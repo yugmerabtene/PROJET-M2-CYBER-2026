@@ -169,6 +169,8 @@ La réussite du modèle dépendra moins d'une sophistication tarifaire excessive
 - `../references/etude_de_marche/05_modele_tam_sam_som.md`
 - `../references/etude_de_marche/06_strategie_entree_marche.md`
 - `../references/etude_de_marche/07_risques_kpi_et_preuves.md`
+- `../references/etude_de_marche/08_sources_reference.md`
+- `../references/etude_de_marche/README.md`
 
 ### Références chiffrées
 
@@ -178,6 +180,14 @@ La réussite du modèle dépendra moins d'une sophistication tarifaire excessive
 - [Annexe BM-4] `../annexes/02_business_model/scenario_model_v4.csv`
 - [Annexe BM-5] `../annexes/02_business_model/kpi_targets_v4.csv`
 - [Annexe BM-6] `../annexes/02_business_model/channel_mix_plan_v3.csv`
+
+### Références antérieures conservées
+
+- `../annexes/01_etude_de_marche/source_register.csv`
+- `../annexes/01_etude_de_marche/tam_sam_som_bottomup_v2.csv`
+- `../annexes/01_etude_de_marche/gtm_comparison_matrix.csv`
+
+Ces références antérieures relient explicitement le business model aux hypothèses marché, aux sources institutionnelles d'origine et aux analyses stratégiques réalisées avant la présente version de synthèse.
 
 ## 15. Annexes chiffrées
 

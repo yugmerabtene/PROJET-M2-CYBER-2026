@@ -222,6 +222,14 @@ La priorité n'est donc pas de rivaliser frontalement avec les plateformes les p
 - `../references/etude_de_marche/06_strategie_entree_marche.md`
 - `../references/etude_de_marche/07_risques_kpi_et_preuves.md`
 - `../references/etude_de_marche/08_sources_reference.md`
+- `../references/etude_de_marche/README.md`
+
+### Registre complet des sources antérieures conservées
+
+- `../annexes/01_etude_de_marche/source_register.csv`
+- `../annexes/01_etude_de_marche/source_quality_matrix.csv`
+
+Le registre complet conserve l'ensemble des références exploitées antérieurement dans l'étude consolidée, notamment les sources institutionnelles et sectorielles S01 à S26. Il constitue la base de traçabilité détaillée des chiffres et constats mobilisés dans le présent document.
 
 ## 13. Annexes chiffrées
 

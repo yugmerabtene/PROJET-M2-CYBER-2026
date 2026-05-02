@@ -230,6 +230,7 @@ La clé du succès résidera dans la capacité à conserver un positionnement si
 - `01_etude_de_marche.md`
 - `02_business_model.md`
 - `../references/etude_de_marche/README.md`
+- `../references/etude_de_marche/08_sources_reference.md`
 
 ### Références externes citées
 
@@ -250,6 +251,15 @@ La clé du succès résidera dans la capacité à conserver un positionnement si
 - [Annexe BP-6] `../annexes/03_business_plan/funding_plan_v2.csv`
 - [Annexe BP-7] `../annexes/03_business_plan/risk_register_v2.csv`
 - [Annexe BM-2] `../annexes/02_business_model/pricing_grid_v1.csv`
+
+### Références antérieures conservées
+
+- `../annexes/01_etude_de_marche/source_register.csv`
+- `../annexes/01_etude_de_marche/tam_sam_som_bottomup_v2.csv`
+- `../annexes/02_business_model/business_model_assumptions_v4.csv`
+- `../annexes/02_business_model/forecast_3y_v4_base.csv`
+
+Ces références assurent la continuité entre les études de marché antérieures, les hypothèses du business model et les projections opérationnelles du business plan.
 
 ## 17. Annexes chiffrées
 
