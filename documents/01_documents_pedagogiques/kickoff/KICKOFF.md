@@ -1,47 +1,67 @@
-# Kick-off projet cybersécurité
+# Projet Cybersécurité : Supervision et analyse réseau
 
 ![Visuel kick-off](assets/kickoff-image.png)
 
-## Contexte
+## Document source
 
-Concevoir un outil de supervision et d'analyse reseau oriente cybersécurité, capable d'observer un reseau, detecter des evenements suspects, generer des alertes et produire des rapports.
+- Document Word original : `1-Kick-off _ Projet Cybersécurité _ Supervision et analyse réseau.docx`
 
-## Objectifs fonctionnels
+## Consigne initiale
 
-- Detecter les equipements connectes au reseau.
-- Scanner une plage d'adresses IP.
-- Identifier les ports ouverts.
-- Recuperer des informations sur les services reseau.
-- Observer le trafic reseau.
-- Detecter des comportements suspects ou malveillants.
-- Generer des alertes actionnables.
-- Produire des rapports exportables (JSON/CSV).
+Dans le cadre de ce projet, vous devez concevoir et réaliser un outil de supervision et d'analyse réseau dont vous êtes libres de choisir le nom, permettant d'observer et d'analyser un réseau informatique, de mapper un réseau informatique, détecter les événements suspects, de générer des alertes et d'exporter des rapports.
+
+## Objectif du projet
+
+L'objectif est de développer un outil capable de :
+
+- détecter les équipements connectés au réseau ;
+- scanner une plage d'adresses IP ;
+- identifier les ports ouverts ;
+- récupérer des informations sur les services réseau ;
+- observer le trafic réseau ;
+- détecter des comportements suspects ou malveillants ;
+- générer des alertes ;
+- produire des rapports exportables en JSON ou CSV.
 
 ## Contraintes techniques
 
-- Backend: Python + FastAPI.
-- Frontend: HTML/CSS/JavaScript (Bootstrap ou Tailwind possibles).
+- Backend : Python, avec FastAPI et les bibliothèques nécessaires au coeur fonctionnel de l'outil.
+- Frontend : HTML, CSS, JavaScript, avec utilisation possible de Bootstrap ou Tailwind CSS.
 
-## Attendus de realisation
+## Ce que le projet doit démontrer
 
-- Concevoir une solution technique coherente.
-- Developper un outil oriente cybersécurité.
-- Travailler en equipe avec une organisation projet claire.
-- Presenter et defendre la solution lors de la soutenance.
+Le projet devra montrer votre capacité à :
+
+- concevoir une solution technique cohérente ;
+- développer un outil orienté cybersécurité ;
+- travailler en équipe ;
+- organiser un projet de manière professionnelle ;
+- présenter et défendre votre solution.
 
 ## Livrables attendus
 
-- Depot GitHub propre, structure, avec commits reguliers et README d'installation/usage.
-- Release finale fonctionnelle et testable.
-- Support de presentation (PPT/PDF) + demonstration.
+- Dépôt GitHub propre et structuré contenant l'intégralité du code source du projet, avec un versioning clair, des commits réguliers et explicites, ainsi qu'un README présentant l'outil et précisant l'installation et l'utilisation de la solution.
+- Une release GitHub correspondant à la version finale, fonctionnelle et facilement testable du projet.
+- Support de présentation au format PPT ou PDF, clair, structuré et paginé, accompagné d'une soutenance avec démonstration.
 
-## Criteres d'evaluation (synthese)
+L'évaluation repose sur les éléments présentés et constatés pendant la soutenance orale, tels qu'ils sont détaillés dans la grille de notation ci-dessous.
 
-- Cadrage du besoin et pertinence de la solution.
-- Gestion de projet et organisation d'equipe.
-- Architecture et choix techniques.
-- Realisation technique et couverture fonctionnelle.
-- Securite, qualite, tests et deploiement.
-- Qualite de la demonstration et des preuves.
-- Versioning, branches et tracabilite GitHub.
-- Communication et valorisation du projet.
+## Grille de notation - Projet cybersécurité
+
+**Note finale : /20**
+
+| Bloc de compétences | Compétences évaluées | Sous-total |
+|---|---|---|
+| Bloc 1 - Cadrage du projet et compréhension du besoin | Présenter clairement le projet en indiquant son nom, son contexte et son objectif. (/0,5)<br>Définir de manière cohérente le besoin auquel il répond ainsi que son périmètre. (/0,75)<br>Justifier l'intérêt du projet et l'utilité de la solution proposée. (/0,75) | /2 |
+| Bloc 2 - Gestion de projet et organisation d'équipe | Expliquer la méthode de travail utilisée pour organiser et gérer le projet, calendrier prévisionnel (Gantt), Kanban..(/0,5)<br>Présenter clairement l'organisation de l'équipe, les rôles attribués et la répartition des tâches. (/0,75)<br>Montrer le suivi de l'avancement et le pilotage du projet. (/0,5)<br>Identifier les risques du projet et expliquer la manière dont ils ont été gérés. (/0,75) | /2,5 |
+| Bloc 3 - Architecture, conception et choix techniques | Présenter l'architecture globale de la solution de manière claire. (/1)<br>Justifier les choix techniques réalisés dans le projet. (/0,75)<br>Fournir des schémas clairs, lisibles et compréhensibles. (/0,5)<br>Architecturer la solution de manière cohérente et logique. (/0,75) | /3 |
+| Bloc 4 - Réalisation technique de la solution | Développer une base applicative fonctionnelle. (/1)<br>Implémenter les principales fonctionnalités réseau attendues. (/1,25)<br>Implémenter les fonctionnalités d'analyse orientées cybersécurité. (/1,5)<br>Produire des résultats exploitables sous forme d'alertes, de logs et d'exports. (/0,75)<br>Développer une interface web cohérente avec l'ensemble de la solution. (/0,5) | /5 |
+| Bloc 5 - Sécurité, qualité, tests et déploiement | Prendre en compte la sécurité de l'application dans sa conception et sa réalisation. (/0,75)<br>Montrer une démarche qualité dans le développement du projet. (/0,75)<br>Tester la solution de manière cohérente avant le déploiement et présenter les tests réalisés. (/0,75)<br>Expliquer la faisabilité du déploiement de la solution. (/0,75) | /3 |
+| Bloc 6 - Démonstration, résultats et preuves | Réaliser une démonstration fluide et maîtrisée. (/0,75)<br>Montrer des résultats observables, cohérents et crédibles. (/0,75)<br>Relier clairement la démonstration au besoin initial du projet. (/0,5) | /2 |
+| Bloc 7 - GitHub, versioning et traçabilité | Présenter un dépôt GitHub propre, structuré et permettant de retracer l'évolution du projet grâce à des commits réguliers. (/0,5)<br>Rédiger des messages de commit clairs et compréhensibles. (/0,25)<br>Maintenir une organisation de branches propre, avec un découpage par fonctionnalité. (/0,25) | /1 |
+| Bloc 8 - Communication, soutenance et valorisation | Fournir un support de présentation clair, paginé et mettant en valeur l'ensemble des éléments du projet. (/0,5)<br>Présenter le projet avec clarté, aisance et fluidité. (/0,5)<br>Défendre le projet, le valoriser et présenter ses perspectives d'évolution. (/0,5) | /1,5 |
+| TOTAL GÉNÉRAL |  | /20 |
+
+## Note de transcription
+
+Ce fichier Markdown reprend intégralement le contenu du document Word de kick-off conservé dans ce même dossier, afin de faciliter la lecture, la citation et la traçabilité dans le dépôt.
