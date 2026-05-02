@@ -6,6 +6,11 @@ Ce document fixe l'architecture de reference du produit DevinciWatch.
 
 Sauf decision explicite ulterieure, cette architecture est consideree comme l'architecture definitive de depart pour le redeveloppement de l'application.
 
+Le document distingue volontairement deux niveaux :
+
+- l'architecture produit cible ;
+- l'architecture de demonstration Docker retenue pour le MVP et la soutenance.
+
 ## 2. Objectif
 
 Ce document définit l'architecture cible du produit DevinciWatch.
@@ -47,8 +52,8 @@ L'architecture doit rester :
 
 ### Frontend
 
-- application web consommant l'API FastAPI
-- technologie frontend à confirmer au démarrage du développement
+- frontend web integre au meme conteneur que le backend pour le MVP
+- interface web servie par le serveur SOC
 
 ### Conteneurisation et démo
 
@@ -57,9 +62,9 @@ L'architecture doit rester :
 
 ### Topologie Docker retenue
 
-- un conteneur `control-server`
-- un conteneur `endpoint-agent`
-- un conteneur `attacker`
+- un conteneur `serveur-soc`
+- un conteneur `serveur-endpoint`
+- un conteneur `serveur-attacker`
 
 ## 4. Principes d'architecture
 
@@ -91,10 +96,11 @@ Les principes retenus sont les suivants :
 ## 6. Lecture de l'architecture logicielle
 
 - l'utilisateur accede uniquement a l'application web ;
-- l'application web consomme uniquement le serveur de controle ;
-- l'agent envoie ses donnees uniquement au serveur de controle ;
-- le simulateur de test ne parle pas directement a l'interface ;
-- PostgreSQL, Redis et Celery restent logiquement separes, mais sont embarques dans le serveur de controle pour la demonstration.
+- l'application web est hebergee dans le meme conteneur que l'API pour le MVP ;
+- le serveur-endpoint envoie ses donnees uniquement au serveur-soc ;
+- le serveur-attacker ne parle pas directement a l'interface ;
+- PostgreSQL, Redis et Celery restent logiquement separes, mais sont embarques dans le serveur-soc pour la demonstration ;
+- la logique produit reste separee par composants, meme si l'emballage Docker de demo est compact.
 
 ## 7. Architecture reseau Docker
 
@@ -102,11 +108,11 @@ Les principes retenus sont les suivants :
 
 L'environnement de developpement et de demonstration est retenu sous la forme de trois conteneurs :
 
-1. un conteneur serveur de controle ;
-2. un conteneur endpoint agent ;
-3. un conteneur attacker de simulation controlee.
+1. un conteneur `serveur-soc` ;
+2. un conteneur `serveur-endpoint` ;
+3. un conteneur `serveur-attacker`.
 
-Le conteneur `control-server` centralise l'application web, l'API FastAPI, PostgreSQL, Redis et le worker Celery pour simplifier le MVP et la soutenance.
+Le conteneur `serveur-soc` centralise l'application web, l'API FastAPI, PostgreSQL, Redis et le worker Celery pour simplifier le MVP et la soutenance.
 
 ```text
 DOCKER HOST
@@ -116,58 +122,61 @@ DOCKER HOST
          |
          | HTTP / HTTPS
          v
-  [control-server]
+  [serveur-soc]
          |
+         +--> Frontend Web
          +--> FastAPI API
          +--> PostgreSQL
          +--> Redis
          +--> Celery Worker
 
-  [endpoint-agent] ----------------> [control-server]
+  [serveur-endpoint] -------------> [serveur-soc]
          ^
          |
-         | scenarios de test
+         | trafic reseau, logs, comportements suspects
          |
-  [attacker]
+  [serveur-attacker]
 
-  [attacker] -- trafic controle --> [endpoint-agent]
+  [serveur-attacker] -- trafic controle --> [serveur-endpoint]
 ```
 
 ### Roles des conteneurs de test
 
-#### `control-server`
+#### `serveur-soc`
 
 Responsabilites :
 
 - exposer l'application ;
 - servir l'API ;
-- servir eventuellement le frontend de demonstration ;
+- servir le frontend de demonstration ;
 - centraliser les appels fonctionnels ;
 - embarquer PostgreSQL, Redis et Celery pour la demonstration.
 
 Composants internes embarques :
 
 - FastAPI API ;
+- Frontend Web ;
 - PostgreSQL ;
 - Redis ;
 - Celery Worker ;
-- frontend de demonstration si servi depuis le meme conteneur.
 
-#### `endpoint-agent`
+#### `serveur-endpoint`
 
 Responsabilites :
 
 - jouer le role d'un hote supervise ;
-- collecter ou simuler des evenements locaux ;
-- remonter `heartbeat` et `events` vers `control-server`.
+- observer le trafic reseau sur l'interface du conteneur ;
+- collecter et parser les fichiers log utiles ;
+- relever les comportements suspects locaux ;
+- remonter `heartbeat` et `events` vers `serveur-soc`.
 
-#### `attacker`
+#### `serveur-attacker`
 
 Responsabilites :
 
 - produire des scenarios de test ;
 - simuler des comportements suspects controles ;
-- generer du trafic ou des evenements attendus pour la detection.
+- generer du trafic ou des comportements attendus pour la detection sur le serveur-endpoint.
 
 Contraintes :
 
@@ -201,8 +210,10 @@ Contraintes :
 Rôle :
 
 - collecter des `heartbeat` ;
-- remonter des événements ;
-- pousser les données vers l'API.
+- observer le trafic reseau ;
+- analyser des fichiers log ;
+- relever des comportements suspects ;
+- pousser les donnees vers l'API.
 
 Contraintes :
 
@@ -221,7 +232,7 @@ Rôle :
 - piloter les règles métier ;
 - retourner les données au frontend.
 
-L'API constitue le point central du système et sera hebergee dans le conteneur `control-server`.
+L'API constitue le point central du systeme et sera hebergee dans le conteneur `serveur-soc`.
 
 ### 9.3 Base PostgreSQL
 
@@ -234,7 +245,7 @@ Rôle :
 - stocker les journaux d'audit ;
 - stocker les informations utiles aux exports et rapports.
 
-PostgreSQL est la source de vérité fonctionnelle et sera embarquee dans `control-server` pour la phase MVP de demonstration.
+PostgreSQL est la source de verite fonctionnelle et sera embarquee dans `serveur-soc` pour la phase MVP de demonstration.
 
 ### 9.4 Redis + Worker Celery
 
@@ -246,7 +257,7 @@ Rôle :
 - générer des exports ;
 - préparer certains rapports ou tâches différées.
 
-Redis et Celery seront egalement embarques dans `control-server` pour la phase MVP de demonstration.
+Redis et Celery seront egalement embarques dans `serveur-soc` pour la phase MVP de demonstration.
 
 ### 9.5 Frontend web
 
@@ -259,7 +270,7 @@ Rôle :
 - consultation et traitement des alertes ;
 - déclenchement d'exports.
 
-Le frontend ne doit parler qu'à l'API.
+Le frontend est integre au meme conteneur que le backend pour le MVP et ne doit parler qu'a l'API locale du serveur-soc.
 
 ### 9.6 Simulateur de test
 
@@ -269,9 +280,22 @@ Rôle :
 - alimenter l'agent ou le serveur en comportements observables ;
 - produire des preuves de detection pour la demonstration.
 
-Ce composant existe pour le lab Docker de test, pas pour la production. Il sera heberge dans le conteneur `attacker`.
+Ce composant existe pour le lab Docker de test, pas pour la production. Il sera heberge dans le conteneur `serveur-attacker`.
 
-## 10. Découpage fonctionnel du backend
+## 10. Capacites fonctionnelles reseau imposees par le projet
+
+L'architecture doit couvrir explicitement les capacites demandees dans le kick-off :
+
+- detection des equipements connectes ;
+- scan de plage IP ;
+- identification des ports ouverts ;
+- recuperation d'informations sur les services reseau ;
+- observation du trafic reseau ;
+- detection de comportements suspects ou malveillants.
+
+Ces capacites seront portees principalement par le serveur-endpoint et par les modules backend associes a la telemetry, aux assets et aux alerts.
+
+## 11. Découpage fonctionnel du backend
 
 Le backend doit être organisé par domaines métier.
 
@@ -279,6 +303,7 @@ Modules recommandés :
 
 - `auth`
 - `telemetry`
+- `discovery`
 - `assets`
 - `alerts`
 - `reports`
@@ -302,6 +327,16 @@ Responsabilités :
 - réception d'événements ;
 - validation des payloads ;
 - normalisation minimale avant persistance.
+
+### `discovery`
+
+Responsabilités :
+
+- scan de plages IP ;
+- identification des ports ouverts ;
+- recuperation d'informations de services reseau ;
+- collecte d'observations liees au trafic reseau ;
+- transmission de ces resultats au module `assets` et au module `alerts`.
 
 ### `assets`
 
@@ -346,7 +381,7 @@ Responsabilités :
 - dépendances communes ;
 - utilitaires partagés.
 
-## 11. Structure logique FastAPI recommandée
+## 12. Structure logique FastAPI recommandée
 
 Structure cible :
 
@@ -356,6 +391,7 @@ app/
   core/
   auth/
   telemetry/
+  discovery/
   assets/
   alerts/
   reports/
@@ -370,21 +406,22 @@ Chaque module devrait à terme contenir :
 - accès aux données ;
 - tests associés.
 
-## 12. Flux de test en environnement Docker
+## 13. Flux de test en environnement Docker
 
 Scenario de demonstration recommande :
 
-1. `app-server`, `postgres`, `redis` et `worker` demarrent ;
-2. `agent-container` s'enregistre et emet un `heartbeat` ;
-3. `attack-simulator` declenche un scenario controle ;
-4. l'agent observe ou produit les evenements attendus ;
-5. l'API persiste les evenements ;
-6. le worker evalue les regles ;
-7. une ou plusieurs alertes sont generees ;
-8. l'analyste visualise le resultat dans l'interface ;
-9. un export ou un audit peut etre produit pour preuve.
+1. `serveur-soc`, `serveur-endpoint` et `serveur-attacker` demarrent ;
+2. `serveur-endpoint` s'enregistre et emet un `heartbeat` ;
+3. `serveur-endpoint` execute ou planifie une phase de decouverte reseau initiale : scan IP, ports ouverts et services observes ;
+4. `serveur-attacker` declenche un scenario controle ;
+5. `serveur-endpoint` observe le trafic, les logs ou les comportements attendus ;
+6. l'API persiste les evenements et les resultats de decouverte ;
+7. le worker evalue les regles ;
+8. une ou plusieurs alertes sont generees ;
+9. l'analyste visualise le resultat dans l'interface ;
+10. un export ou un audit peut etre produit pour preuve.
 
-## 13. Modèle de données fonctionnel
+## 14. Modèle de données fonctionnel
 
 Entités principales à prévoir :
 
@@ -392,6 +429,7 @@ Entités principales à prévoir :
 - `roles`
 - `assets`
 - `events`
+- `network_findings`
 - `alerts`
 - `audit_logs`
 - `exports`
@@ -399,10 +437,11 @@ Entités principales à prévoir :
 Relations principales :
 
 - un événement peut être lié à un actif ;
+- un resultat de scan ou d'observation reseau peut etre lie a un actif ;
 - une alerte peut être liée à un actif et à un ou plusieurs événements ;
 - une action utilisateur sensible doit produire une entrée d'audit.
 
-## 14. Exigences non fonctionnelles
+## 15. Exigences non fonctionnelles
 
 ### Sécurité
 
@@ -429,7 +468,7 @@ Relations principales :
 - environnement local reproductible ;
 - séparation nette entre configuration et code ;
 - capacité à démontrer l'application en conditions réalistes ;
-- possibilité de lancer un lab Docker complet avec serveur, agent et simulateur.
+- possibilité de lancer un lab Docker complet avec serveur-soc, serveur-endpoint et serveur-attacker.
 
 ### Isolation du lab de test
 
@@ -437,32 +476,34 @@ Relations principales :
 - aucun acces inutile hors du reseau de lab ;
 - scenarios de test bornes et documentes.
 
-## 15. MVP recommandé
+## 16. MVP recommandé
 
 Le premier incrément produit devrait couvrir :
 
 1. authentification ;
 2. ingestion `heartbeat` ;
 3. ingestion `events` ;
-4. persistance PostgreSQL ;
-5. inventaire d'actifs simple ;
-6. règles de détection minimales ;
-7. liste et détail d'alertes ;
-8. export CSV ;
-9. audit minimal ;
-10. lab Docker de demonstration en 3 conteneurs.
+4. collecte de trafic, logs et signaux suspects cote endpoint ;
+5. scan IP et identification basique de ports/services ;
+6. persistance PostgreSQL ;
+7. inventaire d'actifs simple ;
+8. règles de détection minimales ;
+9. liste et détail d'alertes ;
+10. export CSV ;
+11. audit minimal ;
+12. lab Docker de demonstration en 3 conteneurs.
 
-## 16. Architecture Docker retenue pour la demonstration
+## 17. Architecture Docker retenue pour la demonstration
 
 Architecture retenue de demonstration :
 
-- `control-server`
-- `endpoint-agent`
-- `attacker`
+- `serveur-soc`
+- `serveur-endpoint`
+- `serveur-attacker`
 
 Cette architecture est retenue comme architecture de test officielle du projet pour les phases de developpement, de demonstration et de validation fonctionnelle.
 
-## 17. Pourquoi cette architecture est adaptée au sujet
+## 18. Pourquoi cette architecture est adaptée au sujet
 
 Cette architecture est adaptée parce qu'elle :
 
@@ -473,10 +514,11 @@ Cette architecture est adaptée parce qu'elle :
 - reste assez simple pour un projet académique ;
 - prepare une montée en qualité sans complexité excessive ;
 - permet un environnement de test réaliste et reproductible ;
+- couvre explicitement les besoins de scan, ports, services, trafic et detection ;
 - rend visible toute la chaine detection -> alerte -> preuve.
 
-## 18. Conclusion
+## 19. Conclusion
 
-L'architecture definitive retenue pour DevinciWatch est une architecture web modulaire centrée sur FastAPI, PostgreSQL, Redis et un worker asynchrone, avec un environnement Docker de test compose de trois conteneurs : `control-server`, `endpoint-agent` et `attacker`.
+L'architecture definitive retenue pour DevinciWatch est une architecture web modulaire centree sur FastAPI, PostgreSQL, Redis et un worker asynchrone, avec un environnement Docker de test compose de trois conteneurs : `serveur-soc`, `serveur-endpoint` et `serveur-attacker`.
 
 Elle est adaptee au sujet, defendable techniquement, exploitable pedagogiquement et suffisamment propre pour servir de base definitive au redeveloppement du produit.
