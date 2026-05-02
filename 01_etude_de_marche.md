@@ -99,3 +99,13 @@ L'etude valide une opportunite commerciale credible sous reserve d'une execution
 - `etude_de_marche/06_strategie_entree_marche.md`
 - `etude_de_marche/07_risques_kpi_et_preuves.md`
 - `etude_de_marche/08_sources_reference.md`
+
+## Annexes chiffrees
+
+- `annexes/01_etude_de_marche/source_register.csv`
+- `annexes/01_etude_de_marche/source_quality_matrix.csv`
+- `annexes/01_etude_de_marche/tam_sam_som_bottomup_v2.csv`
+- `annexes/01_etude_de_marche/competition_benchmark_v2.csv`
+- `annexes/01_etude_de_marche/gtm_comparison_matrix.csv`
+- `annexes/01_etude_de_marche/kpi_template_business_model.csv`
+- `annexes/01_etude_de_marche/sensitivity_model_template.csv`

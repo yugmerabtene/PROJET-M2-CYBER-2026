@@ -1,0 +1,4 @@
+year,active_customers_start,new_customers,churn_rate,churned_customers,active_customers_end,acv_avg_eur,arr_end_year_eur,cac_avg_eur,total_new_logo_cac_eur,gross_margin_rate,gross_margin_arr_eur
+Y1,0,30,0,0,30.00,23000,690000,11000,330000,0.65,448500
+Y2,30.00,42,0.095,2.85,69.15,23000,1590450,11000,462000,0.69,1097411
+Y3,69.15,58,0.085,5.88,121.27,23000,2789210,11000,638000,0.72,2008231

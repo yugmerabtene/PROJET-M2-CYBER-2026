@@ -1,0 +1,6 @@
+variable,base_value,low_case,high_case,impact_on_arr,impact_on_margin,alert_threshold
+acv_eur,15000,11000,22000,high,high,<12000
+poc_to_prod_rate,0.30,0.18,0.45,very_high,high,<0.20
+cac_eur,12000,9000,18000,medium,high,>15000
+annual_churn_rate,0.10,0.06,0.18,very_high,very_high,>0.15
+support_cost_per_client_eur,2800,1800,4500,medium,high,>3500

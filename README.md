@@ -16,7 +16,15 @@ Base propre du projet, reconstruite a partir du kick-off initial.
 - `01_etude_de_marche.md`: rendu principal de l'etude de marche.
 - `02_business_model.md`: rendu principal du business model.
 - `03_business_plan.md`: rendu principal du business plan.
+- `annexes/`: donnees chiffrees (CSV) conservees comme preuves et references.
 
 ## Intention
 
 Ce depot sert de nouvelle base `main`, avec uniquement les elements utiles pour repartir proprement.
+
+## Navigation rapide
+
+- Etude de marche: `01_etude_de_marche.md`
+- Business model: `02_business_model.md`
+- Business plan: `03_business_plan.md`
+- Annexes donnees: `annexes/README.md`

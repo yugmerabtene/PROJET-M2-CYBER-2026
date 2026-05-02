@@ -1,0 +1,8 @@
+item_type,item_name,annual_price_eur,target_segment,attach_rate,notes
+plan,Essential,12000,PME_mono_site,0.50,entry plan
+plan,Professional,21000,PME_multi_site_ETI_light,0.35,core plan
+plan,Enterprise,36000,ETI_governance,0.15,advanced plan
+addon,Support_Premium,4000,all,0.40,SLA and faster response
+addon,Retention_Longue,3000,all,0.30,extended evidence retention
+service,Onboarding_Standard,5000,all,,non-recurring
+service,Onboarding_Avance,9000,complex_accounts,,non-recurring

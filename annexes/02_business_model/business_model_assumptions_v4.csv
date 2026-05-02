@@ -1,0 +1,14 @@
+category,assumption_name,value,unit,confidence_level,notes
+Scope,geography,FR_BE_CHfr,,medium,focus initial go-to-market
+Scope,segment_core,PME_ETI_50_1000,,medium,priority segment
+Economics,acv_avg,23000,EUR_per_year,medium,blended plan and addons
+Economics,poc_to_prod,0.33,ratio,medium,target with stricter qualification
+Economics,cac_avg,11000,EUR_per_customer,low,to validate by channel
+Economics,churn_logo_y2,0.095,ratio,medium,with onboarding standardization
+Economics,churn_logo_y3,0.085,ratio,medium,retention improvement
+Economics,gross_margin_y1,0.65,ratio,low,includes support and delivery costs
+Economics,gross_margin_y2,0.69,ratio,low,scale effect
+Economics,gross_margin_y3,0.72,ratio,low,scale and process maturity
+Channel,new_logo_mix_y1,65_35_direct_partner,,medium,hybrid launch model
+Channel,new_logo_mix_y2,52_48_direct_partner,,medium,partner ramp-up
+Channel,new_logo_mix_y3,40_60_direct_partner,,medium,partner scale phase

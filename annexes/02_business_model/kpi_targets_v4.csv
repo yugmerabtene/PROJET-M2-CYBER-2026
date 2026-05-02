@@ -1,0 +1,7 @@
+kpi,target_y1,target_y2,target_y3,alert_threshold,owner
+POC_to_Prod,0.30,0.33,0.35,<0.25,Sales
+CAC_EUR,12000,11000,10000,>13500,Sales_Marketing
+Logo_Churn,0.00,0.095,0.085,>0.12,Customer_Success
+Gross_Margin,0.65,0.69,0.72,<0.62,Finance_Ops
+CAC_Payback_Months,10.5,8.8,7.5,>12,Finance
+ARR_EOY_EUR,690000,1590450,2789210,<90%_of_target,Leadership

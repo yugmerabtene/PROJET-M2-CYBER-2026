@@ -1,0 +1,17 @@
+category,assumption,value,unit,note
+Revenue,arr_eoy_y1,690000,EUR,from business model v4
+Revenue,arr_eoy_y2,1590450,EUR,from business model v4
+Revenue,arr_eoy_y3,2789210,EUR,from business model v4
+Revenue,services_y1,120000,EUR,onboarding and setup
+Revenue,services_y2,180000,EUR,onboarding and setup
+Revenue,services_y3,260000,EUR,onboarding and setup
+Economics,gross_margin_y1,0.65,ratio,locked v4
+Economics,gross_margin_y2,0.69,ratio,locked v4
+Economics,gross_margin_y3,0.72,ratio,locked v4
+Economics,cac_avg,11000,EUR,locked v4
+Economics,poc_to_prod,0.33,ratio,locked v4
+Economics,churn_y2,0.095,ratio,locked v4
+Economics,churn_y3,0.085,ratio,locked v4
+GoToMarket,mix_y1,65_35_direct_partner,,locked v4
+GoToMarket,mix_y2,52_48_direct_partner,,locked v4
+GoToMarket,mix_y3,40_60_direct_partner,,locked v4

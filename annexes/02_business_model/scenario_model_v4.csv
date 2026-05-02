@@ -1,0 +1,4 @@
+scenario,acv_avg_eur,cac_avg_eur,poc_to_prod,churn_y2,gross_margin_y1,payback_months_est,arr_y1_eur,arr_y2_eur,arr_y3_eur,notes
+prudent,21000,14000,0.25,0.13,0.61,13.1,462000,1113000,1869000,conservative conversion and slower channel effects
+base,23000,11000,0.33,0.095,0.65,8.8,690000,1590450,2789210,recommended steering scenario
+ambitieux,25000,9500,0.40,0.08,0.69,6.6,1050000,2500000,4500000,strong execution and partner acceleration

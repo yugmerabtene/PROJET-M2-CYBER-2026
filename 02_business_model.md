@@ -71,3 +71,12 @@ Le business model retenu est un modele SaaS B2B hybride, centre sur la valeur op
 - `etude_de_marche/05_modele_tam_sam_som.md`
 - `etude_de_marche/06_strategie_entree_marche.md`
 - `etude_de_marche/07_risques_kpi_et_preuves.md`
+
+## Annexes chiffrees
+
+- `annexes/02_business_model/business_model_assumptions_v4.csv`
+- `annexes/02_business_model/pricing_grid_v1.csv`
+- `annexes/02_business_model/forecast_3y_v4_base.csv`
+- `annexes/02_business_model/scenario_model_v4.csv`
+- `annexes/02_business_model/kpi_targets_v4.csv`
+- `annexes/02_business_model/channel_mix_plan_v3.csv`

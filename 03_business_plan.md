@@ -118,3 +118,13 @@ Le business plan confirme une trajectoire realiste: demarrer cible, prouver la v
 - `01_etude_de_marche.md`
 - `02_business_model.md`
 - `etude_de_marche/README.md`
+
+## Annexes chiffrees
+
+- `annexes/03_business_plan/financial_assumptions_v1.csv`
+- `annexes/03_business_plan/sales_plan_12m_v1.csv`
+- `annexes/03_business_plan/pnl_3y_v1.csv`
+- `annexes/03_business_plan/cashflow_3y_v1.csv`
+- `annexes/03_business_plan/break_even_v1.csv`
+- `annexes/03_business_plan/funding_plan_v2.csv`
+- `annexes/03_business_plan/risk_register_v2.csv`
