@@ -69,7 +69,7 @@ flowchart LR
 
 ## Navigation rapide
 
-- Produit : `product/README.md`
+- Produit : `product/architecture.md`
 - Site web : `website/README.md`
 - Documents : `documents/README.md`
 - Etude de marche : `documents/02_etude_de_marche/rendu_principal.md`
