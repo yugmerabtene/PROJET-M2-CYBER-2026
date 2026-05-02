@@ -4,13 +4,13 @@ Ce dossier regroupe les donnees quantitatives conservees depuis l'ancien reposit
 
 ## Structure
 
-- `annexes/01_etude_de_marche/`: donnees marche, benchmark, sources, TAM/SAM/SOM, KPI et sensibilite.
-- `annexes/02_business_model/`: hypotheses de modele, pricing, scenarios, forecast et KPI cibles.
-- `annexes/03_business_plan/`: hypotheses financieres, plan commercial, P&L, cashflow, break-even, financement et risques.
+- `01_etude_de_marche/`: donnees marche, benchmark, sources, TAM/SAM/SOM, KPI et sensibilite.
+- `02_business_model/`: hypotheses de modele, pricing, scenarios, forecast et KPI cibles.
+- `03_business_plan/`: hypotheses financieres, plan commercial, P&L, cashflow, break-even, financement et risques.
 
 ## Provenance
 
-Fichiers copiés depuis:
+Fichiers copies depuis:
 
 - `old/PROJET-M2-CYBER-2026/yugmerabtene-PROJET-M2-CYBER-2026-5fd7b02/etude_de_marche/90_exports/`
 - `old/PROJET-M2-CYBER-2026/yugmerabtene-PROJET-M2-CYBER-2026-5fd7b02/business_model/90_exports/`
