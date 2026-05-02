@@ -1,11 +1,13 @@
 # DevinciWatch
 
-Le depot est organise en deux espaces principaux :
+Le depot est organise en trois espaces principaux :
 
-- `product/` : l'ensemble du projet, des rendus, des references et des annexes.
-- `website/` : l'espace reserve au futur site web officiel `devinciwatch.com`.
+- `product/` : le futur code source du produit DevinciWatch.
+- `website/` : le futur site web officiel `devinciwatch.com`.
+- `documents/` : tous les rendus, etudes, references et annexes conserves.
 
 ## Navigation rapide
 
-- Projet principal : `product/README.md`
+- Produit : `product/README.md`
 - Site web : `website/README.md`
+- Documentation et rendus : `documents/README.md`

@@ -165,35 +165,35 @@ La réussite du modèle dépendra moins d'une sophistication tarifaire excessive
 
 ### Références principales
 
-- `01_etude_de_marche.md`
-- `../references/etude_de_marche/05_modele_tam_sam_som.md`
-- `../references/etude_de_marche/06_strategie_entree_marche.md`
-- `../references/etude_de_marche/07_risques_kpi_et_preuves.md`
-- `../references/etude_de_marche/08_sources_reference.md`
-- `../references/etude_de_marche/README.md`
+- `../02_etude_de_marche/rendu_principal.md`
+- `../02_etude_de_marche/references/05_modele_tam_sam_som.md`
+- `../02_etude_de_marche/references/06_strategie_entree_marche.md`
+- `../02_etude_de_marche/references/07_risques_kpi_et_preuves.md`
+- `../02_etude_de_marche/references/08_sources_reference.md`
+- `../02_etude_de_marche/README.md`
 
 ### Références chiffrées
 
-- [Annexe BM-1] `../annexes/02_business_model/business_model_assumptions_v4.csv`
-- [Annexe BM-2] `../annexes/02_business_model/pricing_grid_v1.csv`
-- [Annexe BM-3] `../annexes/02_business_model/forecast_3y_v4_base.csv`
-- [Annexe BM-4] `../annexes/02_business_model/scenario_model_v4.csv`
-- [Annexe BM-5] `../annexes/02_business_model/kpi_targets_v4.csv`
-- [Annexe BM-6] `../annexes/02_business_model/channel_mix_plan_v3.csv`
+- [Annexe BM-1] `annexes/business_model_assumptions_v4.csv`
+- [Annexe BM-2] `annexes/pricing_grid_v1.csv`
+- [Annexe BM-3] `annexes/forecast_3y_v4_base.csv`
+- [Annexe BM-4] `annexes/scenario_model_v4.csv`
+- [Annexe BM-5] `annexes/kpi_targets_v4.csv`
+- [Annexe BM-6] `annexes/channel_mix_plan_v3.csv`
 
 ### Références antérieures conservées
 
-- `../annexes/01_etude_de_marche/source_register.csv`
-- `../annexes/01_etude_de_marche/tam_sam_som_bottomup_v2.csv`
-- `../annexes/01_etude_de_marche/gtm_comparison_matrix.csv`
+- `../90_references_transverses/source_register.csv`
+- `../02_etude_de_marche/annexes/tam_sam_som_bottomup_v2.csv`
+- `../02_etude_de_marche/annexes/gtm_comparison_matrix.csv`
 
 Ces références antérieures relient explicitement le business model aux hypothèses marché, aux sources institutionnelles d'origine et aux analyses stratégiques réalisées avant la présente version de synthèse.
 
 ## 15. Annexes chiffrées
 
-- `../annexes/02_business_model/business_model_assumptions_v4.csv`
-- `../annexes/02_business_model/pricing_grid_v1.csv`
-- `../annexes/02_business_model/forecast_3y_v4_base.csv`
-- `../annexes/02_business_model/scenario_model_v4.csv`
-- `../annexes/02_business_model/kpi_targets_v4.csv`
-- `../annexes/02_business_model/channel_mix_plan_v3.csv`
+- `annexes/business_model_assumptions_v4.csv`
+- `annexes/pricing_grid_v1.csv`
+- `annexes/forecast_3y_v4_base.csv`
+- `annexes/scenario_model_v4.csv`
+- `annexes/kpi_targets_v4.csv`
+- `annexes/channel_mix_plan_v3.csv`

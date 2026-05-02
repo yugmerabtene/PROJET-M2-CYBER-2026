@@ -214,29 +214,29 @@ La priorité n'est donc pas de rivaliser frontalement avec les plateformes les p
 
 ### Références internes et annexes d'étude
 
-- `../references/etude_de_marche/01_cadrage_reference.md`
-- `../references/etude_de_marche/02_analyse_demande_et_contexte.md`
-- `../references/etude_de_marche/03_segmentation_ciblage_positionnement.md`
-- `../references/etude_de_marche/04_benchmark_concurrence.md`
-- `../references/etude_de_marche/05_modele_tam_sam_som.md`
-- `../references/etude_de_marche/06_strategie_entree_marche.md`
-- `../references/etude_de_marche/07_risques_kpi_et_preuves.md`
-- `../references/etude_de_marche/08_sources_reference.md`
-- `../references/etude_de_marche/README.md`
+- `references/01_cadrage_reference.md`
+- `references/02_analyse_demande_et_contexte.md`
+- `references/03_segmentation_ciblage_positionnement.md`
+- `references/04_benchmark_concurrence.md`
+- `references/05_modele_tam_sam_som.md`
+- `references/06_strategie_entree_marche.md`
+- `references/07_risques_kpi_et_preuves.md`
+- `references/08_sources_reference.md`
+- `README.md`
 
 ### Registre complet des sources antérieures conservées
 
-- `../annexes/01_etude_de_marche/source_register.csv`
-- `../annexes/01_etude_de_marche/source_quality_matrix.csv`
+- `../90_references_transverses/source_register.csv`
+- `../90_references_transverses/source_quality_matrix.csv`
 
 Le registre complet conserve l'ensemble des références exploitées antérieurement dans l'étude consolidée, notamment les sources institutionnelles et sectorielles S01 à S26. Il constitue la base de traçabilité détaillée des chiffres et constats mobilisés dans le présent document.
 
 ## 13. Annexes chiffrées
 
-- `../annexes/01_etude_de_marche/source_register.csv`
-- `../annexes/01_etude_de_marche/source_quality_matrix.csv`
-- `../annexes/01_etude_de_marche/tam_sam_som_bottomup_v2.csv`
-- `../annexes/01_etude_de_marche/competition_benchmark_v2.csv`
-- `../annexes/01_etude_de_marche/gtm_comparison_matrix.csv`
-- `../annexes/01_etude_de_marche/kpi_template_business_model.csv`
-- `../annexes/01_etude_de_marche/sensitivity_model_template.csv`
+- `../90_references_transverses/source_register.csv`
+- `../90_references_transverses/source_quality_matrix.csv`
+- `annexes/tam_sam_som_bottomup_v2.csv`
+- `annexes/competition_benchmark_v2.csv`
+- `annexes/gtm_comparison_matrix.csv`
+- `annexes/kpi_template_business_model.csv`
+- `annexes/sensitivity_model_template.csv`

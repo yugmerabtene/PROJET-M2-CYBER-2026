@@ -227,10 +227,10 @@ La clé du succès résidera dans la capacité à conserver un positionnement si
 
 ### Références principales
 
-- `01_etude_de_marche.md`
-- `02_business_model.md`
-- `../references/etude_de_marche/README.md`
-- `../references/etude_de_marche/08_sources_reference.md`
+- `../02_etude_de_marche/rendu_principal.md`
+- `../03_business_model/rendu_principal.md`
+- `../02_etude_de_marche/README.md`
+- `../02_etude_de_marche/references/08_sources_reference.md`
 
 ### Références externes citées
 
@@ -243,30 +243,30 @@ La clé du succès résidera dans la capacité à conserver un positionnement si
 
 ### Références chiffrées
 
-- [Annexe BP-1] `../annexes/03_business_plan/financial_assumptions_v1.csv`
-- [Annexe BP-2] `../annexes/03_business_plan/sales_plan_12m_v1.csv`
-- [Annexe BP-3] `../annexes/03_business_plan/pnl_3y_v1.csv`
-- [Annexe BP-4] `../annexes/03_business_plan/break_even_v1.csv`
-- [Annexe BP-5] `../annexes/03_business_plan/cashflow_3y_v1.csv`
-- [Annexe BP-6] `../annexes/03_business_plan/funding_plan_v2.csv`
-- [Annexe BP-7] `../annexes/03_business_plan/risk_register_v2.csv`
-- [Annexe BM-2] `../annexes/02_business_model/pricing_grid_v1.csv`
+- [Annexe BP-1] `annexes/financial_assumptions_v1.csv`
+- [Annexe BP-2] `annexes/sales_plan_12m_v1.csv`
+- [Annexe BP-3] `annexes/pnl_3y_v1.csv`
+- [Annexe BP-4] `annexes/break_even_v1.csv`
+- [Annexe BP-5] `annexes/cashflow_3y_v1.csv`
+- [Annexe BP-6] `annexes/funding_plan_v2.csv`
+- [Annexe BP-7] `annexes/risk_register_v2.csv`
+- [Annexe BM-2] `../03_business_model/annexes/pricing_grid_v1.csv`
 
 ### Références antérieures conservées
 
-- `../annexes/01_etude_de_marche/source_register.csv`
-- `../annexes/01_etude_de_marche/tam_sam_som_bottomup_v2.csv`
-- `../annexes/02_business_model/business_model_assumptions_v4.csv`
-- `../annexes/02_business_model/forecast_3y_v4_base.csv`
+- `../90_references_transverses/source_register.csv`
+- `../02_etude_de_marche/annexes/tam_sam_som_bottomup_v2.csv`
+- `../03_business_model/annexes/business_model_assumptions_v4.csv`
+- `../03_business_model/annexes/forecast_3y_v4_base.csv`
 
 Ces références assurent la continuité entre les études de marché antérieures, les hypothèses du business model et les projections opérationnelles du business plan.
 
 ## 17. Annexes chiffrées
 
-- `../annexes/03_business_plan/financial_assumptions_v1.csv`
-- `../annexes/03_business_plan/sales_plan_12m_v1.csv`
-- `../annexes/03_business_plan/pnl_3y_v1.csv`
-- `../annexes/03_business_plan/cashflow_3y_v1.csv`
-- `../annexes/03_business_plan/break_even_v1.csv`
-- `../annexes/03_business_plan/funding_plan_v2.csv`
-- `../annexes/03_business_plan/risk_register_v2.csv`
+- `annexes/financial_assumptions_v1.csv`
+- `annexes/sales_plan_12m_v1.csv`
+- `annexes/pnl_3y_v1.csv`
+- `annexes/cashflow_3y_v1.csv`
+- `annexes/break_even_v1.csv`
+- `annexes/funding_plan_v2.csv`
+- `annexes/risk_register_v2.csv`
