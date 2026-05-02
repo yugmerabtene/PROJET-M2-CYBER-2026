@@ -2,19 +2,18 @@
 
 Ce dossier est reserve exclusivement au futur code source du produit DevinciWatch.
 
-## Perimetre
+## Contenu attendu
 
 - backend du produit,
 - frontend applicatif,
 - scripts techniques de developpement et de deploiement,
 - documentation technique liee au code.
 
+## Reference liee
+
+- Vision projet : `../README.md`
+- Documents de cadrage et de strategie : `../documents/README.md`
+
 ## Etat actuel
 
-- Aucun code n'est place ici a ce stade.
-- Les documents strategiques et academiques ont ete deplaces dans `../documents/`.
-- Le site corporate est separe dans `../website/`.
-
-## Suite prevue
-
-Ce dossier servira de base au redeveloppement du produit.
+Ce dossier servira de base au redeveloppement du produit. Aucun code source n'y est place a ce stade.
