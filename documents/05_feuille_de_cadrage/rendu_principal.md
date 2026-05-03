@@ -85,7 +85,7 @@ Le produit s'appuie sur :
 - Celery ;
 - lab Docker de démonstration en 3 conteneurs.
 
-Référence : `../../product/architecture.md`
+Référence : `../08_architecture/rendu_principal.md`
 
 ## 10. Livrables attendus
 
@@ -136,8 +136,9 @@ Le projet sera jugé réussi si :
 - `../02_etude_de_marche/rendu_principal.md`
 - `../03_business_model/rendu_principal.md`
 - `../04_business_plan/rendu_principal.md`
-- `../05_cahier_des_charges/rendu_principal.md`
-- `../../product/architecture.md`
+- `../06_gestion_de_projet/rendu_principal.md`
+- `../07_cahier_des_charges/rendu_principal.md`
+- `../08_architecture/rendu_principal.md`
 
 ## 16. Feuille de route courte
 

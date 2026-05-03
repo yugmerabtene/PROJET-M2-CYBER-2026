@@ -303,7 +303,7 @@ Le produit sera considéré comme conforme si les points suivants sont démontr�
 - `../02_etude_de_marche/rendu_principal.md`
 - `../03_business_model/rendu_principal.md`
 - `../04_business_plan/rendu_principal.md`
-- `../../product/architecture.md`
+- `../08_architecture/rendu_principal.md`
 
 ## 15. Conclusion
 

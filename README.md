@@ -69,12 +69,13 @@ flowchart LR
 
 ## Navigation rapide
 
-- Produit : `product/architecture.md`
+- Produit : `product/README.md`
 - Site web : `website/README.md`
 - Documents : `documents/README.md`
 - Étude de marche : `documents/02_etude_de_marche/rendu_principal.md`
 - Business model : `documents/03_business_model/rendu_principal.md`
 - Business plan : `documents/04_business_plan/rendu_principal.md`
+- Architecture retenue : `documents/08_architecture/rendu_principal.md`
 
 ## Documentation associée
 
