@@ -85,7 +85,7 @@ Le produit s'appuie sur :
 - Celery ;
 - lab Docker de démonstration en 3 conteneurs.
 
-Référence : `../08_architecture/rendu_principal.md`
+Référence : [Architecture produit (08)](../08_architecture/rendu_principal.md)
 
 ## 10. Livrables attendus
 
@@ -132,24 +132,22 @@ Le projet sera jugé réussi si :
 
 ## 15. Dépendances documentaires
 
-- `../01_documents_pedagogiques/kickoff/KICKOFF.md`
-- `../02_etude_de_marche/rendu_principal.md`
-- `../03_business_model/rendu_principal.md`
-- `../04_business_plan/rendu_principal.md`
-- `../06_gestion_de_projet/rendu_principal.md`
-- `../07_cahier_des_charges/rendu_principal.md`
-- `../08_architecture/rendu_principal.md`
+- [Kick-off pédagogique (01)](../01_documents_pedagogiques/kickoff/KICKOFF.md)
+- [Étude de marché (02)](../02_etude_de_marche/rendu_principal.md)
+- [Business model (03)](../03_business_model/rendu_principal.md)
+- [Business plan (04)](../04_business_plan/rendu_principal.md)
+- [Gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md)
+- [Cahier des charges (07)](../07_cahier_des_charges/rendu_principal.md)
+- [Architecture produit (08)](../08_architecture/rendu_principal.md)
 
 ## 16. Feuille de route courte
 
-1. stabiliser le cadrage fonctionnel ;
-2. démarrer le socle backend ;
-3. intégrer collecte et persistance ;
-4. intégrer découverte et détection ;
-5. intégrer corrélation ;
-6. construire l'interface web ;
-7. préparer la démonstration et les exports.
+1. Phase 1 - Cadrage : consolider le cadrage, finaliser la gestion de projet, le cahier des charges et l'architecture ;
+2. Phase 2 - Socle technique : mettre en place le backend FastAPI, la base de données, le lab Docker et la collecte endpoint minimale ;
+3. Phase 3 - Cœur produit : intégrer la découverte réseau, les actifs, les événements, les alertes et l'audit ;
+4. Phase 4 - Enrichissement analyste : ajouter la corrélation, les métriques, l'historique, les exports et la visualisation ;
+5. Phase 5 - Finalisation soutenance : stabiliser la démonstration, la documentation finale et le support.
 
 ## 17. Conclusion
 
-Cette feuille de cadrage fixe une vision opérationnelle commune du projet. Elle permet de relier le besoin, la valeur, l'architecture, les livrables et les priorités d'exécution dans une même base de pilotage.
+Cette feuille de cadrage fixe une vision opérationnelle commune du projet. Elle permet de relier le besoin, la valeur, l'architecture, les livrables et les priorités d'exécution dans une même base de pilotage. Elle prépare directement le [cahier des charges (07)](../07_cahier_des_charges/rendu_principal.md) et l'[architecture détaillée (08)](../08_architecture/rendu_principal.md), en cohérence avec la [gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md).

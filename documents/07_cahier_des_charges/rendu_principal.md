@@ -6,11 +6,13 @@ Le présent cahier des charges formalise les besoins, les contraintes, le périm
 
 Il constitue le document de référence pour le développement du produit et s'appuie sur :
 
-- le kick-off pédagogique ;
-- l'étude de marché ;
-- le business model ;
-- le business plan ;
-- l'architecture produit retenue.
+- le [kick-off pédagogique (01)](../01_documents_pedagogiques/kickoff/KICKOFF.md) ;
+- l'[étude de marché (02)](../02_etude_de_marche/rendu_principal.md) ;
+- le [business model (03)](../03_business_model/rendu_principal.md) ;
+- le [business plan (04)](../04_business_plan/rendu_principal.md) ;
+- la [feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md) ;
+- la [gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md) ;
+- l'[architecture produit retenue (08)](../08_architecture/rendu_principal.md).
 
 ## 2. Contexte du projet
 
@@ -49,7 +51,7 @@ Le produit doit permettre de :
 ### 5.1. Fonctions incluses
 
 - authentification utilisateur ;
-- gestion de rôles ;
+- gestion des `roles` ;
 - collecte de `heartbeat` ;
 - collecte d'événements ;
 - découverte réseau ;
@@ -97,8 +99,8 @@ Le produit doit permettre de :
 Le système doit permettre :
 
 - l'authentification sécurisée des utilisateurs ;
-- la distinction entre rôles `admin` et `analyst` ;
-- la restriction des actions sensibles selon le rôle.
+- la distinction entre les `roles` (`admin`, `analyst`) ;
+- la restriction des actions sensibles selon le `role`.
 
 ### 7.2. Collecte endpoint
 
@@ -186,7 +188,7 @@ Le système doit journaliser au minimum :
 ### 8.1. Sécurité
 
 - authentification obligatoire ;
-- séparation des rôles ;
+- séparation des `roles` ;
 - restriction des actions sensibles ;
 - journalisation des opérations critiques.
 
@@ -237,7 +239,7 @@ Le `serveur-soc` embarque pour le MVP :
 Le système doit manipuler au minimum :
 
 - utilisateurs ;
-- rôles ;
+- `roles` ;
 - actifs ;
 - événements ;
 - résultats de découverte réseau ;
@@ -299,12 +301,14 @@ Le produit sera considéré comme conforme si les points suivants sont démontr�
 
 ## 14. Références de cadrage
 
-- `../01_documents_pedagogiques/kickoff/KICKOFF.md`
-- `../02_etude_de_marche/rendu_principal.md`
-- `../03_business_model/rendu_principal.md`
-- `../04_business_plan/rendu_principal.md`
-- `../08_architecture/rendu_principal.md`
+- [Kick-off pédagogique (01)](../01_documents_pedagogiques/kickoff/KICKOFF.md)
+- [Étude de marché (02)](../02_etude_de_marche/rendu_principal.md)
+- [Business model (03)](../03_business_model/rendu_principal.md)
+- [Business plan (04)](../04_business_plan/rendu_principal.md)
+- [Feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md)
+- [Gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md)
+- [Architecture produit (08)](../08_architecture/rendu_principal.md)
 
 ## 15. Conclusion
 
-Ce cahier des charges fixe un périmètre clair, cohérent avec le sujet académique, le positionnement produit et l'architecture retenue. Il constitue la base opérationnelle du développement de DevinciWatch.
+Ce cahier des charges fixe un périmètre clair, cohérent avec le sujet académique, le positionnement produit et l'architecture retenue. Il constitue la base opérationnelle du développement de DevinciWatch. Il découle directement de la [feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md), de la [gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md) et de l'[architecture produit (08)](../08_architecture/rendu_principal.md).
