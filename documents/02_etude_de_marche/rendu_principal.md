@@ -2,7 +2,7 @@
 
 ## 1. Objet du document
 
-La présente étude de marché a pour objectif de démontrer la pertinence économique et stratégique de DevinciWatch, solution de supervision et d'analyse cyber réseau orientée usage. Elle s'inscrit dans le cadre du projet pédagogique défini par le [kick-off](../01_documents_pedagogiques/kickoff/KICKOFF.md) et par le syllabus, qui demandent explicitement une étude de marché, un modèle économique et une stratégie d'entrée sur le marché.
+La présente étude de marché a pour objectif de démontrer la pertinence économique et stratégique de DevinciWatch, solution de supervision et d'analyse cyber réseau orientée usage. Elle s'inscrit dans le cadre du projet défini par le [kick-off](../01_documents_pedagogiques/kickoff/KICKOFF.md) et par le cahier d'attendus, qui demandent explicitement une étude de marché, un modèle économique et une stratégie d'entrée sur le marché.
 
 L'analyse adopte une posture universitaire : elle distingue les faits documentés, les hypothèses de travail et les décisions qui en découlent. Cette distinction est essentielle, car un projet cyber ne peut pas être justifié uniquement par l'intuition technique ; il doit s'appuyer sur une compréhension argumentée de la demande, de la concurrence, des contraintes réglementaires et de la capacité réelle du marché à adopter la solution.
 

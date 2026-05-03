@@ -99,7 +99,7 @@ Le parcours commercial de référence est structuré en quatre étapes :
 
 1. qualification du compte et du besoin ;
 2. POC cadré sur six à huit semaines ;
-3. évaluation de résultats avant/après ;
+3. mesure des résultats avant/après ;
 4. passage en production avec plan de déploiement.
 
 Le POC constitue l'étape critique. Il doit produire une preuve de valeur claire : qualité des alertes, visibilité utile, réduction du bruit, capacité d'export et bénéfice opérationnel. Pour être exploitable commercialement, le POC doit être cadré par des critères de succès définis avant son lancement, puis évalué au moyen d'indicateurs comparables avant et après expérimentation.

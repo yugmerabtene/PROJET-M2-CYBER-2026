@@ -9,9 +9,9 @@ Sauf décision explicite ultérieure, cette architecture est considérée comme 
 Le document distingue volontairement deux niveaux :
 
 - l'architecture produit cible ;
-- l'architecture de démonstration Docker retenue pour le MVP et la soutenance.
+- l'architecture de démonstration Docker retenue pour le MVP et la validation produit.
 
-Cette distinction est importante : l'architecture de démonstration simplifie le packaging afin de faciliter l'évaluation, tandis que l'architecture logique conserve une séparation claire des responsabilités pour préparer les évolutions ultérieures.
+Cette distinction est importante : l'architecture de démonstration simplifie le packaging afin de faciliter la validation, tandis que l'architecture logique conserve une séparation claire des responsabilités pour préparer les évolutions ultérieures.
 
 ## 2. Objectif
 
@@ -30,11 +30,11 @@ L'objectif est de concevoir une application de cybersurveillance réseau orient�
 L'architecture doit rester :
 
 - propre ;
-- défendable en soutenance ;
+- défendable en revue projet ;
 - réaliste pour un MVP ;
 - extensible pour les itérations suivantes.
 
-La qualité attendue n'est donc pas seulement technique. L'architecture doit pouvoir être expliquée, justifiée et reliée aux besoins pédagogiques : observation réseau, détection, alertes, exports, traçabilité et démonstration reproductible.
+La qualité attendue n'est donc pas seulement technique. L'architecture doit pouvoir être expliquée, justifiée et reliée aux besoins produit : observation réseau, détection, alertes, exports, traçabilité et démonstration reproductible.
 
 ## 3. Stack cible
 
@@ -109,9 +109,9 @@ Les principes retenus sont les suivants :
 - PostgreSQL, Redis et Celery restent logiquement séparés, mais sont embarqués dans le serveur-soc pour la démonstration ;
 - la logique produit reste séparée par composants, même si l'emballage Docker de démonstration est compact.
 
-Le choix d'embarquer plusieurs services dans `serveur-soc` est un choix de packaging MVP. Il simplifie la démonstration et la soutenance, sans remettre en cause la séparation logique entre API, base de données, file de tâches et worker. En implémentation, ces processus devront être lancés de manière explicite et supervisable dans le conteneur de démonstration.
+Le choix d'embarquer plusieurs services dans `serveur-soc` est un choix de packaging MVP. Il simplifie la démonstration et la validation, sans remettre en cause la séparation logique entre API, base de données, file de tâches et worker. En implémentation, ces processus devront être lancés de manière explicite et supervisable dans le conteneur de démonstration.
 
-Ce compromis doit être présenté comme une décision d'ingénierie adaptée au contexte académique. En production, ces services pourraient être séparés dans des conteneurs distincts, mais cette séparation augmenterait inutilement la complexité du MVP et rendrait la démonstration moins directe.
+Ce compromis doit être présenté comme une décision d'ingénierie adaptée au contexte MVP. En production, ces services pourraient être séparés dans des conteneurs distincts, mais cette séparation augmenterait inutilement la complexité du MVP et rendrait la démonstration moins directe.
 
 ## 7. Architecture réseau Docker
 
@@ -123,7 +123,7 @@ L'environnement de développement et de démonstration est retenu sous la forme 
 2. un conteneur `serveur-endpoint` ;
 3. un conteneur `serveur-attacker`.
 
-Le conteneur `serveur-soc` centralise l'application web, l'API FastAPI, PostgreSQL, Redis et le worker Celery pour simplifier le MVP et la soutenance.
+Le conteneur `serveur-soc` centralise l'application web, l'API FastAPI, PostgreSQL, Redis et le worker Celery pour simplifier le MVP et la validation.
 
 ```text
 DOCKER HOST
@@ -207,7 +207,7 @@ Contraintes :
 4. serveur-soc -> PostgreSQL : persistance des événements
 5. serveur-soc -> Redis : mise en file d'une tâche de détection
 6. Redis -> Celery Worker : dispatch de la tâche
-7. Celery Worker -> PostgreSQL : mise à jour des actifs / évaluation des règles / création des alertes
+7. Celery Worker -> PostgreSQL : mise à jour des actifs / application des règles / création des alertes
 
 8. Interface web -> serveur-soc : consultation assets / alerts / events / reports
 9. serveur-soc -> PostgreSQL : lecture des données
@@ -293,7 +293,7 @@ Rôle :
 - affichage des IP attaquantes et de leur récurrence ;
 - consultation des corrélations entre événements et campagnes suspectes.
 
-L'enrichissement géographique des IP attaquantes doit rester pragmatique. Pour le MVP, il peut s'appuyer sur une base GeoIP locale, un jeu de données simulé ou un enrichissement contrôlé sans dépendance externe obligatoire pendant la soutenance.
+L'enrichissement géographique des IP attaquantes doit rester pragmatique. Pour le MVP, il peut s'appuyer sur une base GeoIP locale, un jeu de données simulé ou un enrichissement contrôlé sans dépendance externe obligatoire pendant la validation.
 
 Le frontend est intégré au même conteneur que le backend pour le MVP et ne doit parler qu'à l'API locale du serveur-soc.
 
@@ -601,8 +601,8 @@ Cette architecture est adaptée parce qu'elle :
 - correspond directement aux attendus du kick-off ;
 - est cohérente avec une implémentation Python/FastAPI ;
 - sépare correctement les responsabilités ;
-- permet une démonstration claire en soutenance ;
-- reste assez simple pour un projet académique ;
+- permet une démonstration claire en validation produit ;
+- reste assez simple pour un MVP ;
 - prépare une montée en qualité sans complexité excessive ;
 - permet un environnement de test réaliste et reproductible ;
 - couvre explicitement les besoins de scan, ports, services, trafic et détection ;
@@ -614,7 +614,7 @@ Cette architecture est adaptée parce qu'elle :
 
 Cette architecture s'appuie sur les documents suivants :
 
-- [Kick-off pédagogique (01)](../01_documents_pedagogiques/kickoff/KICKOFF.md)
+- [Kick-off projet (01)](../01_documents_pedagogiques/kickoff/KICKOFF.md)
 - [Étude de marché (02)](../02_etude_de_marche/rendu_principal.md)
 - [Business model (03)](../03_business_model/rendu_principal.md)
 - [Business plan (04)](../04_business_plan/rendu_principal.md)
@@ -628,4 +628,4 @@ L'architecture définitive retenue pour DevinciWatch est une architecture web mo
 
 Elle intègre également une capacité de corrélation pragmatique entre attaques, répétitions temporelles et sources attaquantes, ainsi qu'une interface web d'analyse moderne orientée métriques, historique, journalisation, exports et cartographie.
 
-Elle est adaptée au sujet, défendable techniquement, exploitable pédagogiquement et suffisamment propre pour servir de base définitive au redéveloppement du produit. Elle matérialise le compromis central du projet : produire une démonstration simple à exécuter, tout en conservant une conception suffisamment rigoureuse pour être discutée à un niveau universitaire.
+Elle est adaptée au sujet, défendable techniquement, exploitable opérationnellement et suffisamment propre pour servir de base définitive au redéveloppement du produit. Elle matérialise le compromis central du projet : produire une démonstration simple à exécuter, tout en conservant une conception suffisamment rigoureuse pour être discutée dans un contexte professionnel.

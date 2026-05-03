@@ -29,11 +29,11 @@ Les garde-fous doivent être intégrés dès la phase MVP : ils concernent autan
 
 Ces KPI doivent être suivis comme des indicateurs de décision. Ils permettent de savoir si la proposition de valeur est comprise, si le produit est exploitable et si le modèle économique reste soutenable.
 
-## Preuves attendues en soutenance
+## Preuves attendues en validation produit
 
 - Cas d'usage de détection observable.
 - Alertes générées et traitées.
 - Exports JSON/CSV exploitables.
 - Cohérence entre besoin initial, solution technique et valeur business.
 
-La soutenance doit montrer une chaîne complète : besoin identifié, scénario exécuté, événement observé, alerte produite, preuve exportée et valeur expliquée.
+La validation produit doit montrer une chaîne complète : besoin identifié, scénario exécuté, événement observé, alerte produite, preuve exportée et valeur expliquée.

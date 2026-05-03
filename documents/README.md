@@ -1,6 +1,6 @@
 # Documents
 
-Ce dossier regroupe l'ensemble des livrables académiques, stratégiques, fonctionnels et techniques de DevinciWatch. Il constitue le corpus documentaire de référence du projet : chaque document précise un niveau de décision différent, depuis la consigne initiale jusqu'à l'architecture de mise en œuvre.
+Ce dossier regroupe l'ensemble des livrables de cadrage, stratégiques, fonctionnels et techniques de DevinciWatch. Il constitue le corpus documentaire de référence du projet : chaque document précise un niveau de décision différent, depuis la consigne initiale jusqu'à l'architecture de mise en œuvre.
 
 La logique de lecture est volontairement progressive. Les premiers documents établissent le besoin, le marché et la viabilité économique ; les documents suivants traduisent ces conclusions en cadrage opérationnel, exigences, organisation de projet et architecture technique.
 
@@ -18,7 +18,7 @@ La logique de lecture est volontairement progressive. Les premiers documents ét
 
 ## Lecture recommandée
 
-1. [Kick-off pédagogique](01_documents_pedagogiques/kickoff/KICKOFF.md)
+1. [Kick-off projet](01_documents_pedagogiques/kickoff/KICKOFF.md)
 2. [Étude de marché](02_etude_de_marche/rendu_principal.md)
 3. [Business model](03_business_model/rendu_principal.md)
 4. [Business plan](04_business_plan/rendu_principal.md)

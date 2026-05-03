@@ -12,7 +12,7 @@ Il sert à préciser :
 - les risques ;
 - les mécanismes de suivi.
 
-Son objectif est de garantir que la progression du projet reste lisible, mesurable et cohérente avec les attentes pédagogiques, le périmètre MVP et les contraintes de démonstration.
+Son objectif est de garantir que la progression du projet reste lisible, mesurable et cohérente avec les attentes produit, le périmètre MVP et les contraintes de démonstration.
 
 ## 2. Position dans la chronologie projet
 
@@ -32,14 +32,14 @@ Il précède :
 
 ## 3. Méthode de travail retenue
 
-La méthode retenue est une approche itérative et pragmatique, adaptée à un projet académique avec démonstration attendue. Elle privilégie des incréments courts, vérifiables et directement reliés à la chaîne de valeur du produit : collecte, détection, corrélation, alerte, preuve et restitution.
+La méthode retenue est une approche itérative et pragmatique, adaptée à un projet produit avec démonstration attendue. Elle privilégie des incréments courts, vérifiables et directement reliés à la chaîne de valeur du produit : collecte, détection, corrélation, alerte, preuve et restitution.
 
 Principes de pilotage :
 
 - avancer par incréments fonctionnels ;
 - garder un MVP démontrable rapidement ;
 - documenter les décisions ;
-- prioriser les fonctions visibles en soutenance ;
+- prioriser les fonctions visibles en démonstration produit ;
 - contrôler la dérive du périmètre.
 
 ## 4. Organisation cible
@@ -107,7 +107,7 @@ Cadence recommandée :
 - exports ;
 - visualisation enrichie.
 
-### Phase 5 - finalisation soutenance
+### Phase 5 - finalisation validation
 
 - stabilisation ;
 - démonstration ;
@@ -127,7 +127,7 @@ Jalons recommandés :
 7. exports et audit prêts ;
 8. démonstration finale stabilisée.
 
-Chaque jalon doit être associé à une preuve concrète : document validé, fonctionnalité exécutable, scénario reproductible, capture de résultat ou export exploitable. Cette logique de preuve permet de relier le pilotage projet à la soutenance finale.
+Chaque jalon doit être associé à une preuve concrète : document validé, fonctionnalité exécutable, scénario reproductible, capture de résultat ou export exploitable. Cette logique de preuve permet de relier le pilotage projet à la validation finale.
 
 ## 8. Livrables de pilotage
 

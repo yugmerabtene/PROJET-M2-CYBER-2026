@@ -3,7 +3,7 @@
 ## Documents internes (cadre)
 
 - `documents-contractuels/syllabus.txt`
-- [Kick-off pédagogique transcrit](../../01_documents_pedagogiques/kickoff/KICKOFF.md)
+- [Kick-off projet transcrit](../../01_documents_pedagogiques/kickoff/KICKOFF.md)
 
 ## Sources externes principales (issues de l'ancien dossier)
 

@@ -2,10 +2,10 @@
 
 ## Référence retenue
 
-Les attendus sont dérivés de deux documents internes. Ces sources fixent à la fois le cadre pédagogique du projet et les livrables attendus pour justifier la cohérence entre produit, marché et soutenance.
+Les attendus sont dérivés de deux documents internes. Ces sources fixent à la fois le cadre initial du projet et les livrables attendus pour justifier la cohérence entre produit, marché et validation.
 
 1. `documents-contractuels/syllabus.txt`
-2. [Kick-off pédagogique transcrit](../../01_documents_pedagogiques/kickoff/KICKOFF.md)
+2. [Kick-off projet transcrit](../../01_documents_pedagogiques/kickoff/KICKOFF.md)
 
 ## Ce qui est explicitement demandé
 

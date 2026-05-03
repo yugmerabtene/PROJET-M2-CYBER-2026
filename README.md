@@ -2,7 +2,7 @@
 
 # DevinciWatch
 
-DevinciWatch est un projet de cybersurveillance réseau orienté SOC. Il vise à concevoir une solution démontrable capable d'observer un environnement réseau, de qualifier des événements de sécurité, de produire des alertes actionnables et de fournir des preuves exploitables pour l'analyse et la soutenance.
+DevinciWatch est un projet de cybersurveillance réseau orienté SOC. Il vise à concevoir une solution démontrable capable d'observer un environnement réseau, de qualifier des événements de sécurité, de produire des alertes actionnables et de fournir des preuves exploitables pour l'analyse et la validation produit.
 
 Le projet vise à couvrir les besoins suivants :
 
@@ -68,7 +68,7 @@ flowchart LR
 
 - [`product/`](product/) : futur code source du produit DevinciWatch.
 - [`website/`](website/) : futur site web officiel [devinciwatch.com](https://devinciwatch.com).
-- [`documents/`](documents/) : livrables pédagogiques, stratégiques, fonctionnels et techniques.
+- [`documents/`](documents/) : livrables de cadrage, stratégiques, fonctionnels et techniques.
 
 ## Navigation rapide
 
@@ -82,7 +82,7 @@ flowchart LR
 
 ## Documentation associée
 
-- Documents pédagogiques : [documents/01_documents_pedagogiques/README.md](documents/01_documents_pedagogiques/README.md)
+- Documents de cadrage initial : [documents/01_documents_pedagogiques/README.md](documents/01_documents_pedagogiques/README.md)
 - Références transverses : [documents/90_references_transverses/README.md](documents/90_references_transverses/README.md)
 
 ## État actuel
@@ -91,4 +91,4 @@ La branche `main` est organisée pour séparer clairement :
 
 - le futur produit,
 - le futur site corporate,
-- les livrables académiques et stratégiques déjà consolidés.
+- les livrables de cadrage et stratégiques déjà consolidés.

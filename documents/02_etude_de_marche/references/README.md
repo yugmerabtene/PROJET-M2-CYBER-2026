@@ -3,7 +3,7 @@
 Ce dossier reprend uniquement les rendus utiles demandés par les documents de référence internes. Il sert de base méthodologique et documentaire à l'[étude de marché](../rendu_principal.md).
 
 - `documents-contractuels/syllabus.txt`
-- [Kick-off pédagogique transcrit](../../01_documents_pedagogiques/kickoff/KICKOFF.md)
+- [Kick-off projet transcrit](../../01_documents_pedagogiques/kickoff/KICKOFF.md)
 
 ## Livrables inclus
 
@@ -13,7 +13,7 @@ Ce dossier reprend uniquement les rendus utiles demandés par les documents de r
 - [Benchmark concurrence](04_benchmark_concurrence.md) : alternatives et espace de différenciation.
 - [Modèle TAM / SAM / SOM](05_modele_tam_sam_som.md) : modélisation bottom-up exploitable.
 - [Stratégie d'entrée sur le marché](06_strategie_entree_marche.md) : scénario GTM recommandé.
-- [Risques, KPI et preuves](07_risques_kpi_et_preuves.md) : risques, KPI de pilotage et preuves attendues en soutenance.
+- [Risques, KPI et preuves](07_risques_kpi_et_preuves.md) : risques, KPI de pilotage et preuves attendues en validation produit.
 - [Sources de référence](08_sources_reference.md) : registre court des sources utilisées.
 
 ## Note de méthode

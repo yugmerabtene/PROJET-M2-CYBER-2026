@@ -8,7 +8,7 @@
 
 ## 2. Contexte
 
-Le projet s'inscrit dans un cadre académique de cybersécurité avec des attendus techniques, méthodologiques et de valorisation. Il doit démontrer la capacité à transformer un besoin de supervision réseau en produit structuré, défendable et démontrable.
+Le projet s'inscrit dans un cadre de conception produit en cybersécurité avec des attendus techniques, méthodologiques et de valorisation. Il doit démontrer la capacité à transformer un besoin de supervision réseau en produit structuré, défendable et démontrable.
 
 La feuille de cadrage joue ici un rôle de document-pivot. Elle traduit les enseignements issus de l'[étude de marché](../02_etude_de_marche/rendu_principal.md), du [business model](../03_business_model/rendu_principal.md) et du [business plan](../04_business_plan/rendu_principal.md) en décisions de périmètre, de priorisation et d'exécution. Elle permet également de préparer le passage vers le [cahier des charges](../07_cahier_des_charges/rendu_principal.md) et l'[architecture](../08_architecture/rendu_principal.md).
 
@@ -25,7 +25,7 @@ Mettre à disposition une solution capable de :
 
 ## 4. Problème adressé
 
-Les structures ciblées ont besoin de visibilité, de simplicité d'exploitation et de preuve, sans recourir à une plateforme trop lourde ou difficile à opérer. Le problème adressé n'est donc pas seulement l'absence d'information technique ; il concerne aussi la capacité à qualifier cette information, à la présenter clairement et à la transformer en éléments exploitables pour une décision ou une soutenance.
+Les structures ciblées ont besoin de visibilité, de simplicité d'exploitation et de preuve, sans recourir à une plateforme trop lourde ou difficile à opérer. Le problème adressé n'est donc pas seulement l'absence d'information technique ; il concerne aussi la capacité à qualifier cette information, à la présenter clairement et à la transformer en éléments exploitables pour une décision ou une revue produit.
 
 ## 5. Objectifs projet
 
@@ -41,7 +41,7 @@ Les structures ciblées ont besoin de visibilité, de simplicité d'exploitation
 - journalisation ;
 - cartographie des attaques.
 
-### Objectifs pédagogiques
+### Objectifs de validation
 
 - démontrer une architecture cohérente ;
 - produire un dépôt clair ;
@@ -70,7 +70,7 @@ Les structures ciblées ont besoin de visibilité, de simplicité d'exploitation
 
 - analyste SOC junior ou intermédiaire ;
 - administrateur ;
-- jury / démonstrateur en soutenance.
+- responsable de validation / référent produit.
 
 ## 8. Proposition de valeur projet
 
@@ -98,7 +98,7 @@ Référence : [Architecture produit (08)](../08_architecture/rendu_principal.md)
 - documentation claire ;
 - exports de preuve ;
 - support de présentation ;
-- démonstration soutenance.
+- démonstration de validation.
 
 ## 11. Critères de succès
 
@@ -138,7 +138,7 @@ Ces décisions doivent rester stables pendant la phase MVP. Toute extension fonc
 
 ## 15. Dépendances documentaires
 
-- [Kick-off pédagogique (01)](../01_documents_pedagogiques/kickoff/KICKOFF.md)
+- [Kick-off projet (01)](../01_documents_pedagogiques/kickoff/KICKOFF.md)
 - [Étude de marché (02)](../02_etude_de_marche/rendu_principal.md)
 - [Business model (03)](../03_business_model/rendu_principal.md)
 - [Business plan (04)](../04_business_plan/rendu_principal.md)
@@ -152,7 +152,7 @@ Ces décisions doivent rester stables pendant la phase MVP. Toute extension fonc
 2. Phase 2 - Socle technique : mettre en place le backend FastAPI, la base de données, le lab Docker et la collecte endpoint minimale ;
 3. Phase 3 - Cœur produit : intégrer la découverte réseau, les actifs, les événements, les alertes et l'audit ;
 4. Phase 4 - Enrichissement analyste : ajouter la corrélation, les métriques, l'historique, les exports et la visualisation ;
-5. Phase 5 - Finalisation soutenance : stabiliser la démonstration, la documentation finale et le support.
+5. Phase 5 - Finalisation validation : stabiliser la démonstration, la documentation finale et le support.
 
 ## 17. Conclusion
 
