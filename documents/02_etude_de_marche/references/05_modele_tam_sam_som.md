@@ -1,4 +1,4 @@
-# 05 - Modele TAM/SAM/SOM (bottom-up)
+# 05 - Modèle TAM/SAM/SOM (bottom-up)
 
 ## Formule de travail
 
@@ -9,7 +9,7 @@ Par segment:
 Avec:
 
 - `N_org`: nombre d'organisations
-- `t_need`: part avec besoin cyber reseau prioritaire
+- `t_need`: part avec besoin cyber réseau prioritaire
 - `t_fit`: part techniquement/organisationnellement compatible
 - `t_access`: part atteignable commercialement a 24-36 mois
 - `ACV`: valeur annuelle moyenne contrat
@@ -24,7 +24,7 @@ Avec:
 ## Lecture decisionnelle
 
 - Le resultat est surtout sensible a `t_access`, `ACV` et churn.
-- Le modele est utile pour prioriser les segments avant acceleration commerciale.
+- Le modèle est utile pour prioriser les segments avant acceleration commerciale.
 
 ## Usage attendu
 

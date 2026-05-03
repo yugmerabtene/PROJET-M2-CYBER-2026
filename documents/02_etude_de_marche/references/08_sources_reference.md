@@ -3,7 +3,7 @@
 ## Documents internes (cadre)
 
 - `documents-contractuels/syllabus.txt`
-- `documents-pedagogiques/1-Kick-off _ Projet Cybersécurité _ Supervision et analyse réseau.docx`
+- `documents-pédagogiques/1-Kick-off _ Projet Cybersécurité _ Supervision et analyse réseau.docx`
 
 ## Sources externes principales (issues de l'ancien dossier)
 

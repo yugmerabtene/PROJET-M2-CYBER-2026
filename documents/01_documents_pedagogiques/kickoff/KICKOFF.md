@@ -25,7 +25,7 @@ L'objectif est de développer un outil capable de :
 
 ## Contraintes techniques
 
-- Backend : Python, avec FastAPI et les bibliothèques nécessaires au coeur fonctionnel de l'outil.
+- Backend : Python, avec FastAPI et les bibliothèques nécessaires au cœur fonctionnel de l'outil.
 - Frontend : HTML, CSS, JavaScript, avec utilisation possible de Bootstrap ou Tailwind CSS.
 
 ## Ce que le projet doit démontrer

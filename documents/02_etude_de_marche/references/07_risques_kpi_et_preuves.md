@@ -3,8 +3,8 @@
 ## Risques majeurs
 
 - Conversion POC -> production insuffisante.
-- Churn eleve apres deploiement initial.
-- Cout d'acquisition superieur a la capacite de financement.
+- Churn élevé apres déploiement initial.
+- Coût d'acquisition supérieur a la capacité de financement.
 - Positionnement trop flou face aux alternatives.
 
 ## Garde-fous proposes
@@ -16,7 +16,7 @@
 
 ## KPI de pilotage recommandes
 
-- MTTD et MTTR (avant/apres deploiement).
+- MTTD et MTTR (avant/apres déploiement).
 - Taux de faux positifs.
 - Couverture actifs supervises.
 - Taux conversion POC -> abonnement.
@@ -25,7 +25,7 @@
 
 ## Preuves attendues en soutenance
 
-- Cas d'usage de detection observable.
+- Cas d'usage de détection observable.
 - Alertes generees et traitees.
 - Exports JSON/CSV exploitables.
 - Coherence entre besoin initial, solution technique et valeur business.

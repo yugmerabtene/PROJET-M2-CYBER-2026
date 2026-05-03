@@ -2,17 +2,17 @@
 
 # DevinciWatch
 
-DevinciWatch est un projet de cyber-surveillance reseau oriente SOC.
+DevinciWatch est un projet de cyber-surveillance réseau orienté SOC.
 
 Le projet vise a couvrir les besoins suivants :
 
-- collecte passive de telemetrie depuis un agent host,
-- persistance des evenements et inventaire d'assets,
-- detection de regles simples et creation d'alertes actionnables,
+- collecte passive de télémétrie depuis un agent host,
+- persistance des événements et inventaire d'assets,
+- détection de règles simples et création d'alertes actionnables,
 - triage analyste via dashboard web,
 - reporting KPI et exports CSV.
 
-## Schema global de fonctionnement
+## Schéma global de fonctionnement
 
 ```mermaid
 flowchart LR
@@ -41,50 +41,50 @@ flowchart LR
     B5 -->|summary + CSV| F
 ```
 
-## Flux metier simplifie
+## Flux métier simplifié
 
 1. L'agent envoie des `heartbeat` et des `events` vers l'API.
-2. L'API persiste la telemetrie en base.
-3. Les evenements mettent a jour ou creent des assets.
-4. Les regles de detection creent des alertes actionnables.
+2. L'API persiste la télémétrie en base.
+3. Les événements mettent a jour ou créent des assets.
+4. Les règles de détection créent des alertes actionnables.
 5. L'analyste consulte et traite les alertes depuis l'interface web.
 6. Le module de reporting expose des KPI et des exports CSV.
 7. Le module d'audit journalise les actions sensibles.
 
-## Presentation du projet
+## Présentation du projet
 
-- **Auth** : authentification et controle d'acces.
-- **Telemetry** : ingestion et consultation des evenements.
-- **Assets** : inventaire enrichi depuis les evenements observes.
-- **Alerts** : liste, detail et traitement des alertes.
-- **Reports** : synthese et exports.
-- **RBAC** : protection des actions sensibles selon le role.
-- **Audit Trail** : tracabilite des actions critiques.
+- **Auth** : authentification et contrôle d'accès.
+- **Telemetry** : ingestion et consultation des événements.
+- **Assets** : inventaire enrichi depuis les événements observés.
+- **Alerts** : liste, détail et traitement des alertes.
+- **Reports** : synthèse et exports.
+- **RBAC** : protection des actions sensibles selon le rôle.
+- **Audit Trail** : traçabilité des actions critiques.
 
-## Structure du depot
+## Structure du dépôt
 
 - `product/` : futur code source du produit DevinciWatch.
 - `website/` : futur site web officiel `https://devinciwatch.com`.
-- `documents/` : etude de marche, business model, business plan, references et annexes.
+- `documents/` : étude de marche, business model, business plan, références et annexes.
 
 ## Navigation rapide
 
 - Produit : `product/architecture.md`
 - Site web : `website/README.md`
 - Documents : `documents/README.md`
-- Etude de marche : `documents/02_etude_de_marche/rendu_principal.md`
+- Étude de marche : `documents/02_etude_de_marche/rendu_principal.md`
 - Business model : `documents/03_business_model/rendu_principal.md`
 - Business plan : `documents/04_business_plan/rendu_principal.md`
 
-## Documentation associee
+## Documentation associée
 
-- Documents pedagogiques : `documents/01_documents_pedagogiques/README.md`
-- References transverses : `documents/90_references_transverses/README.md`
+- Documents pédagogiques : `documents/01_documents_pedagogiques/README.md`
+- Références transverses : `documents/90_references_transverses/README.md`
 
-## Etat actuel
+## État actuel
 
-La branche `main` est organisee pour separer clairement :
+La branche `main` est organisée pour separer clairement :
 
 - le futur produit,
 - le futur site corporate,
-- les livrables academiques et strategiques deja consolides.
+- les livrables académiques et strategiques deja consolidés.

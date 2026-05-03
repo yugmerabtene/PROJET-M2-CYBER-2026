@@ -230,7 +230,7 @@ La clé du succès résidera dans la capacité à conserver un positionnement si
 - `../02_etude_de_marche/rendu_principal.md`
 - `../03_business_model/rendu_principal.md`
 - `../02_etude_de_marche/README.md`
-- `../02_etude_de_marche/references/08_sources_reference.md`
+- `../02_etude_de_marche/références/08_sources_reference.md`
 
 ### Références externes citées
 

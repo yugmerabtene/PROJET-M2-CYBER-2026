@@ -166,10 +166,10 @@ La réussite du modèle dépendra moins d'une sophistication tarifaire excessive
 ### Références principales
 
 - `../02_etude_de_marche/rendu_principal.md`
-- `../02_etude_de_marche/references/05_modele_tam_sam_som.md`
-- `../02_etude_de_marche/references/06_strategie_entree_marche.md`
-- `../02_etude_de_marche/references/07_risques_kpi_et_preuves.md`
-- `../02_etude_de_marche/references/08_sources_reference.md`
+- `../02_etude_de_marche/références/05_modele_tam_sam_som.md`
+- `../02_etude_de_marche/références/06_strategie_entree_marche.md`
+- `../02_etude_de_marche/références/07_risques_kpi_et_preuves.md`
+- `../02_etude_de_marche/références/08_sources_reference.md`
 - `../02_etude_de_marche/README.md`
 
 ### Références chiffrées

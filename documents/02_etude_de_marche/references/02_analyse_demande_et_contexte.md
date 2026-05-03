@@ -2,7 +2,7 @@
 
 ## Constat principal
 
-La demande pour une solution de supervision et d'analyse cyber reseau est structurelle, pas conjoncturelle.
+La demande pour une solution de supervision et d'analyse cyber réseau est structurelle, pas conjoncturelle.
 
 ## Signaux de marche utiles
 
@@ -14,22 +14,22 @@ La demande pour une solution de supervision et d'analyse cyber reseau est struct
 ## Impact reglementaire
 
 - NIS2 renforce les obligations de gestion du risque et de notification.
-- Les organisations doivent prouver leur capacite de detection, reponse et tracabilite.
+- Les organisations doivent prouver leur capacité de détection, réponse et traçabilité.
 
 ## Probleme reel cote client
 
 Le besoin prioritaire n'est pas d'ajouter un outil, mais de rendre l'operation cyber executable avec des equipes limitees:
 
-- voir l'activite reseau rapidement,
+- voir l'activite réseau rapidement,
 - detecter les signaux critiques,
 - prioriser les alertes actionnables,
 - produire des preuves exportables (audit/compliance).
 
 ## Opportunite pour la solution
 
-La fenetre de valeur se situe sur une offre pragmatique:
+La fenêtre de valeur se situe sur une offre pragmatique:
 
-- deploiement rapide,
-- cout lisible,
-- reduction mesurable du temps de detection/reaction,
+- déploiement rapide,
+- coût lisible,
+- reduction mesurable du temps de détection/reaction,
 - evidences de conformite prêtes a exporter.

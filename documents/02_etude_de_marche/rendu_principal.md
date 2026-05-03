@@ -214,14 +214,14 @@ La priorité n'est donc pas de rivaliser frontalement avec les plateformes les p
 
 ### Références internes et annexes d'étude
 
-- `references/01_cadrage_reference.md`
-- `references/02_analyse_demande_et_contexte.md`
-- `references/03_segmentation_ciblage_positionnement.md`
-- `references/04_benchmark_concurrence.md`
-- `references/05_modele_tam_sam_som.md`
-- `references/06_strategie_entree_marche.md`
-- `references/07_risques_kpi_et_preuves.md`
-- `references/08_sources_reference.md`
+- `références/01_cadrage_reference.md`
+- `références/02_analyse_demande_et_contexte.md`
+- `références/03_segmentation_ciblage_positionnement.md`
+- `références/04_benchmark_concurrence.md`
+- `références/05_modele_tam_sam_som.md`
+- `références/06_strategie_entree_marche.md`
+- `références/07_risques_kpi_et_preuves.md`
+- `références/08_sources_reference.md`
 - `README.md`
 
 ### Registre complet des sources antérieures conservées

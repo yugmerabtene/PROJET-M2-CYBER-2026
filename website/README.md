@@ -8,7 +8,7 @@ Ce dossier est reserve au futur site web officiel de DevinciWatch.
 
 ## Contenu attendu
 
-- site corporate de presentation,
+- site corporate de présentation,
 - pages produit et proposition de valeur,
 - pages entreprise et contact,
 - contenu marketing et institutionnel.
@@ -18,6 +18,6 @@ Ce dossier est reserve au futur site web officiel de DevinciWatch.
 - Vue projet globale : `../README.md`
 - Documents strategiques et business : `../documents/README.md`
 
-## Etat actuel
+## État actuel
 
 Aucun code web n'est place ici a ce stade.
