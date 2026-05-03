@@ -1,8 +1,8 @@
 # Références transverses
 
-Ce dossier centralise les sources transverses reutilisees dans plusieurs livrables.
+Ce dossier centralise les sources transverses réutilisées dans plusieurs livrables.
 
-- `source_register.csv` : registre complet des sources exploitees.
-- `source_quality_matrix.csv` : qualification et fiabilite des sources.
+- `source_register.csv` : registre complet des sources exploitées.
+- `source_quality_matrix.csv` : qualification et fiabilité des sources.
 
-Ces fichiers servent de base de traçabilité commune a l'étude de marche, au business model et au business plan.
+Ces fichiers servent de base de traçabilité commune à l'étude de marché, au business model et au business plan.

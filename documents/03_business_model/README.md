@@ -1,9 +1,9 @@
 # Business model
 
-Ce dossier regroupe le rendu principal du business model et ses pieces de support.
+Ce dossier regroupe le rendu principal du business model et ses pièces de support.
 
-- `rendu_principal.md` : document final du modèle economique.
-- `références/` : espace de références du business model.
-- `annexes/` : hypotheses, pricing, scenarios, KPI et forecasts.
+- `rendu_principal.md` : document final du modèle économique.
+- `references/` : espace de références du business model.
+- `annexes/` : hypothèses, pricing, scénarios, KPI et forecasts.
 
-Le business model s'appuie explicitement sur l'étude de marche et sur les références transverses conservees dans `../90_references_transverses/`.
+Le business model s'appuie explicitement sur l'étude de marché et sur les références transverses conservées dans `../90_references_transverses/`.

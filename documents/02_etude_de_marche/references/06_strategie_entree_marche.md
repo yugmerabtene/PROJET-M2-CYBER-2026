@@ -1,27 +1,27 @@
-# 06 - Stratégie d'entrée marche (GTM)
+# 06 - Stratégie d'entrée marché (GTM)
 
-## Scenarios compares
+## Scénarios comparés
 
-- GTM-A: vente directe.
-- GTM-B: canal partenaires (MSSP/integrateurs).
-- GTM-C: hybride (direct + partenaires).
+- GTM-A : vente directe.
+- GTM-B : canal partenaires (MSSP/intégrateurs).
+- GTM-C : hybride (direct + partenaires).
 
-## Evaluation rapide
+## Évaluation rapide
 
-- Direct: meilleur contrôle de la relation client, mais traction initiale plus lente.
-- Partenaires: acceleration potentielle, mais dependance canal et marge plus faible.
-- Hybride: compromis robuste en phase d'amorcage.
+- Direct : meilleur contrôle de la relation client, mais traction initiale plus lente.
+- Partenaires : accélération potentielle, mais dépendance canal et marge plus faible.
+- Hybride : compromis robuste en phase d'amorçage.
 
 ## Recommandation
 
-Retenir GTM-C avec garde-fous operationnels:
+Retenir GTM-C avec garde-fous opérationnels :
 
 1. Pipeline direct minimum garanti.
-2. Selection de 2 a 3 partenaires qualifies.
-3. Règles claires de propriete compte et gouvernance commerciale.
+2. Sélection de 2 à 3 partenaires qualifiés.
+3. Règles claires de propriété compte et gouvernance commerciale.
 
-## Plan de mise en oeuvre initial
+## Plan de mise en œuvre initial
 
-- Lot 1: 2 a 4 POC directs sur verticales prioritaires.
-- Lot 2: onboarding des premiers partenaires avec playbook standard.
-- Lot 3: arbitrage canal selon conversion, marge, coût d'acquisition.
+- Lot 1 : 2 à 4 POC directs sur verticales prioritaires.
+- Lot 2 : onboarding des premiers partenaires avec playbook standard.
+- Lot 3 : arbitrage canal selon conversion, marge, coût d'acquisition.

@@ -4,7 +4,7 @@
 
 DevinciWatch est un projet de cyber-surveillance réseau orienté SOC.
 
-Le projet vise a couvrir les besoins suivants :
+Le projet vise à couvrir les besoins suivants :
 
 - collecte passive de télémétrie depuis un agent host,
 - persistance des événements et inventaire d'assets,
@@ -45,7 +45,7 @@ flowchart LR
 
 1. L'agent envoie des `heartbeat` et des `events` vers l'API.
 2. L'API persiste la télémétrie en base.
-3. Les événements mettent a jour ou créent des assets.
+3. Les événements mettent à jour ou créent des assets.
 4. Les règles de détection créent des alertes actionnables.
 5. L'analyste consulte et traite les alertes depuis l'interface web.
 6. Le module de reporting expose des KPI et des exports CSV.
@@ -65,14 +65,14 @@ flowchart LR
 
 - `product/` : futur code source du produit DevinciWatch.
 - `website/` : futur site web officiel `https://devinciwatch.com`.
-- `documents/` : étude de marche, business model, business plan, références et annexes.
+- `documents/` : étude de marché, business model, business plan, références et annexes.
 
 ## Navigation rapide
 
 - Produit : `product/README.md`
 - Site web : `website/README.md`
 - Documents : `documents/README.md`
-- Étude de marche : `documents/02_etude_de_marche/rendu_principal.md`
+- Étude de marché : `documents/02_etude_de_marche/rendu_principal.md`
 - Business model : `documents/03_business_model/rendu_principal.md`
 - Business plan : `documents/04_business_plan/rendu_principal.md`
 - Architecture retenue : `documents/08_architecture/rendu_principal.md`
@@ -84,8 +84,8 @@ flowchart LR
 
 ## État actuel
 
-La branche `main` est organisée pour separer clairement :
+La branche `main` est organisée pour séparer clairement :
 
 - le futur produit,
 - le futur site corporate,
-- les livrables académiques et strategiques deja consolidés.
+- les livrables académiques et stratégiques déjà consolidés.

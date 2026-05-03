@@ -1,6 +1,6 @@
 # Website
 
-Ce dossier est reserve au futur site web officiel de DevinciWatch.
+Ce dossier est réservé au futur site web officiel de DevinciWatch.
 
 ## Domaine
 
@@ -13,11 +13,11 @@ Ce dossier est reserve au futur site web officiel de DevinciWatch.
 - pages entreprise et contact,
 - contenu marketing et institutionnel.
 
-## Reference liee
+## Référence liée
 
 - Vue projet globale : `../README.md`
-- Documents strategiques et business : `../documents/README.md`
+- Documents stratégiques et business : `../documents/README.md`
 
 ## État actuel
 
-Aucun code web n'est place ici a ce stade.
+Aucun code web n'est placé ici à ce stade.

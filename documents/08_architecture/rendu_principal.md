@@ -2,9 +2,9 @@
 
 ## 1. Statut du document
 
-Ce document fixe l'architecture de reference du produit DevinciWatch.
+Ce document fixe l'architecture de référence du produit DevinciWatch.
 
-Sauf decision explicite ulterieure, cette architecture est consideree comme l'architecture définitive de départ pour le redeveloppement de l'application.
+Sauf décision explicite ultérieure, cette architecture est considérée comme l'architecture définitive de départ pour le redéveloppement de l'application.
 
 Le document distingue volontairement deux niveaux :
 
@@ -98,12 +98,12 @@ Les principes retenus sont les suivants :
 
 ## 6. Lecture de l'architecture logicielle
 
-- l'utilisateur accede uniquement a l'application web ;
+- l'utilisateur accède uniquement à l'application web ;
 - l'application web est hébergée dans le même conteneur que l'API pour le MVP ;
 - le serveur-endpoint envoie ses données uniquement au serveur-soc ;
-- le serveur-attacker ne parle pas directement a l'interface ;
-- PostgreSQL, Redis et Celery restent logiquement séparés, mais sont embarques dans le serveur-soc pour la démonstration ;
-- la logique produit reste séparée par composants, même si l'emballage Docker de demo est compact.
+- le serveur-attacker ne parle pas directement à l'interface ;
+- PostgreSQL, Redis et Celery restent logiquement séparés, mais sont embarqués dans le serveur-soc pour la démonstration ;
+- la logique produit reste séparée par composants, même si l'emballage Docker de démonstration est compact.
 
 ## 7. Architecture réseau Docker
 
@@ -147,7 +147,7 @@ DOCKER HOST
 
 #### `serveur-soc`
 
-Responsabilites :
+Responsabilités :
 
 - exposer l'application ;
 - servir l'API ;
@@ -155,7 +155,7 @@ Responsabilites :
 - centraliser les appels fonctionnels ;
 - embarquer PostgreSQL, Redis et Celery pour la démonstration.
 
-Composants internes embarques :
+Composants internes embarqués :
 
 - FastAPI API ;
 - Frontend Web ;
@@ -165,9 +165,9 @@ Composants internes embarques :
 
 #### `serveur-endpoint`
 
-Responsabilites :
+Responsabilités :
 
-- jouer le rôle d'un hote supervise ;
+- jouer le rôle d'un hôte supervisé ;
 - observer le trafic réseau sur l'interface du conteneur ;
 - collecter et parser les fichiers log utiles ;
 - relever les comportements suspects locaux ;
@@ -175,31 +175,31 @@ Responsabilites :
 
 #### `serveur-attacker`
 
-Responsabilites :
+Responsabilités :
 
-- produire des scenarios de test ;
-- simuler des comportements suspects controles ;
-- generer du trafic ou des comportements attendus pour la détection sur le serveur-endpoint.
+- produire des scénarios de test ;
+- simuler des comportements suspects contrôlés ;
+- générer du trafic ou des comportements attendus pour la détection sur le serveur-endpoint.
 
 Contraintes :
 
-- pas de charge destructive reelle ;
-- pas de code malware reel ;
-- scenarios strictement previsibles et demonstrables.
+- pas de charge destructive réelle ;
+- pas de code malware réel ;
+- scénarios strictement prévisibles et démontrables.
 
-## 8. Diagramme de sequence principal
+## 8. Diagramme de séquence principal
 
-![Diagramme de sequence](assets/architecture-sequence.svg)
+![Diagramme de séquence](assets/architecture-sequence.svg)
 
 ```text
 1. Agent -> Control Server : POST /telemetry/heartbeat
-2. Control Server -> PostgreSQL : persistence du heartbeat
+2. Control Server -> PostgreSQL : persistance du heartbeat
 
 3. Agent -> Control Server : POST /telemetry/events
-4. Control Server -> PostgreSQL : persistence des événements
-5. Control Server -> Redis : mise en file d'une tache de détection
-6. Redis -> Celery Worker : dispatch de la tache
-7. Celery Worker -> PostgreSQL : mise a jour assets / evaluation des règles / création des alertes
+4. Control Server -> PostgreSQL : persistance des événements
+5. Control Server -> Redis : mise en file d'une tâche de détection
+6. Redis -> Celery Worker : dispatch de la tâche
+7. Celery Worker -> PostgreSQL : mise à jour assets / évaluation des règles / création des alertes
 
 8. Web App -> Control Server : consultation assets / alerts / events / reports
 9. Control Server -> PostgreSQL : lecture des données
@@ -236,7 +236,7 @@ Rôle :
 - piloter les règles de corrélation ;
 - retourner les données au frontend.
 
-L'API constitue le point central du systeme et sera hébergée dans le conteneur `serveur-soc`.
+L'API constitue le point central du système et sera hébergée dans le conteneur `serveur-soc`.
 
 ### 9.3 Base PostgreSQL
 
@@ -249,7 +249,7 @@ Rôle :
 - stocker les journaux d'audit ;
 - stocker les informations utiles aux exports et rapports.
 
-PostgreSQL est la source de vérité fonctionnelle et sera embarquee dans `serveur-soc` pour la phase MVP de démonstration.
+PostgreSQL est la source de vérité fonctionnelle et sera embarquée dans `serveur-soc` pour la phase MVP de démonstration.
 
 ### 9.4 Redis + Worker Celery
 
@@ -262,7 +262,7 @@ Rôle :
 - générer des exports ;
 - préparer certains rapports ou tâches différées.
 
-Redis et Celery seront également embarques dans `serveur-soc` pour la phase MVP de démonstration.
+Redis et Celery seront également embarqués dans `serveur-soc` pour la phase MVP de démonstration.
 
 ### 9.5 Frontend web
 
@@ -281,31 +281,31 @@ Rôle :
 - affichage des IP attaquantes et de leur récurrence ;
 - consultation des corrélations entre événements et campagnes suspectes.
 
-Le frontend est intégré au même conteneur que le backend pour le MVP et ne doit parler qu'a l'API locale du serveur-soc.
+Le frontend est intégré au même conteneur que le backend pour le MVP et ne doit parler qu'à l'API locale du serveur-soc.
 
 ### 9.6 Simulateur de test
 
 Rôle :
 
-- executer des scenarios de test de sécurité controles ;
+- exécuter des scénarios de test de sécurité contrôlés ;
 - alimenter l'agent ou le serveur en comportements observables ;
 - produire des preuves de détection pour la démonstration.
 
-Ce composant existe pour le lab Docker de test, pas pour la production. Il sera héberge dans le conteneur `serveur-attacker`.
+Ce composant existe pour le lab Docker de test, pas pour la production. Il sera hébergé dans le conteneur `serveur-attacker`.
 
-## 10. Capacités fonctionnelles réseau imposees par le projet
+## 10. Capacités fonctionnelles réseau imposées par le projet
 
-L'architecture doit couvrir explicitement les capacités demandees dans le kick-off :
+L'architecture doit couvrir explicitement les capacités demandées dans le kick-off :
 
-- détection des equipements connectes ;
+- détection des équipements connectés ;
 - scan de plage IP ;
 - identification des ports ouverts ;
 - récupération d'informations sur les services réseau ;
 - observation du trafic réseau ;
 - détection de comportements suspects ou malveillants ;
-- correlation de signaux repetes ou relies a une même source attaquante.
+- corrélation de signaux répétés ou reliés à une même source attaquante.
 
-Ces capacités seront portees principalement par le serveur-endpoint et par les modules backend associés a la telemetry, aux assets et aux alerts.
+Ces capacités seront portées principalement par le serveur-endpoint et par les modules backend associés à la télémétrie, aux actifs et aux alertes.
 
 ## 11. Découpage fonctionnel du backend
 
@@ -348,8 +348,8 @@ Responsabilités :
 - scan de plages IP ;
 - identification des ports ouverts ;
 - récupération d'informations de services réseau ;
-- collecte d'observations liees au trafic réseau ;
-- transmission de ces resultats au module `assets` et au module `alerts`.
+- collecte d'observations liées au trafic réseau ;
+- transmission de ces résultats au module `assets` et au module `alerts`.
 
 ### `assets`
 
@@ -431,7 +431,7 @@ Chaque module devrait à terme contenir :
 - accès aux données ;
 - tests associés.
 
-## 13. Mécanique de correlation retenue
+## 13. Mécanique de corrélation retenue
 
 La corrélation est retenue comme capacité centrale du produit, inspirée des usages SOC modernes :
 
@@ -452,18 +452,18 @@ L'objectif n'est pas de reproduire la complexité complète d'un SIEM enterprise
 
 ## 14. Flux de test en environnement Docker
 
-Scenario de démonstration recommande :
+Scénario de démonstration recommandé :
 
 1. `serveur-soc`, `serveur-endpoint` et `serveur-attacker` démarrent ;
-2. `serveur-endpoint` s'enregistre et emet un `heartbeat` ;
-3. `serveur-endpoint` execute ou planifie une phase de decouverte réseau initiale : scan IP, ports ouverts et services observés ;
-4. `serveur-attacker` déclenche un scenario contrôle ;
+2. `serveur-endpoint` s'enregistre et émet un `heartbeat` ;
+3. `serveur-endpoint` exécute ou planifie une phase de découverte réseau initiale : scan IP, ports ouverts et services observés ;
+4. `serveur-attacker` déclenche un scénario contrôlé ;
 5. `serveur-endpoint` observe le trafic, les logs ou les comportements attendus ;
-6. l'API persiste les événements et les resultats de decouverte ;
-7. le worker evalue les règles de détection et de correlation ;
-8. une ou plusieurs alertes enrichies sont generees ;
-9. l'analyste visualise le resultat dans l'interface, les historiques et la carte géographique ;
-10. un export CSV, XML ou JSON peut etre produit pour preuve.
+6. l'API persiste les événements et les résultats de découverte ;
+7. le worker évalue les règles de détection et de corrélation ;
+8. une ou plusieurs alertes enrichies sont générées ;
+9. l'analyste visualise le résultat dans l'interface, les historiques et la carte géographique ;
+10. un export CSV, XML ou JSON peut être produit pour preuve.
 
 ## 15. Modèle de données fonctionnel
 
@@ -483,7 +483,7 @@ Entités principales à prévoir :
 Relations principales :
 
 - un événement peut être lié à un actif ;
-- un resultat de scan ou d'observation réseau peut etre lie a un actif ;
+- un résultat de scan ou d'observation réseau peut être lié à un actif ;
 - une alerte peut être liée à un actif et à un ou plusieurs événements ;
 - un groupe de corrélation peut lier plusieurs événements, plusieurs alertes et une ou plusieurs IP sources ;
 - un profil attaquant peut agréger une IP source, des répétitions temporelles et des indicateurs géographiques ;
@@ -521,13 +521,13 @@ Relations principales :
 
 ### Isolation du lab de test
 
-- réseau Docker dedie ;
+- réseau Docker dédié ;
 - aucun accès inutile hors du réseau de lab ;
-- scenarios de test bornes et documentes.
+- scénarios de test bornés et documentés.
 
 ## 17. Interface web cible
 
-L'interface web cible doit etre moderne, complete et orientée analyste.
+L'interface web cible doit être moderne, complète et orientée analyste.
 
 Capacités attendues :
 
@@ -547,7 +547,7 @@ Le premier incrément produit devrait couvrir :
 1. authentification ;
 2. ingestion `heartbeat` ;
 3. ingestion `events` ;
-4. collecte de trafic, logs et signaux suspects cote endpoint ;
+4. collecte de trafic, logs et signaux suspects côté endpoint ;
 5. scan IP et identification basique de ports/services ;
 6. persistance PostgreSQL ;
 7. inventaire d'actifs simple ;
@@ -583,12 +583,12 @@ Cette architecture est adaptée parce qu'elle :
 - couvre explicitement les besoins de scan, ports, services, trafic et détection ;
 - introduit une capacité de corrélation utile sans basculer dans une architecture SIEM trop lourde ;
 - soutient une interface d'investigation plus riche et plus démonstrative ;
-- rend visible toute la chaine détection -> alerte -> preuve.
+- rend visible toute la chaîne détection -> alerte -> preuve.
 
 ## 21. Conclusion
 
-L'architecture définitive retenue pour DevinciWatch est une architecture web modulaire centree sur FastAPI, PostgreSQL, Redis et un worker asynchrone, avec un environnement Docker de test compose de trois conteneurs : `serveur-soc`, `serveur-endpoint` et `serveur-attacker`.
+L'architecture définitive retenue pour DevinciWatch est une architecture web modulaire centrée sur FastAPI, PostgreSQL, Redis et un worker asynchrone, avec un environnement Docker de test composé de trois conteneurs : `serveur-soc`, `serveur-endpoint` et `serveur-attacker`.
 
-Elle intégré également une capacité de corrélation pragmatique entre attaques, répétitions temporelles et sources attaquantes, ainsi qu'une interface web d'analyse moderne orientée métriques, historique, journalisation, exports et cartographie.
+Elle intègre également une capacité de corrélation pragmatique entre attaques, répétitions temporelles et sources attaquantes, ainsi qu'une interface web d'analyse moderne orientée métriques, historique, journalisation, exports et cartographie.
 
-Elle est adaptee au sujet, defendable techniquement, exploitable pedagogiquement et suffisamment propre pour servir de base définitive au redeveloppement du produit.
+Elle est adaptée au sujet, défendable techniquement, exploitable pédagogiquement et suffisamment propre pour servir de base définitive au redéveloppement du produit.

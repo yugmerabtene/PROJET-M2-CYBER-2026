@@ -4,32 +4,32 @@
 
 La demande pour une solution de supervision et d'analyse cyber réseau est structurelle, pas conjoncturelle.
 
-## Signaux de marche utiles
+## Signaux de marché utiles
 
-- France: volumes eleves de signalements/incidents (ANSSI, Cybermalveillance).
-- Belgique: hausse continue des incidents signales et notifications cyber (CCB).
-- Suisse: volume important de signalements, forte part de fraudes (NCSC/OFCS).
-- International: pression persistante sur les vecteurs phishing, credentials, exploitation de vuln. (DBIR, Mandiant).
+- France : volumes élevés de signalements/incidents (ANSSI, Cybermalveillance).
+- Belgique : hausse continue des incidents signalés et notifications cyber (CCB).
+- Suisse : volume important de signalements, forte part de fraudes (NCSC/OFCS).
+- International : pression persistante sur les vecteurs phishing, credentials, exploitation de vulnérabilités (DBIR, Mandiant).
 
-## Impact reglementaire
+## Impact réglementaire
 
 - NIS2 renforce les obligations de gestion du risque et de notification.
 - Les organisations doivent prouver leur capacité de détection, réponse et traçabilité.
 
-## Probleme reel cote client
+## Problème réel côté client
 
-Le besoin prioritaire n'est pas d'ajouter un outil, mais de rendre l'operation cyber executable avec des equipes limitees:
+Le besoin prioritaire n'est pas d'ajouter un outil, mais de rendre l'opération cyber exécutable avec des équipes limitées :
 
-- voir l'activite réseau rapidement,
-- detecter les signaux critiques,
+- voir l'activité réseau rapidement,
+- détecter les signaux critiques,
 - prioriser les alertes actionnables,
 - produire des preuves exportables (audit/compliance).
 
-## Opportunite pour la solution
+## Opportunité pour la solution
 
-La fenêtre de valeur se situe sur une offre pragmatique:
+La fenêtre de valeur se situe sur une offre pragmatique :
 
 - déploiement rapide,
 - coût lisible,
-- reduction mesurable du temps de détection/reaction,
-- evidences de conformite prêtes a exporter.
+- réduction mesurable du temps de détection/réaction,
+- preuves de conformité prêtes à exporter.

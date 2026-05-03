@@ -1,36 +1,36 @@
-# 01 - Cadrage par document de reference
+# 01 - Cadrage par document de référence
 
-## Reference retenue
+## Référence retenue
 
-Les attendus sont derives de deux documents internes:
+Les attendus sont dérivés de deux documents internes :
 
 1. `documents-contractuels/syllabus.txt`
 2. `documents-pédagogiques/1-Kick-off _ Projet Cybersécurité _ Supervision et analyse réseau.docx`
 
-## Ce qui est explicitement demande
+## Ce qui est explicitement demandé
 
-- Structurer un projet pour la mise sur le marche.
-- Produire une étude de marche exploitable pour le pitch et le modèle economique.
+- Structurer un projet pour la mise sur le marché.
+- Produire une étude de marché exploitable pour le pitch et le modèle économique.
 - Aligner la partie business avec la solution technique cyber (supervision, alertes, exports JSON/CSV).
 
-## Objectif de cette étude de marche
+## Objectif de cette étude de marché
 
-Transformer un projet technique en offre defendable en repondant a 4 questions:
+Transformer un projet technique en offre défendable en répondant à 4 questions :
 
-1. Le besoin marche est-il reel et durable ?
+1. Le besoin marché est-il réel et durable ?
 2. Quels segments sont prioritaires et accessibles ?
-3. Comment se differencier face aux alternatives ?
-4. Quelle stratégie d'entrée marche est la plus realiste ?
+3. Comment se différencier face aux alternatives ?
+4. Quelle stratégie d'entrée marché est la plus réaliste ?
 
-## Perimetre de travail
+## Périmètre de travail
 
-- Zone prioritaire: France, Belgique, Suisse francophone.
-- Cible prioritaire: PME/ETI et organisations soumises a contraintes cyber/compliance.
-- Horizon: 24 a 36 mois pour hypotheses de penetration commerciale.
+- Zone prioritaire : France, Belgique, Suisse francophone.
+- Cible prioritaire : PME/ETI et organisations soumises à contraintes cyber/compliance.
+- Horizon : 24 à 36 mois pour hypothèses de pénétration commerciale.
 
-## Methodes utilisees
+## Méthodes utilisées
 
-- Analyse demande (incidents, tendances, reglementation).
+- Analyse demande (incidents, tendances, réglementation).
 - Segmentation/ciblage/positionnement (STP).
 - Benchmark concurrentiel (SIEM, open-source, MSSP).
 - TAM/SAM/SOM bottom-up.

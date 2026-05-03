@@ -3,29 +3,29 @@
 ## Risques majeurs
 
 - Conversion POC -> production insuffisante.
-- Churn élevé apres déploiement initial.
-- Coût d'acquisition supérieur a la capacité de financement.
+- Churn élevé après déploiement initial.
+- Coût d'acquisition supérieur à la capacité de financement.
 - Positionnement trop flou face aux alternatives.
 
-## Garde-fous proposes
+## Garde-fous proposés
 
-- Criteres de succes POC contractualises.
-- Onboarding et runbooks standardises.
-- Priorisation geographie/secteurs avant extension.
-- Message unique centre sur "resultat operationnel + preuve".
+- Critères de succès POC contractualisés.
+- Onboarding et runbooks standardisés.
+- Priorisation géographie/secteurs avant extension.
+- Message unique centré sur "résultat opérationnel + preuve".
 
-## KPI de pilotage recommandes
+## KPI de pilotage recommandés
 
-- MTTD et MTTR (avant/apres déploiement).
+- MTTD et MTTR (avant/après déploiement).
 - Taux de faux positifs.
-- Couverture actifs supervises.
+- Couverture actifs supervisés.
 - Taux conversion POC -> abonnement.
-- Churn client a 6 et 12 mois.
-- Delai moyen de mise en production.
+- Churn client à 6 et 12 mois.
+- Délai moyen de mise en production.
 
 ## Preuves attendues en soutenance
 
 - Cas d'usage de détection observable.
-- Alertes generees et traitees.
+- Alertes générées et traitées.
 - Exports JSON/CSV exploitables.
-- Coherence entre besoin initial, solution technique et valeur business.
+- Cohérence entre besoin initial, solution technique et valeur business.

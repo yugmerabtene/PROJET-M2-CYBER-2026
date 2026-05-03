@@ -1,34 +1,34 @@
 # 03 - Segmentation, ciblage, positionnement
 
-## Segments consideres
+## Segments considérés
 
-- PME de 50 a 249 employes.
-- ETI de 250 a 1000 employes.
-- Organisations sensibles: sante, education, public local, services numeriques.
+- PME de 50 à 249 employés.
+- ETI de 250 à 1000 employés.
+- Organisations sensibles : santé, éducation, public local, services numériques.
 
-## Critere de priorisation
+## Critère de priorisation
 
-- exposition cyber elevee,
-- contrainte de conformite,
+- exposition cyber élevée,
+- contrainte de conformité,
 - manque de ressources SOC internes,
-- capacité budgetaire compatible avec une offre SaaS/B2B.
+- capacité budgétaire compatible avec une offre SaaS/B2B.
 
-## Cibles prioritaires recommandees
+## Cibles prioritaires recommandées
 
-1. PME/ETI avec SI heterogene et faible capacité de supervision interne.
+1. PME/ETI avec SI hétérogène et faible capacité de supervision interne.
 2. Organisations qui doivent produire des preuves de suivi sécurité (audit, reporting).
 
-## Positionnement propose
+## Positionnement proposé
 
-"Supervision cyber réseau pragmatique pour equipes reduites, avec alertes actionnables et preuves exportables, sans complexite SIEM enterprise."
+"Supervision cyber réseau pragmatique pour équipes réduites, avec alertes actionnables et preuves exportables, sans complexité SIEM enterprise."
 
 ## Promesse de valeur
 
 - Time-to-value rapide (mise en place en quelques semaines).
-- Pilotage operationnel simple pour analystes/junior SOC.
+- Pilotage opérationnel simple pour analystes/junior SOC.
 - Traçabilité native via exports JSON/CSV pour preuve et gouvernance.
 
-## Ce que le positionnement evite
+## Ce que le positionnement évite
 
-- La guerre frontale de fonctionnalites contre les SIEM/XDR enterprise.
-- Le bricolage open-source non industrialise en production.
+- La guerre frontale de fonctionnalités contre les SIEM/XDR enterprise.
+- Le bricolage open-source non industrialisé en production.

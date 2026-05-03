@@ -2,31 +2,31 @@
 
 ## Formule de travail
 
-Par segment:
+Par segment :
 
 `SOM_segment = N_org * t_need * t_fit * t_access * ACV`
 
-Avec:
+Avec :
 
-- `N_org`: nombre d'organisations
-- `t_need`: part avec besoin cyber réseau prioritaire
-- `t_fit`: part techniquement/organisationnellement compatible
-- `t_access`: part atteignable commercialement a 24-36 mois
-- `ACV`: valeur annuelle moyenne contrat
+- `N_org` : nombre d'organisations
+- `t_need` : part avec besoin cyber réseau prioritaire
+- `t_fit` : part techniquement/organisationnellement compatible
+- `t_access` : part atteignable commercialement à 24-36 mois
+- `ACV` : valeur annuelle moyenne contrat
 
-## Hypotheses retenues
+## Hypothèses retenues
 
 - Besoin valide par signaux FR/BE/CH.
 - Pression compliance durable (NIS2).
 - Tension talents cyber persistante.
-- Bande ACV de travail: 9k a 24k EUR/an selon segment.
+- Bande ACV de travail : 9k à 24k EUR/an selon segment.
 
-## Lecture decisionnelle
+## Lecture décisionnelle
 
-- Le resultat est surtout sensible a `t_access`, `ACV` et churn.
-- Le modèle est utile pour prioriser les segments avant acceleration commerciale.
+- Le résultat est surtout sensible à `t_access`, `ACV` et churn.
+- Le modèle est utile pour prioriser les segments avant accélération commerciale.
 
 ## Usage attendu
 
-- Alimenter le futur business model avec hypotheses tracees.
-- Mettre a jour les coefficients apres retours POC/relation terrain.
+- Alimenter le futur business model avec hypothèses tracées.
+- Mettre à jour les coefficients après retours POC/relation terrain.
