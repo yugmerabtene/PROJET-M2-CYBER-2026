@@ -13,7 +13,7 @@ Le projet vise à couvrir les besoins suivants :
 - triage analyste via une interface web ;
 - reporting, KPI et exports CSV / JSON.
 
-Le projet est structuré pour répondre à une exigence universitaire : relier clairement le besoin initial, les études stratégiques, le cadrage fonctionnel, la gestion de projet, le cahier des charges et l'architecture technique.
+Le projet est structuré pour répondre à une exigence de validation professionnelle : relier clairement le besoin initial, les études stratégiques, le cadrage fonctionnel, la gestion de projet, le cahier des charges et l'architecture technique.
 
 ## Schéma global de fonctionnement
 

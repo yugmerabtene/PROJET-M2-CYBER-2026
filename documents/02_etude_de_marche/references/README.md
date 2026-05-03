@@ -1,6 +1,6 @@
-# Étude de marché - version propre
+# Étude de marché - références
 
-Ce dossier reprend uniquement les rendus utiles demandés par les documents de référence internes. Il sert de base méthodologique et documentaire à l'[étude de marché](../rendu_principal.md).
+Ce dossier regroupe les analyses détaillées qui soutiennent l'[étude de marché](../rendu_principal.md). Il explicite le cadrage, la demande, la segmentation, le benchmark, la méthode TAM/SAM/SOM, la stratégie d'entrée marché, les risques, les KPI et les sources utilisées.
 
 - `documents-contractuels/syllabus.txt`
 - [Kick-off projet transcrit](../../01_documents_pedagogiques/kickoff/KICKOFF.md)
@@ -18,4 +18,4 @@ Ce dossier reprend uniquement les rendus utiles demandés par les documents de r
 
 ## Note de méthode
 
-Cette version est volontairement compacte pour servir de base `main` claire et défendable. Les hypothèses et chiffres sont issus des analyses antérieures et tracés par source dans le [registre transverse](../../90_references_transverses/source_register.csv).
+Les hypothèses et chiffres sont tracés par source dans le [registre transverse](../../90_references_transverses/source_register.csv), dans les [annexes de l'étude](../annexes/) et dans les matrices de décision ajoutées à la présente version. La logique suivie est : source -> constat -> hypothèse -> calcul -> décision -> transmission au business model.

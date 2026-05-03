@@ -50,18 +50,19 @@ L'offre DevinciWatch est structurée autour d'un abonnement annuel SaaS B2B, com
 
 ### 4.2. Architecture commerciale
 
-L'architecture commerciale de référence repose sur trois niveaux d'offre :
+L'architecture commerciale de référence repose sur trois offres publiques et une offre sur devis :
 
-- Essential : 12 000 EUR par an ;
-- Professional : 21 000 EUR par an ;
-- Enterprise : 36 000 EUR par an [Annexe BM-2].
+- Starter : 20 EUR par mois, soit 240 EUR par an ;
+- Essential : 200 EUR par mois, soit 2 400 EUR par an ;
+- Professional : 740 EUR par mois, soit 8 880 EUR par an ;
+- Enterprise : sur devis, avec une valeur de référence de 18 000 EUR par an pour la modélisation [Annexe BM-2].
 
 À cette base s'ajoutent des revenus non récurrents et additionnels :
 
-- onboarding standard : 5 000 EUR ;
-- onboarding avancé : 9 000 EUR ;
-- support premium : 4 000 EUR ;
-- rétention longue : 3 000 EUR.
+- onboarding standard : 800 EUR ;
+- onboarding avancé : 2 500 EUR ;
+- support premium : 1 200 EUR par an ;
+- rétention longue : 900 EUR par an.
 
 ### 4.3. Promesse commerciale
 
@@ -89,9 +90,9 @@ Le canal partenaire est ensuite développé pour accélérer l'accès au marché
 
 Le mix nouveaux clients prévu est le suivant [Annexe BP-1 / BM-1] :
 
-- année 1 : 65 % direct / 35 % partenaire ;
-- année 2 : 52 % direct / 48 % partenaire ;
-- année 3 : 40 % direct / 60 % partenaire.
+- année 1 : 75 % direct / 25 % partenaire ;
+- année 2 : 61 % direct / 39 % partenaire ;
+- année 3 : 46 % direct / 54 % partenaire.
 
 ## 6. Parcours commercial cible
 
@@ -108,10 +109,10 @@ Le POC constitue l'étape critique. Il doit produire une preuve de valeur claire
 
 Le plan de première année vise une montée progressive des volumes [Annexe BP-2] :
 
-- de 90 MQL au mois 1 à 195 MQL au mois 12 ;
-- de 28 SQL au mois 1 à 61 SQL au mois 12 ;
-- de 7 POC au mois 1 à 16 POC au mois 12 ;
-- de 2 nouveaux clients par mois au début à 4 nouveaux clients au mois 12.
+- de 180 MQL au mois 1 à 420 MQL au mois 12 ;
+- de 45 SQL au mois 1 à 126 SQL au mois 12 ;
+- de 13 démonstrations ou POC au mois 1 à 35 au mois 12 ;
+- de 6 nouveaux clients par mois au début à 14 nouveaux clients au mois 12.
 
 Le plan prévoit une bascule progressive du focus canal :
 
@@ -144,42 +145,42 @@ Les priorités delivery sont tout aussi importantes que les priorités produit :
 
 Les hypothèses financières consolidées du plan sont les suivantes [Annexe BP-1] :
 
-- ARR de fin d'année 1 : 690 000 EUR ;
-- ARR de fin d'année 2 : 1 590 450 EUR ;
-- ARR de fin d'année 3 : 2 789 210 EUR ;
-- revenus de services : 120 000 EUR en année 1, 180 000 EUR en année 2, 260 000 EUR en année 3 ;
-- marge brute : 65 %, 69 %, 72 % ;
-- CAC moyen : 11 000 EUR ;
-- conversion POC vers production : 33 %.
+- ARR de fin d'année 1 : 708 000 EUR ;
+- ARR de fin d'année 2 : 1 685 040 EUR ;
+- ARR de fin d'année 3 : 3 050 536 EUR ;
+- revenus de services : 90 000 EUR en année 1, 120 000 EUR en année 2, 160 000 EUR en année 3 ;
+- marge brute : 72 %, 76 %, 79 % ;
+- CAC moyen : 1 800 EUR ;
+- conversion démo ou POC vers abonnement : 28 %.
 
 ## 10. Compte de résultat prévisionnel
 
 Le compte de résultat synthétique sur trois ans fait apparaître la trajectoire suivante [Annexe BP-3] :
 
-- année 1 : 640 000 EUR de chiffre d'affaires total et un EBITDA de -704 000 EUR ;
-- année 2 : 1 420 000 EUR de chiffre d'affaires total et un EBITDA de -430 200 EUR ;
-- année 3 : 2 460 000 EUR de chiffre d'affaires total et un EBITDA de -8 800 EUR.
+- année 1 : 710 000 EUR de chiffre d'affaires total et un EBITDA de -608 800 EUR ;
+- année 2 : 1 480 000 EUR de chiffre d'affaires total et un EBITDA de -285 200 EUR ;
+- année 3 : 2 520 000 EUR de chiffre d'affaires total et un EBITDA de 210 800 EUR.
 
-Cette lecture traduit une montée en puissance progressive, encore déficitaire au départ, mais proche de l'équilibre opérationnel à horizon trois ans.
+Cette lecture traduit une montée en puissance progressive : le modèle accessible exige davantage de volume client, mais améliore le CAC et permet d'atteindre un EBITDA positif dans le scénario de référence à horizon trois ans.
 
 ## 11. Break-even et trajectoire de rentabilité
 
 L'analyse du seuil de rentabilité montre que l'équilibre n'est pas atteint en années 1 et 2, mais devient presque atteint en année 3 [Annexe BP-4] :
 
-- besoin de 1 723 077 EUR de revenus pour couvrir l'année 1 ;
-- besoin de 2 043 478 EUR en année 2 ;
-- besoin de 2 472 222 EUR en année 3, contre 2 460 000 EUR planifiés.
+- besoin de 1 555 556 EUR de revenus pour couvrir l'année 1 ;
+- besoin de 1 855 263 EUR en année 2 ;
+- besoin de 2 253 165 EUR en année 3, contre 2 520 000 EUR planifiés.
 
-L'écart résiduel en année 3 demeure faible. Cela signifie que le pilotage fin du prix, de la marge et du coût d'acquisition sera déterminant pour atteindre l'équilibre réel.
+L'équilibre devient atteignable en année 3 dans le scénario de référence. Cela suppose toutefois que le mix Professional/Enterprise progresse suffisamment et que le plan Starter ne cannibalise pas excessivement les offres payantes à plus forte valeur.
 
 ## 12. Trésorerie et financement
 
 La trajectoire de trésorerie montre une consommation progressive, mais maîtrisée dans le scénario de référence [Annexe BP-5] :
 
 - trésorerie d'ouverture : 2 400 000 EUR ;
-- trésorerie de clôture année 1 : 1 640 000 EUR ;
-- trésorerie de clôture année 2 : 1 139 800 EUR ;
-- trésorerie de clôture année 3 : 1 041 000 EUR.
+- trésorerie de clôture année 1 : 1 735 200 EUR ;
+- trésorerie de clôture année 2 : 1 380 000 EUR ;
+- trésorerie de clôture année 3 : 1 500 800 EUR.
 
 Cette trajectoire implique une grande vigilance sur la discipline de dépense et sur la vitesse de conversion commerciale.
 
@@ -187,11 +188,12 @@ Cette trajectoire implique une grande vigilance sur la discipline de dépense et
 
 Le registre des risques opérationnels et économiques conservé en annexe identifie cinq zones critiques [Annexe BP-7] :
 
-- baisse du taux de conversion POC vers production ;
+- baisse du taux de conversion démo ou POC vers abonnement ;
 - dérive du CAC ;
 - hausse du churn ;
 - baisse de la marge brute ;
-- tension sur la trésorerie disponible.
+- tension sur la trésorerie disponible ;
+- mix client trop concentré sur Starter ou Essential.
 
 Le pilotage recommandé est mensuel, avec seuils d'alerte et plans de mitigation définis à l'avance. Cette gouvernance doit permettre de traiter rapidement les écarts entre hypothèses et réalité : ralentissement de conversion, surcoût d'acquisition, difficulté d'onboarding ou baisse de marge.
 
@@ -262,6 +264,7 @@ La clé du succès résidera dans la capacité à conserver un positionnement si
 - [Annexe TAM / SAM / SOM](../02_etude_de_marche/annexes/tam_sam_som_bottomup_v2.csv)
 - [Hypothèses du business model](../03_business_model/annexes/business_model_assumptions_v4.csv)
 - [Prévision trois ans du business model](../03_business_model/annexes/forecast_3y_v4_base.csv)
+- [Passerelle marché vers business model](../02_etude_de_marche/annexes/market_to_business_model_bridge.csv)
 
 Ces références assurent la continuité entre les études de marché antérieures, les hypothèses du business model et les projections opérationnelles du business plan.
 

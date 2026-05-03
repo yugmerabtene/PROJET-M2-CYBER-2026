@@ -39,3 +39,16 @@ L'étude doit donc dépasser la simple description d'un outil. Elle doit démont
 - Cadrage GTM (direct, partenaire, hybride).
 
 Cette méthode permet de relier les décisions de marché aux documents suivants : [business model](../../03_business_model/rendu_principal.md), [business plan](../../04_business_plan/rendu_principal.md) et [feuille de cadrage](../../05_feuille_de_cadrage/rendu_principal.md).
+
+## Processus de transformation des données
+
+| Étape | Entrée | Traitement | Sortie |
+|---|---|---|---|
+| 1. Collecte | Rapports institutionnels, sources pricing, sources sectorielles | Extraction des faits utiles | Registre de sources |
+| 2. Qualification | Source, année, origine, type de preuve | Attribution d'un niveau de confiance | Matrice qualité source |
+| 3. Interprétation | Faits documentés | Formulation d'hypothèses de travail | Registre d'hypothèses marché |
+| 4. Chiffrage | Hypothèses segment, ACV, taux d'accès | Calcul TAM/SAM/SOM bottom-up | Annexes de marché |
+| 5. Sensibilité | Variables clés | Scénarios prudent, central, ambitieux | Bornes de décision |
+| 6. Décision | Résultats chiffrés | Arbitrage segmentation, pricing, GTM | Matrice de traçabilité décisionnelle |
+
+Cette approche permet d'éviter une conclusion simplement déclarative. Chaque décision doit pouvoir être rattachée à une source ou à une hypothèse documentée.

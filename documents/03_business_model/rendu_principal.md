@@ -52,26 +52,30 @@ L'offre doit rester suffisamment simple pour être lisible commercialement, tout
 
 ### 5.2. Plans proposés
 
+#### Starter
+
+Le plan Starter est proposé à 20 EUR par mois, soit 240 EUR par an [Annexe BM-2]. Il constitue une offre d'appel destinée aux très petites structures, aux environnements de test, aux labs et aux premiers usages de découverte. Il ne porte pas seul l'économie du projet ; son rôle principal est de réduire la friction d'adoption, d'élargir le haut de funnel et de faire découvrir la valeur du produit.
+
 #### Essential
 
-Le plan Essential constitue l'offre d'entrée. Il cible principalement les PME mono-site qui veulent structurer une première capacité de supervision cyber réseau. La grille tarifaire de référence fixe un prix annuel de 12 000 EUR [Annexe BM-2].
+Le plan Essential est proposé à 200 EUR par mois, soit 2 400 EUR par an [Annexe BM-2]. Il cible principalement les PME mono-site qui veulent structurer une première capacité de supervision cyber réseau avec alertes, historique et exports de preuve.
 
 #### Professional
 
-Le plan Professional représente le cœur de l'offre. Il vise les PME multi-sites et les ETI légères qui ont besoin d'une couverture plus large, de règles plus poussées et d'un niveau de reporting plus complet. Le prix annuel de référence est de 21 000 EUR [Annexe BM-2].
+Le plan Professional représente le cœur de l'offre. Il est proposé à 740 EUR par mois, soit 8 880 EUR par an [Annexe BM-2]. Il vise les PME matures, les PME multi-sites, les ETI légères et les organisations sensibles qui ont besoin d'une couverture plus large, d'une meilleure traçabilité, d'une corrélation exploitable et d'un niveau de reporting plus complet.
 
 #### Enterprise
 
-Le plan Enterprise s'adresse aux structures plus exigeantes en matière de gouvernance, de rétention de preuves, de complexité d'environnement ou de support renforcé. Le prix annuel de référence est de 36 000 EUR [Annexe BM-2].
+Le plan Enterprise reste proposé sur devis. Il s'adresse aux structures plus exigeantes en matière de gouvernance, de rétention de preuves, de complexité d'environnement, d'accompagnement ou de support renforcé. L'annexe de pricing conserve une valeur de référence de 18 000 EUR par an pour les calculs, sans en faire un prix public obligatoire.
 
 ### 5.3. Add-ons et services
 
 Le modèle prévoit également des revenus additionnels :
 
-- support premium : 4 000 EUR par an ;
-- rétention longue : 3 000 EUR par an ;
-- onboarding standard : 5 000 EUR ;
-- onboarding avancé : 9 000 EUR [Annexe BM-2].
+- support premium : 1 200 EUR par an ;
+- rétention longue : 900 EUR par an ;
+- onboarding standard : 800 EUR ;
+- onboarding avancé : 2 500 EUR [Annexe BM-2].
 
 Ces briques complémentaires ont une double utilité : améliorer la marge et adapter l'offre à la complexité réelle des comptes.
 
@@ -83,7 +87,7 @@ Le business model repose sur trois sources de revenus :
 2. les frais de mise en service et d'onboarding ;
 3. les services et options complémentaires.
 
-L'hypothèse de travail consolidée en version v4 retient un ACV moyen de 23 000 EUR par an [Annexe BM-1]. Cette valeur est cohérente avec la grille tarifaire, avec la présence d'add-ons et avec une cible B2B intermédiaire cherchant un compromis entre prix, efficacité et niveau de preuve.
+L'hypothèse de travail consolidée retient désormais un ACV moyen de 5 900 EUR par an [Annexe BM-1]. Cette valeur reflète un modèle plus accessible : beaucoup plus abordable que les hypothèses précédentes, mais soutenu par un volume client plus élevé, une offre Professional à 8 880 EUR par an et une option Enterprise sur devis.
 
 ## 7. Logique de coûts
 
@@ -98,14 +102,14 @@ Cette structure est importante, car elle conditionne la marge brute et le délai
 
 ## 8. Hypothèses économiques de référence
 
-Les hypothèses consolidées du modèle v4 sont les suivantes [Annexe BM-1] :
+Les hypothèses consolidées du modèle sont les suivantes [Annexe BM-1] :
 
-- ACV moyen : 23 000 EUR par an ;
-- conversion POC vers production : 33 % ;
-- CAC moyen : 11 000 EUR par client ;
-- churn logo : 9,5 % en année 2 puis 8,5 % en année 3 ;
-- marge brute : 65 % en année 1, 69 % en année 2, 72 % en année 3 ;
-- mix nouveaux logos : 65/35 direct/partenaire en année 1, 52/48 en année 2, 40/60 en année 3.
+- ACV moyen : 5 900 EUR par an ;
+- conversion démo ou POC vers abonnement : 28 % ;
+- CAC moyen : 1 800 EUR par client ;
+- churn logo : 12 % en année 2 puis 10 % en année 3 ;
+- marge brute : 72 % en année 1, 76 % en année 2, 79 % en année 3 ;
+- mix nouveaux logos : 75/25 direct/partenaire en année 1, 61/39 en année 2, 46/54 en année 3.
 
 Ces hypothèses doivent être lues comme un scénario directeur raisonnable, et non comme une certitude. Elles servent à piloter les arbitrages.
 
@@ -115,15 +119,15 @@ Le modèle prévoit trois scénarios : prudent, base et ambitieux [Annexe BM-4].
 
 ### 9.1. Scénario prudent
 
-Le scénario prudent suppose un ACV moyen de 21 000 EUR, un CAC de 14 000 EUR, une conversion POC vers production de 25 % et un churn plus élevé. Il conduit à une ARR de 462 000 EUR en année 1, 1 113 000 EUR en année 2 et 1 869 000 EUR en année 3.
+Le scénario prudent suppose un ACV moyen de 3 000 EUR, un CAC de 2 200 EUR, une conversion démo ou POC vers abonnement de 18 % et un churn plus élevé. Il conduit à une ARR de 360 000 EUR en année 1, 885 000 EUR en année 2 et 1 550 000 EUR en année 3.
 
 ### 9.2. Scénario de base
 
-Le scénario de base est le scénario recommandé pour le pilotage. Il retient un ACV moyen de 23 000 EUR, un CAC de 11 000 EUR et un taux de conversion POC vers production de 33 %. Il conduit à une ARR de 690 000 EUR en année 1, 1 590 450 EUR en année 2 et 2 789 210 EUR en année 3.
+Le scénario de base est le scénario recommandé pour le pilotage. Il retient un ACV moyen de 5 900 EUR, un CAC de 1 800 EUR et un taux de conversion démo ou POC vers abonnement de 28 %. Il conduit à une ARR de 708 000 EUR en année 1, 1 685 040 EUR en année 2 et 3 050 536 EUR en année 3.
 
 ### 9.3. Scénario ambitieux
 
-Le scénario ambitieux suppose une meilleure exécution commerciale et une accélération du canal partenaire. Il projette une ARR de 1 050 000 EUR en année 1, 2 500 000 EUR en année 2 et 4 500 000 EUR en année 3.
+Le scénario ambitieux suppose une meilleure exécution commerciale, un mix plus fort sur Professional/Enterprise et une accélération du canal partenaire. Il projette une ARR de 1 170 000 EUR en année 1, 2 850 000 EUR en année 2 et 5 300 000 EUR en année 3.
 
 ## 10. Mécanique commerciale et canaux
 
@@ -138,12 +142,12 @@ Le mix de nouveaux logos prévu reflète cette logique de transition progressive
 
 Les KPI cibles à suivre sont les suivants [Annexe BM-5] :
 
-- taux de conversion POC vers production : 30 % en année 1, 33 % en année 2, 35 % en année 3 ;
-- CAC : 12 000 EUR en année 1, 11 000 EUR en année 2, 10 000 EUR en année 3 ;
-- churn logo : 9,5 % puis 8,5 % ;
-- marge brute : 65 %, 69 %, 72 % ;
-- délai de payback CAC : 10,5 mois, puis 8,8 mois, puis 7,5 mois ;
-- ARR de fin d'année : 690 000 EUR, 1 590 450 EUR, 2 789 210 EUR.
+- taux de conversion démo ou POC vers abonnement : 24 % en année 1, 28 % en année 2, 31 % en année 3 ;
+- CAC : 2 100 EUR en année 1, 1 800 EUR en année 2, 1 500 EUR en année 3 ;
+- churn logo : 12 % puis 10 % ;
+- marge brute : 72 %, 76 %, 79 % ;
+- délai de payback CAC : 6,0 mois, puis 4,8 mois, puis 3,8 mois ;
+- ARR de fin d'année : 708 000 EUR, 1 685 040 EUR, 3 050 536 EUR.
 
 Ces KPI ont une fonction de gouvernance. Ils permettent de détecter rapidement une dérive de conversion, de coût d'acquisition, de marge ou de rétention.
 
@@ -152,10 +156,11 @@ Ces KPI ont une fonction de gouvernance. Ils permettent de détecter rapidement 
 Les risques majeurs du business model sont les suivants :
 
 - un coût d'acquisition supérieur aux hypothèses ;
-- un niveau de conversion POC vers production insuffisant ;
+- un niveau de conversion démo ou POC vers abonnement insuffisant ;
 - une dilution du positionnement par surenchère fonctionnelle ;
 - une dépendance trop forte à un canal de distribution unique ;
-- une insuffisante standardisation de l'onboarding et du support.
+- une insuffisante standardisation de l'onboarding et du support ;
+- une cannibalisation excessive vers le plan Starter, qui réduirait l'ACV moyen.
 
 Pour limiter ces risques, le modèle doit rester discipliné : ciblage serré, offre lisible, critères de qualification stricts et suivi mensuel des KPI. La robustesse économique du projet dépendra moins d'une multiplication des options que de la capacité à maintenir une promesse claire et répétable.
 
@@ -190,8 +195,9 @@ La réussite du modèle dépendra moins d'une sophistication tarifaire excessive
 - [Registre transverse des sources](../90_references_transverses/source_register.csv)
 - [Annexe TAM / SAM / SOM](../02_etude_de_marche/annexes/tam_sam_som_bottomup_v2.csv)
 - [Matrice go-to-market](../02_etude_de_marche/annexes/gtm_comparison_matrix.csv)
+- [Passerelle marché vers business model](../02_etude_de_marche/annexes/market_to_business_model_bridge.csv)
 
-Ces références antérieures relient explicitement le business model aux hypothèses marché, aux sources institutionnelles d'origine et aux analyses stratégiques réalisées avant la présente version de synthèse.
+Ces références relient explicitement le business model aux hypothèses marché, aux sources institutionnelles, aux analyses stratégiques et au choix d'un pricing plus accessible.
 
 ## 15. Annexes chiffrées
 

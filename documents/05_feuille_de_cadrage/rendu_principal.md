@@ -112,19 +112,37 @@ Le projet sera jugé réussi si :
 
 ## 12. Risques principaux
 
-- dérive du périmètre ;
-- sous-estimation de la complexité de corrélation ;
-- trop forte ambition visuelle du frontend ;
-- surcharge du conteneur `serveur-soc` pour la démonstration ;
-- manque de temps sur les tests et la finition.
+Les risques ci-dessous consolident les enseignements de l'[étude de marché](../02_etude_de_marche/rendu_principal.md), du [business model](../03_business_model/rendu_principal.md), du [business plan](../04_business_plan/rendu_principal.md), de la [gestion de projet](../06_gestion_de_projet/rendu_principal.md), du [cahier des charges](../07_cahier_des_charges/rendu_principal.md) et de l'[architecture](../08_architecture/rendu_principal.md).
+
+| Risque | Origine | Impact potentiel | Niveau |
+|---|---|---|---|
+| Dilution du positionnement produit | Étude de marché / business model | Perte de lisibilité face aux SIEM enterprise, XDR, stacks open source et MSSP ; difficulté à expliquer la valeur spécifique de DevinciWatch | Élevé |
+| Dérive du périmètre MVP | Feuille de cadrage / gestion de projet / cahier des charges | Ajout de fonctions non indispensables, retard sur la chaîne cœur collecte -> détection -> corrélation -> preuve | Élevé |
+| Sous-estimation de la corrélation | Architecture / cahier des charges | Alertes peu explicables, corrélations non démontrables, valeur SOC affaiblie | Élevé |
+| Complexité excessive de l'interface | Cahier des charges / architecture | Temps consommé sur l'esthétique au détriment de la lisibilité analyste, des tests et des preuves | Moyen |
+| Fragilité du lab Docker de démonstration | Architecture / gestion de projet | Difficulté à reproduire le scénario complet, instabilité des conteneurs, validation moins convaincante | Élevé |
+| Surcharge du conteneur `serveur-soc` | Architecture | Risque opérationnel lié au regroupement API, frontend, PostgreSQL, Redis et Celery dans un packaging MVP compact | Moyen |
+| Sécurité applicative insuffisamment formalisée | Cahier des charges / architecture | Authentification, contrôle des `roles`, validation des payloads ou audit incomplets ; perte de crédibilité pour un produit cyber | Élevé |
+| Données et preuves insuffisamment exploitables | Cahier des charges / étude de marché | Exports incomplets, journaux peu lisibles, difficulté à démontrer la traçabilité et la valeur opérationnelle | Moyen |
+| Retard sur tests, stabilisation et documentation | Gestion de projet | Produit fonctionnel mais difficile à vérifier, maintenir ou présenter dans une revue produit | Élevé |
+| Hypothèses business trop optimistes | Business model / business plan | Conversion POC, CAC, churn ou marge non réalistes si le produit ne démontre pas rapidement sa valeur | Moyen |
+| Adoption limitée par les utilisateurs cibles | Étude de marché / business model | Solution perçue comme trop technique ou insuffisamment actionnable pour une équipe réduite | Moyen |
 
 ## 13. Mesures de maîtrise
 
-- priorisation stricte du MVP ;
-- corrélation simple mais démontrable ;
-- architecture modulaire ;
-- environnement Docker reproductible ;
-- documentation de référence maintenue à jour.
+| Risque couvert | Mesure de maîtrise |
+|---|---|
+| Dilution du positionnement produit | Maintenir la promesse centrale : supervision cyber pragmatique, alertes actionnables, preuves exportables, sans complexité SIEM enterprise |
+| Dérive du périmètre MVP | Appliquer strictement les priorités P1/P2/P3 définies dans le [cahier des charges](../07_cahier_des_charges/rendu_principal.md) |
+| Sous-estimation de la corrélation | Limiter la première version à une corrélation lisible : IP source, cible, fenêtre temporelle et répétition observable |
+| Complexité excessive de l'interface | Prioriser les écrans utiles à l'analyse : dashboard, actifs, événements, alertes, corrélations, audit et exports |
+| Fragilité du lab Docker | Stabiliser tôt le scénario `serveur-soc` / `serveur-endpoint` / `serveur-attacker` et documenter la procédure de lancement |
+| Surcharge du conteneur `serveur-soc` | Conserver une séparation logique claire entre API, frontend, base, file de tâches et worker malgré le packaging compact |
+| Sécurité applicative insuffisante | Reprendre les exigences de sécurité du cahier des charges : authentification, `roles`, validation des payloads, audit, secrets non exposés |
+| Données et preuves insuffisantes | Définir les exports CSV/JSON comme livrables de preuve prioritaires et vérifier leur cohérence avec les scénarios joués |
+| Retard sur tests et documentation | Associer chaque jalon à une preuve vérifiable : scénario reproductible, capture, export, log ou document mis à jour |
+| Hypothèses business trop optimistes | Utiliser le MVP comme preuve de valeur avant toute extension fonctionnelle ou projection commerciale ambitieuse |
+| Adoption limitée | Concevoir les fonctionnalités autour d'un analyste ou administrateur à équipe réduite : lisibilité, simplicité, actionnabilité |
 
 ## 14. Décisions structurantes déjà prises
 
@@ -148,11 +166,13 @@ Ces décisions doivent rester stables pendant la phase MVP. Toute extension fonc
 
 ## 16. Feuille de route courte
 
+Cette feuille de route est volontairement synthétique. Son exécution détaillée est pilotée dans la [gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md) au moyen d'un backlog Scrum, de sprints, de story points et de critères d'acceptation.
+
 1. Phase 1 - Cadrage : consolider le cadrage, finaliser la gestion de projet, le cahier des charges et l'architecture ;
-2. Phase 2 - Socle technique : mettre en place le backend FastAPI, la base de données, le lab Docker et la collecte endpoint minimale ;
-3. Phase 3 - Cœur produit : intégrer la découverte réseau, les actifs, les événements, les alertes et l'audit ;
-4. Phase 4 - Enrichissement analyste : ajouter la corrélation, les métriques, l'historique, les exports et la visualisation ;
-5. Phase 5 - Finalisation validation : stabiliser la démonstration, la documentation finale et le support.
+2. Phase 2 - Sprint socle : mettre en place le backend FastAPI, la base de données, le lab Docker et la collecte endpoint minimale ;
+3. Phase 3 - Sprints cœur produit : intégrer la découverte réseau, les actifs, les événements, les alertes et l'audit ;
+4. Phase 4 - Sprints enrichissement analyste : ajouter la corrélation, les métriques, l'historique, les exports et la visualisation ;
+5. Phase 5 - Sprint de stabilisation : stabiliser la démonstration, la documentation finale et le support.
 
 ## 17. Conclusion
 

@@ -4,7 +4,7 @@
 
 La présente étude de marché a pour objectif de démontrer la pertinence économique et stratégique de DevinciWatch, solution de supervision et d'analyse cyber réseau orientée usage. Elle s'inscrit dans le cadre du projet défini par le [kick-off](../01_documents_pedagogiques/kickoff/KICKOFF.md) et par le cahier d'attendus, qui demandent explicitement une étude de marché, un modèle économique et une stratégie d'entrée sur le marché.
 
-L'analyse adopte une posture universitaire : elle distingue les faits documentés, les hypothèses de travail et les décisions qui en découlent. Cette distinction est essentielle, car un projet cyber ne peut pas être justifié uniquement par l'intuition technique ; il doit s'appuyer sur une compréhension argumentée de la demande, de la concurrence, des contraintes réglementaires et de la capacité réelle du marché à adopter la solution.
+L'analyse adopte une posture rigoureuse : elle distingue les faits documentés, les hypothèses de travail et les décisions qui en découlent. Cette distinction est essentielle, car un projet cyber ne peut pas être justifié uniquement par l'intuition technique ; il doit s'appuyer sur une compréhension argumentée de la demande, de la concurrence, des contraintes réglementaires et de la capacité réelle du marché à adopter la solution.
 
 Cette étude répond à quatre questions structurantes :
 
@@ -12,6 +12,21 @@ Cette étude répond à quatre questions structurantes :
 2. Quels segments présentent le meilleur équilibre entre besoin, accessibilité commerciale et capacité de paiement ?
 3. Comment positionner la solution face aux alternatives existantes ?
 4. Quelle trajectoire d'entrée sur le marché paraît la plus crédible à court et moyen terme ?
+
+### 1.1. Méthode de travail et logique de preuve
+
+L'étude suit une logique en huit étapes afin de rendre les résultats traçables et discutables :
+
+1. collecter les signaux de marché à partir de sources institutionnelles, sectorielles et concurrentielles ;
+2. qualifier la fiabilité des sources selon leur origine, leur fraîcheur, leur usage décisionnel et leur niveau de confiance ;
+3. transformer les constats documentés en hypothèses de marché explicites ;
+4. appliquer une modélisation bottom-up du marché adressable ;
+5. tester les hypothèses avec des scénarios prudent, central et ambitieux ;
+6. identifier les variables les plus sensibles : accès commercial, ACV, conversion POC, CAC, churn ;
+7. traduire les résultats en décisions de segmentation, positionnement, prix et go-to-market ;
+8. transmettre les hypothèses retenues au [business model](../03_business_model/rendu_principal.md) et au [business plan](../04_business_plan/rendu_principal.md).
+
+Cette méthode évite de partir d'une estimation macro trop abstraite. Elle privilégie une chaîne de justification observable : source -> constat -> hypothèse -> calcul -> décision. Les annexes chiffrées créées pour cette étude conservent cette traçabilité.
 
 ## 2. Rappel du besoin initial
 
@@ -158,10 +173,45 @@ Le modèle retenu en annexe s'appuie sur une approche bottom-up :
 
 Cette approche est plus pertinente qu'une estimation purement macro, car elle introduit des variables de réalisme commercial : besoin, compatibilité, accès au segment et valeur annuelle moyenne du contrat.
 
+### 8.1. Processus de chiffrage
+
+La modélisation distingue trois niveaux :
+
+| Niveau | Objectif | Formule |
+|---|---|---|
+| Base segment | Identifier le nombre d'organisations théoriquement pertinentes | `N_org` |
+| SAM | Estimer la valeur annuelle accessible en fonction du besoin et du fit | `N_org × t_need × t_fit × ACV` |
+| SOM | Estimer la part réellement atteignable à 24-36 mois | `SAM × t_access` |
+
+Les coefficients utilisés ont la signification suivante :
+
+| Coefficient | Signification | Interprétation DevinciWatch |
+|---|---|---|
+| `t_need` | Part du segment ayant un besoin cyber réseau prioritaire | Intensité de menace, conformité, besoin de reporting |
+| `t_fit` | Part du segment compatible avec une solution pragmatique | Maturité suffisante, budget, absence de SOC lourd |
+| `t_access` | Part commercialement atteignable à court/moyen terme | Capacité à toucher le segment via direct ou partenaires |
+| `ACV` | Valeur annuelle moyenne du contrat | Prix annuel réaliste selon taille et complexité client |
+
+Le calcul consolidé aboutit à un SAM de travail d'environ 195,2 MEUR et à un SOM central d'environ 4,2 MEUR à horizon 24-36 mois. Ce résultat ne doit pas être interprété comme un chiffre d'affaires garanti, mais comme une borne de potentiel accessible sous hypothèses explicites.
+
+### 8.2. Passage vers les hypothèses business
+
+L'étude de marché identifie une capacité de paiement B2B pouvant aller de 9 000 à 24 000 EUR par an selon les segments et les alternatives comparées. Le [business model](../03_business_model/rendu_principal.md) retient toutefois un pricing public volontairement plus accessible : 20 EUR, 200 EUR et 740 EUR par mois, complété par une offre Enterprise sur devis.
+
+Cette décision transforme la logique économique : DevinciWatch ne cherche plus seulement à capter une valeur annuelle élevée par compte, mais à réduire la friction d'adoption, augmenter le volume de clients atteignables et rendre l'offre plus lisible pour les PME. L'ACV moyen de pilotage devient donc 5 900 EUR par an, porté par :
+
+- une offre Professional à 740 EUR par mois au cœur de la stratégie ;
+- une offre Essential à 200 EUR par mois pour les PME mono-site ;
+- une offre Starter à 20 EUR par mois conçue comme canal d'adoption et non comme cœur de marge ;
+- une offre Enterprise sur devis pour préserver une capacité de montée en valeur ;
+- des add-ons de support, rétention ou onboarding.
+
+La cohérence entre l'étude de marché et le business model repose donc sur une logique d'accessibilité : la fourchette marché valide la capacité de paiement maximale de certaines cibles, tandis que la grille retenue privilégie une pénétration plus rapide et un coût plus lisible.
+
 Les hypothèses principales sont les suivantes :
 
 - horizon de pénétration : 24 à 36 mois ;
-- ACV de travail : de 9 000 à 24 000 EUR par an selon le segment ;
+- ACV de travail business model : 5 900 EUR par an, avec une capacité de paiement marché supérieure sur les segments ETI et sensibles ;
 - forte sensibilité à l'accès commercial, au prix moyen et au churn.
 
 Cette modélisation ne constitue pas une prévision automatique ; elle sert à hiérarchiser les segments et à structurer les décisions de go-to-market.
@@ -182,22 +232,50 @@ L'analyse comparative conservée en annexe conduit à recommander un modèle hyb
 
 La stratégie recommandée consiste à sécuriser un minimum de pipeline direct tout en structurant 2 à 3 partenariats ciblés.
 
+### 9.1. Justification chiffrée du choix hybride
+
+La matrice de go-to-market compare les options direct, partenaire et hybride sur cinq critères : vitesse de traction, efficacité du CAC, qualité du pipeline, contrôle de la relation client et risque d'exécution. Le modèle hybride obtient le meilleur score pondéré, car il équilibre apprentissage direct et capacité de diffusion.
+
+Cette décision influence directement le business model : le lancement conserve une majorité de ventes directes en année 1, puis augmente progressivement la part partenaire afin de réduire la dépendance au canal direct et d'accélérer l'accès aux organisations cibles.
+
 ## 10. Risques de marché identifiés
 
 Les principaux risques de marché sont les suivants :
 
-- une conversion POC vers production inférieure aux hypothèses ;
+- une conversion démo ou POC vers abonnement inférieure aux hypothèses ;
 - un coût d'acquisition trop élevé sur certaines verticales ;
 - un positionnement insuffisamment différencié ;
 - une valeur perçue diluée si le produit devient trop large trop tôt.
 
 Ces risques appellent une exécution disciplinée : qualification stricte, cadrage du POC, pilotage des KPI et clarté du message commercial.
 
+### 10.1. Variables sensibles à surveiller
+
+| Variable | Risque si dérive | Impact business | Réponse recommandée |
+|---|---|---|---|
+| `t_access` | Marché identifié mais difficile à atteindre | Pipeline insuffisant | Structurer partenaires et qualification verticale |
+| ACV | Prix moyen inférieur au mix cible | ARR et marge affaiblies | Clarifier packaging et valeur des add-ons |
+| Conversion POC -> production | POC non transformés | CAC non amorti | Définir critères de succès POC avant lancement |
+| CAC | Acquisition trop coûteuse | Payback trop long | Standardiser discours, playbooks et canaux |
+| Churn | Perte de clients après première année | LTV/CAC dégradé | Onboarding, support, métriques d'adoption |
+
+Ces variables sont reprises dans les annexes de sensibilité et dans les hypothèses du business model afin de maintenir une continuité entre diagnostic marché, modèle économique et business plan.
+
 ## 11. Conclusion générale
 
 L'étude de marché valide l'existence d'une opportunité crédible pour DevinciWatch. Le marché n'est pas en manque d'outils ; il est en manque de solutions réellement exploitables, économiquement lisibles et capables de transformer la conformité et la surveillance en action opérationnelle.
 
 La priorité n'est donc pas de rivaliser frontalement avec les plateformes les plus complètes du marché. Elle est de proposer une solution claire, utile et démontrable pour des organisations qui doivent améliorer leur supervision sans complexifier davantage leur exploitation.
+
+### 11.1. Décisions structurantes issues de l'étude
+
+| Décision | Justification marché | Impact pour la suite |
+|---|---|---|
+| Cibler PME, ETI et organisations sensibles | Besoin cyber réel, mais capacité SOC limitée | Alimente le business model et la feuille de cadrage |
+| Positionnement intermédiaire | Écart entre SIEM enterprise et open source exigeant | Promesse centrée sur simplicité, alerte, preuve |
+| Prix annuel lisible | Risque de coûts variables chez certaines alternatives | Construction d'offres annuelles B2B |
+| Go-to-market hybride | Direct utile pour apprendre, partenaires utiles pour diffuser | Mix canal progressif dans le business plan |
+| MVP orienté preuve | Besoin de traçabilité, conformité et valeur démontrable | Priorité aux alertes, exports, audit et scénario reproductible |
 
 ## 12. Références mobilisées
 
@@ -211,6 +289,12 @@ La priorité n'est donc pas de rivaliser frontalement avec les plateformes les p
 - [S09] [Datadog Cloud SIEM Pricing](https://www.datadoghq.com/pricing/?product=cloud-siem).
 - [S10] [Datadog Workload Protection Pricing](https://www.datadoghq.com/pricing/?product=workload-protection).
 - [S13] [ENISA, NIS Investments 2025 - communication et données associées](https://www.enisa.europa.eu/news/whats-driving-cybersecurity-investments-and-where-lie-the-challenges).
+- [S14] [ENISA, NIS360 2024](https://www.enisa.europa.eu/news/enisa-nis360-2024-report).
+- [S16] [NIST Cybersecurity Framework 2.0](https://www.nist.gov/cyberframework).
+- [S17] [Verizon, Data Breach Investigations Report](https://www.verizon.com/business/resources/reports/dbir/).
+- [S18] [PwC, Global Digital Trust Insights](https://www.pwc.com/gx/en/issues/cybersecurity/global-digital-trust-insights.html).
+- [S19] [IBM, Cost of a Data Breach Report](https://www.ibm.com/reports/data-breach).
+- [S20] [OECD, Digital Security](https://www.oecd.org/digital/digital-security/).
 - [S21] [Centre for Cybersecurity Belgium, chiffres clés 2025](https://ccb.belgium.be/en).
 - [S22] [Centre for Cybersecurity Belgium, réalité cyber 2025](https://ccb.belgium.be/fr/news/plus-dattaques-plus-de-signalements-la-realite-cyber-de-la-belgique-en-2025).
 - [S23] [NCSC Suisse, rapport semestriel 2025/1](https://www.ncsc.admin.ch/ncsc/fr/home/dokumentation/berichte/lageberichte/halbjahresbericht-2025-1.html).
@@ -233,7 +317,7 @@ La priorité n'est donc pas de rivaliser frontalement avec les plateformes les p
 - [Registre transverse des sources](../90_references_transverses/source_register.csv)
 - [Matrice de qualité des sources](../90_references_transverses/source_quality_matrix.csv)
 
-Le registre complet conserve l'ensemble des références exploitées antérieurement dans l'étude consolidée, notamment les sources institutionnelles et sectorielles S01 à S26. Il constitue la base de traçabilité détaillée des chiffres et constats mobilisés dans le présent document.
+Le registre complet conserve l'ensemble des références exploitées dans l'étude consolidée, notamment les sources institutionnelles, sectorielles et concurrentielles S01 à S32. Il constitue la base de traçabilité détaillée des chiffres et constats mobilisés dans le présent document.
 
 ## 13. Annexes chiffrées
 
@@ -244,3 +328,13 @@ Le registre complet conserve l'ensemble des références exploitées antérieure
 - [Matrice comparative go-to-market](annexes/gtm_comparison_matrix.csv)
 - [Modèle de KPI business model](annexes/kpi_template_business_model.csv)
 - [Modèle de sensibilité](annexes/sensitivity_model_template.csv)
+- [TAM / SAM / SOM par pays et segment](annexes/tam_sam_som_by_country_segment.csv)
+- [Scénarios TAM / SAM / SOM](annexes/tam_sam_som_scenarios.csv)
+- [Registre des hypothèses marché](annexes/market_assumptions_register.csv)
+- [Matrice de traçabilité décisionnelle](annexes/decision_traceability_matrix.csv)
+- [Scorecard concurrentielle pondérée](annexes/competitor_weighted_scorecard.csv)
+- [Matrice GTM pondérée](annexes/gtm_weighted_decision_matrix.csv)
+- [Benchmark pricing enrichi](annexes/pricing_benchmark_extended.csv)
+- [Passerelle marché vers business model](annexes/market_to_business_model_bridge.csv)
+- [Registre des sources enrichi](annexes/source_register_v2.csv)
+- [Matrice qualité des sources enrichie](annexes/source_quality_matrix_v2.csv)

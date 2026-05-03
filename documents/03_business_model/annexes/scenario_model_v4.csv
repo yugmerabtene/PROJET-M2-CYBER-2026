@@ -1,4 +1,4 @@
-scenario,acv_avg_eur,cac_avg_eur,poc_to_prod,churn_y2,gross_margin_y1,payback_months_est,arr_y1_eur,arr_y2_eur,arr_y3_eur,notes
-prudent,21000,14000,0.25,0.13,0.61,13.1,462000,1113000,1869000,conservative conversion and slower channel effects
-base,23000,11000,0.33,0.095,0.65,8.8,690000,1590450,2789210,recommended steering scenario
-ambitieux,25000,9500,0.40,0.08,0.69,6.6,1050000,2500000,4500000,strong execution and partner acceleration
+scenario,acv_avg_eur,cac_avg_eur,demo_or_poc_to_paid,churn_y2,gross_margin_y1,payback_months_est,arr_y1_eur,arr_y2_eur,arr_y3_eur,notes
+prudent,3000,2200,0.18,0.18,0.68,10.8,360000,885000,1550000,starter_and_essential_heavy_mix_with_slower_conversion
+base,5900,1800,0.28,0.12,0.72,4.8,708000,1685040,3050536,recommended_accessible_pricing_scenario
+ambitieux,7800,1500,0.35,0.08,0.82,2.8,1170000,2850000,5300000,strong_professional_enterprise_mix_and_partner_acceleration
