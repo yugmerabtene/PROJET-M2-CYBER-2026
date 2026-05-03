@@ -20,6 +20,7 @@ L'objectif est de concevoir une application de cybersurveillance réseau orient�
 - recevoir de la télémétrie depuis un agent ;
 - persister des événements et un inventaire d'actifs ;
 - détecter des comportements suspects ;
+- corréler plusieurs événements ou attaques liés à une même source ou à une même fenêtre temporelle ;
 - générer des alertes actionnables ;
 - exposer une interface web d'analyse ;
 - produire des exports et des éléments de preuve.
@@ -77,11 +78,13 @@ Les principes retenus sont les suivants :
 - traçabilité native des actions sensibles ;
 - structure adaptée à une démonstration rapide, mais suffisamment propre pour évoluer ;
 - environnement de test reproductible via conteneurs séparés ;
-- simulation contrôlée de comportements suspects sans embarquer de code destructeur réel.
+- simulation contrôlée de comportements suspects sans embarquer de code destructeur réel ;
+- corrélation temporelle et contextuelle des signaux pour réduire le bruit et enrichir les alertes ;
+- interface d'analyse moderne orientée investigation, métriques et preuves.
 
 ## 5. Architecture logicielle
 
-![Architecture logicielle](architecture-software.svg)
+![Architecture logicielle](assets/architecture-software.svg)
 
 ```text
 [Endpoint Agent] -- heartbeat / events --> [Control Server]
@@ -104,7 +107,7 @@ Les principes retenus sont les suivants :
 
 ## 7. Architecture reseau Docker
 
-![Architecture reseau Docker](architecture-docker-network.svg)
+![Architecture reseau Docker](assets/architecture-docker-network.svg)
 
 L'environnement de developpement et de demonstration est retenu sous la forme de trois conteneurs :
 
@@ -186,7 +189,7 @@ Contraintes :
 
 ## 8. Diagramme de sequence principal
 
-![Diagramme de sequence](architecture-sequence.svg)
+![Diagramme de sequence](assets/architecture-sequence.svg)
 
 ```text
 1. Agent -> Control Server : POST /telemetry/heartbeat
@@ -230,6 +233,7 @@ Rôle :
 - exposer les endpoints métiers ;
 - valider et normaliser les payloads ;
 - piloter les règles métier ;
+- piloter les règles de corrélation ;
 - retourner les données au frontend.
 
 L'API constitue le point central du systeme et sera hebergee dans le conteneur `serveur-soc`.
@@ -253,6 +257,7 @@ Rôle :
 
 - sortir du chemin synchrone les traitements non immédiats ;
 - exécuter les règles de détection ;
+- exécuter les règles de corrélation ;
 - recalculer certains indicateurs ;
 - générer des exports ;
 - préparer certains rapports ou tâches différées.
@@ -264,11 +269,17 @@ Redis et Celery seront egalement embarques dans `serveur-soc` pour la phase MVP 
 Rôle :
 
 - authentification ;
-- visualisation du dashboard ;
+- visualisation d'un dashboard moderne ;
+- visualisation de métriques SOC ;
+- consultation de l'historique d'alertes et d'événements ;
+- consultation des journaux et traces ;
 - consultation des actifs ;
 - consultation des événements ;
 - consultation et traitement des alertes ;
-- déclenchement d'exports.
+- déclenchement d'exports CSV, XML et JSON ;
+- visualisation géographique des attaques ;
+- affichage des IP attaquantes et de leur récurrence ;
+- consultation des corrélations entre événements et campagnes suspectes.
 
 Le frontend est integre au meme conteneur que le backend pour le MVP et ne doit parler qu'a l'API locale du serveur-soc.
 
@@ -291,7 +302,8 @@ L'architecture doit couvrir explicitement les capacites demandees dans le kick-o
 - identification des ports ouverts ;
 - recuperation d'informations sur les services reseau ;
 - observation du trafic reseau ;
-- detection de comportements suspects ou malveillants.
+- detection de comportements suspects ou malveillants ;
+- correlation de signaux repetes ou relies a une meme source attaquante.
 
 Ces capacites seront portees principalement par le serveur-endpoint et par les modules backend associes a la telemetry, aux assets et aux alerts.
 
@@ -306,6 +318,7 @@ Modules recommandés :
 - `discovery`
 - `assets`
 - `alerts`
+- `correlation`
 - `reports`
 - `audit`
 - `core`
@@ -351,10 +364,21 @@ Responsabilités :
 Responsabilités :
 
 - création d'alertes depuis les règles ;
+- enrichissement des alertes depuis les corrélations ;
 - consultation ;
 - détail ;
 - traitement analyste ;
 - cycle de vie des statuts.
+
+### `correlation`
+
+Responsabilités :
+
+- regrouper plusieurs événements liés à une même IP source, un même attaquant présumé ou une même cible ;
+- corréler des séquences répétées dans une fenêtre de temps ;
+- détecter des répétitions horaires, journalières ou comportementales ;
+- produire des agrégats de type campagne, rafale, scan récurrent ou comportement persistant ;
+- alimenter le module `alerts` avec des alertes enrichies et priorisées.
 
 ### `reports`
 
@@ -394,6 +418,7 @@ app/
   discovery/
   assets/
   alerts/
+  correlation/
   reports/
   audit/
 ```
@@ -406,7 +431,26 @@ Chaque module devrait à terme contenir :
 - accès aux données ;
 - tests associés.
 
-## 13. Flux de test en environnement Docker
+## 13. Mecanique de correlation retenue
+
+La corrélation est retenue comme capacité centrale du produit, inspirée des usages SOC modernes :
+
+- corrélation par IP source ;
+- corrélation par cible ;
+- corrélation par fenêtre temporelle ;
+- corrélation par répétition de ports, services ou signatures de comportement ;
+- corrélation par séquence d'événements successifs.
+
+Exemples de corrélation attendus :
+
+- plusieurs scans de ports provenant de la même IP à intervalles réguliers ;
+- répétition d'attaques sur une même plage horaire ;
+- succession scan -> tentative d'accès -> activité suspecte ;
+- multiplication d'événements sur plusieurs actifs depuis une même source attaquante.
+
+L'objectif n'est pas de reproduire la complexité complète d'un SIEM enterprise, mais de fournir une corrélation utile, lisible et démontrable.
+
+## 14. Flux de test en environnement Docker
 
 Scenario de demonstration recommande :
 
@@ -416,12 +460,12 @@ Scenario de demonstration recommande :
 4. `serveur-attacker` declenche un scenario controle ;
 5. `serveur-endpoint` observe le trafic, les logs ou les comportements attendus ;
 6. l'API persiste les evenements et les resultats de decouverte ;
-7. le worker evalue les regles ;
-8. une ou plusieurs alertes sont generees ;
-9. l'analyste visualise le resultat dans l'interface ;
-10. un export ou un audit peut etre produit pour preuve.
+7. le worker evalue les regles de detection et de correlation ;
+8. une ou plusieurs alertes enrichies sont generees ;
+9. l'analyste visualise le resultat dans l'interface, les historiques et la carte geographique ;
+10. un export CSV, XML ou JSON peut etre produit pour preuve.
 
-## 14. Modèle de données fonctionnel
+## 15. Modèle de données fonctionnel
 
 Entités principales à prévoir :
 
@@ -431,6 +475,8 @@ Entités principales à prévoir :
 - `events`
 - `network_findings`
 - `alerts`
+- `correlation_groups`
+- `attacker_profiles`
 - `audit_logs`
 - `exports`
 
@@ -439,9 +485,11 @@ Relations principales :
 - un événement peut être lié à un actif ;
 - un resultat de scan ou d'observation reseau peut etre lie a un actif ;
 - une alerte peut être liée à un actif et à un ou plusieurs événements ;
+- un groupe de corrélation peut lier plusieurs événements, plusieurs alertes et une ou plusieurs IP sources ;
+- un profil attaquant peut agréger une IP source, des répétitions temporelles et des indicateurs géographiques ;
 - une action utilisateur sensible doit produire une entrée d'audit.
 
-## 15. Exigences non fonctionnelles
+## 16. Exigences non fonctionnelles
 
 ### Sécurité
 
@@ -461,7 +509,8 @@ Relations principales :
 
 - endpoint de santé ;
 - logs applicatifs structurés ;
-- indicateurs simples pour la démonstration.
+- indicateurs simples pour la démonstration ;
+- métriques de détection et de corrélation visibles dans l'interface.
 
 ### Déploiement
 
@@ -476,7 +525,22 @@ Relations principales :
 - aucun acces inutile hors du reseau de lab ;
 - scenarios de test bornes et documentes.
 
-## 16. MVP recommandé
+## 17. Interface web cible
+
+L'interface web cible doit etre moderne, complete et orientee analyste.
+
+Capacites attendues :
+
+- dashboard synthétique ;
+- métriques clés ;
+- historique des alertes et événements ;
+- journalisation consultable ;
+- exports CSV, XML et JSON ;
+- visualisation des IP attaquantes ;
+- carte géographique des attaques ;
+- vue de corrélation entre attaques répétées ou reliées.
+
+## 18. MVP recommandé
 
 Le premier incrément produit devrait couvrir :
 
@@ -488,12 +552,14 @@ Le premier incrément produit devrait couvrir :
 6. persistance PostgreSQL ;
 7. inventaire d'actifs simple ;
 8. règles de détection minimales ;
-9. liste et détail d'alertes ;
-10. export CSV ;
-11. audit minimal ;
-12. lab Docker de demonstration en 3 conteneurs.
+9. corrélation de base par IP source et fenêtre temporelle ;
+10. liste et détail d'alertes ;
+11. export CSV, avec JSON/XML dans le périmètre suivant si le calendrier le permet ;
+12. audit minimal ;
+13. dashboard avec métriques et historique ;
+14. lab Docker de demonstration en 3 conteneurs.
 
-## 17. Architecture Docker retenue pour la demonstration
+## 19. Architecture Docker retenue pour la demonstration
 
 Architecture retenue de demonstration :
 
@@ -503,7 +569,7 @@ Architecture retenue de demonstration :
 
 Cette architecture est retenue comme architecture de test officielle du projet pour les phases de developpement, de demonstration et de validation fonctionnelle.
 
-## 18. Pourquoi cette architecture est adaptée au sujet
+## 20. Pourquoi cette architecture est adaptée au sujet
 
 Cette architecture est adaptée parce qu'elle :
 
@@ -515,10 +581,14 @@ Cette architecture est adaptée parce qu'elle :
 - prepare une montée en qualité sans complexité excessive ;
 - permet un environnement de test réaliste et reproductible ;
 - couvre explicitement les besoins de scan, ports, services, trafic et detection ;
+- introduit une capacité de corrélation utile sans basculer dans une architecture SIEM trop lourde ;
+- soutient une interface d'investigation plus riche et plus démonstrative ;
 - rend visible toute la chaine detection -> alerte -> preuve.
 
-## 19. Conclusion
+## 21. Conclusion
 
 L'architecture definitive retenue pour DevinciWatch est une architecture web modulaire centree sur FastAPI, PostgreSQL, Redis et un worker asynchrone, avec un environnement Docker de test compose de trois conteneurs : `serveur-soc`, `serveur-endpoint` et `serveur-attacker`.
+
+Elle integre egalement une capacite de corrélation pragmatique entre attaques, repetitions temporelles et sources attaquantes, ainsi qu'une interface web d'analyse moderne orientee métriques, historique, journalisation, exports et cartographie.
 
 Elle est adaptee au sujet, defendable techniquement, exploitable pedagogiquement et suffisamment propre pour servir de base definitive au redeveloppement du produit.
