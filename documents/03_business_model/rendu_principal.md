@@ -2,9 +2,11 @@
 
 ## 1. Objet du document
 
-Le présent document formalise le modèle économique de DevinciWatch à partir des conclusions de l'étude de marché. Il précise la logique de création de valeur, les segments visés, la structure d'offre, les hypothèses financières de travail et les indicateurs de pilotage qui permettront de suivre la viabilité du projet.
+Le présent document formalise le modèle économique de DevinciWatch à partir des conclusions de l'[étude de marché](../02_etude_de_marche/rendu_principal.md). Il précise la logique de création de valeur, les segments visés, la structure d'offre, les hypothèses financières de travail et les indicateurs de pilotage qui permettront de suivre la viabilité du projet.
 
 Ce business model n'a pas vocation à figer définitivement les paramètres économiques. Il constitue une version de référence, argumentée et exploitable, destinée à guider les choix produit, commerciaux et financiers.
+
+L'approche retenue distingue la valeur fonctionnelle, la valeur économique et la valeur de gouvernance. Cette distinction permet d'éviter une lecture trop exclusivement technique du produit : DevinciWatch doit être capable de générer des résultats mesurables pour l'utilisateur, mais aussi de soutenir une logique de revenus, de coûts et de pilotage compatible avec une offre B2B.
 
 ## 2. Rappel du positionnement
 
@@ -25,7 +27,7 @@ Le modèle cible en priorité trois familles d'organisations :
 2. les ETI de 250 à 1 000 employés ;
 3. les organisations sensibles soumises à des contraintes de sécurité, d'audit ou de conformité.
 
-Le cœur de cible correspond néanmoins aux organisations intermédiaires qui ont déjà une réalité réseau et des enjeux cyber sérieux, mais qui ne disposent ni des moyens ni de l'intérêt économique immédiat pour exploiter une architecture SOC trop lourde.
+Le cœur de cible correspond néanmoins aux organisations intermédiaires qui ont déjà une réalité réseau et des enjeux cyber sérieux, mais qui ne disposent ni des moyens ni de l'intérêt économique immédiat pour exploiter une architecture SOC trop lourde. Ce choix de ciblage est central : il évite la dispersion commerciale et permet d'aligner la proposition de valeur sur des besoins observables, comme la visibilité réseau, la qualification d'alertes et la production de preuves.
 
 ## 4. Proposition de valeur
 
@@ -39,6 +41,8 @@ Cette proposition de valeur repose sur quatre bénéfices clients :
 - une amélioration opérationnelle mesurable, notamment sur le MTTD et le MTTR ;
 - une réduction du risque de dérive économique lié au volume d'événements ;
 - un support plus direct aux obligations de gouvernance et de traçabilité.
+
+La valeur attendue ne se limite donc pas à la détection d'un événement isolé. Elle réside dans la capacité à rendre l'information exploitable : contextualisation, priorisation, historique, export et compréhension par un utilisateur non expert d'un SIEM enterprise.
 
 ## 5. Architecture de l'offre
 
@@ -153,7 +157,7 @@ Les risques majeurs du business model sont les suivants :
 - une dépendance trop forte à un canal de distribution unique ;
 - une insuffisante standardisation de l'onboarding et du support.
 
-Pour limiter ces risques, le modèle doit rester discipliné : ciblage serré, offre lisible, critères de qualification stricts et suivi mensuel des KPI.
+Pour limiter ces risques, le modèle doit rester discipliné : ciblage serré, offre lisible, critères de qualification stricts et suivi mensuel des KPI. La robustesse économique du projet dépendra moins d'une multiplication des options que de la capacité à maintenir une promesse claire et répétable.
 
 ## 13. Conclusion
 
@@ -165,35 +169,35 @@ La réussite du modèle dépendra moins d'une sophistication tarifaire excessive
 
 ### Références principales
 
-- `../02_etude_de_marche/rendu_principal.md`
-- `../02_etude_de_marche/references/05_modele_tam_sam_som.md`
-- `../02_etude_de_marche/references/06_strategie_entree_marche.md`
-- `../02_etude_de_marche/references/07_risques_kpi_et_preuves.md`
-- `../02_etude_de_marche/references/08_sources_reference.md`
-- `../02_etude_de_marche/README.md`
+- [Étude de marché](../02_etude_de_marche/rendu_principal.md)
+- [Modèle TAM / SAM / SOM](../02_etude_de_marche/references/05_modele_tam_sam_som.md)
+- [Stratégie d'entrée sur le marché](../02_etude_de_marche/references/06_strategie_entree_marche.md)
+- [Risques, KPI et preuves](../02_etude_de_marche/references/07_risques_kpi_et_preuves.md)
+- [Sources de référence](../02_etude_de_marche/references/08_sources_reference.md)
+- [README de l'étude de marché](../02_etude_de_marche/README.md)
 
 ### Références chiffrées
 
-- [Annexe BM-1] `annexes/business_model_assumptions_v4.csv`
-- [Annexe BM-2] `annexes/pricing_grid_v1.csv`
-- [Annexe BM-3] `annexes/forecast_3y_v4_base.csv`
-- [Annexe BM-4] `annexes/scenario_model_v4.csv`
-- [Annexe BM-5] `annexes/kpi_targets_v4.csv`
-- [Annexe BM-6] `annexes/channel_mix_plan_v3.csv`
+- [Annexe BM-1] [Hypothèses business model](annexes/business_model_assumptions_v4.csv)
+- [Annexe BM-2] [Grille tarifaire](annexes/pricing_grid_v1.csv)
+- [Annexe BM-3] [Prévision trois ans](annexes/forecast_3y_v4_base.csv)
+- [Annexe BM-4] [Modèle de scénarios](annexes/scenario_model_v4.csv)
+- [Annexe BM-5] [KPI cibles](annexes/kpi_targets_v4.csv)
+- [Annexe BM-6] [Plan de mix canal](annexes/channel_mix_plan_v3.csv)
 
 ### Références antérieures conservées
 
-- `../90_references_transverses/source_register.csv`
-- `../02_etude_de_marche/annexes/tam_sam_som_bottomup_v2.csv`
-- `../02_etude_de_marche/annexes/gtm_comparison_matrix.csv`
+- [Registre transverse des sources](../90_references_transverses/source_register.csv)
+- [Annexe TAM / SAM / SOM](../02_etude_de_marche/annexes/tam_sam_som_bottomup_v2.csv)
+- [Matrice go-to-market](../02_etude_de_marche/annexes/gtm_comparison_matrix.csv)
 
 Ces références antérieures relient explicitement le business model aux hypothèses marché, aux sources institutionnelles d'origine et aux analyses stratégiques réalisées avant la présente version de synthèse.
 
 ## 15. Annexes chiffrées
 
-- `annexes/business_model_assumptions_v4.csv`
-- `annexes/pricing_grid_v1.csv`
-- `annexes/forecast_3y_v4_base.csv`
-- `annexes/scenario_model_v4.csv`
-- `annexes/kpi_targets_v4.csv`
-- `annexes/channel_mix_plan_v3.csv`
+- [Hypothèses business model](annexes/business_model_assumptions_v4.csv)
+- [Grille tarifaire](annexes/pricing_grid_v1.csv)
+- [Prévision trois ans](annexes/forecast_3y_v4_base.csv)
+- [Modèle de scénarios](annexes/scenario_model_v4.csv)
+- [KPI cibles](annexes/kpi_targets_v4.csv)
+- [Plan de mix canal](annexes/channel_mix_plan_v3.csv)

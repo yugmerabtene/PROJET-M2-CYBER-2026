@@ -2,7 +2,7 @@
 
 ## 1. Statut du document
 
-Ce document fixe l'architecture de référence du produit DevinciWatch.
+Ce document fixe l'architecture de référence du produit DevinciWatch. Il traduit les exigences du [cahier des charges](../07_cahier_des_charges/rendu_principal.md) en choix techniques, composants, flux, responsabilités et contraintes de démonstration.
 
 Sauf décision explicite ultérieure, cette architecture est considérée comme l'architecture définitive de départ pour le redéveloppement de l'application.
 
@@ -10,6 +10,8 @@ Le document distingue volontairement deux niveaux :
 
 - l'architecture produit cible ;
 - l'architecture de démonstration Docker retenue pour le MVP et la soutenance.
+
+Cette distinction est importante : l'architecture de démonstration simplifie le packaging afin de faciliter l'évaluation, tandis que l'architecture logique conserve une séparation claire des responsabilités pour préparer les évolutions ultérieures.
 
 ## 2. Objectif
 
@@ -31,6 +33,8 @@ L'architecture doit rester :
 - défendable en soutenance ;
 - réaliste pour un MVP ;
 - extensible pour les itérations suivantes.
+
+La qualité attendue n'est donc pas seulement technique. L'architecture doit pouvoir être expliquée, justifiée et reliée aux besoins pédagogiques : observation réseau, détection, alertes, exports, traçabilité et démonstration reproductible.
 
 ## 3. Stack cible
 
@@ -87,12 +91,12 @@ Les principes retenus sont les suivants :
 ![Architecture logicielle](assets/architecture-software.svg)
 
 ```text
-[Endpoint Agent] -- heartbeat / events --> [Control Server]
-[Web App] -------- REST / JWT --------> [Control Server]
-[Control Server] - logique interne ---> [FastAPI API]
-[Control Server] - logique interne ---> [PostgreSQL]
-[Control Server] - logique interne ---> [Redis]
-[Control Server] - logique interne ---> [Celery Worker]
+[serveur-endpoint] -- heartbeat / events --> [serveur-soc]
+[Interface web] -- REST / JWT --------> [serveur-soc]
+[serveur-soc] - logique interne ---> [FastAPI API]
+[serveur-soc] - logique interne ---> [PostgreSQL]
+[serveur-soc] - logique interne ---> [Redis]
+[serveur-soc] - logique interne ---> [Celery Worker]
 [Celery Worker] ----------------------> [PostgreSQL]
 ```
 
@@ -104,6 +108,10 @@ Les principes retenus sont les suivants :
 - le serveur-attacker ne parle pas directement à l'interface ;
 - PostgreSQL, Redis et Celery restent logiquement séparés, mais sont embarqués dans le serveur-soc pour la démonstration ;
 - la logique produit reste séparée par composants, même si l'emballage Docker de démonstration est compact.
+
+Le choix d'embarquer plusieurs services dans `serveur-soc` est un choix de packaging MVP. Il simplifie la démonstration et la soutenance, sans remettre en cause la séparation logique entre API, base de données, file de tâches et worker. En implémentation, ces processus devront être lancés de manière explicite et supervisable dans le conteneur de démonstration.
+
+Ce compromis doit être présenté comme une décision d'ingénierie adaptée au contexte académique. En production, ces services pourraient être séparés dans des conteneurs distincts, mais cette séparation augmenterait inutilement la complexité du MVP et rendrait la démonstration moins directe.
 
 ## 7. Architecture réseau Docker
 
@@ -192,18 +200,18 @@ Contraintes :
 ![Diagramme de séquence](assets/architecture-sequence.svg)
 
 ```text
-1. Agent -> Control Server : POST /telemetry/heartbeat
-2. Control Server -> PostgreSQL : persistance du heartbeat
+1. serveur-endpoint -> serveur-soc : POST /telemetry/heartbeat
+2. serveur-soc -> PostgreSQL : persistance du heartbeat
 
-3. Agent -> Control Server : POST /telemetry/events
-4. Control Server -> PostgreSQL : persistance des événements
-5. Control Server -> Redis : mise en file d'une tâche de détection
+3. serveur-endpoint -> serveur-soc : POST /telemetry/events
+4. serveur-soc -> PostgreSQL : persistance des événements
+5. serveur-soc -> Redis : mise en file d'une tâche de détection
 6. Redis -> Celery Worker : dispatch de la tâche
-7. Celery Worker -> PostgreSQL : mise à jour assets / évaluation des règles / création des alertes
+7. Celery Worker -> PostgreSQL : mise à jour des actifs / évaluation des règles / création des alertes
 
-8. Web App -> Control Server : consultation assets / alerts / events / reports
-9. Control Server -> PostgreSQL : lecture des données
-10. Control Server -> Web App : réponse
+8. Interface web -> serveur-soc : consultation assets / alerts / events / reports
+9. serveur-soc -> PostgreSQL : lecture des données
+10. serveur-soc -> Interface web : réponse
 ```
 
 ## 9. Composants principaux
@@ -222,19 +230,23 @@ Contraintes :
 
 - simple ;
 - robuste ;
-- peu couplé au reste du système.
+- peu couplé au reste du système ;
+- authentifié auprès de l'API par un secret d'agent ou une clé API dédiée.
 
 ### 9.2 API Backend FastAPI
 
 Rôle :
 
 - authentifier les utilisateurs ;
+- authentifier les agents de collecte ;
 - recevoir les données agent ;
 - exposer les endpoints métiers ;
 - valider et normaliser les payloads ;
 - piloter les règles métier ;
 - piloter les règles de corrélation ;
 - retourner les données au frontend.
+
+Les routes d'ingestion agent doivent être séparées des routes utilisateur. Elles doivent accepter uniquement des agents connus du serveur SOC, via un secret d'agent, une clé API ou un mécanisme équivalent stocké côté serveur. Cette séparation limite les confusions entre actions humaines et remontées automatiques, facilite l'audit et prépare un durcissement ultérieur de l'authentification agent.
 
 L'API constitue le point central du système et sera hébergée dans le conteneur `serveur-soc`.
 
@@ -276,10 +288,12 @@ Rôle :
 - consultation des actifs ;
 - consultation des événements ;
 - consultation et traitement des alertes ;
-- déclenchement d'exports CSV, XML et JSON ;
+- déclenchement d'exports CSV et JSON pour le MVP, avec XML en extension si le calendrier le permet ;
 - visualisation géographique des attaques ;
 - affichage des IP attaquantes et de leur récurrence ;
 - consultation des corrélations entre événements et campagnes suspectes.
+
+L'enrichissement géographique des IP attaquantes doit rester pragmatique. Pour le MVP, il peut s'appuyer sur une base GeoIP locale, un jeu de données simulé ou un enrichissement contrôlé sans dépendance externe obligatoire pendant la soutenance.
 
 Le frontend est intégré au même conteneur que le backend pour le MVP et ne doit parler qu'à l'API locale du serveur-soc.
 
@@ -306,6 +320,8 @@ L'architecture doit couvrir explicitement les capacités demandées dans le kick
 - corrélation de signaux répétés ou reliés à une même source attaquante.
 
 Ces capacités seront portées principalement par le serveur-endpoint et par les modules backend associés à la télémétrie, aux actifs et aux alertes.
+
+Dans l'environnement Docker de démonstration, les scans et observations doivent rester limités au réseau de lab `devinciwatch_net`. Si l'observation réseau nécessite des droits particuliers, ils doivent être explicitement bornés au conteneur `serveur-endpoint` et documentés dans la configuration Docker, par exemple via les capacités Linux strictement nécessaires (`NET_RAW` ou `NET_ADMIN` selon l'implémentation retenue).
 
 ## 11. Découpage fonctionnel du backend
 
@@ -386,6 +402,8 @@ Responsabilités :
 
 - synthèse de KPI ;
 - exports CSV ;
+- exports JSON ;
+- export XML optionnel si le calendrier le permet ;
 - vue exploitable pour la démonstration et la preuve.
 
 ### `audit`
@@ -448,14 +466,14 @@ Exemples de corrélation attendus :
 - succession scan -> tentative d'accès -> activité suspecte ;
 - multiplication d'événements sur plusieurs actifs depuis une même source attaquante.
 
-L'objectif n'est pas de reproduire la complexité complète d'un SIEM enterprise, mais de fournir une corrélation utile, lisible et démontrable.
+L'objectif n'est pas de reproduire la complexité complète d'un SIEM enterprise, mais de fournir une corrélation utile, lisible et démontrable. Une corrélation réussie doit permettre à l'analyste de comprendre pourquoi plusieurs signaux appartiennent à un même phénomène et pourquoi cette agrégation justifie une priorité plus élevée.
 
 ## 14. Flux de test en environnement Docker
 
 Scénario de démonstration recommandé :
 
 1. `serveur-soc`, `serveur-endpoint` et `serveur-attacker` démarrent ;
-2. `serveur-endpoint` s'enregistre et émet un `heartbeat` ;
+2. `serveur-endpoint` s'authentifie auprès de l'API, s'enregistre et émet un `heartbeat` ;
 3. `serveur-endpoint` exécute ou planifie une phase de découverte réseau initiale : scan IP, ports ouverts et services observés ;
 4. `serveur-attacker` déclenche un scénario contrôlé ;
 5. `serveur-endpoint` observe le trafic, les logs ou les comportements attendus ;
@@ -463,14 +481,14 @@ Scénario de démonstration recommandé :
 7. le worker évalue les règles de détection et de corrélation ;
 8. une ou plusieurs alertes enrichies sont générées ;
 9. l'analyste visualise le résultat dans l'interface, les historiques et la carte géographique ;
-10. un export CSV, XML ou JSON peut être produit pour preuve.
+10. un export CSV ou JSON peut être produit pour preuve, avec XML si l'extension est réalisée.
 
 ## 15. Modèle de données fonctionnel
 
 Entités principales à prévoir :
 
 - `users`
-- `rôles`
+- `roles`
 - `assets`
 - `events`
 - `network_findings`
@@ -479,6 +497,8 @@ Entités principales à prévoir :
 - `attacker_profiles`
 - `audit_logs`
 - `exports`
+
+Les noms ci-dessus sont volontairement exprimés sous forme technique afin de pouvoir être repris directement dans les conventions de modèles, migrations et tables SQL. Cette convention limite les ambiguïtés entre documentation, code et schéma de base de données.
 
 Relations principales :
 
@@ -495,6 +515,7 @@ Relations principales :
 
 - authentification obligatoire côté interface ;
 - séparation des rôles `admin` / `analyst` ;
+- authentification obligatoire côté agent pour l'ingestion ;
 - protection des actions sensibles ;
 - journalisation des opérations critiques.
 
@@ -511,6 +532,8 @@ Relations principales :
 - logs applicatifs structurés ;
 - indicateurs simples pour la démonstration ;
 - métriques de détection et de corrélation visibles dans l'interface.
+
+Les métriques minimales à exposer sont : nombre d'événements ingérés, nombre d'alertes générées, dernier `heartbeat` reçu par endpoint, erreurs d'ingestion, état du worker et volume d'exports produits.
 
 ### Déploiement
 
@@ -529,13 +552,15 @@ Relations principales :
 
 L'interface web cible doit être moderne, complète et orientée analyste.
 
+Elle doit privilégier la lisibilité de l'investigation plutôt que l'accumulation visuelle. Les écrans doivent aider à comprendre rapidement l'état du lab, les alertes récentes, les actifs concernés, les corrélations détectées et les preuves disponibles.
+
 Capacités attendues :
 
 - dashboard synthétique ;
 - métriques clés ;
 - historique des alertes et événements ;
 - journalisation consultable ;
-- exports CSV, XML et JSON ;
+- exports CSV et JSON, avec XML optionnel ;
 - visualisation des IP attaquantes ;
 - carte géographique des attaques ;
 - vue de corrélation entre attaques répétées ou reliées.
@@ -554,7 +579,7 @@ Le premier incrément produit devrait couvrir :
 8. règles de détection minimales ;
 9. corrélation de base par IP source et fenêtre temporelle ;
 10. liste et détail d'alertes ;
-11. export CSV, avec JSON/XML dans le périmètre suivant si le calendrier le permet ;
+11. exports CSV et JSON, avec XML dans le périmètre suivant si le calendrier le permet ;
 12. audit minimal ;
 13. dashboard avec métriques et historique ;
 14. lab Docker de démonstration en 3 conteneurs.
@@ -585,10 +610,22 @@ Cette architecture est adaptée parce qu'elle :
 - soutient une interface d'investigation plus riche et plus démonstrative ;
 - rend visible toute la chaîne détection -> alerte -> preuve.
 
-## 21. Conclusion
+## 21. Références documentaires
+
+Cette architecture s'appuie sur les documents suivants :
+
+- [Kick-off pédagogique (01)](../01_documents_pedagogiques/kickoff/KICKOFF.md)
+- [Étude de marché (02)](../02_etude_de_marche/rendu_principal.md)
+- [Business model (03)](../03_business_model/rendu_principal.md)
+- [Business plan (04)](../04_business_plan/rendu_principal.md)
+- [Feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md)
+- [Gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md)
+- [Cahier des charges (07)](../07_cahier_des_charges/rendu_principal.md)
+
+## 22. Conclusion
 
 L'architecture définitive retenue pour DevinciWatch est une architecture web modulaire centrée sur FastAPI, PostgreSQL, Redis et un worker asynchrone, avec un environnement Docker de test composé de trois conteneurs : `serveur-soc`, `serveur-endpoint` et `serveur-attacker`.
 
 Elle intègre également une capacité de corrélation pragmatique entre attaques, répétitions temporelles et sources attaquantes, ainsi qu'une interface web d'analyse moderne orientée métriques, historique, journalisation, exports et cartographie.
 
-Elle est adaptée au sujet, défendable techniquement, exploitable pédagogiquement et suffisamment propre pour servir de base définitive au redéveloppement du produit.
+Elle est adaptée au sujet, défendable techniquement, exploitable pédagogiquement et suffisamment propre pour servir de base définitive au redéveloppement du produit. Elle matérialise le compromis central du projet : produire une démonstration simple à exécuter, tout en conservant une conception suffisamment rigoureuse pour être discutée à un niveau universitaire.

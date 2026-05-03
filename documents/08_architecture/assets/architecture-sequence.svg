@@ -14,14 +14,14 @@
     </marker>
   </defs>
 
-  <text x="750" y="42" class="title" text-anchor="middle">DevinciWatch - Diagramme de sequence principal</text>
+  <text x="750" y="42" class="title" text-anchor="middle">DevinciWatch - Diagramme de séquence principal</text>
 
   <rect x="80" y="90" width="140" height="48" class="actor"/>
-  <text x="150" y="120" class="label">Endpoint Agent</text>
+  <text x="150" y="120" class="label">serveur-endpoint</text>
   <line x1="150" y1="138" x2="150" y2="850" class="lifeline"/>
 
   <rect x="320" y="90" width="160" height="48" class="actor"/>
-  <text x="400" y="120" class="label">Control Server</text>
+  <text x="400" y="120" class="label">serveur-soc</text>
   <line x1="400" y1="138" x2="400" y2="850" class="lifeline"/>
 
   <rect x="580" y="90" width="140" height="48" class="actor"/>
@@ -42,11 +42,11 @@
 
   <text x="40" y="185" class="step">1</text>
   <line x1="150" y1="180" x2="400" y2="180" class="msg"/>
-  <text x="225" y="170" class="msglabel">POST /telemetry/heartbeat</text>
+  <text x="225" y="170" class="msglabel">POST /telemetry/heartbeat + auth agent</text>
 
   <text x="40" y="245" class="step">2</text>
   <line x1="400" y1="240" x2="650" y2="240" class="msg"/>
-  <text x="470" y="230" class="msglabel">persist heartbeat</text>
+  <text x="470" y="230" class="msglabel">persiste heartbeat</text>
 
   <text x="40" y="305" class="step">3</text>
   <line x1="150" y1="300" x2="400" y2="300" class="msg"/>
@@ -54,19 +54,19 @@
 
   <text x="40" y="365" class="step">4</text>
   <line x1="400" y1="360" x2="650" y2="360" class="msg"/>
-  <text x="470" y="350" class="msglabel">persist events</text>
+  <text x="470" y="350" class="msglabel">persiste events</text>
 
   <text x="40" y="425" class="step">5</text>
   <line x1="400" y1="420" x2="870" y2="420" class="msg"/>
-  <text x="560" y="410" class="msglabel">enqueue detection task</text>
+  <text x="560" y="410" class="msglabel">planifie tâche détection</text>
 
   <text x="40" y="485" class="step">6</text>
   <line x1="870" y1="480" x2="1095" y2="480" class="msg"/>
-  <text x="930" y="470" class="msglabel">dispatch task</text>
+  <text x="930" y="470" class="msglabel">dispatch tâche</text>
 
   <text x="40" y="545" class="step">7</text>
   <line x1="1095" y1="540" x2="650" y2="540" class="msg"/>
-  <text x="860" y="530" class="msglabel">update assets / evaluate rules / create alerts</text>
+  <text x="860" y="530" class="msglabel">met à jour assets / évalue règles / crée alertes</text>
 
   <text x="40" y="625" class="step">8</text>
   <line x1="1330" y1="620" x2="400" y2="620" class="msg"/>
@@ -74,11 +74,11 @@
 
   <text x="40" y="685" class="step">9</text>
   <line x1="400" y1="680" x2="650" y2="680" class="msg"/>
-  <text x="475" y="670" class="msglabel">query data</text>
+  <text x="475" y="670" class="msglabel">lit données</text>
 
   <text x="40" y="745" class="step">10</text>
   <line x1="400" y1="740" x2="1330" y2="740" class="msg"/>
-  <text x="760" y="730" class="msglabel">response JSON / data for UI</text>
+  <text x="760" y="730" class="msglabel">réponse JSON / données UI</text>
 
-  <text x="90" y="810" class="msglabel">Le diagramme de sequence represente le chemin principal de detection et de consultation dans l'architecture de demonstration.</text>
+  <text x="90" y="810" class="msglabel">Le diagramme de séquence représente le chemin principal de détection et de consultation dans l'architecture de démonstration.</text>
 </svg>

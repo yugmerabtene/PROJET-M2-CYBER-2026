@@ -10,6 +10,8 @@
 
 Le projet s'inscrit dans un cadre académique de cybersécurité avec des attendus techniques, méthodologiques et de valorisation. Il doit démontrer la capacité à transformer un besoin de supervision réseau en produit structuré, défendable et démontrable.
 
+La feuille de cadrage joue ici un rôle de document-pivot. Elle traduit les enseignements issus de l'[étude de marché](../02_etude_de_marche/rendu_principal.md), du [business model](../03_business_model/rendu_principal.md) et du [business plan](../04_business_plan/rendu_principal.md) en décisions de périmètre, de priorisation et d'exécution. Elle permet également de préparer le passage vers le [cahier des charges](../07_cahier_des_charges/rendu_principal.md) et l'[architecture](../08_architecture/rendu_principal.md).
+
 ## 3. Besoin principal
 
 Mettre à disposition une solution capable de :
@@ -23,7 +25,7 @@ Mettre à disposition une solution capable de :
 
 ## 4. Problème adressé
 
-Les structures ciblées ont besoin de visibilité, de simplicité d'exploitation et de preuve, sans recourir à une plateforme trop lourde ou difficile à opérer.
+Les structures ciblées ont besoin de visibilité, de simplicité d'exploitation et de preuve, sans recourir à une plateforme trop lourde ou difficile à opérer. Le problème adressé n'est donc pas seulement l'absence d'information technique ; il concerne aussi la capacité à qualifier cette information, à la présenter clairement et à la transformer en éléments exploitables pour une décision ou une soutenance.
 
 ## 5. Objectifs projet
 
@@ -73,6 +75,8 @@ Les structures ciblées ont besoin de visibilité, de simplicité d'exploitation
 ## 8. Proposition de valeur projet
 
 DevinciWatch propose une supervision cyber réseau pragmatique, démontrable et exploitable, combinant visibilité, alertes, corrélation, historique et preuve dans une architecture simple à expliquer et à mettre en œuvre.
+
+La valeur du projet repose sur une articulation entre rigueur technique et lisibilité opérationnelle : l'utilisateur doit pouvoir comprendre ce qui est observé, pourquoi une alerte est produite, comment les événements sont reliés entre eux et quelles preuves peuvent être exportées.
 
 ## 9. Architecture de référence retenue
 
@@ -129,6 +133,8 @@ Le projet sera jugé réussi si :
 - démonstration en 3 conteneurs ;
 - focus sur supervision, corrélation, historique, preuves et exports ;
 - orientation produit cohérente avec les études réalisées.
+
+Ces décisions doivent rester stables pendant la phase MVP. Toute extension fonctionnelle devra être évaluée au regard de son apport démonstratif, de sa faisabilité dans le calendrier et de son impact sur la simplicité de l'architecture.
 
 ## 15. Dépendances documentaires
 

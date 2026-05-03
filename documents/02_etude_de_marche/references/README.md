@@ -1,21 +1,21 @@
 # Étude de marché - version propre
 
-Ce dossier reprend uniquement les rendus utiles demandés par les documents de référence internes :
+Ce dossier reprend uniquement les rendus utiles demandés par les documents de référence internes. Il sert de base méthodologique et documentaire à l'[étude de marché](../rendu_principal.md).
 
 - `documents-contractuels/syllabus.txt`
-- `documents-pédagogiques/1-Kick-off _ Projet Cybersécurité _ Supervision et analyse réseau.docx`
+- [Kick-off pédagogique transcrit](../../01_documents_pedagogiques/kickoff/KICKOFF.md)
 
 ## Livrables inclus
 
-- `01_cadrage_reference.md` : ce qui est demandé, périmètre, méthode.
-- `02_analyse_demande_et_contexte.md` : preuves de besoin marché et pression cyber/compliance.
-- `03_segmentation_ciblage_positionnement.md`: cibles prioritaires et proposition de valeur.
-- `04_benchmark_concurrence.md` : alternatives et espace de différenciation.
-- `05_modele_tam_sam_som.md` : modélisation bottom-up exploitable.
-- `06_strategie_entree_marche.md` : scénario GTM recommandé.
-- `07_risques_kpi_et_preuves.md` : risques, KPI de pilotage et preuves attendues en soutenance.
-- `08_sources_reference.md` : registre court des sources utilisées.
+- [Cadrage de référence](01_cadrage_reference.md) : ce qui est demandé, périmètre, méthode.
+- [Analyse de la demande et du contexte](02_analyse_demande_et_contexte.md) : preuves de besoin marché et pression cyber/compliance.
+- [Segmentation, ciblage et positionnement](03_segmentation_ciblage_positionnement.md) : cibles prioritaires et proposition de valeur.
+- [Benchmark concurrence](04_benchmark_concurrence.md) : alternatives et espace de différenciation.
+- [Modèle TAM / SAM / SOM](05_modele_tam_sam_som.md) : modélisation bottom-up exploitable.
+- [Stratégie d'entrée sur le marché](06_strategie_entree_marche.md) : scénario GTM recommandé.
+- [Risques, KPI et preuves](07_risques_kpi_et_preuves.md) : risques, KPI de pilotage et preuves attendues en soutenance.
+- [Sources de référence](08_sources_reference.md) : registre court des sources utilisées.
 
 ## Note de méthode
 
-Cette version est volontairement compacte pour servir de base `main` claire et défendable. Les hypothèses et chiffres sont issus des analyses de l'ancien repository et tracés par source.
+Cette version est volontairement compacte pour servir de base `main` claire et défendable. Les hypothèses et chiffres sont issus des analyses antérieures et tracés par source dans le [registre transverse](../../90_references_transverses/source_register.csv).

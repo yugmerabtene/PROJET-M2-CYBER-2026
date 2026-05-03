@@ -2,7 +2,9 @@
 
 ## 1. Objet du document
 
-La présente étude de marché a pour objectif de démontrer la pertinence économique et stratégique de DevinciWatch, solution de supervision et d'analyse cyber réseau orientée usage. Elle s'inscrit dans le cadre du projet pédagogique défini par le kick-off et par le syllabus, qui demandent explicitement une étude de marché, un modèle économique et une stratégie d'entrée sur le marché.
+La présente étude de marché a pour objectif de démontrer la pertinence économique et stratégique de DevinciWatch, solution de supervision et d'analyse cyber réseau orientée usage. Elle s'inscrit dans le cadre du projet pédagogique défini par le [kick-off](../01_documents_pedagogiques/kickoff/KICKOFF.md) et par le syllabus, qui demandent explicitement une étude de marché, un modèle économique et une stratégie d'entrée sur le marché.
+
+L'analyse adopte une posture universitaire : elle distingue les faits documentés, les hypothèses de travail et les décisions qui en découlent. Cette distinction est essentielle, car un projet cyber ne peut pas être justifié uniquement par l'intuition technique ; il doit s'appuyer sur une compréhension argumentée de la demande, de la concurrence, des contraintes réglementaires et de la capacité réelle du marché à adopter la solution.
 
 Cette étude répond à quatre questions structurantes :
 
@@ -24,11 +26,13 @@ Le projet DevinciWatch vise à concevoir un outil de supervision et d'analyse r�
 - générer des alertes ;
 - produire des exports exploitables, notamment en JSON et CSV.
 
-L'enjeu n'est donc pas seulement technique. Il s'agit de transformer ce socle fonctionnel en offre lisible, utile et défendable sur un marché où les clients attendent à la fois de la détection, de la réactivité et de la traçabilité.
+L'enjeu n'est donc pas seulement technique. Il s'agit de transformer ce socle fonctionnel en offre lisible, utile et défendable sur un marché où les clients attendent à la fois de la détection, de la réactivité et de la traçabilité. Le produit doit ainsi répondre à une double exigence : produire des signaux cyber pertinents et rendre ces signaux suffisamment compréhensibles pour soutenir une décision opérationnelle.
 
 ## 3. Hypothèse centrale de marché
 
 L'hypothèse retenue est la suivante : il existe une place de marché pour une solution de supervision cyber réseau plus simple à déployer et à exploiter que les stacks SIEM/XDR lourdes, tout en étant plus industrialisée et plus orientée résultat qu'un assemblage open source maintenu en interne.
+
+Cette hypothèse ne suppose pas que DevinciWatch remplace les plateformes les plus matures. Elle affirme plutôt l'existence d'un espace intermédiaire : celui des organisations qui ont besoin d'une visibilité cyber concrète, mais qui ne peuvent pas absorber la complexité humaine, financière et technique d'un SOC complet.
 
 Cette hypothèse repose sur trois constats convergents :
 
@@ -199,44 +203,44 @@ La priorité n'est donc pas de rivaliser frontalement avec les plateformes les p
 
 ### Références externes
 
-- [S01] ANSSI, Panorama de la cybermenace 2025.
-- [S02] Cybermalveillance.gouv.fr, Rapport d'activité 2025.
-- [S04] Google Cloud / Mandiant, M-Trends 2025.
-- [S05] Commission européenne, Directive NIS2.
-- [S08] Wazuh Cloud Pricing.
-- [S09] Datadog Cloud SIEM Pricing.
-- [S10] Datadog Workload Protection Pricing.
-- [S13] ENISA, NIS Investments 2025 - communication et données associées.
-- [S21] Centre for Cybersecurity Belgium, chiffres clés 2025.
-- [S22] Centre for Cybersecurity Belgium, réalité cyber 2025.
-- [S23] NCSC Suisse, rapport semestriel 2025/1.
-- [S24] NCSC Suisse, rapport semestriel 2025/2.
+- [S01] [ANSSI, Panorama de la cybermenace 2025](https://cyber.gouv.fr/actualites/panorama-de-la-cybermenace-2025/).
+- [S02] [Cybermalveillance.gouv.fr, Rapport d'activité 2025](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/rapport-activite-2025).
+- [S04] [Google Cloud / Mandiant, M-Trends 2025](https://cloud.google.com/blog/topics/threat-intelligence/m-trends-2025).
+- [S05] [Commission européenne, Directive NIS2](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive).
+- [S08] [Wazuh Cloud Pricing](https://wazuh.com/cloud/).
+- [S09] [Datadog Cloud SIEM Pricing](https://www.datadoghq.com/pricing/?product=cloud-siem).
+- [S10] [Datadog Workload Protection Pricing](https://www.datadoghq.com/pricing/?product=workload-protection).
+- [S13] [ENISA, NIS Investments 2025 - communication et données associées](https://www.enisa.europa.eu/news/whats-driving-cybersecurity-investments-and-where-lie-the-challenges).
+- [S21] [Centre for Cybersecurity Belgium, chiffres clés 2025](https://ccb.belgium.be/en).
+- [S22] [Centre for Cybersecurity Belgium, réalité cyber 2025](https://ccb.belgium.be/fr/news/plus-dattaques-plus-de-signalements-la-realite-cyber-de-la-belgique-en-2025).
+- [S23] [NCSC Suisse, rapport semestriel 2025/1](https://www.ncsc.admin.ch/ncsc/fr/home/dokumentation/berichte/lageberichte/halbjahresbericht-2025-1.html).
+- [S24] [NCSC Suisse, rapport semestriel 2025/2](https://www.ncsc.admin.ch/ncsc/fr/home/dokumentation/berichte/lageberichte/halbjahresbericht-2025-2.html).
 
 ### Références internes et annexes d'étude
 
-- `references/01_cadrage_reference.md`
-- `references/02_analyse_demande_et_contexte.md`
-- `references/03_segmentation_ciblage_positionnement.md`
-- `references/04_benchmark_concurrence.md`
-- `references/05_modele_tam_sam_som.md`
-- `references/06_strategie_entree_marche.md`
-- `references/07_risques_kpi_et_preuves.md`
-- `references/08_sources_reference.md`
-- `README.md`
+- [Cadrage de référence](references/01_cadrage_reference.md)
+- [Analyse de la demande et du contexte](references/02_analyse_demande_et_contexte.md)
+- [Segmentation, ciblage et positionnement](references/03_segmentation_ciblage_positionnement.md)
+- [Benchmark concurrence](references/04_benchmark_concurrence.md)
+- [Modèle TAM / SAM / SOM](references/05_modele_tam_sam_som.md)
+- [Stratégie d'entrée sur le marché](references/06_strategie_entree_marche.md)
+- [Risques, KPI et preuves](references/07_risques_kpi_et_preuves.md)
+- [Sources de référence](references/08_sources_reference.md)
+- [README de l'étude de marché](README.md)
 
 ### Registre complet des sources antérieures conservées
 
-- `../90_references_transverses/source_register.csv`
-- `../90_references_transverses/source_quality_matrix.csv`
+- [Registre transverse des sources](../90_references_transverses/source_register.csv)
+- [Matrice de qualité des sources](../90_references_transverses/source_quality_matrix.csv)
 
 Le registre complet conserve l'ensemble des références exploitées antérieurement dans l'étude consolidée, notamment les sources institutionnelles et sectorielles S01 à S26. Il constitue la base de traçabilité détaillée des chiffres et constats mobilisés dans le présent document.
 
 ## 13. Annexes chiffrées
 
-- `../90_references_transverses/source_register.csv`
-- `../90_references_transverses/source_quality_matrix.csv`
-- `annexes/tam_sam_som_bottomup_v2.csv`
-- `annexes/competition_benchmark_v2.csv`
-- `annexes/gtm_comparison_matrix.csv`
-- `annexes/kpi_template_business_model.csv`
-- `annexes/sensitivity_model_template.csv`
+- [Registre transverse des sources](../90_references_transverses/source_register.csv)
+- [Matrice de qualité des sources](../90_references_transverses/source_quality_matrix.csv)
+- [Annexe TAM / SAM / SOM](annexes/tam_sam_som_bottomup_v2.csv)
+- [Benchmark concurrence](annexes/competition_benchmark_v2.csv)
+- [Matrice comparative go-to-market](annexes/gtm_comparison_matrix.csv)
+- [Modèle de KPI business model](annexes/kpi_template_business_model.csv)
+- [Modèle de sensibilité](annexes/sensitivity_model_template.csv)

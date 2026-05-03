@@ -4,6 +4,8 @@
 
 Le présent cahier des charges formalise les besoins, les contraintes, le périmètre, les exigences fonctionnelles et non fonctionnelles ainsi que les critères d'acceptation du projet DevinciWatch.
 
+Il a une fonction contractuelle au sein du projet : il transforme les orientations de cadrage en exigences vérifiables, suffisamment précises pour guider le développement et suffisamment lisibles pour être défendues lors de la soutenance.
+
 Il constitue le document de référence pour le développement du produit et s'appuie sur :
 
 - le [kick-off pédagogique (01)](../01_documents_pedagogiques/kickoff/KICKOFF.md) ;
@@ -17,6 +19,8 @@ Il constitue le document de référence pour le développement du produit et s'a
 ## 2. Contexte du projet
 
 DevinciWatch est un projet de cybersurveillance réseau orienté SOC. Son ambition est de proposer une solution pragmatique de supervision, de détection et de preuve à destination d'organisations qui ont besoin de visibilité cyber sans supporter la lourdeur d'une plateforme SIEM enterprise.
+
+Le cahier des charges retient donc une logique de MVP démontrable : l'objectif n'est pas de couvrir l'ensemble des usages d'un SIEM, mais de prouver une chaîne fonctionnelle cohérente, depuis l'observation réseau jusqu'à l'export de preuves.
 
 Le projet doit répondre à deux niveaux d'attente :
 
@@ -33,6 +37,8 @@ Les organisations ciblées doivent pouvoir :
 - comprendre la répétition ou la corrélation d'attaques ;
 - générer des alertes actionnables ;
 - produire des preuves exploitables via journalisation, historique et exports.
+
+La problématique peut être résumée ainsi : comment produire une visibilité cyber suffisamment riche pour être utile, tout en conservant une architecture simple, testable et compatible avec un environnement de démonstration académique ?
 
 ## 4. Objectifs du produit
 
@@ -76,6 +82,8 @@ Le produit doit permettre de :
 - multi-tenant complet ;
 - couverture SIEM exhaustive ;
 - moteur de détection enterprise complexe.
+
+Cette exclusion n'est pas une faiblesse du produit ; elle constitue un choix de maîtrise. Le périmètre initial se concentre sur les fonctionnalités qui démontrent le mieux la valeur du projet dans le temps disponible.
 
 ## 6. Parties prenantes
 
@@ -262,6 +270,8 @@ Le produit sera considéré comme conforme si les points suivants sont démontr�
 7. l'historique et la journalisation sont visibles ;
 8. un export exploitable est produit ;
 9. la démonstration fonctionne dans le lab Docker prévu.
+
+Ces critères doivent être évalués sur des preuves observables : scénario exécuté, données persistées, alerte visible, export généré, journal d'audit consultable et comportement reproductible dans l'environnement Docker.
 
 ## 12. Priorisation
 

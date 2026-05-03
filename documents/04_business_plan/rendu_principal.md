@@ -4,13 +4,17 @@
 
 DevinciWatch est une solution de supervision et d'analyse cyber réseau conçue pour des organisations qui doivent améliorer leur visibilité, leur capacité de détection et leur niveau de preuve sans déployer une plateforme de sécurité disproportionnée au regard de leurs moyens.
 
-Le business plan proposé s'appuie sur les conclusions de l'étude de marché et du business model. Il décrit la trajectoire d'exécution recommandée sur trois ans, les priorités opérationnelles, les hypothèses financières et les principaux risques de pilotage.
+Le business plan proposé s'appuie sur les conclusions de l'[étude de marché](../02_etude_de_marche/rendu_principal.md) et du [business model](../03_business_model/rendu_principal.md). Il décrit la trajectoire d'exécution recommandée sur trois ans, les priorités opérationnelles, les hypothèses financières et les principaux risques de pilotage.
 
 L'ambition n'est pas de projeter une croissance irréaliste, mais de construire une trajectoire crédible de mise sur le marché, d'acquisition, de conversion et de structuration progressive.
+
+Le document articule donc deux dimensions complémentaires : la soutenabilité économique du projet et sa faisabilité opérationnelle. Cette articulation est indispensable pour éviter un plan purement financier, déconnecté de la capacité réelle de livraison, ou un plan purement produit, insuffisamment relié aux exigences commerciales.
 
 ## 2. Vision et ambition du projet
 
 La vision de DevinciWatch est de proposer une réponse pragmatique à un problème très concret : beaucoup d'organisations ont besoin d'une supervision cyber plus efficace, mais n'ont ni la disponibilité opérationnelle ni le budget pour absorber la complexité de solutions plus lourdes.
+
+Cette vision implique une discipline de conception : le produit doit rester suffisamment simple pour être déployé, compris et démontré rapidement, tout en produisant des résultats crédibles sur les actifs, les événements, les alertes, les corrélations et les preuves exportables.
 
 L'ambition du projet est donc double :
 
@@ -98,7 +102,7 @@ Le parcours commercial de référence est structuré en quatre étapes :
 3. évaluation de résultats avant/après ;
 4. passage en production avec plan de déploiement.
 
-Le POC constitue l'étape critique. Il doit produire une preuve de valeur claire : qualité des alertes, visibilité utile, réduction du bruit, capacité d'export et bénéfice opérationnel.
+Le POC constitue l'étape critique. Il doit produire une preuve de valeur claire : qualité des alertes, visibilité utile, réduction du bruit, capacité d'export et bénéfice opérationnel. Pour être exploitable commercialement, le POC doit être cadré par des critères de succès définis avant son lancement, puis évalué au moyen d'indicateurs comparables avant et après expérimentation.
 
 ## 7. Plan commercial de première année
 
@@ -189,7 +193,7 @@ Le registre des risques opérationnels et économiques conservé en annexe ident
 - baisse de la marge brute ;
 - tension sur la trésorerie disponible.
 
-Le pilotage recommandé est mensuel, avec seuils d'alerte et plans de mitigation définis à l'avance.
+Le pilotage recommandé est mensuel, avec seuils d'alerte et plans de mitigation définis à l'avance. Cette gouvernance doit permettre de traiter rapidement les écarts entre hypothèses et réalité : ralentissement de conversion, surcoût d'acquisition, difficulté d'onboarding ou baisse de marge.
 
 ## 14. Roadmap de mise en œuvre sur douze mois
 
@@ -227,46 +231,46 @@ La clé du succès résidera dans la capacité à conserver un positionnement si
 
 ### Références principales
 
-- `../02_etude_de_marche/rendu_principal.md`
-- `../03_business_model/rendu_principal.md`
-- `../02_etude_de_marche/README.md`
-- `../02_etude_de_marche/references/08_sources_reference.md`
+- [Étude de marché](../02_etude_de_marche/rendu_principal.md)
+- [Business model](../03_business_model/rendu_principal.md)
+- [README de l'étude de marché](../02_etude_de_marche/README.md)
+- [Sources de référence](../02_etude_de_marche/references/08_sources_reference.md)
 
 ### Références externes citées
 
-- [S01] ANSSI, Panorama de la cybermenace 2025.
-- [S02] Cybermalveillance.gouv.fr, Rapport d'activité 2025.
-- [S05] Commission européenne, Directive NIS2.
-- [S13] ENISA, NIS Investments 2025.
-- [S21] Centre for Cybersecurity Belgium, chiffres clés 2025.
-- [S23] NCSC Suisse, rapport semestriel 2025/1.
+- [S01] [ANSSI, Panorama de la cybermenace 2025](https://cyber.gouv.fr/actualites/panorama-de-la-cybermenace-2025/).
+- [S02] [Cybermalveillance.gouv.fr, Rapport d'activité 2025](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/rapport-activite-2025).
+- [S05] [Commission européenne, Directive NIS2](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive).
+- [S13] [ENISA, NIS Investments 2025](https://www.enisa.europa.eu/news/whats-driving-cybersecurity-investments-and-where-lie-the-challenges).
+- [S21] [Centre for Cybersecurity Belgium, chiffres clés 2025](https://ccb.belgium.be/en).
+- [S23] [NCSC Suisse, rapport semestriel 2025/1](https://www.ncsc.admin.ch/ncsc/fr/home/dokumentation/berichte/lageberichte/halbjahresbericht-2025-1.html).
 
 ### Références chiffrées
 
-- [Annexe BP-1] `annexes/financial_assumptions_v1.csv`
-- [Annexe BP-2] `annexes/sales_plan_12m_v1.csv`
-- [Annexe BP-3] `annexes/pnl_3y_v1.csv`
-- [Annexe BP-4] `annexes/break_even_v1.csv`
-- [Annexe BP-5] `annexes/cashflow_3y_v1.csv`
-- [Annexe BP-6] `annexes/funding_plan_v2.csv`
-- [Annexe BP-7] `annexes/risk_register_v2.csv`
-- [Annexe BM-2] `../03_business_model/annexes/pricing_grid_v1.csv`
+- [Annexe BP-1] [Hypothèses financières](annexes/financial_assumptions_v1.csv)
+- [Annexe BP-2] [Plan commercial 12 mois](annexes/sales_plan_12m_v1.csv)
+- [Annexe BP-3] [Compte de résultat prévisionnel](annexes/pnl_3y_v1.csv)
+- [Annexe BP-4] [Seuil de rentabilité](annexes/break_even_v1.csv)
+- [Annexe BP-5] [Trésorerie prévisionnelle](annexes/cashflow_3y_v1.csv)
+- [Annexe BP-6] [Plan de financement](annexes/funding_plan_v2.csv)
+- [Annexe BP-7] [Registre des risques](annexes/risk_register_v2.csv)
+- [Annexe BM-2] [Grille tarifaire du business model](../03_business_model/annexes/pricing_grid_v1.csv)
 
 ### Références antérieures conservées
 
-- `../90_references_transverses/source_register.csv`
-- `../02_etude_de_marche/annexes/tam_sam_som_bottomup_v2.csv`
-- `../03_business_model/annexes/business_model_assumptions_v4.csv`
-- `../03_business_model/annexes/forecast_3y_v4_base.csv`
+- [Registre transverse des sources](../90_references_transverses/source_register.csv)
+- [Annexe TAM / SAM / SOM](../02_etude_de_marche/annexes/tam_sam_som_bottomup_v2.csv)
+- [Hypothèses du business model](../03_business_model/annexes/business_model_assumptions_v4.csv)
+- [Prévision trois ans du business model](../03_business_model/annexes/forecast_3y_v4_base.csv)
 
 Ces références assurent la continuité entre les études de marché antérieures, les hypothèses du business model et les projections opérationnelles du business plan.
 
 ## 17. Annexes chiffrées
 
-- `annexes/financial_assumptions_v1.csv`
-- `annexes/sales_plan_12m_v1.csv`
-- `annexes/pnl_3y_v1.csv`
-- `annexes/cashflow_3y_v1.csv`
-- `annexes/break_even_v1.csv`
-- `annexes/funding_plan_v2.csv`
-- `annexes/risk_register_v2.csv`
+- [Hypothèses financières](annexes/financial_assumptions_v1.csv)
+- [Plan commercial 12 mois](annexes/sales_plan_12m_v1.csv)
+- [Compte de résultat prévisionnel](annexes/pnl_3y_v1.csv)
+- [Trésorerie prévisionnelle](annexes/cashflow_3y_v1.csv)
+- [Seuil de rentabilité](annexes/break_even_v1.csv)
+- [Plan de financement](annexes/funding_plan_v2.csv)
+- [Registre des risques](annexes/risk_register_v2.csv)

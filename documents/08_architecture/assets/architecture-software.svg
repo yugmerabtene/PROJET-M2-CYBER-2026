@@ -30,10 +30,10 @@
   <text x="200" y="263" class="label">Web App</text>
 
   <rect x="390" y="90" width="650" height="580" class="zone" />
-  <text x="715" y="122" class="zone-title" text-anchor="middle">Zone serveur de controle</text>
+  <text x="715" y="122" class="zone-title" text-anchor="middle">Zone serveur SOC</text>
 
   <rect x="610" y="160" width="210" height="72" class="box-blue" />
-  <text x="715" y="192" class="label">Control Server</text>
+  <text x="715" y="192" class="label">serveur-soc</text>
   <text x="715" y="214" class="sub">conteneur principal</text>
 
   <rect x="430" y="300" width="190" height="84" class="box-blue" />
@@ -42,21 +42,21 @@
 
   <rect x="700" y="300" width="170" height="84" class="box-green" />
   <text x="785" y="335" class="label">PostgreSQL</text>
-  <text x="785" y="356" class="sub">source de verite</text>
+  <text x="785" y="356" class="sub">source de vérité</text>
 
   <rect x="460" y="460" width="140" height="72" class="box-amber" />
   <text x="530" y="495" class="label">Redis</text>
 
   <rect x="700" y="450" width="170" height="84" class="box-purple" />
   <text x="785" y="485" class="label">Celery Worker</text>
-  <text x="785" y="506" class="sub">detection / exports</text>
+  <text x="785" y="506" class="sub">détection / exports</text>
 
   <rect x="1090" y="120" width="250" height="260" class="zone" />
   <text x="1215" y="152" class="zone-title" text-anchor="middle">Zone collecte / test</text>
   <rect x="1120" y="200" width="190" height="56" class="box" />
-  <text x="1215" y="233" class="label">Endpoint Agent</text>
+  <text x="1215" y="233" class="label">serveur-endpoint</text>
   <rect x="1120" y="290" width="190" height="56" class="box-amber" />
-  <text x="1215" y="323" class="label">Attacker</text>
+  <text x="1215" y="323" class="label">serveur-attacker</text>
 
   <line x1="200" y1="211" x2="200" y2="230" class="arrow" />
   <line x1="310" y1="258" x2="610" y2="196" class="arrow" />
@@ -71,7 +71,7 @@
   <text x="965" y="205" class="edge-label">heartbeat / events</text>
 
   <line x1="1215" y1="290" x2="1215" y2="256" class="arrow dashed" />
-  <text x="1295" y="275" class="edge-label">scenarios</text>
+  <text x="1295" y="275" class="edge-label">scénarios</text>
 
   <line x1="600" y1="496" x2="700" y2="492" class="arrow" />
   <text x="650" y="480" class="edge-label">tasks</text>

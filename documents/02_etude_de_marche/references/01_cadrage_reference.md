@@ -2,10 +2,10 @@
 
 ## Référence retenue
 
-Les attendus sont dérivés de deux documents internes :
+Les attendus sont dérivés de deux documents internes. Ces sources fixent à la fois le cadre pédagogique du projet et les livrables attendus pour justifier la cohérence entre produit, marché et soutenance.
 
 1. `documents-contractuels/syllabus.txt`
-2. `documents-pédagogiques/1-Kick-off _ Projet Cybersécurité _ Supervision et analyse réseau.docx`
+2. [Kick-off pédagogique transcrit](../../01_documents_pedagogiques/kickoff/KICKOFF.md)
 
 ## Ce qui est explicitement demandé
 
@@ -22,6 +22,8 @@ Transformer un projet technique en offre défendable en répondant à 4 question
 3. Comment se différencier face aux alternatives ?
 4. Quelle stratégie d'entrée marché est la plus réaliste ?
 
+L'étude doit donc dépasser la simple description d'un outil. Elle doit démontrer pourquoi le besoin existe, pourquoi le segment visé est pertinent, pourquoi l'offre est différenciable et pourquoi la stratégie de lancement retenue est crédible.
+
 ## Périmètre de travail
 
 - Zone prioritaire : France, Belgique, Suisse francophone.
@@ -35,3 +37,5 @@ Transformer un projet technique en offre défendable en répondant à 4 question
 - Benchmark concurrentiel (SIEM, open-source, MSSP).
 - TAM/SAM/SOM bottom-up.
 - Cadrage GTM (direct, partenaire, hybride).
+
+Cette méthode permet de relier les décisions de marché aux documents suivants : [business model](../../03_business_model/rendu_principal.md), [business plan](../../04_business_plan/rendu_principal.md) et [feuille de cadrage](../../05_feuille_de_cadrage/rendu_principal.md).

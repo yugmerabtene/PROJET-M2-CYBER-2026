@@ -6,9 +6,13 @@
 
 - Document Word original : `1-Kick-off _ Projet Cybersécurité _ Supervision et analyse réseau.docx`
 
+Ce document constitue la référence pédagogique initiale du projet. Il fixe le besoin minimal, les contraintes techniques imposées et les critères d'évaluation attendus lors de la soutenance. Les documents suivants du dossier `documents/` déclinent cette consigne en analyse de marché, modèle économique, cadrage fonctionnel, gestion de projet, cahier des charges et architecture technique.
+
 ## Consigne initiale
 
-Dans le cadre de ce projet, vous devez concevoir et réaliser un outil de supervision et d'analyse réseau dont vous êtes libres de choisir le nom, permettant d'observer et d'analyser un réseau informatique, de mapper un réseau informatique, détecter les événements suspects, de générer des alertes et d'exporter des rapports.
+Dans le cadre de ce projet, vous devez concevoir et réaliser un outil de supervision et d'analyse réseau dont vous êtes libres de choisir le nom. L'outil doit permettre d'observer et d'analyser un réseau informatique, d'en établir une cartographie exploitable, de détecter les événements suspects, de générer des alertes et d'exporter des rapports.
+
+La consigne impose donc une approche complète : il ne s'agit pas uniquement de produire un scanner réseau, mais de construire une chaîne cohérente allant de l'observation technique à la restitution de preuves compréhensibles par un analyste ou un jury.
 
 ## Objectif du projet
 
@@ -22,6 +26,8 @@ L'objectif est de développer un outil capable de :
 - détecter des comportements suspects ou malveillants ;
 - générer des alertes ;
 - produire des rapports exportables en JSON ou CSV.
+
+Ces objectifs sont repris et enrichis dans le [cahier des charges](../../07_cahier_des_charges/rendu_principal.md) et dans l'[architecture technique](../../08_architecture/rendu_principal.md), afin de garantir une continuité entre la demande initiale et les choix de conception retenus.
 
 ## Contraintes techniques
 
@@ -65,3 +71,5 @@ L'évaluation repose sur les éléments présentés et constatés pendant la sou
 ## Note de transcription
 
 Ce fichier Markdown reprend intégralement le contenu du document Word de kick-off conservé dans ce même dossier, afin de faciliter la lecture, la citation et la traçabilité dans le dépôt.
+
+Pour la suite du projet, ce kick-off doit être lu comme le socle d'évaluation. Les choix fonctionnels, organisationnels et techniques doivent pouvoir être justifiés au regard de cette grille, notamment sur la clarté du besoin, la qualité de l'architecture, la capacité de démonstration, la traçabilité GitHub et la valeur pédagogique de la soutenance.

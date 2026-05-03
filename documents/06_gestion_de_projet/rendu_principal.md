@@ -2,7 +2,7 @@
 
 ## 1. Objet du document
 
-Ce document définit l'organisation et les modalités de pilotage du projet DevinciWatch.
+Ce document définit l'organisation et les modalités de pilotage du projet DevinciWatch. Il transforme le cadrage stratégique en dispositif d'exécution : méthode de travail, responsabilités, jalons, suivi des risques et critères de décision.
 
 Il sert à préciser :
 
@@ -12,25 +12,27 @@ Il sert à préciser :
 - les risques ;
 - les mécanismes de suivi.
 
+Son objectif est de garantir que la progression du projet reste lisible, mesurable et cohérente avec les attentes pédagogiques, le périmètre MVP et les contraintes de démonstration.
+
 ## 2. Position dans la chronologie projet
 
 Ce document intervient après :
 
-- le kick-off ;
-- l'étude de marché ;
-- le business model ;
-- le business plan ;
-- la feuille de cadrage.
+- le [kick-off](../01_documents_pedagogiques/kickoff/KICKOFF.md) ;
+- l'[étude de marché](../02_etude_de_marche/rendu_principal.md) ;
+- le [business model](../03_business_model/rendu_principal.md) ;
+- le [business plan](../04_business_plan/rendu_principal.md) ;
+- la [feuille de cadrage](../05_feuille_de_cadrage/rendu_principal.md).
 
 Il précède :
 
-- le cahier des charges ;
-- l'architecture détaillée ;
+- le [cahier des charges](../07_cahier_des_charges/rendu_principal.md) ;
+- l'[architecture détaillée](../08_architecture/rendu_principal.md) ;
 - le développement du produit.
 
 ## 3. Méthode de travail retenue
 
-La méthode retenue est une approche itérative et pragmatique, adaptée à un projet académique avec démonstration attendue.
+La méthode retenue est une approche itérative et pragmatique, adaptée à un projet académique avec démonstration attendue. Elle privilégie des incréments courts, vérifiables et directement reliés à la chaîne de valeur du produit : collecte, détection, corrélation, alerte, preuve et restitution.
 
 Principes de pilotage :
 
@@ -50,7 +52,7 @@ Les responsabilités projet doivent couvrir au minimum :
 - collecte / endpoint / scénarios de test ;
 - documentation / démonstration / qualité.
 
-Même si les rôles exacts peuvent évoluer, la répartition des responsabilités doit rester explicite.
+Même si les rôles exacts peuvent évoluer, la répartition des responsabilités doit rester explicite. Cette exigence évite les angles morts classiques des projets techniques : fonctionnalités développées sans propriétaire, documentation produite trop tard, ou démonstration préparée après la stabilisation du produit.
 
 ## 5. Gouvernance
 
@@ -125,6 +127,8 @@ Jalons recommandés :
 7. exports et audit prêts ;
 8. démonstration finale stabilisée.
 
+Chaque jalon doit être associé à une preuve concrète : document validé, fonctionnalité exécutable, scénario reproductible, capture de résultat ou export exploitable. Cette logique de preuve permet de relier le pilotage projet à la soutenance finale.
+
 ## 8. Livrables de pilotage
 
 - feuille de cadrage ;
@@ -164,11 +168,11 @@ Indicateurs recommandés :
 
 ## 12. Dépendances documentaires
 
-- `../05_feuille_de_cadrage/rendu_principal.md`
-- `../07_cahier_des_charges/rendu_principal.md`
-- `../08_architecture/rendu_principal.md`
-- `../04_business_plan/rendu_principal.md`
+- [Feuille de cadrage](../05_feuille_de_cadrage/rendu_principal.md)
+- [Cahier des charges](../07_cahier_des_charges/rendu_principal.md)
+- [Architecture](../08_architecture/rendu_principal.md)
+- [Business plan](../04_business_plan/rendu_principal.md)
 
 ## 13. Conclusion
 
-La gestion de projet retenue pour DevinciWatch vise à maintenir une exécution lisible, priorisée et démontrable. Elle sert de pont entre le cadrage stratégique, les exigences détaillées et la mise en œuvre technique.
+La gestion de projet retenue pour DevinciWatch vise à maintenir une exécution lisible, priorisée et démontrable. Elle sert de pont entre le cadrage stratégique, les exigences détaillées et la mise en œuvre technique. Sa qualité sera mesurée à la capacité de l'équipe à arbitrer rapidement, à documenter les décisions et à produire une démonstration stable, cohérente et défendable.

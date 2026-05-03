@@ -2,7 +2,7 @@
 
 ## Constat principal
 
-La demande pour une solution de supervision et d'analyse cyber réseau est structurelle, pas conjoncturelle.
+La demande pour une solution de supervision et d'analyse cyber réseau est structurelle, pas conjoncturelle. Elle résulte de la combinaison de trois facteurs durables : intensification de la menace, pression réglementaire et difficulté d'exploitation par des équipes cyber limitées.
 
 ## Signaux de marché utiles
 
@@ -11,10 +11,12 @@ La demande pour une solution de supervision et d'analyse cyber réseau est struc
 - Suisse : volume important de signalements, forte part de fraudes (NCSC/OFCS).
 - International : pression persistante sur les vecteurs phishing, credentials, exploitation de vulnérabilités (DBIR, Mandiant).
 
+Ces signaux ne prouvent pas à eux seuls l'existence d'un marché accessible, mais ils établissent la réalité du problème. Ils justifient ensuite une segmentation plus fine afin d'identifier les organisations capables d'adopter une solution intermédiaire.
+
 ## Impact réglementaire
 
-- NIS2 renforce les obligations de gestion du risque et de notification.
-- Les organisations doivent prouver leur capacité de détection, réponse et traçabilité.
+- [NIS2](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive) renforce les obligations de gestion du risque et de notification.
+- Les organisations doivent prouver leur capacité de détection, de réponse et de traçabilité.
 
 ## Problème réel côté client
 
@@ -33,3 +35,5 @@ La fenêtre de valeur se situe sur une offre pragmatique :
 - coût lisible,
 - réduction mesurable du temps de détection/réaction,
 - preuves de conformité prêtes à exporter.
+
+L'opportunité se situe donc moins dans la création d'un outil supplémentaire que dans la capacité à rendre la supervision exploitable, mesurable et défendable pour des structures qui ne disposent pas d'un SOC mature.
