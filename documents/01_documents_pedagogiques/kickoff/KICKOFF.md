@@ -27,7 +27,7 @@ L'objectif est de développer un outil capable de :
 - générer des alertes ;
 - produire des rapports exportables en JSON ou CSV.
 
-Ces objectifs sont repris et enrichis dans le [cahier des charges](../../07_cahier_des_charges/rendu_principal.md) et dans l'[architecture technique](../../08_architecture/rendu_principal.md), afin de garantir une continuité entre la demande initiale et les choix de conception retenus.
+Ces objectifs sont repris et enrichis dans le [cahier des charges](../../06_cahier_des_charges/rendu_principal.md) et dans l'[architecture technique](../../08_architecture/rendu_principal.md), afin de garantir une continuité entre la demande initiale et les choix de conception retenus.
 
 ## Contraintes techniques
 

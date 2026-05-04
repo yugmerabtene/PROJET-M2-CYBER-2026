@@ -10,7 +10,7 @@
 
 Le projet s'inscrit dans un cadre de conception produit en cybersécurité avec des attendus techniques, méthodologiques et de valorisation. Il doit démontrer la capacité à transformer un besoin de supervision réseau en produit structuré, défendable et démontrable.
 
-La feuille de cadrage joue ici un rôle de document-pivot. Elle traduit les enseignements issus de l'[étude de marché](../02_etude_de_marche/rendu_principal.md), du [business model](../03_business_model/rendu_principal.md) et du [business plan](../04_business_plan/rendu_principal.md) en décisions de périmètre, de priorisation et d'exécution. Elle permet également de préparer le passage vers le [cahier des charges](../07_cahier_des_charges/rendu_principal.md) et l'[architecture](../08_architecture/rendu_principal.md).
+La feuille de cadrage joue ici un rôle de document-pivot. Elle traduit les enseignements issus de l'[étude de marché](../02_etude_de_marche/rendu_principal.md), du [business model](../03_business_model/rendu_principal.md) et du [business plan](../04_business_plan/rendu_principal.md) en décisions de périmètre, de priorisation et d'exécution. Elle permet également de préparer le passage vers le [cahier des charges](../06_cahier_des_charges/rendu_principal.md) et l'[architecture](../08_architecture/rendu_principal.md).
 
 ## 3. Besoin principal
 
@@ -112,7 +112,7 @@ Le projet sera jugé réussi si :
 
 ## 12. Risques principaux
 
-Les risques ci-dessous consolident les enseignements de l'[étude de marché](../02_etude_de_marche/rendu_principal.md), du [business model](../03_business_model/rendu_principal.md), du [business plan](../04_business_plan/rendu_principal.md), de la [gestion de projet](../06_gestion_de_projet/rendu_principal.md), du [cahier des charges](../07_cahier_des_charges/rendu_principal.md) et de l'[architecture](../08_architecture/rendu_principal.md).
+Les risques ci-dessous consolident les enseignements de l'[étude de marché](../02_etude_de_marche/rendu_principal.md), du [business model](../03_business_model/rendu_principal.md), du [business plan](../04_business_plan/rendu_principal.md), de la [gestion de projet](../07_gestion_de_projet/rendu_principal.md), du [cahier des charges](../06_cahier_des_charges/rendu_principal.md) et de l'[architecture](../08_architecture/rendu_principal.md).
 
 | Risque | Origine | Impact potentiel | Niveau |
 |---|---|---|---|
@@ -133,7 +133,7 @@ Les risques ci-dessous consolident les enseignements de l'[étude de marché](..
 | Risque couvert | Mesure de maîtrise |
 |---|---|
 | Dilution du positionnement produit | Maintenir la promesse centrale : supervision cyber pragmatique, alertes actionnables, preuves exportables, sans complexité SIEM enterprise |
-| Dérive du périmètre MVP | Appliquer strictement les priorités P1/P2/P3 définies dans le [cahier des charges](../07_cahier_des_charges/rendu_principal.md) |
+| Dérive du périmètre MVP | Appliquer strictement les priorités P1/P2/P3 définies dans le [cahier des charges](../06_cahier_des_charges/rendu_principal.md) |
 | Sous-estimation de la corrélation | Limiter la première version à une corrélation lisible : IP source, cible, fenêtre temporelle et répétition observable |
 | Complexité excessive de l'interface | Prioriser les écrans utiles à l'analyse : dashboard, actifs, événements, alertes, corrélations, audit et exports |
 | Fragilité du lab Docker | Stabiliser tôt le scénario `serveur-soc` / `serveur-endpoint` / `serveur-attacker` et documenter la procédure de lancement |
@@ -160,13 +160,13 @@ Ces décisions doivent rester stables pendant la phase MVP. Toute extension fonc
 - [Étude de marché (02)](../02_etude_de_marche/rendu_principal.md)
 - [Business model (03)](../03_business_model/rendu_principal.md)
 - [Business plan (04)](../04_business_plan/rendu_principal.md)
-- [Gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md)
-- [Cahier des charges (07)](../07_cahier_des_charges/rendu_principal.md)
+- [Gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md)
+- [Cahier des charges (07)](../06_cahier_des_charges/rendu_principal.md)
 - [Architecture produit (08)](../08_architecture/rendu_principal.md)
 
 ## 16. Feuille de route courte
 
-Cette feuille de route est volontairement synthétique. Son exécution détaillée est pilotée dans la [gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md) au moyen d'un backlog Scrum, de sprints, de story points et de critères d'acceptation.
+Cette feuille de route est volontairement synthétique. Son exécution détaillée est pilotée dans la [gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md) au moyen d'un backlog Scrum, de sprints, de story points et de critères d'acceptation.
 
 1. Phase 1 - Cadrage : consolider le cadrage, finaliser la gestion de projet, le cahier des charges et l'architecture ;
 2. Phase 2 - Sprint socle : mettre en place le backend FastAPI, la base de données, le lab Docker et la collecte endpoint minimale ;
@@ -176,4 +176,4 @@ Cette feuille de route est volontairement synthétique. Son exécution détaill�
 
 ## 17. Conclusion
 
-Cette feuille de cadrage fixe une vision opérationnelle commune du projet. Elle permet de relier le besoin, la valeur, l'architecture, les livrables et les priorités d'exécution dans une même base de pilotage. Elle prépare directement le [cahier des charges (07)](../07_cahier_des_charges/rendu_principal.md) et l'[architecture détaillée (08)](../08_architecture/rendu_principal.md), en cohérence avec la [gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md).
+Cette feuille de cadrage fixe une vision opérationnelle commune du projet. Elle permet de relier le besoin, la valeur, l'architecture, les livrables et les priorités d'exécution dans une même base de pilotage. Elle prépare directement le [cahier des charges (07)](../06_cahier_des_charges/rendu_principal.md) et l'[architecture détaillée (08)](../08_architecture/rendu_principal.md), en cohérence avec la [gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md).

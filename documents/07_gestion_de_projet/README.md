@@ -4,4 +4,4 @@ Ce dossier regroupe le cadre de gestion de projet de DevinciWatch. Il définit l
 
 - [Rendu principal](rendu_principal.md) : équipe nominative, organisation Scrum, backlog produit, sprints, story points, répartition des tâches, jalons, risques et pilotage.
 
-Ce document vient après la [feuille de cadrage](../05_feuille_de_cadrage/rendu_principal.md) et avant le [cahier des charges](../07_cahier_des_charges/rendu_principal.md) et l'[architecture](../08_architecture/rendu_principal.md).
+Ce document vient après la [feuille de cadrage](../05_feuille_de_cadrage/rendu_principal.md) et avant le [cahier des charges](../06_cahier_des_charges/rendu_principal.md) et l'[architecture](../08_architecture/rendu_principal.md).

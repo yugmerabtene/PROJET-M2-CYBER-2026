@@ -13,7 +13,7 @@ Ce document s'appuie sur :
 - le [business model (03)](../03_business_model/rendu_principal.md) ;
 - le [business plan (04)](../04_business_plan/rendu_principal.md) ;
 - la [feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md) ;
-- la [gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md) ;
+- la [gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md) ;
 - l'[architecture produit retenue (08)](../08_architecture/rendu_principal.md).
 
 ## 2. Fiche documentaire
@@ -26,7 +26,7 @@ Ce document s'appuie sur :
 | Statut | Version détaillée du cahier des charges MVP |
 | Périmètre | Produit MVP démontrable en environnement Docker |
 | Public visé | Équipe projet, parties prenantes, contributeurs techniques, responsables de validation |
-| Document précédent | [Gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md) |
+| Document précédent | [Gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md) |
 | Document suivant | [Architecture produit (08)](../08_architecture/rendu_principal.md) |
 
 ### Historique des versions
@@ -148,7 +148,7 @@ La corrélation minimale par IP source est considérée comme P1, car elle maté
 
 ### 7.3. Alignement avec l'équipe projet
 
-Le cahier des charges est exploité par l'équipe définie dans la [gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md). Les responsabilités de validation sont réparties ainsi :
+Le cahier des charges est exploité par l'équipe définie dans la [gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md). Les responsabilités de validation sont réparties ainsi :
 
 | Rôle projet | Contribution au cahier des charges |
 |---|---|
@@ -223,7 +223,7 @@ Toute route non explicitement publique doit refuser les accès non authentifiés
 - [Business model (03)](../03_business_model/rendu_principal.md)
 - [Business plan (04)](../04_business_plan/rendu_principal.md)
 - [Feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md)
-- [Gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md)
+- [Gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md)
 - [Architecture produit (08)](../08_architecture/rendu_principal.md)
 
 ## 10. Exigences fonctionnelles
@@ -586,7 +586,7 @@ Le produit sera considéré comme conforme si les points suivants sont démontr�
 - [Business model (03)](../03_business_model/rendu_principal.md)
 - [Business plan (04)](../04_business_plan/rendu_principal.md)
 - [Feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md)
-- [Gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md)
+- [Gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md)
 - [Architecture produit (08)](../08_architecture/rendu_principal.md)
 - [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/)
 - [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)

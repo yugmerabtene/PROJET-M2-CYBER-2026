@@ -31,7 +31,7 @@ Ce document intervient après :
 
 Il précède et structure :
 
-- le [cahier des charges](../07_cahier_des_charges/rendu_principal.md) ;
+- le [cahier des charges](../06_cahier_des_charges/rendu_principal.md) ;
 - l'[architecture détaillée](../08_architecture/rendu_principal.md) ;
 - le développement du produit.
 
@@ -554,7 +554,7 @@ Le découpage reste prévisionnel. Il peut être ajusté à chaque sprint planni
 ## 16. Dépendances documentaires
 
 - [Feuille de cadrage](../05_feuille_de_cadrage/rendu_principal.md)
-- [Cahier des charges](../07_cahier_des_charges/rendu_principal.md)
+- [Cahier des charges](../06_cahier_des_charges/rendu_principal.md)
 - [Architecture](../08_architecture/rendu_principal.md)
 - [Business plan](../04_business_plan/rendu_principal.md)
 

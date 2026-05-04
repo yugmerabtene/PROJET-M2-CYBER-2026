@@ -11,8 +11,8 @@ La logique de lecture est volontairement progressive. Les premiers documents ét
 - [`03_business_model/`](03_business_model/) : rendu principal, hypothèses, références et annexes chiffrées.
 - [`04_business_plan/`](04_business_plan/) : rendu principal, projections, références et annexes chiffrées.
 - [`05_feuille_de_cadrage/`](05_feuille_de_cadrage/) : synthèse de pilotage du projet, du périmètre et des décisions structurantes.
-- [`06_gestion_de_projet/`](06_gestion_de_projet/) : méthode, organisation, jalons, risques et pilotage.
-- [`07_cahier_des_charges/`](07_cahier_des_charges/) : cadrage détaillé des besoins, exigences et critères d'acceptation.
+- [`06_cahier_des_charges/`](06_cahier_des_charges/) : cadrage détaillé des besoins, exigences et critères d'acceptation.
+- [`07_gestion_de_projet/`](07_gestion_de_projet/) : méthode, organisation, jalons, risques et pilotage.
 - [`08_architecture/`](08_architecture/) : architecture retenue du produit et schémas techniques associés.
 - [`90_references_transverses/`](90_references_transverses/) : registre central des sources et qualité des sources.
 
@@ -23,8 +23,8 @@ La logique de lecture est volontairement progressive. Les premiers documents ét
 3. [Business model](03_business_model/rendu_principal.md)
 4. [Business plan](04_business_plan/rendu_principal.md)
 5. [Feuille de cadrage](05_feuille_de_cadrage/rendu_principal.md)
-6. [Gestion de projet](06_gestion_de_projet/rendu_principal.md)
-7. [Cahier des charges](07_cahier_des_charges/rendu_principal.md)
+6. [Cahier des charges](06_cahier_des_charges/rendu_principal.md)
+7. [Gestion de projet](07_gestion_de_projet/rendu_principal.md)
 8. [Architecture](08_architecture/rendu_principal.md)
 
 ## Principe de traçabilité

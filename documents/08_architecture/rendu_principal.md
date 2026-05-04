@@ -2,7 +2,7 @@
 
 ## 1. Statut du document
 
-Ce document fixe l'architecture de référence du produit DevinciWatch. Il traduit les exigences du [cahier des charges](../07_cahier_des_charges/rendu_principal.md) en choix techniques, composants, flux, responsabilités et contraintes de démonstration.
+Ce document fixe l'architecture de référence du produit DevinciWatch. Il traduit les exigences du [cahier des charges](../06_cahier_des_charges/rendu_principal.md) en choix techniques, composants, flux, responsabilités et contraintes de démonstration.
 
 Sauf décision explicite ultérieure, cette architecture est considérée comme l'architecture définitive de départ pour le redéveloppement de l'application.
 
@@ -619,8 +619,8 @@ Cette architecture s'appuie sur les documents suivants :
 - [Business model (03)](../03_business_model/rendu_principal.md)
 - [Business plan (04)](../04_business_plan/rendu_principal.md)
 - [Feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md)
-- [Gestion de projet (06)](../06_gestion_de_projet/rendu_principal.md)
-- [Cahier des charges (07)](../07_cahier_des_charges/rendu_principal.md)
+- [Gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md)
+- [Cahier des charges (07)](../06_cahier_des_charges/rendu_principal.md)
 
 ## 22. Conclusion
 
