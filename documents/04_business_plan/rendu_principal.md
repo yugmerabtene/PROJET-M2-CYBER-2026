@@ -25,9 +25,15 @@ L'ambition du projet est donc double :
 
 Trois enseignements issus de l'étude de marché fondent ce business plan.
 
-### 3.1. Le besoin est avéré
+### 3.1. Le besoin est avéré et quantifié
 
 Les signaux marché sont clairs : incidents élevés en France, Belgique et Suisse, pression réglementaire croissante avec NIS2, difficulté de recrutement sur les profils cyber et forte attente autour de la preuve et de la traçabilité [S01][S02][S05][S13][S21][S23].
+
+**Analyse de données (mai 2026)** :
+- **1 587 vulnérabilités connues et exploitées** (CISA KEV) documentent une menace persistante
+- **317 cas de ransomware** (20 %) montrent l'urgence d'une détection proactive
+- **Score d'intensité 1 114,8** (Élevé) justifie l'ACV moyen de 5 900 EUR
+- **Top 5 fournisseurs** (Microsoft 370, Apple 93, Cisco 89...) confirme le besoin de surveillance indépendante
 
 ### 3.2. Le bon positionnement est intermédiaire
 

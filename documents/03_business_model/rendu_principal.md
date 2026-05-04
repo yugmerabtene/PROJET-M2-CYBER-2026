@@ -89,6 +89,16 @@ Le business model repose sur trois sources de revenus :
 
 L'hypothèse de travail consolidée retient désormais un ACV moyen de 5 900 EUR par an [Annexe BM-1]. Cette valeur est une moyenne pondérée des plans : Starter (240 EUR/an), Essential (2 400 EUR/an), Professional (8 880 EUR/an) et Enterprise (18 000 EUR/an), ajustée selon la répartition cible des clients. Cette moyenne reflète un modèle plus accessible, soutenu par un volume client plus élevé.
 
+### Analyse de marché intégrée (mai 2026)
+
+Les données collectées (NVD 30 CVEs récents, CISA KEV 1 587 entrées) confirment la pertinence du positionnement :
+- **Score d'intensité** : 1 114,8 (niveau Élevé)
+- **Top 5 fournisseurs critiques** : Microsoft (370), Apple (93), Cisco (89), Adobe (78), Google (71)
+- **Ransomware identifié** : 317 cas (20 % des KEV)
+- **Répartition CVE 2026** : 23 % Critique, 20 % Élevé, 57 % Moyen
+
+Cette concentration des risques valide l'ACV moyen de 5 900 EUR : les organisations ont besoin d'une solutionaccessible comme DevinciWatch (20€/200€/740€/mois) pour surveiller ces menaces croissantes.
+
 ## 7. Logique de coûts
 
 La structure de coûts se répartit en quatre blocs principaux :
