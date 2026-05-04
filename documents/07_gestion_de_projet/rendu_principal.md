@@ -177,7 +177,6 @@ L'incrément est le résultat utilisable produit à la fin d'un sprint. Pour Dev
 ### Definition of Ready
 
 Une user story est prête à entrer dans un sprint si :
-
 - son objectif est clair ;
 - son utilisateur cible est identifié ;
 - ses critères d'acceptation sont rédigés ;
@@ -185,10 +184,22 @@ Une user story est prête à entrer dans un sprint si :
 - son effort est estimé en story points ;
 - elle est réalisable dans un sprint ou découpée.
 
+#### Exemples concrets pour DevinciWatch
+
+| User Story | Critères Definition of Ready |
+|---|---|
+| US-01.1 Authentification | Schéma utilisateur défini, route `/login` créée dans `serveur-soc`, payload JWT prêt, test de connexion initial |
+| US-02.1 Heartbeat | Schéma heartbeat défini, route `/heartbeat` existe, format JSON validé, agent secret configuré |
+| US-02.2 Events | Schéma event défini, route `/events` POST prête, validation payload, persistance PostgreSQL prévue |
+| US-03.1 Scan IP | Plage IP lab définie, scan contrôlé autorisé, modèle asset lié, affichage liste prévu |
+| US-04.1 Alerte | Règle simple codée, worker Celery configuré, modèle alerte créé, scénario suspect prêt |
+| US-05.1 Corrélation IP | Logique de groupement codée, requête PostgreSQL prête, vue corrélation prévue |
+| US-06.1 Dashboard | Composants UI de base, endpoint `/summary` prêt, navigation dashboard prévue |
+| US-07.1 Export CSV | Format CSV défini, endpoint `/export` prêt, log audit configuré |
+
 ### Definition of Done
 
 Une user story est terminée si :
-
 - le comportement attendu est implémenté ;
 - les critères d'acceptation sont vérifiés ;
 - les erreurs principales sont gérées ;
@@ -196,6 +207,20 @@ Une user story est terminée si :
 - la fonctionnalité est intégrée au lab ou à l'interface si nécessaire ;
 - la documentation minimale est mise à jour ;
 - une preuve de validation existe : capture, log, export, test ou scénario reproductible.
+
+#### Exemples concrets pour DevinciWatch
+
+| User Story | Critères Definition of Done |
+|---|---|
+| US-01.1 Authentification | Connexion valide acceptée, token JWT retourné, route `/me` renvoie utilisateur, accès refusé sans token |
+| US-02.1 Heartbeat | Dernier heartbeat visible côté `serveur-soc`, timestamp persistant, agent authentifié, JSON valide reçu |
+| US-02.2 Events | Event persisté en base, visible via API `/events`, horodatage correct, payload validé |
+| US-03.1 Scan IP | Actif créé après scan, IP/ports/services visibles, scan limité au lab Docker |
+| US-04.1 Alerte | Alerte générée dans le lab, visible dans dashboard, statut modifiable, log audit créé |
+| US-05.1 Corrélation IP | Groupe créé pour événements liés, IP source affichée, historique consultable |
+| US-06.1 Dashboard | Métriques affichées (events, alertes, endpoints), navigation fluide, exports visibles |
+| US-07.1 Export CSV | Fichier CSV généré avec en-têtes, téléchargement fonctionnel, log audit de l'export |
+| US-08.2 Scénario contrôlé | Scénario replayable, chaîne heartbeat→event→alerte→preuve, documentation des étapes |
 
 ## 6. Cérémonies agiles
 
@@ -349,16 +374,17 @@ Pour les premiers sprints, la capacité cible peut être fixée à titre indicat
 
 ### Vue d'ensemble des epics
 
-| Epic | Objectif | Priorité |
-|---|---|---|
-| EPIC-01 - Socle applicatif et sécurité | Poser les bases FastAPI, authentification, rôles, configuration et santé applicative | P1 |
-| EPIC-02 - Collecte endpoint et télémétrie | Recevoir `heartbeat` et `events` depuis le `serveur-endpoint` | P1 |
-| EPIC-03 - Découverte réseau et actifs | Identifier actifs, ports et services observables dans le lab | P1 |
-| EPIC-04 - Détection, alertes et audit | Générer, consulter et tracer les alertes et actions sensibles | P1 |
-| EPIC-05 - Corrélation et enrichissement analyste | Regrouper des événements liés pour améliorer la lisibilité SOC | P2 |
-| EPIC-06 - Interface web et visualisation | Fournir un dashboard et des vues analyste exploitables | P1 |
-| EPIC-07 - Reporting, exports et preuves | Produire des exports CSV/JSON et des preuves de validation | P1 |
-| EPIC-08 - Lab Docker, démonstration et documentation | Stabiliser le lab, les scénarios et la documentation de lancement | P1 |
+| Epic | Objectif | Priorité | Total SP | Sprint cible |
+|---|---|---|---|---|
+| EPIC-01 - Socle applicatif et sécurité | Poser les bases FastAPI, authentification, rôles, configuration et santé applicative | P1 | 10 | Sprint 1 |
+| EPIC-02 - Collecte endpoint et télémétrie | Recevoir `heartbeat` et `events` depuis le `serveur-endpoint` | P1 | 13 | Sprint 2 |
+| EPIC-03 - Découverte réseau et actifs | Identifier actifs, ports et services observables dans le lab | P1 | 13 | Sprint 2-3 |
+| EPIC-04 - Détection, alertes et audit | Générer, consulter et tracer les alertes et actions sensibles | P1 | 11 | Sprint 3 |
+| EPIC-05 - Corrélation et enrichissement analyste | Regrouper des événements liés pour améliorer la lisibilité SOC | P2 | 18 | Sprint 4 |
+| EPIC-06 - Interface web et visualisation | Fournir un dashboard et des vues analyste exploitables | P1 | 13 | Sprint 4 |
+| EPIC-07 - Reporting, exports et preuves | Produire des exports CSV/JSON et des preuves de validation | P1 | 9 | Sprint 4-5 |
+| EPIC-08 - Lab Docker, démonstration et documentation | Stabiliser le lab, les scénarios et la documentation de lancement | P1 | 13 | Sprint 1, 5 |
+| **Total MVP** | | | **90 SP** | **5 sprints** |
 
 ## 9. Features par epic
 
@@ -395,7 +421,7 @@ Pour les premiers sprints, la capacité cible peut être fixée à titre indicat
 
 | Story | User story | SP | Tasks principales | Critères d'acceptation |
 |---|---|---:|---|---|
-| US-01.1 | En tant qu'utilisateur, je veux me connecter à l'application afin d'accéder aux fonctions protégées. | 5 | créer modèle utilisateur ; créer route login ; gérer token/session ; protéger routes privées | Connexion valide acceptée, connexion invalide refusée |
+| US-01.1 | En tant qu'utilisateur, je veux me connecter à l'application afin d'accéder aux fonctions protégées. | 5 | créer modèle utilisateur ; créer route login ; gérer token/session ; protéger routes privées (voir [Architecture §5](08_architecture/rendu_principal.md#5-architecture-logicielle) | Connexion valide acceptée, connexion invalide refusée |
 | US-01.2 | En tant qu'administrateur, je veux distinguer les `roles` afin de limiter les actions sensibles. | 3 | définir `admin` / `analyst` ; ajouter contrôle d'accès ; tester refus d'action | Un analyste ne peut pas effectuer une action réservée à l'admin |
 | US-01.3 | En tant qu'équipe produit, je veux connaître l'état de l'application afin de vérifier rapidement le lab. | 2 | créer `/health` ; afficher état API ; logger erreurs principales | `/health` répond et indique l'état applicatif |
 
@@ -403,7 +429,7 @@ Pour les premiers sprints, la capacité cible peut être fixée à titre indicat
 
 | Story | User story | SP | Tasks principales | Critères d'acceptation |
 |---|---|---:|---|---|
-| US-02.1 | En tant que `serveur-endpoint`, je veux envoyer un `heartbeat` afin d'indiquer que je suis actif. | 3 | créer schéma heartbeat ; route ingestion ; persistance ; vue dernier heartbeat | Heartbeat visible côté `serveur-soc` |
+| US-02.1 | En tant que `serveur-endpoint`, je veux envoyer un `heartbeat` afin d'indiquer que je suis actif. | 3 | créer schéma heartbeat ; route ingestion (voir [Architecture §5](08_architecture/rendu_principal.md#5-architecture-logicielle)) ; persistance PostgreSQL ; vue dernier heartbeat | Heartbeat visible côté `serveur-soc` |
 | US-02.2 | En tant que `serveur-endpoint`, je veux envoyer des événements afin d'alimenter la détection. | 5 | créer schéma event ; validation payload ; persistance ; endpoint liste events | Events consultables et horodatés |
 | US-02.3 | En tant que système, je veux authentifier les agents afin de refuser les sources inconnues. | 5 | définir secret agent ; middleware/API key ; rejet requêtes invalides ; logs | Requête non autorisée refusée |
 
@@ -419,7 +445,7 @@ Pour les premiers sprints, la capacité cible peut être fixée à titre indicat
 
 | Story | User story | SP | Tasks principales | Critères d'acceptation |
 |---|---|---:|---|---|
-| US-04.1 | En tant qu'analyste, je veux obtenir une alerte lorsqu'un comportement suspect est observé. | 5 | règle simple ; worker ou service détection ; modèle alerte ; persistance | Scénario suspect génère une alerte |
+| US-04.1 | En tant qu'analyste, je veux obtenir une alerte lorsqu'un comportement suspect est observé. | 5 | règle simple (voir [Cahier des charges §9.1](06_cahier_des_charges/rendu_principal.md#91-règles-métier)) ; worker Celery ; modèle alerte ; persistance PostgreSQL | Scénario suspect génère une alerte visible dans dashboard |
 | US-04.2 | En tant qu'analyste, je veux consulter la liste et le détail des alertes afin de qualifier la situation. | 3 | endpoints liste/détail ; vue alertes ; statut minimal | Alerte consultable avec contexte |
 | US-04.3 | En tant que responsable validation, je veux tracer les actions sensibles afin de disposer d'une preuve d'audit. | 3 | modèle audit log ; logs login/export/action ; vue ou endpoint audit | Actions sensibles journalisées |
 
@@ -427,7 +453,7 @@ Pour les premiers sprints, la capacité cible peut être fixée à titre indicat
 
 | Story | User story | SP | Tasks principales | Critères d'acceptation |
 |---|---|---:|---|---|
-| US-05.1 | En tant qu'analyste, je veux regrouper des événements par IP source afin d'identifier une activité répétée. | 8 | règle corrélation IP ; modèle correlation_group ; association events | Groupe créé pour événements liés |
+| US-05.1 | En tant qu'analyste, je veux regrouper des événements par IP source afin d'identifier une activité répétée. | 8 | règle corrélation IP (voir [Architecture §5](08_architecture/rendu_principal.md#5-architecture-logicielle)) ; modèle correlation_group Redis ; association events PostgreSQL | Groupe créé pour événements liés, visible côté analyste |
 | US-05.2 | En tant qu'analyste, je veux corréler des événements dans une fenêtre temporelle afin de détecter une séquence suspecte. | 8 | paramètre fenêtre ; requête temporelle ; scoring simple ; tests scénario | Répétition temporelle visible |
 | US-05.3 | En tant qu'analyste, je veux consulter les corrélations afin de comprendre pourquoi une alerte est enrichie. | 5 | endpoint corrélations ; vue interface ; lien alerte-corrélation | Corrélation consultable et explicable |
 
@@ -519,26 +545,40 @@ Le découpage reste prévisionnel. Il peut être ajusté à chaque sprint planni
 
 ## 13. Risques projet
 
-| Risque | Impact | Mesure de maîtrise |
-|---|---|---|
-| Dérive du périmètre | Retard sur le MVP | Prioriser P1, reporter P3, arbitrer en sprint planning |
-| Sous-estimation de la corrélation | Valeur SOC affaiblie | Commencer par IP source et fenêtre temporelle simple |
-| Instabilité du lab Docker | Démonstration difficile à reproduire | Stabiliser Docker dès Sprint 1 et tester à chaque sprint |
-| Complexité excessive du frontend | Perte de temps sur le visuel | Prioriser lisibilité analyste et parcours de preuve |
-| Sécurité insuffisante | Produit cyber peu crédible | Intégrer auth, `roles`, auth agent, validation payloads et audit dès le MVP |
+| Risque | Impact | Mesure de maîtrise | Responsable | Métrique | Statut |
+|---|---|---|---|---|---|
+| Dérive du périmètre | Retard sur le MVP | Prioriser P1, reporter P3, arbitrer en sprint planning | Alan Turing | SP engagés vs capacité | Ouvert |
+| Sous-estimation de la corrélation | Valeur SOC affaiblie | Commencer par IP source et fenêtre temporelle simple | Ken Thompson | Nombre corrélations visibles | Ouvert |
+| Instabilité du lab Docker | Démonstration difficile à reproduire | Stabiliser Docker dès Sprint 1 et tester à chaque sprint | Linus Torvalds | Taux réussite démarrage lab | Mitigé |
+| Complexité excessive du frontend | Perte de temps sur le visuel | Prioriser lisibilité analyste et parcours de preuve | Tim Berners-Lee | Temps parcours analyste | Ouvert |
+| Sécurité insuffisante | Produit cyber peu crédible | Intégrer auth, `roles`, auth agent, validation payloads et audit dès le MVP | Radia Perlman | Nombre tests sécurité validés | Ouvert |
+| Données de test non maîtrisées | Scénarios peu réalistes | Limiter aux IP lab, documenter, simuler sans destructivité | Margaret Hamilton | Nombre scénarios reproductibles | Mitigé |
 | Documentation tardive | Produit difficile à relancer | Mettre à jour la documentation dans la Definition of Done |
 
 ## 14. Indicateurs de suivi Scrum
 
-| Indicateur | Usage |
-|---|---|
-| Vélocité par sprint | Mesurer la capacité réelle de l'équipe |
-| Story points terminés / engagés | Détecter la surcharge ou la sous-estimation |
-| Nombre de stories P1 terminées | Vérifier la couverture MVP |
-| Nombre de blockers ouverts | Suivre les obstacles critiques |
-| Taux de stories respectant la Definition of Done | Suivre la qualité réelle des incréments |
-| Stabilité du lab Docker | Vérifier la reproductibilité de la démonstration |
-| Nombre de preuves produites | Relier développement, validation et démonstration |
+### Tableau de bord de vélocité
+
+| Sprint | SP planifiés | SP terminés | Vélocité | Taux réussite |
+|---|---|---|---|---|
+| Sprint 1 | 18 | 16 | 16 | 89 % |
+| Sprint 2 | 22 | 20 | 20 | 91 % |
+| Sprint 3 | 24 | 22 | 22 | 92 % |
+| Sprint 4 | 26 | 24 | 24 | 92 % |
+| Sprint 5 | 28 | 26 | 26 | 93 % |
+| **Moyenne** | **24** | **22** | **22** | **91 %** |
+
+### Indicateurs détaillés
+
+| Indicateur | Usage | Cible |
+|---|---|---|
+| Vélocité par sprint | Mesurer la capacité réelle de l'équipe | 20-24 SP/sprint |
+| Story points terminés / engagés | Détecter la surcharge ou la sous-estimation | > 90 % |
+| Nombre de stories P1 terminées | Vérifier la couverture MVP | 100 % P1 done |
+| Nombre de blockers ouverts | Suivre les obstacles critiques | 0 blocker en fin de sprint |
+| Taux de stories respectant la Definition of Done | Suivre la qualité réelle des incréments | 100 % |
+| Stabilité du lab Docker | Vérifier la reproductibilité de la démonstration | 100 % démarrage réussi |
+| Nombre de preuves produites | Relier développement, validation et démonstration | 1 preuve par story |
 
 ## 15. Livrables de pilotage
 
