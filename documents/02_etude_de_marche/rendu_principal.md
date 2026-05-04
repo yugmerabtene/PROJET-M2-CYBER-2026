@@ -71,6 +71,11 @@ L'analyse technique récente (30 CVE récents collectés via NVD, 1 587 entrées
 - Élevé : 6 (20 %)
 - Moyen : 17 (57 %)
 
+**Exemples de vulnérabilités critiques récentes (2026)** :
+- CVE-2026-42364 : GeoVision LPC2011 - OS Command Injection (9,9/10)
+- CVE-2026-42368 : GeoVision GV-VMS V20 - Privilege Escalation (9,9/10)
+- CVE-2026-42369 : GeoVision GV-VMS V20 - Credentials Leak (10,0/10)
+
 Cette concentration des risques sur les technologies dominantes, combinée à l'émergence de vulnérabilités critiques sur des équipements connectés (GeoVision, MindsDB, etc.), valide le positionnement de DevinciWatch : une solution accessible, orientée détection réseau, capable de surveiller l'infrastructure indépendamment du fournisseur.
 
 Cette hypothèse repose sur trois constats convergents :
