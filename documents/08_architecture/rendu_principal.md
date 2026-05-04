@@ -619,8 +619,8 @@ Cette architecture s'appuie sur les documents suivants :
 - [Business model (03)](../03_business_model/rendu_principal.md)
 - [Business plan (04)](../04_business_plan/rendu_principal.md)
 - [Feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md)
-- [Gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md)
-- [Cahier des charges (07)](../06_cahier_des_charges/rendu_principal.md)
+- [Gestion de projet (07)](../07_gestion_de_projet/rendu_principal.md)
+- [Cahier des charges (06)](../06_cahier_des_charges/rendu_principal.md)
 
 ## 22. Conclusion
 

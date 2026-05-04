@@ -87,7 +87,7 @@ Le business model repose sur trois sources de revenus :
 2. les frais de mise en service et d'onboarding ;
 3. les services et options complémentaires.
 
-L'hypothèse de travail consolidée retient désormais un ACV moyen de 5 900 EUR par an [Annexe BM-1]. Cette valeur reflète un modèle plus accessible : beaucoup plus abordable que les hypothèses précédentes, mais soutenu par un volume client plus élevé, une offre Professional à 8 880 EUR par an et une option Enterprise sur devis.
+L'hypothèse de travail consolidée retient désormais un ACV moyen de 5 900 EUR par an [Annexe BM-1]. Cette valeur est une moyenne pondérée des plans : Starter (240 EUR/an), Essential (2 400 EUR/an), Professional (8 880 EUR/an) et Enterprise (18 000 EUR/an), ajustée selon la répartition cible des clients. Cette moyenne reflète un modèle plus accessible, soutenu par un volume client plus élevé.
 
 ## 7. Logique de coûts
 

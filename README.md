@@ -19,7 +19,7 @@ Le projet est structuré pour répondre à une exigence de validation profession
 
 ```mermaid
 flowchart LR
-    A[Host Sensor Agent] -->|heartbeat + events| B[Backend API]
+    A[serveur-endpoint] -->|heartbeat + events| B[serveur-soc]
     B --> C[(PostgreSQL)]
     B --> D[(Redis)]
     D --> E[Worker]

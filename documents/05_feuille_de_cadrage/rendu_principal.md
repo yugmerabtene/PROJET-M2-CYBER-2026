@@ -166,7 +166,7 @@ Ces décisions doivent rester stables pendant la phase MVP. Toute extension fonc
 
 ## 16. Feuille de route courte
 
-Cette feuille de route est volontairement synthétique. Son exécution détaillée est pilotée dans la [gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md) au moyen d'un backlog Scrum, de sprints, de story points et de critères d'acceptation.
+Cette feuille de route est volontairement synthétique. Son exécution détaillée est pilotée dans la [gestion de projet (07)](../07_gestion_de_projet/rendu_principal.md) au moyen d'un backlog Scrum, de sprints, de story points et de critères d'acceptation.
 
 1. Phase 1 - Cadrage : consolider le cadrage, finaliser la gestion de projet, le cahier des charges et l'architecture ;
 2. Phase 2 - Sprint socle : mettre en place le backend FastAPI, la base de données, le lab Docker et la collecte endpoint minimale ;
@@ -176,4 +176,4 @@ Cette feuille de route est volontairement synthétique. Son exécution détaill�
 
 ## 17. Conclusion
 
-Cette feuille de cadrage fixe une vision opérationnelle commune du projet. Elle permet de relier le besoin, la valeur, l'architecture, les livrables et les priorités d'exécution dans une même base de pilotage. Elle prépare directement le [cahier des charges (07)](../06_cahier_des_charges/rendu_principal.md) et l'[architecture détaillée (08)](../08_architecture/rendu_principal.md), en cohérence avec la [gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md).
+Cette feuille de cadrage fixe une vision opérationnelle commune du projet. Elle permet de relier le besoin, la valeur, l'architecture, les livrables et les priorités d'exécution dans une même base de pilotage. Elle prépare directement le [cahier des charges (06)](../06_cahier_des_charges/rendu_principal.md) et l'[architecture détaillée (08)](../08_architecture/rendu_principal.md), en cohérence avec la [gestion de projet (07)](../07_gestion_de_projet/rendu_principal.md).
