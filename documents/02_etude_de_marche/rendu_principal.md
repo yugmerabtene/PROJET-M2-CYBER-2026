@@ -49,6 +49,23 @@ L'hypothèse retenue est la suivante : il existe une place de marché pour une s
 
 Cette hypothèse ne suppose pas que DevinciWatch remplace les plateformes les plus matures. Elle affirme plutôt l'existence d'un espace intermédiaire : celui des organisations qui ont besoin d'une visibilité cyber concrète, mais qui ne peuvent pas absorber la complexité humaine, financière et technique d'un SOC complet.
 
+### 3.1. Validation par l'analyse des données (mai 2026)
+
+L'analyse technique récente confirme l'intensité de la menace et justifie la demande pour une solution comme DevinciWatch :
+
+- **Score d'intensité de la menace** : 1111,2 (niveau Élevé)
+- **Vulnérabilités connues et exploitées (CISA KEV)** : 1 587 entrées référencées
+- **Implication pour le marché SIEM** : Forte demande soutenue par la criticité des vulnérabilités
+
+**Top 5 des fournisseurs les plus touchés** (source : CISA KEV) :
+1. Microsoft (370 vulnérabilités)
+2. Apple (93)
+3. Cisco (89)
+4. Adobe (78)
+5. Google (71)
+
+Cette concentration des risques sur les technologies dominantes valide le positionnement de DevinciWatch : une solution accessible, orientée détection réseau, capable de surveiller l'infrastructure indépendamment du fournisseur.
+
 Cette hypothèse repose sur trois constats convergents :
 
 - la pression cyber reste élevée dans les pays cibles ;
