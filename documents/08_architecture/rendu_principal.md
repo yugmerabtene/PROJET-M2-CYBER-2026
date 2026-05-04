@@ -29,6 +29,14 @@ L'objectif est de concevoir une application de cybersurveillance réseau orient�
 
 L'architecture doit rester :
 
+### 2.1. Contraintes validées par les données (mai 2026)
+
+L'analyse de 1 638 enregistrements (NVD 30, CISA KEV 1 587, GitHub 10, CERT-FR 10) impose :
+- **Scalabilité** : Score intensité 1 114,8 → FastAPI + Celery + Redis + PostgreSQL
+- **Couverture** : 1 587 vulnérabilités KEV + 317 ransomware → Moteur règles YARA/Sigma
+- **Performance** : 30 CVEs 2026 (7 Critiques) → Temps détection < 5 min, API collecteurs multi-sources
+- **Stockage** : 1 638 enregistrements normalisés → PostgreSQL optimisé, index sur cve_id/vendor
+
 - propre ;
 - défendable en revue projet ;
 - réaliste pour un MVP ;

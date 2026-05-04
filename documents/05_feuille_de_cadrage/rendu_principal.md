@@ -12,6 +12,14 @@ Le projet s'inscrit dans un cadre de conception produit en cybersécurité avec 
 
 La feuille de cadrage joue ici un rôle de document-pivot. Elle traduit les enseignements issus de l'[étude de marché](../02_etude_de_marche/rendu_principal.md), du [business model](../03_business_model/rendu_principal.md) et du [business plan](../04_business_plan/rendu_principal.md) en décisions de périmètre, de priorisation et d'exécution. Elle permet également de préparer le passage vers le [cahier des charges](../06_cahier_des_charges/rendu_principal.md) et l'[architecture](../08_architecture/rendu_principal.md).
 
+### 3.1. Validation par les données (mai 2026)
+
+L'analyse de 1 638 enregistrements confirme le cadrage :
+- **Score d'intensité 1 114,8** (Élevé) → Produit doit couvrir 1 587 vulnérabilités KEV + 30 CVEs 2026
+- **317 cas de ransomware** (20 % des KEV) → Priorité sur détection et alertes automatiques
+- **Top 5 fournisseurs critiques** (Microsoft 370, Apple 93, Cisco 89...) → Périmètre MVP doit supporter ces sources
+- **30 CVEs récents 2026** (23 % Critique, 20 % Élevé) → Architecture doit traiter flux temps-réel < 5 min
+
 ## 3. Besoin principal
 
 Mettre à disposition une solution capable de :

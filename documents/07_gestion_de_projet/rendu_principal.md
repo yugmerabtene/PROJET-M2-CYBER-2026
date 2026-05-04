@@ -19,6 +19,14 @@ Il sert à préciser :
 
 Son objectif est de garantir que la progression du projet reste lisible, mesurable et cohérente avec les attentes produit, le périmètre MVP et les contraintes de démonstration.
 
+### 1.1. Justification par les données (mai 2026)
+
+L'analyse de 1 638 enregistrements valide le cadrage Scrum :
+- **90 Story Points** pour couvrir 1 587 KEV + 30 CVEs 2026 → Effort justifié par volume menaces
+- **5 sprints** (2 semaines) face à score intensité 1 114,8 → Rythme soutenu nécessaire
+- **9 membres équipe** pour 7 sources + 3 conteneurs Docker → Ressources adaptées au risque
+- **317 ransomware KEV** → Vélocité cible 18-28 SP/sprint indispensable pour protection rapide
+
 ## 2. Position dans la chronologie projet
 
 Ce document intervient après :

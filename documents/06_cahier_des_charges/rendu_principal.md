@@ -16,6 +16,16 @@ Ce document s'appuie sur :
 - la [gestion de projet (07)](../07_gestion_de_projet/rendu_principal.md) ;
 - l'[architecture produit retenue (08)](../08_architecture/rendu_principal.md).
 
+### 1.1. Contexte quantifié (mai 2026)
+
+Les données collectées valident les exigences du cahier des charges :
+- **1 587 vulnérabilités connues et exploitées** (CISA KEV) → Exigence de couverture étendue
+- **317 cas de ransomware identifiés** (20 % des KEV) → Exigence de détection proactive obligatoire
+- **Score d'intensité 1 114,8** (Élevé) → Exigence de performance < 5 min détection
+- **30 CVEs récents 2026** (7 Critiques, 6 Élevés) → Exigence de support CVSS v3.1 complet
+
+Ces chiffres justifient le périmètre MVP et les fonctionnalités demandées.
+
 ## 2. Fiche documentaire
 
 | Élément | Valeur |
