@@ -51,11 +51,13 @@ Cette hypothèse ne suppose pas que DevinciWatch remplace les plateformes les pl
 
 ### 3.1. Validation par l'analyse des données (mai 2026)
 
-L'analyse technique récente confirme l'intensité de la menace et justifie la demande pour une solution comme DevinciWatch :
+L'analyse technique récente (30 CVE récents collectés via NVD, 1 587 entrées CISA KEV) confirme l'intensité de la menace :
 
-- **Score d'intensité de la menace** : 1111,2 (niveau Élevé)
+- **Score d'intensité de la menace** : 1 114,8 (niveau Élevé)
+- **CVE récents analysés (2026)** : 30 vulnérabilités dont 13 critiques/hauts (43 %)
 - **Vulnérabilités connues et exploitées (CISA KEV)** : 1 587 entrées référencées
-- **Implication pour le marché SIEM** : Forte demande soutenue par la criticité des vulnérabilités
+- **Ransomware identifié** : 317 cas documentés (20 % des KEV)
+- **Implication pour le marché SIEM** : Forte demande soutenue par la criticité croissante
 
 **Top 5 des fournisseurs les plus touchés** (source : CISA KEV) :
 1. Microsoft (370 vulnérabilités)
@@ -64,7 +66,12 @@ L'analyse technique récente confirme l'intensité de la menace et justifie la d
 4. Adobe (78)
 5. Google (71)
 
-Cette concentration des risques sur les technologies dominantes valide le positionnement de DevinciWatch : une solution accessible, orientée détection réseau, capable de surveiller l'infrastructure indépendamment du fournisseur.
+**Répartition des CVE 2026 par sévérité** (source : NVD) :
+- Critique : 7 (23 %)
+- Élevé : 6 (20 %)
+- Moyen : 17 (57 %)
+
+Cette concentration des risques sur les technologies dominantes, combinée à l'émergence de vulnérabilités critiques sur des équipements connectés (GeoVision, MindsDB, etc.), valide le positionnement de DevinciWatch : une solution accessible, orientée détection réseau, capable de surveiller l'infrastructure indépendamment du fournisseur.
 
 Cette hypothèse repose sur trois constats convergents :
 
