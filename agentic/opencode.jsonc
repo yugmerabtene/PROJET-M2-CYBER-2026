@@ -1,0 +1,121 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "enabled_providers": ["openai"],
+
+  "default_agent": "project-manager-tech",
+
+  "model": "{env:OPENCODE_MODEL}",
+  "small_model": "{env:OPENCODE_SMALL_MODEL}",
+
+  "instructions": [
+    "agentic/.opencode/AGENTS.md",
+    "README.md",
+    "product/README.md",
+    "documents/07_gestion_de_projet/rendu_principal.md",
+    "documents/07_gestion_de_projet/tasks/*.md",
+    "documents/06_cahier_des_charges/rendu_principal.md",
+    "documents/08_architecture/rendu_principal.md",
+    "documents/07_gestion_de_projet/.github-project-management/PROJECT_SETUP.md"
+  ],
+
+  "permission": {
+    "*": "ask",
+    "edit": "ask",
+
+    "bash": {
+      "*": "ask",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git branch*": "allow",
+      "git fetch*": "ask",
+      "ls*": "allow",
+      "find*": "allow",
+      "grep*": "allow",
+      "python -m pytest*": "allow",
+      "pytest*": "allow",
+      "ruff*": "allow",
+      "docker compose ps*": "allow",
+      "docker compose logs*": "ask",
+      "gh issue view*": "allow",
+      "gh issue list*": "allow",
+      "gh project item-list*": "allow",
+      "gh auth status*": "allow",
+      "gh issue create*": "ask",
+      "gh issue edit*": "ask",
+      "gh project item-add*": "ask",
+      "gh project item-edit*": "ask",
+      "git push*": "deny",
+      "rm -rf*": "deny"
+    },
+
+    "skill": {
+      "*": "allow"
+    },
+
+    "task": {
+      "*": "ask",
+      "backend-python-dev": "allow",
+      "frontend-web-dev": "allow",
+      "qa-tester": "allow",
+      "devops-engineer": "ask",
+      "security-tech-lead": "allow",
+      "github-project-manager": "ask",
+      "docs-maintainer": "allow"
+    }
+  },
+
+  "agent": {
+    "project-manager-tech": {
+      "mode": "primary",
+      "description": "Chef de projet technique DevinciWatch : backlog, sprint, priorités, coordination et GitHub Project.",
+      "prompt": "{file:agentic/.opencode/agents/project-manager-tech.md}"
+    },
+
+    "backend-python-dev": {
+      "mode": "subagent",
+      "description": "Développeur backend Python/FastAPI pour DevinciWatch.",
+      "prompt": "{file:agentic/.opencode/agents/backend-python-dev.md}"
+    },
+
+    "frontend-web-dev": {
+      "mode": "subagent",
+      "description": "Développeur frontend DevinciWatch : dashboard, vues analyste, navigation et parcours d'export.",
+      "prompt": "{file:agentic/.opencode/agents/frontend-web-dev.md}"
+    },
+
+    "qa-tester": {
+      "mode": "subagent",
+      "description": "Testeur QA Python avec pytest.",
+      "prompt": "{file:agentic/.opencode/agents/qa-tester.md}"
+    },
+
+    "devops-engineer": {
+      "mode": "subagent",
+      "description": "DevOps Docker, scripts, variables d'environnement et reproductibilite du lab.",
+      "prompt": "{file:agentic/.opencode/agents/devops-engineer.md}"
+    },
+
+    "security-tech-lead": {
+      "mode": "subagent",
+      "description": "Security Tech Lead : audit securite, secrets, RBAC, payloads et scenarios cyber.",
+      "prompt": "{file:agentic/.opencode/agents/security-tech-lead.md}",
+      "permission": {
+        "edit": "deny"
+      }
+    },
+
+    "github-project-manager": {
+      "mode": "subagent",
+      "description": "Gestion GitHub Issues/Projects : epics, features, user stories, tasks, sprints, owners et statuts.",
+      "prompt": "{file:agentic/.opencode/agents/github-project-manager.md}"
+    },
+
+    "docs-maintainer": {
+      "mode": "subagent",
+      "description": "Mainteneur documentation docs-as-code : README, preuves, DoD, liens projet et documentation technique.",
+      "prompt": "{file:agentic/.opencode/agents/docs-maintainer.md}"
+    }
+  }
+}

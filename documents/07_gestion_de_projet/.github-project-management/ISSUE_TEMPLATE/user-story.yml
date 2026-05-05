@@ -1,0 +1,107 @@
+name: User Story
+description: Create a new DevinciWatch user story linked to an epic, feature and sprint.
+title: "[US-XX.X] "
+labels: ["user-story"]
+body:
+  - type: dropdown
+    id: epic
+    attributes:
+      label: Epic
+      description: Link to Gestion de projet sections 8 and 9.
+      options:
+        - EPIC-01 - Socle applicatif et sécurité
+        - EPIC-02 - Collecte endpoint et télémétrie
+        - EPIC-03 - Découverte réseau et actifs
+        - EPIC-04 - Détection, alertes et audit
+        - EPIC-05 - Corrélation et enrichissement analyste
+        - EPIC-06 - Interface web et visualisation
+        - EPIC-07 - Reporting, exports et preuves
+        - EPIC-08 - Lab Docker, démonstration et documentation
+    validations:
+      required: true
+  - type: input
+    id: feature
+    attributes:
+      label: Feature
+      placeholder: FEAT-XX.X
+    validations:
+      required: true
+  - type: input
+    id: story-id
+    attributes:
+      label: Story ID
+      placeholder: US-XX.X
+    validations:
+      required: true
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User Story
+      value: En tant que [rôle], je veux [action] afin de [objectif].
+    validations:
+      required: true
+  - type: dropdown
+    id: story-points
+    attributes:
+      label: Story Points
+      options: ["1", "2", "3", "5", "8", "13"]
+    validations:
+      required: true
+  - type: dropdown
+    id: sprint
+    attributes:
+      label: Sprint cible
+      options:
+        - Sprint 1
+        - Sprint 2
+        - Sprint 3
+        - Sprint 4
+        - Sprint 5
+    validations:
+      required: true
+  - type: dropdown
+    id: owner
+    attributes:
+      label: Owner
+      options:
+        - Ada Lovelace
+        - Grace Hopper
+        - Alan Turing
+        - Barbara Liskov
+        - Ken Thompson
+        - Tim Berners-Lee
+        - Margaret Hamilton
+        - Linus Torvalds
+        - Radia Perlman
+    validations:
+      required: true
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Technical Tasks
+      value: |
+        - [ ] Task 1
+        - [ ] Task 2
+        - [ ] Task 3
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      value: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+        - [ ] Preuve de validation générée
+    validations:
+      required: true
+  - type: input
+    id: cross-refs
+    attributes:
+      label: Cross-references
+      placeholder: Architecture §5.1, Cahier des charges §6.2
+  - type: markdown
+    attributes:
+      value: |
+        Source locale: `documents/07_gestion_de_projet/tasks/`.
+        Mettre à jour le fichier EPIC correspondant après création de l'issue.
