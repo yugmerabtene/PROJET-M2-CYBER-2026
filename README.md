@@ -1,8 +1,24 @@
-<img width="420" alt="DevinciWatch" src="https://github.com/user-attachments/assets/a51a747f-7b3e-4d8e-a811-c866023a4f1e" />
-
 # DevinciWatch
 
-DevinciWatch est une plateforme de cybersurveillance réseau orientée SOC. Le projet vise à fournir un environnement démontrable capable de collecter de la télémétrie depuis un endpoint supervisé, qualifier des événements de sécurité, corréler des signaux suspects, générer des alertes actionnables et produire des preuves exploitables pour l'analyse.
+<table>
+<tr>
+<td valign="top">
+
+**DevinciWatch** est une plateforme de cybersurveillance réseau orientée SOC.
+
+- Collecte et analyse de la télémétrie
+- Détection de comportements suspects
+- Génération d'alertes actionnables
+- Preuves exploitables pour l'analyse
+
+</td>
+<td>
+
+<img width="420" alt="DevinciWatch" src="https://github.com/user-attachments/assets/a51a747f-7b3e-4d8e-a811-c866023a4f1e" />
+
+</td>
+</tr>
+</table>
 
 Le dépôt regroupe le cadrage produit, les livrables de gestion de projet, l'architecture technique, le futur code applicatif et le workflow OpenCode utilisé pour piloter les développements.
 
