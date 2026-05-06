@@ -18,7 +18,7 @@ Recevoir `heartbeat` et `events` depuis le `serveur-endpoint` (Priorité P1)
 - [x] Schéma Pydantic `HeartbeatSchema` - Ken Thompson
 - [x] Route `POST /heartbeat` (FastAPI) - Ken Thompson
 - [x] Persistance PostgreSQL (modèle `Heartbeat`) - Barbara Liskov
-- [ ] Vue liste dernier heartbeat (API) - Tim Berners-Lee
+- [x] Vue liste dernier heartbeat (API) - Tim Berners-Lee
 - [x] Tests ingestion heartbeat - Margaret Hamilton
 - [x] Agent secret configuré - Linus Torvalds
 
@@ -28,7 +28,7 @@ Recevoir `heartbeat` et `events` depuis le `serveur-endpoint` (Priorité P1)
 - [x] Route `POST /events` - Ken Thompson
 - [x] Validation payload JSON - Radia Perlman
 - [x] Persistance events PostgreSQL - Barbara Liskov
-- [ ] Vue liste events (API + UI) - Tim Berners-Lee
+- [x] Vue liste events (API + UI) - Tim Berners-Lee
 - [x] Tests events - Margaret Hamilton
 
 ## Tasks Techniques (US-02.3 - Auth Agent)
@@ -36,22 +36,22 @@ Recevoir `heartbeat` et `events` depuis le `serveur-endpoint` (Priorité P1)
 - [x] Définir secret agent (config/env) - Radia Perlman
 - [x] Middleware auth agent (API key) - Ken Thompson
 - [x] Rejet requêtes non autorisées - Ken Thompson
-- [ ] Logs tentatives auth - Margaret Hamilton
+- [x] Logs tentatives auth - Margaret Hamilton
 
 ## Definition of Ready (US-02.1)
 
-- [ ] Schéma heartbeat défini
-- [ ] Route `/heartbeat` existe dans `serveur-soc`
-- [ ] Format JSON validé
+- [x] Schéma heartbeat défini
+- [x] Route `/heartbeat` existe dans `serveur-soc`
+- [x] Format JSON validé
 - [x] Agent secret configuré
 
 ## Definition of Done (US-02.1)
 
-- [ ] Dernier heartbeat visible côté `serveur-soc`
-- [ ] Timestamp persistant PostgreSQL
-- [ ] Agent authentifié
-- [ ] JSON valide reçu
-- [ ] Preuve: heartbeat dans dashboard
+- [x] Dernier heartbeat visible côté `serveur-soc`
+- [x] Timestamp persistant PostgreSQL
+- [x] Agent authentifié
+- [x] JSON valide reçu
+- [x] Preuve: heartbeat dans dashboard
 
 ## Acceptance Criteria
 
@@ -63,6 +63,6 @@ Recevoir `heartbeat` et `events` depuis le `serveur-endpoint` (Priorité P1)
 
 ## GitHub Project
 
-- Status actuel recommandé : `In Review`
+- Status actuel recommandé : `Done`
 - Labels recommandés : `epic`, `user-story`, `backend`, `telemetry`, `security`
 - Issues GitHub : à compléter dans la colonne `Issue #`

@@ -24,8 +24,8 @@ Stabiliser le lab, les scénarios et la documentation de lancement (Priorité P1
 - [x] Ajouter Redis - Linus Torvalds
 - [x] Configurer réseau Docker dédié - Linus Torvalds
 - [x] Documenter variables dans `.env.example` - Linus Torvalds
-- [ ] Tester démarrage complet du lab - Margaret Hamilton
-- [ ] Documenter procédure de vérification - Linus Torvalds
+- [x] Tester démarrage complet du lab - Margaret Hamilton
+- [x] Documenter procédure de vérification - Linus Torvalds
 
 ## Tasks Techniques (US-08.2 - Scenarios controles)
 
@@ -49,7 +49,7 @@ Stabiliser le lab, les scénarios et la documentation de lancement (Priorité P1
 - [x] Services cibles identifiés
 - [x] Variables d'environnement listées
 - [x] Réseau Docker prévu
-- [ ] Commande de validation définie
+- [x] Commande de validation définie
 
 ## Definition of Done (US-08.1)
 
@@ -57,8 +57,8 @@ Stabiliser le lab, les scénarios et la documentation de lancement (Priorité P1
 - [x] `serveur-endpoint` défini
 - [x] `serveur-attacker` défini
 - [x] PostgreSQL et Redis définis
-- [ ] Démarrage complet vérifié
-- [ ] Preuve: logs ou capture `docker compose ps`
+- [x] Démarrage complet vérifié
+- [x] Preuve: logs ou capture `docker compose ps`
 
 ## Acceptance Criteria
 

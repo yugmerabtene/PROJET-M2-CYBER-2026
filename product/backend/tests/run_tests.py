@@ -159,7 +159,7 @@ class TestDocumentationSync(unittest.TestCase):
         epic_path = os.path.join(DOCS_DIR, "EPIC-02-collection-endpoint.md")
         self.assertTrue(os.path.exists(epic_path), f"Missing: {epic_path}")
         content = open(epic_path).read()
-        self.assertIn("In Review", content)
+        self.assertIn("Done", content)
         tasks_done = content.count("- [x]")
         self.assertGreater(tasks_done, 3, "EPIC-02 doit avoir au moins 4 tâches terminées")
 

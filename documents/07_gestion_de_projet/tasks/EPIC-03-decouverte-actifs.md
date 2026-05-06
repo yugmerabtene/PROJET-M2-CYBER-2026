@@ -19,14 +19,14 @@ Identifier actifs, ports et services observables dans le lab (Priorité P1)
 - [x] Modèle `Asset` PostgreSQL - Barbara Liskov
 - [x] Route `POST /scan` (FastAPI) - Ken Thompson
 - [x] Association IP → Asset - Barbara Liskov
-- [ ] Vue liste actifs (API + UI) - Tim Berners-Lee
+- [x] Vue liste actifs (API + UI) - Tim Berners-Lee
 - [x] Tests scan contrôlé - Margaret Hamilton
 
 ## Tasks Techniques (US-03.2 - Inventaire)
 
 - [x] Création actif depuis événements - Barbara Liskov
 - [x] Route `GET /assets` (API) - Barbara Liskov
-- [ ] Vue détail actif (UI) - Tim Berners-Lee
+- [x] Vue détail actif (UI) - Tim Berners-Lee
 - [x] Mise à jour actif (heartbeat/events) - Ken Thompson
 
 ## Tasks Techniques (US-03.3 - Ports/Services)
@@ -34,21 +34,21 @@ Identifier actifs, ports et services observables dans le lab (Priorité P1)
 - [x] Scan ports (nmap/ scapy simplifié) - Ken Thompson
 - [x] Modèle `PortFinding` - Barbara Liskov
 - [x] Association actif → ports - Ken Thompson
-- [ ] Affichage ports/services - Tim Berners-Lee
+- [x] Affichage ports/services - Tim Berners-Lee
 
 ## Definition of Ready (US-03.1)
 
-- [ ] Plage IP lab définie
-- [ ] Scan contrôlé autorisé
-- [ ] Modèle asset lié
-- [ ] Affichage liste prévu
+- [x] Plage IP lab définie
+- [x] Scan contrôlé autorisé
+- [x] Modèle asset lié
+- [x] Affichage liste prévu
 
 ## Definition of Done (US-03.1)
 
-- [ ] Actif créé après scan
-- [ ] IP/ports/services visibles
-- [ ] Scan limité au lab Docker
-- [ ] Preuve: actif dans dashboard
+- [x] Actif créé après scan
+- [x] IP/ports/services visibles
+- [x] Scan limité au lab Docker
+- [x] Preuve: actif dans dashboard
 
 ## Acceptance Criteria
 
@@ -60,6 +60,6 @@ Identifier actifs, ports et services observables dans le lab (Priorité P1)
 
 ## GitHub Project
 
-- Status actuel recommandé : `In Review`
+- Status actuel recommandé : `Done`
 - Labels recommandés : `epic`, `user-story`, `backend`, `assets`, `discovery`
 - Issues GitHub : à compléter dans la colonne `Issue #`

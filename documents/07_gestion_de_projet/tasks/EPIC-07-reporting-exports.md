@@ -37,15 +37,15 @@ Produire des exports CSV/JSON et des preuves de validation (Priorité P1)
 
 ## Definition of Ready (US-07.1)
 
-- [ ] Format CSV défini
-- [ ] Endpoint `/export` prêt
-- [ ] Log audit configuré
+- [x] Format CSV défini
+- [x] Endpoint `/export` prêt
+- [x] Log audit configuré
 
 ## Definition of Done (US-07.1)
 
-- [ ] CSV généré et téléchargeable
-- [ ] Log audit de l'export
-- [ ] Preuve: fichier CSV exploitable
+- [x] CSV généré et téléchargeable
+- [x] Log audit de l'export
+- [x] Preuve: fichier CSV exploitable
 
 ## Acceptance Criteria
 

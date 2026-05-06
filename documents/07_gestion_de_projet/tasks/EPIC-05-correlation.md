@@ -19,7 +19,7 @@ Regrouper des événements liés pour améliorer la lisibilité SOC (Priorité P
 - [x] Modèle `CorrelationGroup` - Barbara Liskov
 - [x] Association events → groupe - Ken Thompson
 - [x] Endpoint corrélations (API) - Barbara Liskov
-- [ ] Vue groupes IP (UI) - Tim Berners-Lee
+- [x] Vue groupes IP (UI) - Tim Berners-Lee
 - [x] Tests corrélation IP - Margaret Hamilton
 
 ## Tasks Techniques (US-05.2 - Temporelle)
@@ -31,22 +31,22 @@ Regrouper des événements liés pour améliorer la lisibilité SOC (Priorité P
 
 ## Tasks Techniques (US-05.3 - Vue)
 
-- [ ] Vue consultation corrélations - Tim Berners-Lee
-- [ ] Lien alerte → corrélation - Tim Berners-Lee
-- [ ] Explication corrélation (UI) - Tim Berners-Lee
+- [x] Vue consultation corrélations - Tim Berners-Lee
+- [x] Lien alerte → corrélation - Tim Berners-Lee
+- [x] Explication corrélation (UI) - Tim Berners-Lee
 
 ## Definition of Ready (US-05.1)
 
-- [ ] Logique de regroupement codée
-- [ ] Requête PostgreSQL prête
-- [ ] Vue corrélation prévue
+- [x] Logique de regroupement codée
+- [x] Requête PostgreSQL prête
+- [x] Vue corrélation prévue
 
 ## Definition of Done (US-05.1)
 
-- [ ] Groupe créé pour événements liés
-- [ ] IP source affichée
-- [ ] Historique consultable
-- [ ] Preuve: groupe visible dashboard
+- [x] Groupe créé pour événements liés
+- [x] IP source affichée
+- [x] Historique consultable
+- [x] Preuve: groupe visible dashboard
 
 ## Acceptance Criteria
 
@@ -58,6 +58,6 @@ Regrouper des événements liés pour améliorer la lisibilité SOC (Priorité P
 
 ## GitHub Project
 
-- Status actuel recommandé : `In Review`
+- Status actuel recommandé : `Done`
 - Labels recommandés : `epic`, `user-story`, `backend`, `correlation`
 - Issues GitHub : à compléter dans la colonne `Issue #`

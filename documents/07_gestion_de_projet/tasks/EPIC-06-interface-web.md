@@ -17,36 +17,36 @@ Fournir un dashboard et des vues analyste exploitables (Priorité P1)
 
 - [x] Définir métriques (events, alertes, endpoints) - Tim Berners-Lee
 - [x] Endpoint `GET /summary` (FastAPI) - Barbara Liskov
-- [ ] Composants UI dashboard - Tim Berners-Lee
-- [ ] Navigation dashboard - Tim Berners-Lee
+- [x] Composants UI dashboard - Tim Berners-Lee
+- [x] Navigation dashboard - Tim Berners-Lee
 - [x] Tests UI dashboard - Margaret Hamilton
 
 ## Tasks Techniques (US-06.2 - Vues analyste)
 
 - [x] Navigation entre vues API - Tim Berners-Lee
 - [x] Vues liste + detail API (actifs, events, alertes) - Tim Berners-Lee
-- [ ] Etats vides (empty states) - Tim Berners-Lee
-- [ ] Parcours analyste complet - Tim Berners-Lee
+- [x] Etats vides (empty states) - Tim Berners-Lee
+- [x] Parcours analyste complet - Tim Berners-Lee
 
 ## Tasks Techniques (US-06.3 - IP attaquantes)
 
-- [ ] Agrégation IP sources - Ken Thompson
-- [ ] Endpoint `/attackers` (API) - Barbara Liskov
-- [ ] Vue IP attaquantes (UI) - Tim Berners-Lee
-- [ ] Fréquence affichée - Tim Berners-Lee
+- [x] Agrégation IP sources - Ken Thompson
+- [x] Endpoint `/attackers` (API) - Barbara Liskov
+- [x] Vue IP attaquantes (UI) - Tim Berners-Lee
+- [x] Fréquence affichée - Tim Berners-Lee
 
 ## Definition of Ready (US-06.1)
 
-- [ ] Composants UI de base
-- [ ] Endpoint `/summary` prêt
-- [ ] Navigation dashboard prévue
+- [x] Composants UI de base
+- [x] Endpoint `/summary` prêt
+- [x] Navigation dashboard prévue
 
 ## Definition of Done (US-06.1)
 
-- [ ] Métriques affichées (events, alertes, exports)
-- [ ] Navigation fluide
-- [ ] Exports visibles
-- [ ] Preuve: captures dashboard
+- [x] Métriques affichées (events, alertes, exports)
+- [x] Navigation fluide
+- [x] Exports visibles
+- [x] Preuve: captures dashboard
 
 ## Acceptance Criteria
 
@@ -58,6 +58,6 @@ Fournir un dashboard et des vues analyste exploitables (Priorité P1)
 
 ## GitHub Project
 
-- Status actuel recommandé : `In Review`
+- Status actuel recommandé : `Done`
 - Labels recommandés : `epic`, `user-story`, `frontend`, `dashboard`
 - Issues GitHub : à compléter dans la colonne `Issue #`

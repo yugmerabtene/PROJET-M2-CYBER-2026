@@ -16,7 +16,7 @@ Générer, consulter et tracer les alertes et actions sensibles (Priorité P1)
 ## Tasks Techniques (US-04.1 - Détection)
 
 - [x] Règle simple (ex: port scan, brute force) - Ken Thompson
-- [ ] Worker Celery détection - Ken Thompson
+- [x] Worker Celery détection - Ken Thompson
 - [x] Modèle `Alert` PostgreSQL - Barbara Liskov
 - [x] Route `POST /detect` (FastAPI) - Ken Thompson
 - [x] Persistance alerte - Barbara Liskov
@@ -25,31 +25,31 @@ Générer, consulter et tracer les alertes et actions sensibles (Priorité P1)
 ## Tasks Techniques (US-04.2 - Alertes)
 
 - [x] Endpoints liste/détail alertes - Tim Berners-Lee
-- [ ] Vue alertes (UI) - Tim Berners-Lee
+- [x] Vue alertes (UI) - Tim Berners-Lee
 - [x] Changement statut alerte - Tim Berners-Lee
-- [ ] Tests UI alertes - Margaret Hamilton
+- [x] Tests UI alertes - Margaret Hamilton
 
 ## Tasks Techniques (US-04.3 - Audit)
 
 - [x] Modèle `AuditLog` - Barbara Liskov
 - [x] Logger connexions/exports/actions - Radia Perlman
 - [x] Endpoint `/audit` (API) - Barbara Liskov
-- [ ] Vue audit (UI) - Tim Berners-Lee
+- [x] Vue audit (UI) - Tim Berners-Lee
 
 ## Definition of Ready (US-04.1)
 
-- [ ] Règle simple codée
-- [ ] Worker Celery configuré
-- [ ] Modèle alerte créé
-- [ ] Scénario suspect prêt
+- [x] Règle simple codée
+- [x] Worker Celery configuré
+- [x] Modèle alerte créé
+- [x] Scénario suspect prêt
 
 ## Definition of Done (US-04.1)
 
-- [ ] Alerte générée dans le lab
-- [ ] Visible dans dashboard
-- [ ] Statut modifiable
-- [ ] Log audit créé
-- [ ] Preuve: alerte + export CSV
+- [x] Alerte générée dans le lab
+- [x] Visible dans dashboard
+- [x] Statut modifiable
+- [x] Log audit créé
+- [x] Preuve: alerte + export CSV
 
 ## Acceptance Criteria
 
@@ -61,6 +61,6 @@ Générer, consulter et tracer les alertes et actions sensibles (Priorité P1)
 
 ## GitHub Project
 
-- Status actuel recommandé : `In Review`
+- Status actuel recommandé : `Done`
 - Labels recommandés : `epic`, `user-story`, `backend`, `alerts`, `audit`, `security`
 - Issues GitHub : à compléter dans la colonne `Issue #`
