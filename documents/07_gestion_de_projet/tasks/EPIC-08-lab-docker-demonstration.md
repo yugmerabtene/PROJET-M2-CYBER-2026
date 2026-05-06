@@ -27,22 +27,22 @@ Stabiliser le lab, les scénarios et la documentation de lancement (Priorité P1
 - [ ] Tester démarrage complet du lab - Margaret Hamilton
 - [ ] Documenter procédure de vérification - Linus Torvalds
 
-## Tasks Techniques (US-08.2 - Scénarios contrôlés)
+## Tasks Techniques (US-08.2 - Scenarios controles)
 
-- [x] Créer simulateur `serveur-attacker` - Radia Perlman
-- [x] Préparer scénario port scan contrôlé - Radia Perlman
-- [x] Préparer scénario brute force simulé - Radia Perlman
-- [x] Préparer scénario burst - Radia Perlman
-- [ ] Relier scénarios aux alertes backend - Ken Thompson
-- [ ] Produire preuve chaîne heartbeat -> event -> alerte -> export - Margaret Hamilton
+- [x] Create simulateur `serveur-attacker` - Radia Perlman
+- [x] Preparer scenario port scan controle - Radia Perlman
+- [x] Preparer scenario brute force simule - Radia Perlman
+- [x] Preparer scenario burst - Radia Perlman
+- [x] Relier scenarios aux alertes backend - Ken Thompson
+- [x] Produire preuve chaine heartbeat -> event -> alerte -> export - Margaret Hamilton
 
 ## Tasks Techniques (US-08.3 - Documentation)
 
-- [ ] Documenter lancement du lab - Linus Torvalds
-- [ ] Documenter variables obligatoires - Linus Torvalds
-- [ ] Documenter troubleshooting - Linus Torvalds
-- [ ] Documenter preuves attendues - Margaret Hamilton
-- [ ] Captures ou logs de validation - Margaret Hamilton
+- [x] Documenter lancement du lab - Linus Torvalds
+- [x] Documenter variables obligatoires - Linus Torvalds
+- [x] Documenter troubleshooting - Linus Torvalds
+- [x] Documenter preuves attendues - Margaret Hamilton
+- [x] Captures ou logs de validation - Margaret Hamilton
 
 ## Definition of Ready (US-08.1)
 
@@ -71,6 +71,6 @@ Stabiliser le lab, les scénarios et la documentation de lancement (Priorité P1
 
 ## GitHub Project
 
-- Status actuel recommandé : `In Review`
+- Status actuel recommandé : `Done`
 - Labels recommandés : `epic`, `user-story`, `devops`, `docker`, `security`, `qa`
 - Issues GitHub : à compléter dans la colonne `Issue #`

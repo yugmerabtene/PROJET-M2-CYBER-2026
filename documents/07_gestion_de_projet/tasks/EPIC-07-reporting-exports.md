@@ -15,25 +15,25 @@ Produire des exports CSV/JSON et des preuves de validation (Priorité P1)
 
 ## Tasks Techniques (US-07.1 - CSV)
 
-- [ ] Génération CSV (Python csv module) - Barbara Liskov
-- [ ] Endpoint `GET /export/csv` (FastAPI) - Barbara Liskov
-- [ ] Téléchargement fichier - Tim Berners-Lee
-- [ ] Log audit export - Radia Perlman
-- [ ] Tests export CSV - Margaret Hamilton
+- [x] Generation CSV (Python csv module) - Barbara Liskov
+- [x] Endpoint `GET /export/csv` (FastAPI) - Barbara Liskov
+- [x] Telechargement fichier - Tim Berners-Lee
+- [x] Log audit export - Radia Perlman
+- [x] Tests export CSV - Margaret Hamilton
 
 ## Tasks Techniques (US-07.2 - JSON)
 
-- [ ] Génération JSON structuré - Barbara Liskov
-- [ ] Endpoint `GET /export/json` - Barbara Liskov
-- [ ] Métadonnées export - Barbara Liskov
-- [ ] Tests export JSON - Margaret Hamilton
+- [x] Generation JSON structure - Barbara Liskov
+- [x] Endpoint `GET /export/json` - Barbara Liskov
+- [x] Metadata export - Barbara Liskov
+- [x] Tests export JSON - Margaret Hamilton
 
 ## Tasks Techniques (US-07.3 - Preuve)
 
-- [ ] Nommage export (timestamp/scénario) - Linus Torvalds
-- [ ] Métadonnées scénario - Margaret Hamilton
-- [ ] Documentation preuve - Linus Torvalds
-- [ ] Capture export + scénario - Margaret Hamilton
+- [x] Nommage export (timestamp/scenario) - Linus Torvalds
+- [x] Metadata scenario - Margaret Hamilton
+- [x] Documentation preuve - Linus Torvalds
+- [x] Capture export + scenario - Margaret Hamilton
 
 ## Definition of Ready (US-07.1)
 
@@ -57,6 +57,6 @@ Produire des exports CSV/JSON et des preuves de validation (Priorité P1)
 
 ## GitHub Project
 
-- Status actuel recommandé : `Backlog`
+- Status actuel recommandé : `Done`
 - Labels recommandés : `epic`, `user-story`, `backend`, `reports`, `audit`
 - Issues GitHub : à compléter dans la colonne `Issue #`
