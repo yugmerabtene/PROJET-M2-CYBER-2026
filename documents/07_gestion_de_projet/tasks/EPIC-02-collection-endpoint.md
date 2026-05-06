@@ -15,27 +15,27 @@ Recevoir `heartbeat` et `events` depuis le `serveur-endpoint` (Priorité P1)
 
 ## Tasks Techniques (US-02.1 - Heartbeat)
 
-- [ ] Schéma Pydantic `HeartbeatSchema` - Ken Thompson
-- [ ] Route `POST /heartbeat` (FastAPI) - Ken Thompson
-- [ ] Persistance PostgreSQL (modèle `Heartbeat`) - Barbara Liskov
+- [x] Schéma Pydantic `HeartbeatSchema` - Ken Thompson
+- [x] Route `POST /heartbeat` (FastAPI) - Ken Thompson
+- [x] Persistance PostgreSQL (modèle `Heartbeat`) - Barbara Liskov
 - [ ] Vue liste dernier heartbeat (API) - Tim Berners-Lee
-- [ ] Tests ingestion heartbeat - Margaret Hamilton
+- [x] Tests ingestion heartbeat - Margaret Hamilton
 - [x] Agent secret configuré - Linus Torvalds
 
 ## Tasks Techniques (US-02.2 - Events)
 
-- [ ] Schéma `EventSchema` - Ken Thompson
-- [ ] Route `POST /events` - Ken Thompson
-- [ ] Validation payload JSON - Radia Perlman
-- [ ] Persistance events PostgreSQL - Barbara Liskov
+- [x] Schéma `EventSchema` - Ken Thompson
+- [x] Route `POST /events` - Ken Thompson
+- [x] Validation payload JSON - Radia Perlman
+- [x] Persistance events PostgreSQL - Barbara Liskov
 - [ ] Vue liste events (API + UI) - Tim Berners-Lee
-- [ ] Tests events - Margaret Hamilton
+- [x] Tests events - Margaret Hamilton
 
 ## Tasks Techniques (US-02.3 - Auth Agent)
 
 - [x] Définir secret agent (config/env) - Radia Perlman
-- [ ] Middleware auth agent (API key) - Ken Thompson
-- [ ] Rejet requêtes non autorisées - Ken Thompson
+- [x] Middleware auth agent (API key) - Ken Thompson
+- [x] Rejet requêtes non autorisées - Ken Thompson
 - [ ] Logs tentatives auth - Margaret Hamilton
 
 ## Definition of Ready (US-02.1)
@@ -63,6 +63,6 @@ Recevoir `heartbeat` et `events` depuis le `serveur-endpoint` (Priorité P1)
 
 ## GitHub Project
 
-- Status actuel recommandé : `Backlog`
+- Status actuel recommandé : `In Review`
 - Labels recommandés : `epic`, `user-story`, `backend`, `telemetry`, `security`
 - Issues GitHub : à compléter dans la colonne `Issue #`

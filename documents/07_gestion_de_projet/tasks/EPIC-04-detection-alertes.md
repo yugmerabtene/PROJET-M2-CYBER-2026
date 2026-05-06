@@ -15,25 +15,25 @@ Générer, consulter et tracer les alertes et actions sensibles (Priorité P1)
 
 ## Tasks Techniques (US-04.1 - Détection)
 
-- [ ] Règle simple (ex: port scan, brute force) - Ken Thompson
+- [x] Règle simple (ex: port scan, brute force) - Ken Thompson
 - [ ] Worker Celery détection - Ken Thompson
-- [ ] Modèle `Alert` PostgreSQL - Barbara Liskov
-- [ ] Route `POST /detect` (FastAPI) - Ken Thompson
-- [ ] Persistance alerte - Barbara Liskov
-- [ ] Tests scénario suspect → alerte - Margaret Hamilton
+- [x] Modèle `Alert` PostgreSQL - Barbara Liskov
+- [x] Route `POST /detect` (FastAPI) - Ken Thompson
+- [x] Persistance alerte - Barbara Liskov
+- [x] Tests scénario suspect → alerte - Margaret Hamilton
 
 ## Tasks Techniques (US-04.2 - Alertes)
 
-- [ ] Endpoints liste/détail alertes - Tim Berners-Lee
+- [x] Endpoints liste/détail alertes - Tim Berners-Lee
 - [ ] Vue alertes (UI) - Tim Berners-Lee
-- [ ] Changement statut alerte - Tim Berners-Lee
+- [x] Changement statut alerte - Tim Berners-Lee
 - [ ] Tests UI alertes - Margaret Hamilton
 
 ## Tasks Techniques (US-04.3 - Audit)
 
-- [ ] Modèle `AuditLog` - Barbara Liskov
-- [ ] Logger connexions/exports/actions - Radia Perlman
-- [ ] Endpoint `/audit` (API) - Barbara Liskov
+- [x] Modèle `AuditLog` - Barbara Liskov
+- [x] Logger connexions/exports/actions - Radia Perlman
+- [x] Endpoint `/audit` (API) - Barbara Liskov
 - [ ] Vue audit (UI) - Tim Berners-Lee
 
 ## Definition of Ready (US-04.1)
@@ -61,6 +61,6 @@ Générer, consulter et tracer les alertes et actions sensibles (Priorité P1)
 
 ## GitHub Project
 
-- Status actuel recommandé : `Backlog`
+- Status actuel recommandé : `In Review`
 - Labels recommandés : `epic`, `user-story`, `backend`, `alerts`, `audit`, `security`
 - Issues GitHub : à compléter dans la colonne `Issue #`

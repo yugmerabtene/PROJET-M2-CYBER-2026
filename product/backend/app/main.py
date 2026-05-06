@@ -2,16 +2,19 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 
+from app.alerts.routes import router as alerts_router
+from app.assets.routes import router as assets_router
 from app.auth.routes import router as auth_router
 from app.auth.service import create_user, get_by_username
 from app.core.config import settings
 from app.core.database import Base, SessionLocal, engine
+from app.telemetry.routes import router as telemetry_router
 
 
 def create_app() -> FastAPI:
     app = FastAPI(
         title=settings.app_name,
-        version="0.1.0",
+        version="0.2.0",
         description="Outil de supervision réseau orienté SOC — DevinciWatch MVP",
     )
 
@@ -24,6 +27,9 @@ def create_app() -> FastAPI:
     )
 
     app.include_router(auth_router, prefix="/auth", tags=["auth"])
+    app.include_router(telemetry_router, prefix="/telemetry", tags=["telemetry"])
+    app.include_router(assets_router, prefix="/assets", tags=["assets"])
+    app.include_router(alerts_router, prefix="/alerts", tags=["alerts"])
 
     @app.get("/health", tags=["system"], summary="Santé applicative")
     def health() -> dict:

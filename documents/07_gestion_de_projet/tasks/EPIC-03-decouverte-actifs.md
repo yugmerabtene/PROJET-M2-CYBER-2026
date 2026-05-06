@@ -15,25 +15,25 @@ Identifier actifs, ports et services observables dans le lab (Priorité P1)
 
 ## Tasks Techniques (US-03.1 - Scan IP)
 
-- [ ] Scan contrôlé (limites IP lab) - Ken Thompson
-- [ ] Modèle `Asset` PostgreSQL - Barbara Liskov
-- [ ] Route `POST /scan` (FastAPI) - Ken Thompson
-- [ ] Association IP → Asset - Barbara Liskov
+- [x] Scan contrôlé (limites IP lab) - Ken Thompson
+- [x] Modèle `Asset` PostgreSQL - Barbara Liskov
+- [x] Route `POST /scan` (FastAPI) - Ken Thompson
+- [x] Association IP → Asset - Barbara Liskov
 - [ ] Vue liste actifs (API + UI) - Tim Berners-Lee
-- [ ] Tests scan contrôlé - Margaret Hamilton
+- [x] Tests scan contrôlé - Margaret Hamilton
 
 ## Tasks Techniques (US-03.2 - Inventaire)
 
-- [ ] Création actif depuis événements - Barbara Liskov
-- [ ] Route `GET /assets` (API) - Barbara Liskov
+- [x] Création actif depuis événements - Barbara Liskov
+- [x] Route `GET /assets` (API) - Barbara Liskov
 - [ ] Vue détail actif (UI) - Tim Berners-Lee
-- [ ] Mise à jour actif (heartbeat/events) - Ken Thompson
+- [x] Mise à jour actif (heartbeat/events) - Ken Thompson
 
 ## Tasks Techniques (US-03.3 - Ports/Services)
 
-- [ ] Scan ports (nmap/ scapy simplifié) - Ken Thompson
-- [ ] Modèle `PortFinding` - Barbara Liskov
-- [ ] Association actif → ports - Ken Thompson
+- [x] Scan ports (nmap/ scapy simplifié) - Ken Thompson
+- [x] Modèle `PortFinding` - Barbara Liskov
+- [x] Association actif → ports - Ken Thompson
 - [ ] Affichage ports/services - Tim Berners-Lee
 
 ## Definition of Ready (US-03.1)
@@ -60,6 +60,6 @@ Identifier actifs, ports et services observables dans le lab (Priorité P1)
 
 ## GitHub Project
 
-- Status actuel recommandé : `Backlog`
+- Status actuel recommandé : `In Review`
 - Labels recommandés : `epic`, `user-story`, `backend`, `assets`, `discovery`
 - Issues GitHub : à compléter dans la colonne `Issue #`
