@@ -131,7 +131,7 @@ class TestMainIntegration(unittest.TestCase):
     def test_main_version_updated(self):
         fp = os.path.join(BACKEND_DIR, "app", "main.py")
         content = open(fp).read()
-        self.assertIn("0.3.0", content)
+        self.assertIn("0.5.0", content)
 
     def test_all_routers_registered(self):
         fp = os.path.join(BACKEND_DIR, "app", "main.py")

@@ -40,7 +40,7 @@ class Alert(Base):
     )
     raw_payload: Mapped[dict] = mapped_column(JSON, nullable=True)
 
-    audit_logs: Mapped[list["AuditLog"]] = relationship(back_populates="alert", lazy="selectin")
+    audit_logs: Mapped[list["AuditLog"]] = relationship(back_populates="alert_rel", lazy="selectin")
 
 
 class AuditLog(Base):

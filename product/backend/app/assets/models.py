@@ -26,7 +26,7 @@ class Asset(Base):
         default=lambda: datetime.now(timezone.utc),
         nullable=False,
     )
-    metadata: Mapped[dict] = mapped_column(JSON, nullable=True)
+    metadata_json: Mapped[dict] = mapped_column("metadata", JSON, nullable=True)
 
     ports: Mapped[list["PortFinding"]] = relationship(back_populates="asset", lazy="selectin", cascade="all, delete-orphan")
 

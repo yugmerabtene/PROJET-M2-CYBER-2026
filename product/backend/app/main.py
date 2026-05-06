@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 from sqlalchemy import text
 
 from app.alerts.routes import router as alerts_router
@@ -9,6 +11,7 @@ from app.auth.service import create_user, get_by_username
 from app.core.config import settings
 from app.core.database import Base, SessionLocal, engine
 from app.correlation.routes import router as correlation_router
+from app.frontend.routes import router as frontend_router
 from app.reports.routes import router as reports_router
 from app.telemetry.routes import router as telemetry_router
 
@@ -16,7 +19,7 @@ from app.telemetry.routes import router as telemetry_router
 def create_app() -> FastAPI:
     app = FastAPI(
         title=settings.app_name,
-        version="0.3.0",
+        version="0.5.0",
         description="Outil de supervision reseau oriente SOC - DevinciWatch MVP",
     )
 
@@ -34,6 +37,11 @@ def create_app() -> FastAPI:
     app.include_router(alerts_router, prefix="/alerts", tags=["alerts"])
     app.include_router(correlation_router, prefix="/correlation", tags=["correlation"])
     app.include_router(reports_router, prefix="/reports", tags=["reports"])
+    app.include_router(frontend_router, tags=["frontend"])
+
+    static_dir = Path(__file__).parent / "frontend" / "static"
+    if static_dir.exists():
+        app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 
     @app.get("/health", tags=["system"], summary="Sante applicative")
     def health() -> dict:
