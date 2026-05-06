@@ -167,6 +167,9 @@ def run_loop() -> None:
     mode = detect_mode()
     interfaces = list_interfaces()
     previous_connections: list[dict] = []
+    connection_tracker: list[dict] = []
+    port_scan_window: list[float] = []
+    ssh_attempt_times: list[float] = []
 
     print(f"[agent] démarré — sensor={cfg.sensor_id} mode={mode} api={cfg.api_url}")
 
@@ -182,8 +185,62 @@ def run_loop() -> None:
             payload={"mode": mode, "interfaces": counters},
         )
 
-        previous_connections = detect_suspicious_connections(cfg, previous_connections)
+        current_connections = read_tcp_connections()
 
+        # Detect suspicious new connections
+        prev_keys = {(c["remote_ip"], c["remote_port"]) for c in connection_tracker}
+        for conn in current_connections:
+            key = (conn["remote_ip"], conn["remote_port"])
+            if key not in prev_keys and conn["remote_ip"] not in ("0.0.0.0", "127.0.0.1"):
+                send_event(
+                    cfg,
+                    event_type="suspicious_connection",
+                    severity="high",
+                    message=f"Nouvelle connexion entrante depuis {conn['remote_ip']}:{conn['remote_port']}",
+                    payload={"source_ip": conn["remote_ip"], "connection": conn},
+                )
+                connection_tracker.append(conn)
+
+        # Detect port scans (multiple ports in short window)
+        now = time.time()
+        port_scan_window = [t for t in port_scan_window if now - t < 30]
+        ssh_attempt_times = [t for t in ssh_attempt_times if now - t < 60]
+
+        # Track connection attempts to different ports
+        active_ports = {(c["remote_ip"], c["remote_port"]) for c in current_connections}
+        if len(active_ports) > 5:
+            send_event(
+                cfg,
+                event_type="network_scan",
+                severity="high",
+                message=f"Scan détecté: {len(active_ports)} ports actifs",
+                payload={"source_ip": "external", "active_ports": len(active_ports), "ports": [c["remote_port"] for c in current_connections[:20]]},
+            )
+
+        # Detect SSH brute force (many connection attempts to port 22)
+        ssh_attempts = [c for c in current_connections if c.get("local_port") == 22 or c.get("remote_port") == 22]
+        if len(ssh_attempts) >= 3:
+            for _ in range(min(3, len(ssh_attempts) - len(ssh_attempt_times))):
+                ssh_attempt_times.append(now)
+            send_event(
+                cfg,
+                event_type="brute_force",
+                severity="critical",
+                message=f"Tentatives SSH brute force détectées ({len(ssh_attempts)} connexions)",
+                payload={"source_ip": "external", "attempts": len(ssh_attempts), "port": 22},
+            )
+
+        # Detect traffic burst (high volume of connections)
+        if len(current_connections) > 15:
+            send_event(
+                cfg,
+                event_type="traffic_burst",
+                severity="high",
+                message=f"Rafale de connexions détectée ({len(current_connections)} connexions)",
+                payload={"source_ip": "external", "connection_count": len(current_connections)},
+            )
+
+        previous_connections = current_connections
         time.sleep(cfg.interval_seconds)
 
 

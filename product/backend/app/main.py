@@ -11,9 +11,11 @@ from app.auth.routes import router as auth_router
 from app.auth.service import create_user, get_by_username
 from app.core.config import settings
 from app.core.database import Base, SessionLocal, engine
+from app.core.realtime import router as realtime_router
 from app.correlation.routes import router as correlation_router
 from app.discovery.routes import router as discovery_router
 from app.frontend.routes import router as frontend_router
+from app.ml.routes import router as ml_router
 from app.reports.routes import router as reports_router
 from app.telemetry.routes import router as telemetry_router
 
@@ -40,8 +42,10 @@ def create_app() -> FastAPI:
     app.include_router(discovery_router, prefix="/discovery", tags=["discovery"])
     app.include_router(audit_router, prefix="/audit", tags=["audit"])
     app.include_router(correlation_router, prefix="/correlation", tags=["correlation"])
+    app.include_router(ml_router, prefix="/correlation", tags=["ml"])
     app.include_router(reports_router, prefix="/reports", tags=["reports"])
     app.include_router(frontend_router, tags=["frontend"])
+    app.include_router(realtime_router, tags=["realtime"])
 
     static_dir = Path(__file__).parent / "frontend" / "static"
     if static_dir.exists():

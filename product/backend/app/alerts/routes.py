@@ -32,6 +32,11 @@ def create_alert_route(
 ):
     alert = create_alert(db, title, severity, source_ip, target_ip, rule_name, description)
     log_audit(db, action="alert_created", actor=user.username, target_type="alert", target_id=alert.id)
+
+    # Broadcast real-time update
+    from app.core.realtime import send_dashboard_update
+    send_dashboard_update()
+
     return alert
 
 
@@ -51,7 +56,7 @@ def update_alert_status_route(
     return alert
 
 
-@router.get("/{alert_id}", response_model=AlertResponse, summary="Détail d'une alerte")
+@router.get("/{alert_id}", summary="Detail enrichi d'une alerte")
 def get_alert_route(
     alert_id: int,
     db: Session = Depends(get_db),
@@ -60,7 +65,78 @@ def get_alert_route(
     alert = get_alert_by_id(db, alert_id)
     if alert is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Alerte introuvable")
-    return alert
+
+    # Enrich with linked events and correlation info
+    from app.telemetry.models import TelemetryEvent
+    from app.correlation.models import CorrelatedEvent, CorrelationGroup
+
+    # Find events matching alert's source/target IP and time window
+    related_events = (
+        db.query(TelemetryEvent)
+        .filter(
+            (TelemetryEvent.source_ip == alert.source_ip) | (TelemetryEvent.target_ip == alert.target_ip)
+        )
+        .order_by(TelemetryEvent.observed_at.desc())
+        .limit(50)
+        .all()
+    )
+
+    # Find correlation groups that contain events related to this alert
+    event_ids = [e.id for e in related_events]
+    if event_ids:
+        correlated = (
+            db.query(CorrelatedEvent)
+            .filter(CorrelatedEvent.telemetry_event_id.in_(event_ids))
+            .all()
+        )
+        correlation_group_ids = list(set(c.group_id for c in correlated))
+        correlations = (
+            db.query(CorrelationGroup)
+            .filter(CorrelationGroup.id.in_(correlation_group_ids))
+            .all()
+        )
+    else:
+        correlations = []
+
+    return {
+        "id": alert.id,
+        "title": alert.title,
+        "severity": alert.severity,
+        "status": alert.status,
+        "source_ip": alert.source_ip,
+        "target_ip": alert.target_ip,
+        "rule_name": alert.rule_name,
+        "description": alert.description,
+        "created_at": alert.created_at,
+        "updated_at": alert.updated_at,
+        "related_events": [
+            {
+                "id": e.id,
+                "event_type": e.event_type,
+                "source_ip": e.source_ip,
+                "target_ip": e.target_ip,
+                "severity": e.severity,
+                "message": e.message,
+                "observed_at": e.observed_at,
+                "raw_payload": e.raw_payload,
+            }
+            for e in related_events
+        ],
+        "related_correlations": [
+            {
+                "id": g.id,
+                "group_type": g.group_type,
+                "source_ip": g.source_ip,
+                "severity": g.severity,
+                "event_count": g.event_count,
+                "is_resolved": g.is_resolved,
+                "ml_anomaly_score": g.ml_anomaly_score,
+            }
+            for g in correlations
+        ],
+        "event_count": len(related_events),
+        "correlation_count": len(correlations),
+    }
 
 
 @router.post("/detect", response_model=list[AlertResponse], summary="Évaluer les règles de détection sur des événements")

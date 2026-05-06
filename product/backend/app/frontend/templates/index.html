@@ -92,6 +92,14 @@
                 </svg>
                 Correlations
             </a>
+            <a href="/audit" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors"
+               :class="currentPage === 'audit' ? 'bg-soc-accent/10 text-soc-accent border-l-2 border-soc-accent' : 'text-soc-muted hover:bg-soc-bg hover:text-soc-text'"
+               @click.prevent="navigate('audit')">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Audit Logs
+            </a>
             <a href="/reports" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors"
                :class="currentPage === 'reports' ? 'bg-soc-accent/10 text-soc-accent border-l-2 border-soc-accent' : 'text-soc-muted hover:bg-soc-bg hover:text-soc-text'"
                @click.prevent="navigate('reports')">
@@ -180,8 +188,23 @@
                 <div x-html="pageContent"></div>
             </template>
         </div>
+
+        <!-- Correlation Detail Modal -->
+        <template x-if="showCorrelationDetail">
+            <div x-html="renderCorrelationDetailHTML()"></div>
+        </template>
+
+        <!-- Event Detail Modal -->
+        <template x-if="showEventDetail">
+            <div x-html="renderEventDetailHTML()"></div>
+        </template>
+
+        <!-- Alert Detail Modal -->
+        <template x-if="showAlertDetail">
+            <div x-html="renderAlertDetailHTML()"></div>
+        </template>
     </main>
 
-    <script src="/static/js/app.js"></script>
+    <script src="/static/js/app.js?v=8"></script>
 </body>
 </html>

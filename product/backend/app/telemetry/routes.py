@@ -14,12 +14,14 @@ from app.telemetry.service import (
     get_agent_by_id,
     get_agents,
     get_events,
+    get_event_by_id,
     get_heartbeats,
     get_latest_heartbeat,
     get_or_create_agent,
     record_event,
     record_heartbeat,
 )
+from app.alerts.service import evaluate_detection_rules
 
 router = APIRouter()
 
@@ -57,6 +59,28 @@ def ingest_event(
     try:
         agent = get_or_create_agent(db, payload)
         event = record_event(db, agent, payload)
+
+        # Broadcast real-time update
+        from app.core.realtime import send_dashboard_update
+        send_dashboard_update()
+
+        # Trigger alert evaluation for recent events from same source IP
+        if payload.source_ip:
+            recent_events = get_events(db, limit=20, event_type=None, severity=None)
+            events_dict = [
+                {
+                    "source_ip": e.source_ip,
+                    "target_ip": e.target_ip,
+                    "event_type": e.event_type,
+                    "severity": e.severity,
+                    "message": e.message,
+                    "raw_payload": e.raw_payload,
+                }
+                for e in recent_events
+                if e.source_ip
+            ]
+            evaluate_detection_rules(db, events_dict)
+
         return event
     except TelemetryError as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
@@ -101,6 +125,22 @@ def list_events(
     _user=Depends(get_current_user),
 ):
     return get_events(db, limit, event_type, severity)
+
+
+@router.get(
+    "/events/{event_id}",
+    response_model=TelemetryEventResponse,
+    summary="Detail d'un evenement de telemetrique",
+)
+def get_event(
+    event_id: int,
+    db: Session = Depends(get_db),
+    _user=Depends(get_current_user),
+):
+    event = get_event_by_id(db, event_id)
+    if event is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Evenement introuvable")
+    return event
 
 
 @router.get(

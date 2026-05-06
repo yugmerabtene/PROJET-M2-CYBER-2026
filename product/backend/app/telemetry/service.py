@@ -117,3 +117,7 @@ def get_agents(db: Session) -> list[Agent]:
 
 def get_agent_by_id(db: Session, agent_id: int) -> Agent | None:
     return db.query(Agent).filter(Agent.id == agent_id).first()
+
+
+def get_event_by_id(db: Session, event_id: int) -> TelemetryEvent | None:
+    return db.query(TelemetryEvent).filter(TelemetryEvent.id == event_id).first()

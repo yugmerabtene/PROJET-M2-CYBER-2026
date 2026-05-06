@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     redis_url: str = "redis://localhost:6379/0"
 
     default_admin_username: str = "admin"
-    default_admin_password: str = "ChangeMeNow123!"
+    default_admin_password: str = "password"
 
     agent_ingest_key: str = "devinciwatch-agent-key-change-me"
 
