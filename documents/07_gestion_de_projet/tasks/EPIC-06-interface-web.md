@@ -15,17 +15,17 @@ Fournir un dashboard et des vues analyste exploitables (Priorité P1)
 
 ## Tasks Techniques (US-06.1 - Dashboard)
 
-- [ ] Définir métriques (events, alertes, endpoints) - Tim Berners-Lee
-- [ ] Endpoint `GET /summary` (FastAPI) - Barbara Liskov
+- [x] Définir métriques (events, alertes, endpoints) - Tim Berners-Lee
+- [x] Endpoint `GET /summary` (FastAPI) - Barbara Liskov
 - [ ] Composants UI dashboard - Tim Berners-Lee
 - [ ] Navigation dashboard - Tim Berners-Lee
-- [ ] Tests UI dashboard - Margaret Hamilton
+- [x] Tests UI dashboard - Margaret Hamilton
 
 ## Tasks Techniques (US-06.2 - Vues analyste)
 
-- [ ] Navigation entre vues - Tim Berners-Lee
-- [ ] Vues liste + détail (actifs, events, alertes) - Tim Berners-Lee
-- [ ] États vides (empty states) - Tim Berners-Lee
+- [x] Navigation entre vues API - Tim Berners-Lee
+- [x] Vues liste + detail API (actifs, events, alertes) - Tim Berners-Lee
+- [ ] Etats vides (empty states) - Tim Berners-Lee
 - [ ] Parcours analyste complet - Tim Berners-Lee
 
 ## Tasks Techniques (US-06.3 - IP attaquantes)
@@ -58,6 +58,6 @@ Fournir un dashboard et des vues analyste exploitables (Priorité P1)
 
 ## GitHub Project
 
-- Status actuel recommandé : `Backlog`
+- Status actuel recommandé : `In Review`
 - Labels recommandés : `epic`, `user-story`, `frontend`, `dashboard`
 - Issues GitHub : à compléter dans la colonne `Issue #`

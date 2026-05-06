@@ -15,19 +15,19 @@ Regrouper des événements liés pour améliorer la lisibilité SOC (Priorité P
 
 ## Tasks Techniques (US-05.1 - IP)
 
-- [ ] Règle corrélation IP - Ken Thompson
-- [ ] Modèle `CorrelationGroup` - Barbara Liskov
-- [ ] Association events → groupe - Ken Thompson
-- [ ] Endpoint corrélations (API) - Barbara Liskov
+- [x] Règle corrélation IP - Ken Thompson
+- [x] Modèle `CorrelationGroup` - Barbara Liskov
+- [x] Association events → groupe - Ken Thompson
+- [x] Endpoint corrélations (API) - Barbara Liskov
 - [ ] Vue groupes IP (UI) - Tim Berners-Lee
-- [ ] Tests corrélation IP - Margaret Hamilton
+- [x] Tests corrélation IP - Margaret Hamilton
 
 ## Tasks Techniques (US-05.2 - Temporelle)
 
-- [ ] Paramètre fenêtre temporelle - Ken Thompson
-- [ ] Requête temporelle PostgreSQL - Barbara Liskov
-- [ ] Scoring simple corrélation - Ken Thompson
-- [ ] Tests scénario temporel - Margaret Hamilton
+- [x] Paramètre fenêtre temporelle - Ken Thompson
+- [x] Requête temporelle PostgreSQL - Barbara Liskov
+- [x] Scoring simple corrélation - Ken Thompson
+- [x] Tests scénario temporel - Margaret Hamilton
 
 ## Tasks Techniques (US-05.3 - Vue)
 
@@ -58,6 +58,6 @@ Regrouper des événements liés pour améliorer la lisibilité SOC (Priorité P
 
 ## GitHub Project
 
-- Status actuel recommandé : `Backlog`
+- Status actuel recommandé : `In Review`
 - Labels recommandés : `epic`, `user-story`, `backend`, `correlation`
 - Issues GitHub : à compléter dans la colonne `Issue #`

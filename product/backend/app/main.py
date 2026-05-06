@@ -8,14 +8,16 @@ from app.auth.routes import router as auth_router
 from app.auth.service import create_user, get_by_username
 from app.core.config import settings
 from app.core.database import Base, SessionLocal, engine
+from app.correlation.routes import router as correlation_router
+from app.reports.routes import router as reports_router
 from app.telemetry.routes import router as telemetry_router
 
 
 def create_app() -> FastAPI:
     app = FastAPI(
         title=settings.app_name,
-        version="0.2.0",
-        description="Outil de supervision réseau orienté SOC — DevinciWatch MVP",
+        version="0.3.0",
+        description="Outil de supervision reseau oriente SOC - DevinciWatch MVP",
     )
 
     app.add_middleware(
@@ -30,8 +32,10 @@ def create_app() -> FastAPI:
     app.include_router(telemetry_router, prefix="/telemetry", tags=["telemetry"])
     app.include_router(assets_router, prefix="/assets", tags=["assets"])
     app.include_router(alerts_router, prefix="/alerts", tags=["alerts"])
+    app.include_router(correlation_router, prefix="/correlation", tags=["correlation"])
+    app.include_router(reports_router, prefix="/reports", tags=["reports"])
 
-    @app.get("/health", tags=["system"], summary="Santé applicative")
+    @app.get("/health", tags=["system"], summary="Sante applicative")
     def health() -> dict:
         db_status = "ok"
         try:
