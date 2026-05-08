@@ -1,9 +1,19 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import Boolean, DateTime, String, Text, JSON, Integer, ForeignKey
+from sqlalchemy import Boolean, DateTime, String, Text, JSON, Integer, ForeignKey, Table
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
+from app.correlation.association import AlertCorrelationAssociation
+
+# Table d'association many-to-many
+alert_correlation_assoc = Table(
+    "alert_correlation_assoc",
+    Base.metadata,
+    Column("alert_id", Integer, ForeignKey("alerts.id"), primary_key=True),
+    Column("correlation_group_id", Integer, ForeignKey("correlation_groups.id"), primary_key=True),
+    Column("linked_at", DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+)
 
 
 class Alert(Base):
@@ -40,10 +50,11 @@ class Alert(Base):
     )
     raw_payload: Mapped[dict] = mapped_column(JSON, nullable=True)
 
-    # NOUVEAU : Relation many-to-many avec CorrelationGroup
+    # Relation many-to-many avec CorrelationGroup
     correlation_groups: Mapped[list["CorrelationGroup"]] = relationship(
+        "CorrelationGroup",
         back_populates="alerts",
-        secondary="alert_correlation_assoc"
+        secondary=alert_correlation_assoc
     )
 
     audit_logs: Mapped[list["AuditLog"]] = relationship(back_populates="alert_rel", lazy="selectin")

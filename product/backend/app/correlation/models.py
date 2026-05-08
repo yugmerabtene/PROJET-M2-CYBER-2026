@@ -1,9 +1,11 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import Boolean, DateTime, String, Text, JSON, Integer, ForeignKey
+from sqlalchemy import Boolean, DateTime, String, Text, JSON, Integer, ForeignKey, Table
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
+from app.alerts.models import Alert
+from app.correlation.association import AlertCorrelationAssociation
 
 
 class CorrelationGroup(Base):
@@ -42,6 +44,13 @@ class CorrelationGroup(Base):
     score_breakdown: Mapped[dict] = mapped_column(JSON, nullable=True)
 
     events: Mapped[list["CorrelatedEvent"]] = relationship(back_populates="group", lazy="selectin", cascade="all, delete-orphan")
+    
+    # Many-to-many with Alert
+    alerts: Mapped[list["Alert"]] = relationship(
+        "Alert",
+        back_populates="correlation_groups",
+        secondary=AlertCorrelationAssociation.__tablename__
+    )
 
 
 class CorrelatedEvent(Base):
