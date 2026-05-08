@@ -1,10 +1,9 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import Boolean, DateTime, String, Text, JSON, Integer, ForeignKey, Table
+from sqlalchemy import Boolean, DateTime, String, Text, JSON, Integer, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
-from app.correlation.association import AlertCorrelationAssociation
 
 
 class CorrelationGroup(Base):
@@ -35,7 +34,6 @@ class CorrelationGroup(Base):
         nullable=False,
     )
 
-    # NOUVEAUX CHAMPS
     correlation_score: Mapped[float] = mapped_column(default=0.0, nullable=False, index=True)
     hostname: Mapped[str] = mapped_column(String(255), nullable=True, index=True)
     ip_cidr: Mapped[str] = mapped_column(String(20), nullable=True, index=True)
@@ -43,13 +41,6 @@ class CorrelationGroup(Base):
     score_breakdown: Mapped[dict] = mapped_column(JSON, nullable=True)
 
     events: Mapped[list["CorrelatedEvent"]] = relationship(back_populates="group", lazy="selectin", cascade="all, delete-orphan")
-    
-    # Many-to-many with Alert - use string reference to avoid circular import
-    alerts: Mapped[list["Alert"]] = relationship(
-        "Alert",
-        back_populates="correlation_groups",
-        secondary=AlertCorrelationAssociation.__tablename__
-    )
 
 
 class CorrelatedEvent(Base):
@@ -66,7 +57,6 @@ class CorrelatedEvent(Base):
     observed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     raw_payload: Mapped[dict] = mapped_column(JSON, nullable=True)
 
-    # NOUVEAUX CHAMPS
     sequence_order: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     ml_anomaly_score: Mapped[float] = mapped_column(default=0.0, nullable=False)
 
