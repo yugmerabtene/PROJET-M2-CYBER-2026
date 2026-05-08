@@ -40,6 +40,12 @@ class Alert(Base):
     )
     raw_payload: Mapped[dict] = mapped_column(JSON, nullable=True)
 
+    # NOUVEAU : Relation many-to-many avec CorrelationGroup
+    correlation_groups: Mapped[list["CorrelationGroup"]] = relationship(
+        back_populates="alerts",
+        secondary="alert_correlation_assoc"
+    )
+
     audit_logs: Mapped[list["AuditLog"]] = relationship(back_populates="alert_rel", lazy="selectin")
 
 

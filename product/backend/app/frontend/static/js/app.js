@@ -1,5 +1,9 @@
 function app() {
     return {
+        // i18n
+        currentLang: localStorage.getItem('dw_lang') || 'fr',
+        translations: {},
+        
         // State
         isAuthenticated: false,
         token: localStorage.getItem('dw_token') || null,
@@ -27,9 +31,34 @@ function app() {
             return { 'Authorization': `Bearer ${this.token}` };
         },
 
+        // i18n
+        async initI18n() {
+            try {
+                const response = await fetch(`/static/i18n/${this.currentLang}.json`);
+                if (response.ok) {
+                    this.translations = await response.json();
+                }
+            } catch (e) {
+                console.warn('[i18n] Failed to load translations:', e);
+            }
+        },
+        
+        t(key) {
+            return this.translations[key] || key;
+        },
+        
+        async switchLang(lang) {
+            this.currentLang = lang;
+            localStorage.setItem('dw_lang', lang);
+            await this.initI18n();
+            // Re-render current page with new language
+            await this.navigateTo(this.currentPage);
+        },
+        
         // Init
         init() {
             this.checkHealth();
+            this.initI18n();
             if (this.token) {
                 this.fetchUser();
             }
@@ -1179,6 +1208,144 @@ function app() {
                     </div>
                 </div>
             `;
+        },
+
+        // ===================== ATTACK LAB =====================
+        async renderAttackLab() {
+            try {
+                const r = await fetch('/attack-lab/scenarios', { headers: this.headers });
+                const scenarios = r.ok ? await r.json() : [];
+                
+                let scenarioCards = scenarios.length > 0 ? scenarios.map(s => `
+                    <div class="bg-soc-card border border-soc-border rounded-xl p-5 hover:border-soc-accent/50 transition-colors">
+                        <div class="flex items-center gap-3 mb-3">
+                            <svg class="w-5 h-5 text-soc-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                            <h4 class="text-sm font-medium text-white">${s.name}</h4>
+                        </div>
+                        <p class="text-xs text-soc-muted mb-3">${s.description || s.id}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs px-2 py-1 rounded bg-soc-bg text-soc-muted border border-soc-border">${s.tool}</span>
+                            <button @click="launchAttack('${s.id}')" class="px-3 py-1.5 bg-soc-accent/10 text-soc-accent border border-soc-accent/20 rounded-lg text-xs hover:bg-soc-accent/20 transition-colors">${this.t('launch_attack')}</button>
+                        </div>
+                    </div>
+                `).join('') : '<p class="text-soc-muted text-center py-8">Aucun scénario disponible</p>';
+                
+                this.pageContent = `
+                    <div class="space-y-6">
+                        <!-- Header with Language Selector -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-semibold text-white">${this.t('attack_lab')}</h3>
+                                <p class="text-sm text-soc-muted mt-1">${this.t('launch_attack')} - ${this.t('target')}: serveur-endpoint</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs text-soc-muted">${this.t('language')}:</span>
+                                <select @change="switchLang($event.target.value)" class="bg-soc-bg border border-soc-border text-white text-xs rounded-lg px-2 py-1.5">
+                                    <option value="fr" ${this.currentLang === 'fr' ? 'selected' : ''}>${this.t('french')}</option>
+                                    <option value="en" ${this.currentLang === 'en' ? 'selected' : ''}>${this.t('english')}</option>
+                                    <option value="es" ${this.currentLang === 'es' ? 'selected' : ''}>${this.t('spanish')}</option>
+                                    <option value="de" ${this.currentLang === 'de' ? 'selected' : ''}>${this.t('german')}</option>
+                                    <option value="ar" ${this.currentLang === 'ar' ? 'selected' : ''}>${this.t('arabic')}</option>
+                                    <option value="it" ${this.currentLang === 'it' ? 'selected' : ''}>${this.t('italian')}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="bg-soc-card border border-soc-border rounded-xl p-5">
+                            <h4 class="text-sm font-medium text-white mb-3">${this.t('quick_actions') || 'Actions rapides'}</h4>
+                            <div class="flex gap-3">
+                                <button @click="launchAttack('port_scan', 'low')" class="px-4 py-2 bg-soc-accent/10 text-soc-accent border border-soc-accent/20 rounded-lg text-sm hover:bg-soc-accent/20 transition-colors">${this.t('recon')} (Low)</button>
+                                <button @click="launchAttack('brute_force', 'medium')" class="px-4 py-2 bg-soc-warning/10 text-soc-warning border border-soc-warning/20 rounded-lg text-sm hover:bg-soc-warning/20 transition-colors">${this.t('brute_force')} (Med)</button>
+                                <button @click="launchAttack('attack_chain_full', 'low')" class="px-4 py-2 bg-soc-danger/10 text-soc-danger border border-soc-danger/20 rounded-lg text-sm hover:bg-soc-danger/20 transition-colors">${this.t('kill_chain')}</button>
+                                <button @click="stopAllAttacks()" class="px-4 py-2 bg-soc-danger/10 text-soc-danger border border-soc-danger/20 rounded-lg text-sm hover:bg-soc-danger/20 transition-colors">${this.t('stop_all')}</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Scenarios Grid -->
+                        <div>
+                            <h4 class="text-sm font-medium text-white mb-3">${this.t('scenario')}s disponibles</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                ${scenarioCards}
+                            </div>
+                        </div>
+                        
+                        <!-- Active Jobs -->
+                        <div class="bg-soc-card border border-soc-border rounded-xl p-5">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="text-sm font-medium text-white">${this.t('history')} - Jobs récents</h4>
+                                <button @click="refreshAttackJobs()" class="text-xs text-soc-accent hover:underline">Actualiser</button>
+                            </div>
+                            <div id="attack-jobs-list" class="space-y-2">
+                                <p class="text-xs text-soc-muted">Cliquez sur "Actualiser" pour voir les jobs</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch (e) {
+                this.pageContent = `<div class="bg-soc-danger/10 border border-soc-danger rounded-lg p-6"><p class="text-soc-danger">Erreur: ${e.message}</p></div>`;
+            }
+        },
+
+        async launchAttack(scenario, intensity = 'low') {
+            try {
+                const r = await fetch('/attack-lab/launch', {
+                    method: 'POST',
+                    headers: { ...this.headers, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ scenario, intensity, target: 'serveur-endpoint' })
+                });
+                if (r.ok) {
+                    const data = await r.json();
+                    alert(`Attaque lancée: ${data.job_id}`);
+                    setTimeout(() => this.refreshAttackJobs(), 1000);
+                } else {
+                    alert(`Erreur: ${await r.text()}`);
+                }
+            } catch (e) {
+                alert(`Erreur: ${e.message}`);
+            }
+        },
+
+        async stopAllAttacks() {
+            try {
+                const r = await fetch('/attack-lab/stop-all', {
+                    method: 'POST',
+                    headers: this.headers
+                });
+                if (r.ok) {
+                    const data = await r.json();
+                    alert(`${data.message}`);
+                }
+            } catch (e) {
+                console.error('Stop all error:', e);
+            }
+        },
+
+        async refreshAttackJobs() {
+            try {
+                const r = await fetch('/attack-lab/jobs', { headers: this.headers });
+                if (r.ok) {
+                    const jobs = await r.json();
+                    const jobsDiv = document.getElementById('attack-jobs-list');
+                    if (jobsDiv) {
+                        if (jobs.length > 0) {
+                            jobsDiv.innerHTML = jobs.map(j => `
+                                <div class="bg-soc-bg rounded-lg p-3 border border-soc-border text-xs">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-white font-medium">${j.scenario || j.job_id}</span>
+                                        <span class="px-2 py-0.5 rounded ${j.status === 'running' ? 'bg-soc-success/10 text-soc-success' : j.status === 'completed' ? 'bg-soc-accent/10 text-soc-accent' : 'bg-soc-danger/10 text-soc-danger'}">${j.status}</span>
+                                    </div>
+                                    <p class="text-soc-muted">Job: ${j.job_id}</p>
+                                </div>
+                            `).join('');
+                        } else {
+                            jobsDiv.innerHTML = '<p class="text-xs text-soc-muted">Aucun job récent</p>';
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Refresh jobs error:', e);
+            }
         },
 
         // ===================== UTILS =====================

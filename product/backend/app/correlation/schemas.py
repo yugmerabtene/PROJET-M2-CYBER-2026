@@ -18,6 +18,13 @@ class CorrelationGroupResponse(BaseModel):
     is_resolved: bool
     created_at: datetime
 
+    # NOUVEAUX CHAMPS
+    correlation_score: float = 0.0
+    hostname: str | None = None
+    ip_cidr: str | None = None
+    attack_chain_type: str | None = None
+    score_breakdown: dict | None = None
+
     model_config = {"from_attributes": True}
 
 
