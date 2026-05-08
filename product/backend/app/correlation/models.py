@@ -4,7 +4,6 @@ from sqlalchemy import Boolean, DateTime, String, Text, JSON, Integer, ForeignKe
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
-from app.alerts.models import Alert
 from app.correlation.association import AlertCorrelationAssociation
 
 
@@ -45,7 +44,7 @@ class CorrelationGroup(Base):
 
     events: Mapped[list["CorrelatedEvent"]] = relationship(back_populates="group", lazy="selectin", cascade="all, delete-orphan")
     
-    # Many-to-many with Alert
+    # Many-to-many with Alert - use string reference to avoid circular import
     alerts: Mapped[list["Alert"]] = relationship(
         "Alert",
         back_populates="correlation_groups",
