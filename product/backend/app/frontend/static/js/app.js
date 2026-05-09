@@ -18,6 +18,21 @@ function app() {
         pageContent: '',
         pageTitle: 'Dashboard',
         pageSubtitle: 'Vue d\'ensemble de la plateforme SOC',
+        dockerHealthRefreshTimer: null,
+        attackLabConfig: {
+            scenario: 'recon_nmap',
+            target: 'serveur-endpoint',
+            intensity: 'low',
+            duration: 60,
+        },
+        attackPresetLabels: {
+            'recon': 'Recon',
+            'web': 'Web',
+            'bruteforce': 'Bruteforce',
+            'dos': 'DoS',
+            'kill-chain': 'Kill Chain',
+            'other': 'Autres',
+        },
 
         // Real-time state
         sseConnected: false,
@@ -182,6 +197,10 @@ function app() {
 
         async navigateTo(page) {
             if (!this.isAuthenticated) return;
+            if (this.dockerHealthRefreshTimer) {
+                clearTimeout(this.dockerHealthRefreshTimer);
+                this.dockerHealthRefreshTimer = null;
+            }
             this.loading = true;
             const routes = {
                 'dashboard': { title: 'Dashboard', subtitle: 'Vue d\'ensemble de la plateforme SOC', render: this.renderDashboard },
@@ -189,6 +208,8 @@ function app() {
                 'events': { title: 'Evenements', subtitle: 'Journal des evenements telemetrique', render: this.renderEvents },
                 'assets': { title: 'Actifs', subtitle: 'Inventaire des actifs supervises', render: this.renderAssets },
                 'correlations': { title: 'Correlations', subtitle: 'Groupement d\'evenements lies', render: this.renderCorrelations },
+                'attack-lab': { title: 'Attack Lab', subtitle: 'Pilotage des attaques et campagnes de test', render: this.renderAttackLab },
+                'docker-health': { title: 'Docker Health', subtitle: 'Etat logique et métriques des services du lab', render: this.renderDockerHealth },
                 'audit': { title: 'Audit Logs', subtitle: 'Journal de toutes les actions effectuees', render: this.renderAuditLogs },
                 'reports': { title: 'Rapports', subtitle: 'Exports et preuves de validation', render: this.renderReports },
             };
@@ -572,6 +593,9 @@ function app() {
         eventDetail: null,
         showAlertDetail: false,
         alertDetail: null,
+        showReportPreview: false,
+        reportPreviewTitle: '',
+        reportPreviewContent: '',
 
         async openCorrelationDetail(groupId) {
             try {
@@ -778,6 +802,64 @@ function app() {
                 }
             }
 
+            const relatedAlerts = e.related_alerts || [];
+            const relatedAlertCards = relatedAlerts.length > 0 ? relatedAlerts.map(a => `
+                <div class="bg-soc-bg rounded-lg p-4 border border-soc-border cursor-pointer hover:border-soc-accent/50 transition-colors" onclick="document.querySelector('[x-data]').__x.$data.closeEventDetail(); setTimeout(() => document.querySelector('[x-data]').__x.$data.openAlertDetail(${a.id}), 200)">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-white">Alerte #${a.id}</span>
+                        <span class="text-xs px-2 py-0.5 rounded ${a.status === 'resolved' ? 'bg-soc-success/10 text-soc-success' : 'bg-soc-danger/10 text-soc-danger'}">${a.status}</span>
+                    </div>
+                    <p class="text-sm text-white mb-1">${a.title}</p>
+                    <p class="text-xs text-soc-muted">${a.rule_name || '-'} | ${a.severity}</p>
+                </div>
+            `).join('') : '<p class="text-sm text-soc-muted">Aucune alerte liée</p>';
+
+            const relatedCorrelations = e.related_correlations || [];
+            const relatedCorrelationCards = relatedCorrelations.length > 0 ? relatedCorrelations.map(g => `
+                <div class="bg-soc-bg rounded-lg p-4 border border-soc-border cursor-pointer hover:border-soc-accent/50 transition-colors" onclick="document.querySelector('[x-data]').__x.$data.closeEventDetail(); setTimeout(() => document.querySelector('[x-data]').__x.$data.openCorrelationDetail(${g.id}), 200)">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-white">Corrélation #${g.id}</span>
+                        <span class="text-xs px-2 py-0.5 rounded ${g.is_resolved ? 'bg-soc-success/10 text-soc-success' : 'bg-soc-warning/10 text-soc-warning'}">${g.group_type}</span>
+                    </div>
+                    <p class="text-xs text-soc-muted">Score: ${g.correlation_score || 0} | Events: ${g.event_count || 0} | ${g.severity}</p>
+                </div>
+            `).join('') : '<p class="text-sm text-soc-muted">Aucune corrélation liée</p>';
+
+            const similarEvents = e.similar_events || [];
+            const similarEventRows = similarEvents.length > 0 ? similarEvents.map(s => `
+                <tr class="border-t border-soc-border hover:bg-soc-bg/50 transition-colors cursor-pointer" onclick="document.querySelector('[x-data]').__x.$data.closeEventDetail(); setTimeout(() => document.querySelector('[x-data]').__x.$data.openEventDetail(${s.id}), 200)">
+                    <td class="px-4 py-3 text-sm text-white">${s.event_type}</td>
+                    <td class="px-4 py-3 text-sm text-soc-mono">${s.source_ip || '-'}</td>
+                    <td class="px-4 py-3 text-sm text-soc-mono">${s.target_ip || '-'}</td>
+                    <td class="px-4 py-3 text-sm text-soc-muted">${this.formatDate(s.observed_at)}</td>
+                </tr>
+            `).join('') : '<tr><td colspan="4" class="px-4 py-8 text-center text-soc-muted">Aucun événement similaire</td></tr>';
+
+            const eventTimelineItems = [
+                ...relatedAlerts.map(a => ({
+                    kind: 'alert',
+                    label: `Alerte #${a.id}`,
+                    title: a.title,
+                    when: a.created_at,
+                    tone: a.severity === 'critical' ? 'bg-soc-danger' : 'bg-soc-warning',
+                })),
+                ...similarEvents.map(s => ({
+                    kind: 'event',
+                    label: `Event #${s.id}`,
+                    title: s.message || s.event_type,
+                    when: s.observed_at,
+                    tone: 'bg-soc-accent',
+                })),
+            ].sort((a, b) => new Date(a.when) - new Date(b.when));
+            const eventTimeline = eventTimelineItems.length > 0 ? eventTimelineItems.map(item => `
+                <div class="relative pl-6">
+                    <div class="absolute left-0 top-1.5 w-2.5 h-2.5 rounded-full ${item.tone}"></div>
+                    <div class="absolute left-1 top-4 bottom-[-12px] w-px bg-soc-border"></div>
+                    <p class="text-xs text-soc-muted">${this.formatDate(item.when)} · ${item.label}</p>
+                    <p class="text-sm text-white">${item.title}</p>
+                </div>
+            `).join('') : '<p class="text-sm text-soc-muted">Aucune timeline disponible</p>';
+
             return `
                 <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" @click.self="closeEventDetail()">
                     <div class="bg-soc-card border border-soc-border rounded-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
@@ -817,6 +899,26 @@ function app() {
                                 </div>
                             </div>
 
+                            ${e.agent ? `
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="bg-soc-bg rounded-lg p-4 border border-soc-border">
+                                    <p class="text-xs text-soc-muted">Agent</p>
+                                    <p class="text-sm text-white mt-1">${e.agent.sensor_id}</p>
+                                </div>
+                                <div class="bg-soc-bg rounded-lg p-4 border border-soc-border">
+                                    <p class="text-xs text-soc-muted">Hostname</p>
+                                    <p class="text-sm text-white mt-1">${e.agent.hostname || '-'}</p>
+                                </div>
+                                <div class="bg-soc-bg rounded-lg p-4 border border-soc-border">
+                                    <p class="text-xs text-soc-muted">Mode</p>
+                                    <p class="text-sm text-white mt-1">${e.agent.mode || '-'}</p>
+                                </div>
+                                <div class="bg-soc-bg rounded-lg p-4 border border-soc-border">
+                                    <p class="text-xs text-soc-muted">Reçu le</p>
+                                    <p class="text-sm text-white mt-1">${this.formatDate(e.received_at)}</p>
+                                </div>
+                            </div>` : ''}
+
                             <!-- Message -->
                             <div class="bg-soc-bg rounded-lg p-4 border border-soc-border">
                                 <h4 class="text-sm font-medium text-white mb-2">Message</h4>
@@ -840,6 +942,36 @@ function app() {
                                 <h4 class="text-sm font-medium text-white mb-2">Raw Payload</h4>
                                 ${rawPayload}
                             </div>
+
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                <div>
+                                    <h4 class="text-sm font-medium text-white mb-3">Alertes liées (${relatedAlerts.length})</h4>
+                                    <div class="space-y-2">${relatedAlertCards}</div>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-white mb-3">Corrélations liées (${relatedCorrelations.length})</h4>
+                                    <div class="space-y-2">${relatedCorrelationCards}</div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-medium text-white mb-3">Événements similaires (${similarEvents.length})</h4>
+                                <div class="bg-soc-bg rounded-lg border border-soc-border overflow-hidden">
+                                    <table class="w-full text-left">
+                                        <thead><tr class="text-xs text-soc-muted uppercase border-b border-soc-border bg-soc-card">
+                                            <th class="px-4 py-3">Type</th><th class="px-4 py-3">Source</th><th class="px-4 py-3">Cible</th><th class="px-4 py-3">Date</th>
+                                        </tr></thead>
+                                        <tbody>${similarEventRows}</tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-medium text-white mb-3">Timeline contextuelle</h4>
+                                <div class="bg-soc-bg rounded-lg border border-soc-border p-4 space-y-4">
+                                    ${eventTimeline}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -861,6 +993,12 @@ function app() {
         closeAlertDetail() {
             this.showAlertDetail = false;
             this.alertDetail = null;
+        },
+
+        closeReportPreview() {
+            this.showReportPreview = false;
+            this.reportPreviewTitle = '';
+            this.reportPreviewContent = '';
         },
 
         exportAlertDetail() {
@@ -926,6 +1064,48 @@ function app() {
                 </div>
             `).join('') : '<p class="text-sm text-soc-muted">Aucune correlation liee</p>';
 
+            const auditLogs = a.audit_logs || [];
+            const auditRows = auditLogs.length > 0 ? auditLogs.map(log => `
+                <tr class="border-t border-soc-border">
+                    <td class="px-4 py-3 text-sm text-white">${log.action}</td>
+                    <td class="px-4 py-3 text-sm text-soc-muted">${log.actor || 'system'}</td>
+                    <td class="px-4 py-3 text-sm text-soc-muted">${log.details || '-'}</td>
+                    <td class="px-4 py-3 text-sm text-soc-muted">${this.formatDate(log.created_at)}</td>
+                </tr>
+            `).join('') : '<tr><td colspan="4" class="px-4 py-8 text-center text-soc-muted">Aucune trace d\'audit</td></tr>';
+
+            let alertRawPayload = '-';
+            if (a.raw_payload) {
+                try {
+                    alertRawPayload = `<pre class="text-xs text-soc-muted bg-soc-card p-3 rounded-lg border border-soc-border overflow-x-auto">${JSON.stringify(typeof a.raw_payload === 'string' ? JSON.parse(a.raw_payload) : a.raw_payload, null, 2)}</pre>`;
+                } catch {
+                    alertRawPayload = `<pre class="text-xs text-soc-muted bg-soc-card p-3 rounded-lg border border-soc-border overflow-x-auto">${a.raw_payload}</pre>`;
+                }
+            }
+
+            const alertTimelineItems = [
+                ...(a.audit_logs || []).map(log => ({
+                    label: log.action,
+                    title: log.details || log.action,
+                    when: log.created_at,
+                    tone: 'bg-soc-accent',
+                })),
+                ...relatedEvents.map(evt => ({
+                    label: evt.event_type,
+                    title: evt.message || evt.event_type,
+                    when: evt.observed_at,
+                    tone: evt.severity === 'critical' ? 'bg-soc-danger' : evt.severity === 'high' ? 'bg-soc-warning' : 'bg-soc-accent',
+                })),
+            ].sort((x, y) => new Date(x.when) - new Date(y.when));
+            const alertTimeline = alertTimelineItems.length > 0 ? alertTimelineItems.map(item => `
+                <div class="relative pl-6">
+                    <div class="absolute left-0 top-1.5 w-2.5 h-2.5 rounded-full ${item.tone}"></div>
+                    <div class="absolute left-1 top-4 bottom-[-12px] w-px bg-soc-border"></div>
+                    <p class="text-xs text-soc-muted">${this.formatDate(item.when)} · ${item.label}</p>
+                    <p class="text-sm text-white">${item.title}</p>
+                </div>
+            `).join('') : '<p class="text-sm text-soc-muted">Aucune timeline disponible</p>';
+
             return `
                 <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" @click.self="closeAlertDetail()">
                     <div class="bg-soc-card border border-soc-border rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
@@ -972,6 +1152,25 @@ function app() {
                                 ${a.description ? `<p class="text-sm text-soc-muted mt-2">${a.description}</p>` : ''}
                             </div>
 
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="bg-soc-bg rounded-lg p-4 border border-soc-border">
+                                    <p class="text-xs text-soc-muted">Première vue</p>
+                                    <p class="text-sm text-white mt-1">${this.formatDate(a.first_seen || a.created_at)}</p>
+                                </div>
+                                <div class="bg-soc-bg rounded-lg p-4 border border-soc-border">
+                                    <p class="text-xs text-soc-muted">Dernière vue</p>
+                                    <p class="text-sm text-white mt-1">${this.formatDate(a.last_seen || a.updated_at)}</p>
+                                </div>
+                                <div class="bg-soc-bg rounded-lg p-4 border border-soc-border">
+                                    <p class="text-xs text-soc-muted">Règle</p>
+                                    <p class="text-sm text-white mt-1">${a.rule_name || '-'}</p>
+                                </div>
+                                <div class="bg-soc-bg rounded-lg p-4 border border-soc-border">
+                                    <p class="text-xs text-soc-muted">Relations</p>
+                                    <p class="text-sm text-white mt-1">${a.event_count || 0} events / ${a.correlation_count || 0} corr.</p>
+                                </div>
+                            </div>
+
                             <!-- Timeline -->
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="bg-soc-bg rounded-lg p-4 border border-soc-border">
@@ -1016,6 +1215,30 @@ function app() {
                                 <h4 class="text-sm font-medium text-white mb-3">Correlations liees (${correlations.length})</h4>
                                 <div class="space-y-2">
                                     ${corrCards}
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-medium text-white mb-2">Raw Payload</h4>
+                                ${alertRawPayload}
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-medium text-white mb-3">Audit Trail (${auditLogs.length})</h4>
+                                <div class="bg-soc-bg rounded-lg border border-soc-border overflow-hidden">
+                                    <table class="w-full text-left">
+                                        <thead><tr class="text-xs text-soc-muted uppercase border-b border-soc-border bg-soc-card">
+                                            <th class="px-4 py-3">Action</th><th class="px-4 py-3">Acteur</th><th class="px-4 py-3">Détails</th><th class="px-4 py-3">Date</th>
+                                        </tr></thead>
+                                        <tbody>${auditRows}</tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-medium text-white mb-3">Timeline de l'alerte</h4>
+                                <div class="bg-soc-bg rounded-lg border border-soc-border p-4 space-y-4">
+                                    ${alertTimeline}
                                 </div>
                             </div>
                         </div>
@@ -1186,6 +1409,14 @@ function app() {
                                 </div>
                                 <svg class="w-4 h-4 text-soc-muted group-hover:text-soc-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                             </a>
+                            <a href="/reports/export/correlations/csv" target="_blank" class="flex items-center gap-3 p-3 bg-soc-bg rounded-lg border border-soc-border hover:border-soc-accent/50 transition-colors group">
+                                <svg class="w-5 h-5 text-soc-muted group-hover:text-soc-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                <div class="flex-1">
+                                    <p class="text-sm text-white">Corrélations</p>
+                                    <p class="text-xs text-soc-muted">Groupes et scores de corrélation</p>
+                                </div>
+                                <svg class="w-4 h-4 text-soc-muted group-hover:text-soc-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                            </a>
                         </div>
                     </div>
 
@@ -1204,17 +1435,118 @@ function app() {
                                 </div>
                                 <svg class="w-4 h-4 text-soc-muted group-hover:text-soc-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                             </a>
+                            <a href="/reports/export/events/json" target="_blank" class="flex items-center gap-3 p-3 bg-soc-bg rounded-lg border border-soc-border hover:border-soc-accent/50 transition-colors group">
+                                <svg class="w-5 h-5 text-soc-muted group-hover:text-soc-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                <div class="flex-1">
+                                    <p class="text-sm text-white">Evénements JSON</p>
+                                    <p class="text-xs text-soc-muted">Historique structuré des événements</p>
+                                </div>
+                                <svg class="w-4 h-4 text-soc-muted group-hover:text-soc-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                            <a href="/reports/export/assets/json" target="_blank" class="flex items-center gap-3 p-3 bg-soc-bg rounded-lg border border-soc-border hover:border-soc-accent/50 transition-colors group">
+                                <svg class="w-5 h-5 text-soc-muted group-hover:text-soc-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                <div class="flex-1">
+                                    <p class="text-sm text-white">Actifs JSON</p>
+                                    <p class="text-xs text-soc-muted">Inventaire structuré avec metadata</p>
+                                </div>
+                                <svg class="w-4 h-4 text-soc-muted group-hover:text-soc-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                            <a href="/reports/export/correlations/json" target="_blank" class="flex items-center gap-3 p-3 bg-soc-bg rounded-lg border border-soc-border hover:border-soc-accent/50 transition-colors group">
+                                <svg class="w-5 h-5 text-soc-muted group-hover:text-soc-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                <div class="flex-1">
+                                    <p class="text-sm text-white">Corrélations JSON</p>
+                                    <p class="text-xs text-soc-muted">Groupes, scores et événements liés</p>
+                                </div>
+                                <svg class="w-4 h-4 text-soc-muted group-hover:text-soc-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2 bg-soc-card border border-soc-border rounded-xl">
+                        <div class="px-5 py-4 border-b border-soc-border">
+                            <h3 class="font-semibold text-white">Exports PDF</h3>
+                            <p class="text-xs text-soc-muted mt-1">Résumé imprimable des ressources</p>
+                        </div>
+                        <div class="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                            <a href="/reports/export/alerts/pdf" target="_blank" class="flex items-center gap-3 p-3 bg-soc-bg rounded-lg border border-soc-border hover:border-soc-accent/50 transition-colors group"><div class="flex-1"><p class="text-sm text-white">Alertes PDF</p><p class="text-xs text-soc-muted">Résumé imprimable</p></div></a>
+                            <a href="/reports/export/events/pdf" target="_blank" class="flex items-center gap-3 p-3 bg-soc-bg rounded-lg border border-soc-border hover:border-soc-accent/50 transition-colors group"><div class="flex-1"><p class="text-sm text-white">Evénements PDF</p><p class="text-xs text-soc-muted">Résumé imprimable</p></div></a>
+                            <a href="/reports/export/assets/pdf" target="_blank" class="flex items-center gap-3 p-3 bg-soc-bg rounded-lg border border-soc-border hover:border-soc-accent/50 transition-colors group"><div class="flex-1"><p class="text-sm text-white">Actifs PDF</p><p class="text-xs text-soc-muted">Résumé imprimable</p></div></a>
+                            <a href="/reports/export/correlations/pdf" target="_blank" class="flex items-center gap-3 p-3 bg-soc-bg rounded-lg border border-soc-border hover:border-soc-accent/50 transition-colors group"><div class="flex-1"><p class="text-sm text-white">Corrélations PDF</p><p class="text-xs text-soc-muted">Résumé imprimable</p></div></a>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2 bg-soc-card border border-soc-border rounded-xl">
+                        <div class="px-5 py-4 border-b border-soc-border flex items-center justify-between">
+                            <div>
+                                <h3 class="font-semibold text-white">Aperçu Avant Export</h3>
+                                <p class="text-xs text-soc-muted mt-1">Contrôler rapidement le contenu avant téléchargement</p>
+                            </div>
+                        </div>
+                        <div class="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                            <button @click="previewReport('/reports/export/alerts/json', 'Aperçu Alertes JSON')" class="px-4 py-3 bg-soc-bg border border-soc-border rounded-lg text-sm text-white hover:border-soc-accent/50 text-left">Aperçu Alertes JSON</button>
+                            <button @click="previewReport('/reports/export/events/json', 'Aperçu Evénements JSON')" class="px-4 py-3 bg-soc-bg border border-soc-border rounded-lg text-sm text-white hover:border-soc-accent/50 text-left">Aperçu Evénements JSON</button>
+                            <button @click="previewReport('/reports/export/assets/json', 'Aperçu Actifs JSON')" class="px-4 py-3 bg-soc-bg border border-soc-border rounded-lg text-sm text-white hover:border-soc-accent/50 text-left">Aperçu Actifs JSON</button>
+                            <button @click="previewReport('/reports/export/correlations/json', 'Aperçu Corrélations JSON')" class="px-4 py-3 bg-soc-bg border border-soc-border rounded-lg text-sm text-white hover:border-soc-accent/50 text-left">Aperçu Corrélations JSON</button>
+                            <button @click="previewReport('/reports/export/alerts/csv', 'Aperçu Alertes CSV')" class="px-4 py-3 bg-soc-bg border border-soc-border rounded-lg text-sm text-white hover:border-soc-accent/50 text-left">Aperçu Alertes CSV</button>
+                            <button @click="previewReport('/reports/export/events/csv', 'Aperçu Evénements CSV')" class="px-4 py-3 bg-soc-bg border border-soc-border rounded-lg text-sm text-white hover:border-soc-accent/50 text-left">Aperçu Evénements CSV</button>
+                            <button @click="previewReport('/reports/export/assets/csv', 'Aperçu Actifs CSV')" class="px-4 py-3 bg-soc-bg border border-soc-border rounded-lg text-sm text-white hover:border-soc-accent/50 text-left">Aperçu Actifs CSV</button>
+                            <button @click="previewReport('/reports/export/correlations/csv', 'Aperçu Corrélations CSV')" class="px-4 py-3 bg-soc-bg border border-soc-border rounded-lg text-sm text-white hover:border-soc-accent/50 text-left">Aperçu Corrélations CSV</button>
+                            <button @click="previewReport('/reports/export/alerts/pdf', 'Aperçu Alertes PDF (binaire)')" class="px-4 py-3 bg-soc-bg border border-soc-border rounded-lg text-sm text-white hover:border-soc-accent/50 text-left">Aperçu Alertes PDF</button>
+                            <button @click="previewReport('/reports/export/events/pdf', 'Aperçu Evénements PDF (binaire)')" class="px-4 py-3 bg-soc-bg border border-soc-border rounded-lg text-sm text-white hover:border-soc-accent/50 text-left">Aperçu Evénements PDF</button>
+                            <button @click="previewReport('/reports/export/assets/pdf', 'Aperçu Actifs PDF (binaire)')" class="px-4 py-3 bg-soc-bg border border-soc-border rounded-lg text-sm text-white hover:border-soc-accent/50 text-left">Aperçu Actifs PDF</button>
+                            <button @click="previewReport('/reports/export/correlations/pdf', 'Aperçu Corrélations PDF (binaire)')" class="px-4 py-3 bg-soc-bg border border-soc-border rounded-lg text-sm text-white hover:border-soc-accent/50 text-left">Aperçu Corrélations PDF</button>
                         </div>
                     </div>
                 </div>
             `;
         },
 
+        async previewReport(path, title) {
+            try {
+                const r = await fetch(path, { headers: this.headers });
+                const contentType = r.headers.get('content-type') || '';
+                let text = '';
+                if (contentType.includes('application/pdf')) {
+                    const blob = await r.blob();
+                    text = `[PDF binaire] Taille: ${blob.size} octets`;
+                } else {
+                    text = await r.text();
+                }
+                let content = text;
+                if (contentType.includes('application/json')) {
+                    try {
+                        content = JSON.stringify(JSON.parse(text), null, 2);
+                    } catch {}
+                }
+                this.reportPreviewTitle = title;
+                this.reportPreviewContent = content.slice(0, 12000);
+                this.showReportPreview = true;
+            } catch (e) {
+                this.reportPreviewTitle = title;
+                this.reportPreviewContent = `Erreur d'aperçu: ${e.message}`;
+                this.showReportPreview = true;
+            }
+        },
+
         // ===================== ATTACK LAB =====================
         async renderAttackLab() {
             try {
-                const r = await fetch('/attack-lab/scenarios', { headers: this.headers });
-                const scenarios = r.ok ? await r.json() : [];
+                const [scenarioResp, targetResp, presetResp] = await Promise.all([
+                    fetch('/attack-lab/scenarios', { headers: this.headers }),
+                    fetch('/attack-lab/targets', { headers: this.headers }),
+                    fetch('/attack-lab/presets', { headers: this.headers })
+                ]);
+                const scenarios = scenarioResp.ok ? await scenarioResp.json() : [];
+                const targetData = targetResp.ok ? await targetResp.json() : { targets: ['serveur-endpoint'] };
+                const presets = presetResp.ok ? await presetResp.json() : [];
+                const targets = targetData.targets || ['serveur-endpoint'];
+
+                if (!targets.includes(this.attackLabConfig.target)) {
+                    this.attackLabConfig.target = targets[0] || 'serveur-endpoint';
+                }
+                if (!scenarios.find(s => s.id === this.attackLabConfig.scenario) && scenarios[0]) {
+                    this.attackLabConfig.scenario = scenarios[0].id;
+                }
                 
                 let scenarioCards = scenarios.length > 0 ? scenarios.map(s => `
                     <div class="bg-soc-card border border-soc-border rounded-xl p-5 hover:border-soc-accent/50 transition-colors">
@@ -1229,6 +1561,35 @@ function app() {
                         </div>
                     </div>
                 `).join('') : '<p class="text-soc-muted text-center py-8">Aucun scénario disponible</p>';
+
+                const scenarioOptions = scenarios.map(s => `<option value="${s.id}" ${this.attackLabConfig.scenario === s.id ? 'selected' : ''}>${s.name}</option>`).join('');
+                const targetOptions = targets.map(t => `<option value="${t}" ${this.attackLabConfig.target === t ? 'selected' : ''}>${t}</option>`).join('');
+                const presetGroups = presets.reduce((acc, preset) => {
+                    const category = preset.category || 'other';
+                    if (!acc[category]) acc[category] = [];
+                    acc[category].push(preset);
+                    return acc;
+                }, {});
+                const presetSections = Object.entries(presetGroups).map(([category, groupPresets]) => `
+                    <div class="bg-soc-card border border-soc-border rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-sm font-medium text-white">Presets ${this.attackPresetLabels[category] || category}</h4>
+                            <span class="text-xs px-2 py-1 rounded bg-soc-bg text-soc-muted border border-soc-border">${groupPresets.length}</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${groupPresets.map(preset => `
+                                <button @click="launchPreset('${preset.id}')" class="text-left bg-soc-bg border border-soc-border rounded-lg p-4 hover:border-soc-accent/50 transition-colors">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-white">${preset.name}</span>
+                                        <span class="text-xs text-soc-accent">${preset.steps.length} étape(s)</span>
+                                    </div>
+                                    <p class="text-xs text-soc-muted mb-2">${preset.description}</p>
+                                    <p class="text-xs text-soc-muted">${preset.steps.map(step => step.scenario).join(' -> ')}</p>
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
                 
                 this.pageContent = `
                     <div class="space-y-6">
@@ -1251,12 +1612,43 @@ function app() {
                             </div>
                         </div>
                         
+                        <!-- Attack Controls -->
+                        <div class="bg-soc-card border border-soc-border rounded-xl p-5">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-sm font-medium text-white">Paramétrage des attaques</h4>
+                                <button @click="launchConfiguredAttack()" class="px-4 py-2 bg-soc-accent text-white rounded-lg text-sm hover:bg-blue-600 transition-colors">${this.t('launch_attack')}</button>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                <label class="block">
+                                    <span class="text-xs text-soc-muted block mb-2">Scénario</span>
+                                    <select id="attack-scenario" class="w-full bg-soc-bg border border-soc-border text-white text-sm rounded-lg px-3 py-2">${scenarioOptions}</select>
+                                </label>
+                                <label class="block">
+                                    <span class="text-xs text-soc-muted block mb-2">Cible</span>
+                                    <select id="attack-target" class="w-full bg-soc-bg border border-soc-border text-white text-sm rounded-lg px-3 py-2">${targetOptions}</select>
+                                </label>
+                                <label class="block">
+                                    <span class="text-xs text-soc-muted block mb-2">Intensité</span>
+                                    <select id="attack-intensity" class="w-full bg-soc-bg border border-soc-border text-white text-sm rounded-lg px-3 py-2">
+                                        <option value="low" ${this.attackLabConfig.intensity === 'low' ? 'selected' : ''}>low</option>
+                                        <option value="medium" ${this.attackLabConfig.intensity === 'medium' ? 'selected' : ''}>medium</option>
+                                        <option value="high" ${this.attackLabConfig.intensity === 'high' ? 'selected' : ''}>high</option>
+                                        <option value="stress" ${this.attackLabConfig.intensity === 'stress' ? 'selected' : ''}>stress</option>
+                                    </select>
+                                </label>
+                                <label class="block">
+                                    <span class="text-xs text-soc-muted block mb-2">Durée (s)</span>
+                                    <input id="attack-duration" type="number" min="10" max="3600" value="${this.attackLabConfig.duration}" class="w-full bg-soc-bg border border-soc-border text-white text-sm rounded-lg px-3 py-2" />
+                                </label>
+                            </div>
+                        </div>
+
                         <!-- Quick Actions -->
                         <div class="bg-soc-card border border-soc-border rounded-xl p-5">
                             <h4 class="text-sm font-medium text-white mb-3">${this.t('quick_actions') || 'Actions rapides'}</h4>
                             <div class="flex gap-3">
-                                <button @click="launchAttack('port_scan', 'low')" class="px-4 py-2 bg-soc-accent/10 text-soc-accent border border-soc-accent/20 rounded-lg text-sm hover:bg-soc-accent/20 transition-colors">${this.t('recon')} (Low)</button>
-                                <button @click="launchAttack('brute_force', 'medium')" class="px-4 py-2 bg-soc-warning/10 text-soc-warning border border-soc-warning/20 rounded-lg text-sm hover:bg-soc-warning/20 transition-colors">${this.t('brute_force')} (Med)</button>
+                                <button @click="launchAttack('recon_nmap', 'low')" class="px-4 py-2 bg-soc-accent/10 text-soc-accent border border-soc-accent/20 rounded-lg text-sm hover:bg-soc-accent/20 transition-colors">${this.t('recon')} (Low)</button>
+                                <button @click="launchAttack('bruteforce_hydra', 'medium')" class="px-4 py-2 bg-soc-warning/10 text-soc-warning border border-soc-warning/20 rounded-lg text-sm hover:bg-soc-warning/20 transition-colors">${this.t('brute_force')} (Med)</button>
                                 <button @click="launchAttack('attack_chain_full', 'low')" class="px-4 py-2 bg-soc-danger/10 text-soc-danger border border-soc-danger/20 rounded-lg text-sm hover:bg-soc-danger/20 transition-colors">${this.t('kill_chain')}</button>
                                 <button @click="stopAllAttacks()" class="px-4 py-2 bg-soc-danger/10 text-soc-danger border border-soc-danger/20 rounded-lg text-sm hover:bg-soc-danger/20 transition-colors">${this.t('stop_all')}</button>
                             </div>
@@ -1267,6 +1659,13 @@ function app() {
                             <h4 class="text-sm font-medium text-white mb-3">${this.t('scenario')}s disponibles</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 ${scenarioCards}
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-sm font-medium text-white mb-3">Presets par catégorie</h4>
+                            <div class="space-y-4">
+                                ${presetSections || '<p class="text-xs text-soc-muted">Aucun preset disponible</p>'}
                             </div>
                         </div>
                         
@@ -1287,12 +1686,51 @@ function app() {
             }
         },
 
-        async launchAttack(scenario, intensity = 'low') {
+        readAttackLabConfig() {
+            const scenario = document.getElementById('attack-scenario');
+            const target = document.getElementById('attack-target');
+            const intensity = document.getElementById('attack-intensity');
+            const duration = document.getElementById('attack-duration');
+            if (scenario) this.attackLabConfig.scenario = scenario.value;
+            if (target) this.attackLabConfig.target = target.value;
+            if (intensity) this.attackLabConfig.intensity = intensity.value;
+            if (duration) this.attackLabConfig.duration = parseInt(duration.value || '60', 10);
+        },
+
+        async launchConfiguredAttack() {
+            this.readAttackLabConfig();
+            await this.launchAttack(this.attackLabConfig.scenario, this.attackLabConfig.intensity, this.attackLabConfig.target, this.attackLabConfig.duration);
+        },
+
+        async launchPreset(presetId) {
+            try {
+                const r = await fetch('/attack-lab/presets', { headers: this.headers });
+                const presets = r.ok ? await r.json() : [];
+                const preset = presets.find(p => p.id === presetId);
+                if (!preset) {
+                    alert('Preset introuvable');
+                    return;
+                }
+
+                for (const step of preset.steps) {
+                    await this.launchAttack(
+                        step.scenario,
+                        step.intensity || this.attackLabConfig.intensity,
+                        this.attackLabConfig.target,
+                        this.attackLabConfig.duration
+                    );
+                }
+            } catch (e) {
+                alert(`Erreur preset: ${e.message}`);
+            }
+        },
+
+        async launchAttack(scenario, intensity = 'low', target = 'serveur-endpoint', duration = 60) {
             try {
                 const r = await fetch('/attack-lab/launch', {
                     method: 'POST',
                     headers: { ...this.headers, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ scenario, intensity, target: 'serveur-endpoint' })
+                    body: JSON.stringify({ scenario, intensity, target, duration })
                 });
                 if (r.ok) {
                     const data = await r.json();
@@ -1335,7 +1773,10 @@ function app() {
                                         <span class="text-white font-medium">${j.scenario || j.job_id}</span>
                                         <span class="px-2 py-0.5 rounded ${j.status === 'running' ? 'bg-soc-success/10 text-soc-success' : j.status === 'completed' ? 'bg-soc-accent/10 text-soc-accent' : 'bg-soc-danger/10 text-soc-danger'}">${j.status}</span>
                                     </div>
-                                    <p class="text-soc-muted">Job: ${j.job_id}</p>
+                                    <div class="flex items-center justify-between gap-2">
+                                        <p class="text-soc-muted">Job: ${j.job_id}</p>
+                                        <span class="px-2 py-0.5 rounded bg-soc-accent/10 text-soc-accent border border-soc-accent/20">executed by serveur-attacker</span>
+                                    </div>
                                 </div>
                             `).join('');
                         } else {
@@ -1345,6 +1786,86 @@ function app() {
                 }
             } catch (e) {
                 console.error('Refresh jobs error:', e);
+            }
+        },
+
+        async renderDockerHealth() {
+            const r = await fetch('/reports/docker-health', { headers: this.headers });
+            const data = r.ok ? await r.json() : { status: 'error', services: [] };
+
+            const overallClass = data.status === 'ok' ? 'text-soc-success' : 'text-soc-warning';
+            const cards = (data.services || []).map(service => {
+                const statusClass = service.status === 'ok'
+                    ? 'bg-soc-success/10 text-soc-success border-soc-success/20'
+                    : 'bg-soc-danger/10 text-soc-danger border-soc-danger/20';
+                const m = service.metrics || {};
+                const memoryBar = m.mem_used_percent !== undefined ? `
+                    <div class="mt-3">
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="text-soc-muted">Mémoire</span>
+                            <span class="text-white font-mono">${m.mem_used_percent}%</span>
+                        </div>
+                        <div class="w-full bg-soc-bg rounded-full h-2 overflow-hidden">
+                            <div class="h-2 ${m.mem_used_percent >= 85 ? 'bg-soc-danger' : m.mem_used_percent >= 65 ? 'bg-soc-warning' : 'bg-soc-success'}" style="width:${Math.min(m.mem_used_percent, 100)}%"></div>
+                        </div>
+                    </div>
+                ` : '';
+                const loadBar = m.load_1m !== undefined && m.cpu_count ? `
+                    <div class="mt-3">
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="text-soc-muted">Charge CPU</span>
+                            <span class="text-white font-mono">${m.load_1m}/${m.cpu_count}</span>
+                        </div>
+                        <div class="w-full bg-soc-bg rounded-full h-2 overflow-hidden">
+                            <div class="h-2 ${m.load_1m >= m.cpu_count ? 'bg-soc-danger' : m.load_1m >= (m.cpu_count * 0.7) ? 'bg-soc-warning' : 'bg-soc-accent'}" style="width:${Math.min(((m.load_1m / Math.max(m.cpu_count, 1)) * 100), 100)}%"></div>
+                        </div>
+                    </div>
+                ` : '';
+                const metricEntries = Object.entries(m).filter(([key]) => !['mem_used_percent','load_1m','cpu_count'].includes(key));
+                const metrics = metricEntries.map(([key, value]) => `
+                    <div class="flex items-center justify-between text-xs py-1 border-b border-soc-border/50 last:border-b-0">
+                        <span class="text-soc-muted">${key}</span>
+                        <span class="text-white font-mono ml-4 text-right">${Array.isArray(value) ? value.join(', ') : value}</span>
+                    </div>
+                `).join('') || '<p class="text-xs text-soc-muted">Aucune métrique</p>';
+
+                return `
+                    <div class="bg-soc-card border border-soc-border rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-sm font-medium text-white">${service.name}</h4>
+                            <span class="text-xs px-2 py-1 rounded border ${statusClass}">${service.status}</span>
+                        </div>
+                        <div class="space-y-1">${metrics}</div>
+                        ${memoryBar}
+                        ${loadBar}
+                        ${service.error ? `<div class="mt-4 text-xs text-soc-danger">${service.error}</div>` : ''}
+                    </div>
+                `;
+            }).join('');
+
+            this.pageContent = `
+                <div class="space-y-6">
+                    <div class="bg-soc-card border border-soc-border rounded-xl p-5 flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-white">Docker Health</h3>
+                            <p class="text-sm text-soc-muted mt-1">Etat logique des services Docker et métriques internes</p>
+                        </div>
+                        <div class="text-right flex items-center gap-4">
+                            <button onclick="document.querySelector('[x-data]').__x.$data.renderDockerHealth()" class="px-3 py-2 bg-soc-bg border border-soc-border rounded-lg text-xs text-soc-muted hover:text-white transition-colors">Actualiser</button>
+                            <div>
+                            <p class="text-xs text-soc-muted">Etat global</p>
+                            <p class="text-lg font-bold ${overallClass}">${data.status}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                        ${cards || '<p class="text-soc-muted">Aucun service détecté</p>'}
+                    </div>
+                </div>
+            `;
+
+            if (this.currentPage === 'docker-health') {
+                this.dockerHealthRefreshTimer = setTimeout(() => this.renderDockerHealth(), 5000);
             }
         },
 

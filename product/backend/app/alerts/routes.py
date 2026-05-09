@@ -109,6 +109,17 @@ def get_alert_route(
         "description": alert.description,
         "created_at": alert.created_at,
         "updated_at": alert.updated_at,
+        "raw_payload": alert.raw_payload,
+        "audit_logs": [
+            {
+                "id": log.id,
+                "action": log.action,
+                "actor": log.actor,
+                "details": log.details,
+                "created_at": log.created_at,
+            }
+            for log in alert.audit_logs
+        ],
         "related_events": [
             {
                 "id": e.id,

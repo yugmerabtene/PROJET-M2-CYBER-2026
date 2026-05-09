@@ -52,6 +52,6 @@ RUN go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest && \
 COPY . .
 
 # Install Python dependencies if any
-RUN pip install --no-cache-dir requests
+RUN pip install --no-cache-dir requests redis
 
 CMD ["python", "scenario.py"]

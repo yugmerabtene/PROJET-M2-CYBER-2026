@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
+from app.correlation.models import CorrelationGroup
 from app.correlation.schemas import CorrelationGroupResponse, CorrelatedEventResponse, CorrelationSummary
 from app.correlation.service import (
     correlate_by_ip,

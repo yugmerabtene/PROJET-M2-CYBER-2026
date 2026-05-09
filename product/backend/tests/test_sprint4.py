@@ -9,17 +9,20 @@ DOCS_DIR = os.path.join(ROOT_DIR, "documents", "07_gestion_de_projet", "tasks")
 
 
 def get_classes(fp):
-    tree = ast.parse(open(fp).read())
+    with open(fp) as f:
+        tree = ast.parse(f.read())
     return [n.name for n in ast.walk(tree) if isinstance(n, ast.ClassDef)]
 
 
 def get_functions(fp):
-    tree = ast.parse(open(fp).read())
+    with open(fp) as f:
+        tree = ast.parse(f.read())
     return [n.name for n in ast.walk(tree) if isinstance(n, ast.FunctionDef)]
 
 
 def has_text(fp, text):
-    return text in open(fp).read()
+    with open(fp) as f:
+        return text in f.read()
 
 
 class TestEPIC05_Correlation(unittest.TestCase):
@@ -66,7 +69,8 @@ class TestEPIC05_Correlation(unittest.TestCase):
 
     def test_correlation_model_fields(self):
         fp = os.path.join(BACKEND_DIR, "app", "correlation", "models.py")
-        content = open(fp).read()
+        with open(fp) as f:
+            content = f.read()
         self.assertIn("group_type", content)
         self.assertIn("source_ip", content)
         self.assertIn("is_resolved", content)
@@ -118,24 +122,28 @@ class TestEPIC06_Dashboard(unittest.TestCase):
 class TestMainIntegration(unittest.TestCase):
     def test_main_registers_correlation(self):
         fp = os.path.join(BACKEND_DIR, "app", "main.py")
-        content = open(fp).read()
+        with open(fp) as f:
+            content = f.read()
         self.assertIn("correlation_router", content)
         self.assertIn("/correlation", content)
 
     def test_main_registers_reports(self):
         fp = os.path.join(BACKEND_DIR, "app", "main.py")
-        content = open(fp).read()
+        with open(fp) as f:
+            content = f.read()
         self.assertIn("reports_router", content)
         self.assertIn("/reports", content)
 
     def test_main_version_updated(self):
         fp = os.path.join(BACKEND_DIR, "app", "main.py")
-        content = open(fp).read()
+        with open(fp) as f:
+            content = f.read()
         self.assertIn("0.5.0", content)
 
     def test_all_routers_registered(self):
         fp = os.path.join(BACKEND_DIR, "app", "main.py")
-        content = open(fp).read()
+        with open(fp) as f:
+            content = f.read()
         for prefix in ["/auth", "/telemetry", "/assets", "/alerts", "/correlation", "/reports"]:
             self.assertIn(prefix, content, f"Missing prefix: {prefix}")
 
@@ -144,19 +152,22 @@ class TestDocumentationSync(unittest.TestCase):
     def test_epic_05_updated(self):
         fp = os.path.join(DOCS_DIR, "EPIC-05-correlation.md")
         self.assertTrue(os.path.exists(fp))
-        content = open(fp).read()
+        with open(fp) as f:
+            content = f.read()
         self.assertGreater(content.count("- [x]"), 2)
 
     def test_epic_06_updated(self):
         fp = os.path.join(DOCS_DIR, "EPIC-06-interface-web.md")
         self.assertTrue(os.path.exists(fp))
-        content = open(fp).read()
+        with open(fp) as f:
+            content = f.read()
         self.assertGreater(content.count("- [x]"), 2)
 
     def test_sprint_4_in_backlog(self):
         fp = os.path.join(DOCS_DIR, "sprint-backlog.md")
         self.assertTrue(os.path.exists(fp))
-        content = open(fp).read()
+        with open(fp) as f:
+            content = f.read()
         self.assertIn("Sprint 4", content)
 
 

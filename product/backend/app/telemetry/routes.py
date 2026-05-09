@@ -129,8 +129,7 @@ def list_events(
 
 @router.get(
     "/events/{event_id}",
-    response_model=TelemetryEventResponse,
-    summary="Detail d'un evenement de telemetrique",
+    summary="Detail enrichi d'un evenement de telemetrique",
 )
 def get_event(
     event_id: int,
@@ -140,7 +139,108 @@ def get_event(
     event = get_event_by_id(db, event_id)
     if event is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Evenement introuvable")
-    return event
+
+    from app.alerts.models import Alert
+    from app.correlation.models import CorrelatedEvent, CorrelationGroup
+
+    related_alerts = (
+        db.query(Alert)
+        .filter(
+            ((Alert.source_ip == event.source_ip) & (Alert.source_ip.is_not(None)))
+            | ((Alert.target_ip == event.target_ip) & (Alert.target_ip.is_not(None)))
+        )
+        .order_by(Alert.created_at.desc())
+        .limit(10)
+        .all()
+    )
+
+    correlated = (
+        db.query(CorrelatedEvent)
+        .filter(
+            (CorrelatedEvent.telemetry_event_id == event.id)
+            | (
+                (CorrelatedEvent.source_ip == event.source_ip)
+                & (CorrelatedEvent.event_type == event.event_type)
+            )
+        )
+        .all()
+    )
+    group_ids = list({c.group_id for c in correlated})
+    related_correlations = (
+        db.query(CorrelationGroup)
+        .filter(CorrelationGroup.id.in_(group_ids))
+        .all()
+        if group_ids
+        else []
+    )
+
+    similar_events = (
+        db.query(type(event))
+        .filter(
+            type(event).id != event.id,
+            type(event).event_type == event.event_type,
+            ((type(event).source_ip == event.source_ip) & (type(event).source_ip.is_not(None)))
+            | ((type(event).target_ip == event.target_ip) & (type(event).target_ip.is_not(None))),
+        )
+        .order_by(type(event).observed_at.desc())
+        .limit(10)
+        .all()
+    )
+
+    return {
+        "id": event.id,
+        "agent_id": event.agent_id,
+        "agent": {
+            "id": event.agent.id,
+            "sensor_id": event.agent.sensor_id,
+            "hostname": event.agent.hostname,
+            "ip_address": event.agent.ip_address,
+            "mode": event.agent.mode,
+            "last_heartbeat_at": event.agent.last_heartbeat_at,
+        } if event.agent else None,
+        "source_ip": event.source_ip,
+        "target_ip": event.target_ip,
+        "event_type": event.event_type,
+        "severity": event.severity,
+        "message": event.message,
+        "observed_at": event.observed_at,
+        "received_at": event.received_at,
+        "raw_payload": event.raw_payload,
+        "related_alerts": [
+            {
+                "id": a.id,
+                "title": a.title,
+                "severity": a.severity,
+                "status": a.status,
+                "rule_name": a.rule_name,
+                "created_at": a.created_at,
+            }
+            for a in related_alerts
+        ],
+        "related_correlations": [
+            {
+                "id": g.id,
+                "group_type": g.group_type,
+                "severity": g.severity,
+                "event_count": g.event_count,
+                "correlation_score": g.correlation_score,
+                "is_resolved": g.is_resolved,
+            }
+            for g in related_correlations
+        ],
+        "similar_events": [
+            {
+                "id": e.id,
+                "event_type": e.event_type,
+                "severity": e.severity,
+                "source_ip": e.source_ip,
+                "target_ip": e.target_ip,
+                "message": e.message,
+                "observed_at": e.observed_at,
+            }
+            for e in similar_events
+        ],
+    }
 
 
 @router.get(
