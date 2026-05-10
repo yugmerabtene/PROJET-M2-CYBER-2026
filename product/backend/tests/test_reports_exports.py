@@ -1,13 +1,45 @@
 import csv
 import io
 import json
+import os
 import time
 import unittest
 from urllib.request import Request, urlopen
 from urllib.error import URLError
+from pathlib import Path
 
 
 BASE_URL = "http://localhost:8000"
+
+
+def get_admin_password() -> str:
+    env_password = os.getenv("DEVINCIWATCH_TEST_ADMIN_PASSWORD")
+    if env_password:
+        return env_password
+    env_file = Path(__file__).resolve().parents[2] / ".env"
+    if env_file.exists():
+        for line in env_file.read_text(encoding="utf-8", errors="ignore").splitlines():
+            if line.startswith("DEFAULT_ADMIN_PASSWORD="):
+                return line.split("=", 1)[1].strip()
+    return "CHANGE_ME_ADMIN_PASSWORD"
+
+
+def login_and_get_token() -> str:
+    candidates = [get_admin_password(), "password"]
+    last_error = None
+    for candidate in candidates:
+        try:
+            status, _, payload = http_json(
+                "POST",
+                "/auth/login",
+                body={"username": "admin", "password": candidate},
+            )
+            if status == 200 and "access_token" in payload:
+                return payload["access_token"]
+        except Exception as exc:  # noqa: BLE001
+            last_error = exc
+            continue
+    raise AssertionError(f"Unable to authenticate test client: {last_error}")
 
 
 def http_json(method: str, path: str, token: str | None = None, body: dict | None = None):
@@ -47,13 +79,7 @@ class ReportsExportsLiveTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         wait_for_service()
-        status, _, payload = http_json(
-            "POST",
-            "/auth/login",
-            body={"username": "admin", "password": "password"},
-        )
-        assert status == 200, payload
-        cls.token = payload["access_token"]
+        cls.token = login_and_get_token()
 
     def test_dashboard_endpoint(self):
         status, _, payload = http_json("GET", "/reports/dashboard", token=self.token)

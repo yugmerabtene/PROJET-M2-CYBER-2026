@@ -117,7 +117,7 @@ def load_config() -> AgentConfig:
         api_url=os.getenv("DEVINCIWATCH_API_URL", "http://127.0.0.1:8000").rstrip("/"),
         sensor_id=os.getenv("DEVINCIWATCH_SENSOR_ID", f"sensor-{hostname}"),
         interval_seconds=int(os.getenv("DEVINCIWATCH_INTERVAL_SECONDS", "10")),
-        agent_ingest_key=os.getenv("DEVINCIWATCH_AGENT_INGEST_KEY", "devinciwatch-agent-key-change-me"),
+        agent_ingest_key=os.getenv("DEVINCIWATCH_AGENT_INGEST_KEY", "CHANGE_ME_AGENT_INGEST_KEY"),
     )
 
 

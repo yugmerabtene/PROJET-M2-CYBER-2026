@@ -43,8 +43,8 @@ runtime_metrics = {
 
 def ensure_runtime_files() -> None:
     Path('/tmp/users.txt').write_text('admin\noperator\nroot\n', encoding='utf-8')
-    Path('/tmp/pass_small.txt').write_text('admin\npassword\nadmin123\nChangeMeNow123!\n', encoding='utf-8')
-    Path('/tmp/pass_big.txt').write_text('admin\npassword\nadmin123\nChangeMeNow123!\ntest\nwelcome\nqwerty\n', encoding='utf-8')
+    Path('/tmp/pass_small.txt').write_text('admin\nchangeme\nwelcome123\nlabpass\n', encoding='utf-8')
+    Path('/tmp/pass_big.txt').write_text('admin\nchangeme\nwelcome123\nlabpass\ntest\nwelcome\nqwerty\n', encoding='utf-8')
     Path('/tmp/ffuf_paths.txt').write_text('admin\nlogin\nhealth\nsecret\nbackup\napi\n', encoding='utf-8')
 
 

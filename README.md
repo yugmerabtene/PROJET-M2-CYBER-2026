@@ -222,8 +222,8 @@ docker compose ps
 | **Health Check** | http://localhost:8000/health | État de l'API |
 
 ### Credentials par défaut
-- **Username** : `admin`
-- **Password** : `password`
+- **Username** : valeur définie dans votre `.env`
+- **Password** : valeur définie dans votre `.env`
 
 ---
 
@@ -305,7 +305,7 @@ docker compose up --build -d
 
 ### Accès
 1. Ouvrez l'interface web : http://localhost:8000
-2. Connectez-vous avec `admin / password`
+2. Connectez-vous avec les identifiants définis dans votre `.env`
 3. Cliquez sur **Attack Lab** dans la sidebar (icône alerte)
 4. Choisissez un scénario ou lancez une chaîne complète
 

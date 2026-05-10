@@ -139,13 +139,13 @@ class TestDocumentation(unittest.TestCase):
         )
         self.assertTrue(os.path.exists(report_path), "Sprint 4 report must exist")
 
-    def test_sprint_backlog_updated(self):
-        """Sprint backlog must be updated."""
-        backlog_path = os.path.join(
+    def test_devops_rules_exist(self):
+        """Public project docs should expose release/devops rules."""
+        rules_path = os.path.join(
             PROJECT_ROOT,
-            "documents", "07_gestion_de_projet", "tasks", "sprint-backlog.md"
+            "documents", "07_gestion_de_projet", "devops-release-rules.md"
         )
-        self.assertTrue(os.path.exists(backlog_path), "Sprint backlog must exist")
+        self.assertTrue(os.path.exists(rules_path), "DevOps release rules must exist")
 
 
 class TestSprint5Completeness(unittest.TestCase):

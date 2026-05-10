@@ -163,12 +163,12 @@ class TestDocumentationSync(unittest.TestCase):
             content = f.read()
         self.assertGreater(content.count("- [x]"), 2)
 
-    def test_sprint_4_in_backlog(self):
-        fp = os.path.join(DOCS_DIR, "sprint-backlog.md")
+    def test_devops_release_rules_exist(self):
+        fp = os.path.join(ROOT_DIR, "documents", "07_gestion_de_projet", "devops-release-rules.md")
         self.assertTrue(os.path.exists(fp))
         with open(fp) as f:
             content = f.read()
-        self.assertIn("Sprint 4", content)
+        self.assertIn("Release", content)
 
 
 if __name__ == "__main__":
