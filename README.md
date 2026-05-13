@@ -6,7 +6,7 @@
 **DevinciWatch** est une plateforme de cybersurveillance réseau orientée SOC, conçue pour la formation, la démonstration et la validation professionnelle.
 
 - Collecte et analyse la télémétrie réseau en temps réel
-- Détecte les comportements suspects via des règles et le Machine Learning
+- Détecte les comportements suspects via des règles de détection et de corrélation
 - Corrèle les événements par IP, hostname, chaînes d'attaque
 - Fournit une interface web SOC complète (Dashboard, Alertes, Inventaire)
 - Intègre un **Attack Lab** avec de vrais outils (nmap, nikto, ffuf, hydra)
@@ -21,8 +21,7 @@ Le dépôt regroupe le cadrage produit, les livrables de gestion de projet, l'ar
 **v0.6.0** - Release 2026-05-08
 
 ### Nouveautés majeures
-- **EPIC-05** : Corrélation avancée avec score composite (temporal, ML, diversité, sévérité), détection de chaînes d'attaque, corrélation par hostname
-- **EPIC-10** : ML temps réel avec Isolation Forest, scoring à l'ingestion, tables ML (ml_models, ml_training_runs, ml_feedback), auto-retraining sur fenêtre glissante
+- **EPIC-05** : Corrélation avancée avec score composite (temporel, diversité, sévérité), détection de chaînes d'attaque, corrélation par hostname et session
 - **EPIC-11** : Attack Lab web complet avec lanceur de scénarios, outils réels (nmap, nikto, ffuf, hydra, httpx), mode batch, historique des jobs
 - **i18n** : Support de 6 langues avec Alpine.js, sélecteur dynamique
 - **DevOps** : Règles de release régulières (1 par sprint), versioning SemVer
@@ -40,7 +39,6 @@ Le dépôt regroupe le cadrage produit, les livrables de gestion de projet, l'ar
 - [Services Docker](#services-docker)
 - [Commandes Utiles](#commandes-utiles)
 - [Attack Lab](#attack-lab)
-- [Machine Learning](#machine-learning)
 - [Troubleshooting](#troubleshooting)
 - [Release Management](#release-management)
 - [Documentation](#documentation)
@@ -52,7 +50,7 @@ Le dépôt regroupe le cadrage produit, les livrables de gestion de projet, l'ar
 - Collecter des `heartbeat` et événements depuis des endpoints supervisés
 - Découvrir les actifs, ports, services et comportements réseau observables
 - Persister la télémétrie, l'inventaire, les alertes et les journaux d'audit
-- Détecter des comportements suspects via des règles simples et le Machine Learning
+- Détecter des comportements suspects via des règles simples et la corrélation d'événements
 - Corréler les événements par source, cible, fenêtre temporelle ou séquence logique
 - Fournir une interface web d'analyse pour le triage SOC
 - Produire des KPI, rapports et exports CSV / JSON
@@ -75,7 +73,7 @@ flowchart LR
         API --> Discovery[Discovery]
         API --> Assets[Assets]
         API --> Alerts[Alerts]
-        API --> Correlation[Correlation + ML]
+        API --> Correlation[Correlation]
         API --> AttackLab[Attack Lab]
         API --> Reports[Reports]
         API --> Audit[Audit trail]
@@ -118,7 +116,6 @@ flowchart LR
 - Ingestion via API REST
 - Types : heartbeat, port_scan, brute_force, web_attack, etc.
 - Détail complet avec raw payload
-- Scoring ML en temps réel
 
 ### 🖥️ Inventaire (Assets)
 - Découverte automatique via télémétrie
@@ -131,16 +128,8 @@ flowchart LR
 - **Par hostname** : Corrélation basée sur le nom d'hôte
 - **Fenêtre temporelle** : Détection de bursts d'activité
 - **Chaînes d'attaque** : Séquence logique (recon → exploit → exfiltration)
-- **Score composite** : 4 facteurs pondérés (temporal 35%, ML 25%, diversité 20%, sévérité 20%)
-- Timeline avec ordre de séquence et scores ML
-
-### 🤖 Machine Learning (EPIC-10)
-- **Isolation Forest** : Algorithme principal (scalabilité O(n log n))
-- **Scoring temps réel** : Chaque événement reçoit un score d'anomalie
-- **Auto-retraining** : Fenêtre glissante, réentraînement automatique
-- **ML Feedback** : Annotation humaine (vrai/faux positif)
-- **Drift detection** : Détection de changement de distribution
-- Tables : `ml_models`, `ml_training_runs`, `ml_feedback`
+- **Score composite** : 3 facteurs pondérés (temporel, diversité, sévérité)
+- Timeline avec ordre de séquence et contexte d'attaque
 
 ### ⚔️ Attack Lab (EPIC-11)
 - **Interface web dédiée** avec lanceur de scénarios
@@ -336,35 +325,6 @@ docker compose up --build -d
 
 ---
 
-## Machine Learning
-
-### Isolation Forest (Principal)
-- **Algorithme** : Isolation Forest (sklearn)
-- **Contamination** : Dynamique (0.05 - 0.15 selon historique)
-- **Features** : event_type (encodé), severity (ordinal), source_ip (hash), target_ip
-- **Scoring** : 0.0 (normal) à 1.0 (anomalie)
-
-### Temps Réel
-- Chaque événement est scoré à l'ingestion
-- Les scores sont publiés via SSE vers le dashboard
-- Mise à jour immédiate des alertes
-
-### Auto-Retraining
-- Base de données : `ml_training_runs`
-- Fréquence : Toutes les 15 min ou 1000 événements
-- Fenêtre : 5000 derniers événements
-- Validation : Comparaison ancien/nouveau modèle avant remplacement
-
-### Consultation
-```bash
-# Résumé ML via API
-curl -H "Authorization: Bearer VOTRE_TOKEN" http://localhost:8000/correlation/ml-summary
-
-# Corps d'une alerte avec score ML
-curl -H "Authorization: Bearer VOTRE_TOKEN" http://localhost:8000/alerts/1
-```
-
----
 
 ## Troubleshooting
 

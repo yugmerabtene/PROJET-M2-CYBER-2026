@@ -132,7 +132,7 @@ ATTACK_PRESETS = [
         "id": "preset_kill_chain_demo",
         "name": "Kill Chain Démo",
         "category": "kill-chain",
-        "description": "Chaîne complète pour valider corrélation et ML.",
+        "description": "Chaîne complète pour valider corrélation et détection.",
         "steps": [
             {"scenario": "attack_chain_full", "intensity": "low"},
         ],

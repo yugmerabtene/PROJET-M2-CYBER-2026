@@ -35,11 +35,11 @@ Ce document intervient après :
 - l'[étude de marché](../02_etude_de_marche/rendu_principal.md) ;
 - le [business model](../03_business_model/rendu_principal.md) ;
 - le [business plan](../04_business_plan/rendu_principal.md) ;
-- la [feuille de cadrage](../05_feuille_de_cadrage/rendu_principal.md).
+- la [feuille de cadrage](../05_feuille_de_cadrage/rendu_principal.md) ;
+- le [cahier des charges](../06_cahier_des_charges/rendu_principal.md).
 
-Il précède et structure :
+Il structure l'exécution agile et précède :
 
-- le [cahier des charges](../06_cahier_des_charges/rendu_principal.md) ;
 - l'[architecture détaillée](../08_architecture/rendu_principal.md) ;
 - le développement du produit.
 
@@ -429,7 +429,7 @@ Pour les premiers sprints, la capacité cible peut être fixée à titre indicat
 
 | Story | User story | SP | Tasks principales | Critères d'acceptation |
 |---|---|---:|---|---|
-| US-01.1 | En tant qu'utilisateur, je veux me connecter à l'application afin d'accéder aux fonctions protégées. | 5 | créer modèle utilisateur ; créer route login ; gérer token/session ; protéger routes privées (voir [Architecture §5](08_architecture/rendu_principal.md#5-architecture-logicielle) | Connexion valide acceptée, connexion invalide refusée |
+| US-01.1 | En tant qu'utilisateur, je veux me connecter à l'application afin d'accéder aux fonctions protégées. | 5 | créer modèle utilisateur ; créer route login ; gérer token/session ; protéger routes privées (voir [Architecture §5](../08_architecture/rendu_principal.md#5-architecture-logicielle)) | Connexion valide acceptée, connexion invalide refusée |
 | US-01.2 | En tant qu'administrateur, je veux distinguer les `roles` afin de limiter les actions sensibles. | 3 | définir `admin` / `analyst` ; ajouter contrôle d'accès ; tester refus d'action | Un analyste ne peut pas effectuer une action réservée à l'admin |
 | US-01.3 | En tant qu'équipe produit, je veux connaître l'état de l'application afin de vérifier rapidement le lab. | 2 | créer `/health` ; afficher état API ; logger erreurs principales | `/health` répond et indique l'état applicatif |
 
@@ -437,7 +437,7 @@ Pour les premiers sprints, la capacité cible peut être fixée à titre indicat
 
 | Story | User story | SP | Tasks principales | Critères d'acceptation |
 |---|---|---:|---|---|
-| US-02.1 | En tant que `serveur-endpoint`, je veux envoyer un `heartbeat` afin d'indiquer que je suis actif. | 3 | créer schéma heartbeat ; route ingestion (voir [Architecture §5](08_architecture/rendu_principal.md#5-architecture-logicielle)) ; persistance PostgreSQL ; vue dernier heartbeat | Heartbeat visible côté `serveur-soc` |
+| US-02.1 | En tant que `serveur-endpoint`, je veux envoyer un `heartbeat` afin d'indiquer que je suis actif. | 3 | créer schéma heartbeat ; route ingestion (voir [Architecture §5](../08_architecture/rendu_principal.md#5-architecture-logicielle)) ; persistance PostgreSQL ; vue dernier heartbeat | Heartbeat visible côté `serveur-soc` |
 | US-02.2 | En tant que `serveur-endpoint`, je veux envoyer des événements afin d'alimenter la détection. | 5 | créer schéma event ; validation payload ; persistance ; endpoint liste events | Events consultables et horodatés |
 | US-02.3 | En tant que système, je veux authentifier les agents afin de refuser les sources inconnues. | 5 | définir secret agent ; middleware/API key ; rejet requêtes invalides ; logs | Requête non autorisée refusée |
 
@@ -453,7 +453,7 @@ Pour les premiers sprints, la capacité cible peut être fixée à titre indicat
 
 | Story | User story | SP | Tasks principales | Critères d'acceptation |
 |---|---|---:|---|---|
-| US-04.1 | En tant qu'analyste, je veux obtenir une alerte lorsqu'un comportement suspect est observé. | 5 | règle simple (voir [Cahier des charges §9.1](06_cahier_des_charges/rendu_principal.md#91-règles-métier)) ; worker Celery ; modèle alerte ; persistance PostgreSQL | Scénario suspect génère une alerte visible dans dashboard |
+| US-04.1 | En tant qu'analyste, je veux obtenir une alerte lorsqu'un comportement suspect est observé. | 5 | règle simple (voir [Cahier des charges §10.1](../06_cahier_des_charges/rendu_principal.md#101-règles-métier-mvp)) ; worker Celery ; modèle alerte ; persistance PostgreSQL | Scénario suspect génère une alerte visible dans dashboard |
 | US-04.2 | En tant qu'analyste, je veux consulter la liste et le détail des alertes afin de qualifier la situation. | 3 | endpoints liste/détail ; vue alertes ; statut minimal | Alerte consultable avec contexte |
 | US-04.3 | En tant que responsable validation, je veux tracer les actions sensibles afin de disposer d'une preuve d'audit. | 3 | modèle audit log ; logs login/export/action ; vue ou endpoint audit | Actions sensibles journalisées |
 
@@ -461,7 +461,7 @@ Pour les premiers sprints, la capacité cible peut être fixée à titre indicat
 
 | Story | User story | SP | Tasks principales | Critères d'acceptation |
 |---|---|---:|---|---|
-| US-05.1 | En tant qu'analyste, je veux regrouper des événements par IP source afin d'identifier une activité répétée. | 8 | règle corrélation IP (voir [Architecture §5](08_architecture/rendu_principal.md#5-architecture-logicielle)) ; modèle correlation_group Redis ; association events PostgreSQL | Groupe créé pour événements liés, visible côté analyste |
+| US-05.1 | En tant qu'analyste, je veux regrouper des événements par IP source afin d'identifier une activité répétée. | 8 | règle corrélation IP (voir [Architecture §5](../08_architecture/rendu_principal.md#5-architecture-logicielle)) ; modèle correlation_group PostgreSQL ; association events PostgreSQL | Groupe créé pour événements liés, visible côté analyste |
 | US-05.2 | En tant qu'analyste, je veux corréler des événements dans une fenêtre temporelle afin de détecter une séquence suspecte. | 8 | paramètre fenêtre ; requête temporelle ; scoring simple ; tests scénario | Répétition temporelle visible |
 | US-05.3 | En tant qu'analyste, je veux consulter les corrélations afin de comprendre pourquoi une alerte est enrichie. | 5 | endpoint corrélations ; vue interface ; lien alerte-corrélation | Corrélation consultable et explicable |
 
@@ -601,10 +601,13 @@ Le découpage reste prévisionnel. Il peut être ajusté à chaque sprint planni
 
 ## 16. Dépendances documentaires
 
-- [Feuille de cadrage](../05_feuille_de_cadrage/rendu_principal.md)
-- [Cahier des charges](../06_cahier_des_charges/rendu_principal.md)
-- [Architecture](../08_architecture/rendu_principal.md)
+- [Kick-off projet (01)](../01_documents_pedagogiques/kickoff/KICKOFF.md)
+- [Étude de marché (02)](../02_etude_de_marche/rendu_principal.md)
+- [Business model (03)](../03_business_model/rendu_principal.md)
 - [Business plan](../04_business_plan/rendu_principal.md)
+- [Feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md)
+- [Cahier des charges (06)](../06_cahier_des_charges/rendu_principal.md)
+- [Architecture produit (08)](../08_architecture/rendu_principal.md)
 
 ## 17. Conclusion
 

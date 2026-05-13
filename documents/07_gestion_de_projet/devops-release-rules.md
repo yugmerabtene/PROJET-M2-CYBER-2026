@@ -57,7 +57,7 @@ Aucune release ne peut être créée si :
 - **PATCH (Z)** : Corrections de bugs rétrocompatibles (ex: v0.5.0 → v0.5.1)
 
 ### 6. Releases incrémentales pour grosses features
-Pour des EPICs majeurs (comme EPIC-10 ML ou EPIC-11 Attack Lab) :
+Pour des EPICs majeurs (comme EPIC-05 Corrélation ou EPIC-11 Attack Lab) :
 - Livrer en **releases incrémentales** (v0.6.0, v0.7.0, v0.8.0)
 - Ne pas attendre la complétion totale pour une grosse release unique
 - Chaque release doit être utilisable de manière autonome
@@ -75,12 +75,10 @@ Pour des EPICs majeurs (comme EPIC-10 ML ou EPIC-11 Attack Lab) :
 ## [v0.6.0] - 2026-05-08
 ### Added
 - EPIC-05: Nouveaux champs de corrélation (correlation_score, hostname, attack_chain)
-- EPIC-10: Tables ML (ml_models, ml_training_runs, ml_feedback)
 - EPIC-11: Attack Lab backend avec job runner
 - i18n: Support 6 langues (FR, EN, ES, DE, AR, IT)
 
 ### Changed
-- Isolation Forest ML scoring en temps réel
 - DB: Nouvelles colonnes correlation_groups et correlated_events
 
 ### Technical

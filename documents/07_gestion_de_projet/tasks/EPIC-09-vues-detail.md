@@ -20,7 +20,7 @@ Permettre a l'analyste de cliquer sur les elements (correlations, evenements, al
 - [ ] Endpoint `GET /correlation/{id}/events` - Ken Thompson
 - [ ] Modal/panel detail correlation (UI) - Tim Berners-Lee
 - [ ] Affichage events correles dans le detail - Tim Berners-Lee
-- [ ] Score ML affiche dans le detail - Tim Berners-Lee
+- [ ] Score de corrélation affiche dans le detail - Tim Berners-Lee
 - [ ] Tests detail correlation - Margaret Hamilton
 
 ## Tasks Techniques (US-09.2 - Detail event)
@@ -37,7 +37,7 @@ Permettre a l'analyste de cliquer sur les elements (correlations, evenements, al
 - [ ] Modal/panel detail alerte (UI) - Tim Berners-Lee
 - [ ] Timeline de l'alerte (events sources) - Tim Berners-Lee
 - [ ] Lien vers groupe de correlation - Tim Berners-Lee
-- [ ] Score ML dans le detail - Tim Berners-Lee
+- [ ] Score de corrélation dans le detail - Tim Berners-Lee
 - [ ] Tests detail alerte - Margaret Hamilton
 
 ## Tasks Techniques (US-09.4 - Actions detail)
@@ -58,7 +58,7 @@ Permettre a l'analyste de cliquer sur les elements (correlations, evenements, al
 
 - [ ] Clic sur groupe ouvre vue detail
 - [ ] Events correles affiches avec contexte
-- [ ] Score ML visible si disponible
+- [ ] Score de corrélation visible si disponible
 - [ ] Preuve: capture detail correlation
 
 ## Acceptance Criteria

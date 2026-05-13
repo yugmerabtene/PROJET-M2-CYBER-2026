@@ -671,21 +671,6 @@ function app() {
                 </tr>
             `).join('') : `<tr><td colspan="5" class="px-4 py-8 text-center text-soc-muted">Aucun evenement dans ce groupe</td></tr>`;
 
-            const mlScore = g.ml_anomaly_score !== undefined ? `
-                <div class="bg-soc-bg rounded-lg p-4 border border-soc-border">
-                    <h4 class="text-sm font-medium text-white mb-2 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                        Score ML Anomalie
-                    </h4>
-                    <div class="flex items-center gap-4">
-                        <div class="flex-1 bg-soc-card rounded-full h-3">
-                            <div class="h-3 rounded-full ${g.ml_anomaly_score > 0.6 ? 'bg-soc-danger' : g.ml_anomaly_score > 0.4 ? 'bg-soc-warning' : 'bg-soc-success'}" style="width: ${g.ml_anomaly_score * 100}%"></div>
-                        </div>
-                        <span class="text-lg font-bold ${g.ml_anomaly_score > 0.6 ? 'text-soc-danger' : g.ml_anomaly_score > 0.4 ? 'text-soc-warning' : 'text-soc-success'}">${(g.ml_anomaly_score * 100).toFixed(0)}%</span>
-                    </div>
-                </div>
-            ` : '';
-
             return `
                 <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" @click.self="closeCorrelationDetail()">
                     <div class="bg-soc-card border border-soc-border rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
@@ -734,9 +719,6 @@ function app() {
                                     <button @click="closeCorrelationDetail()" class="px-3 py-1.5 bg-soc-bg text-soc-muted border border-soc-border rounded-lg text-sm hover:text-white transition-colors">Fermer</button>
                                 </div>
                             </div>
-
-                            <!-- ML Score -->
-                            ${mlScore}
 
                             <!-- Events Table -->
                             <div>
@@ -1059,7 +1041,6 @@ function app() {
                     <div class="flex items-center gap-4 text-xs text-soc-muted">
                         <span>Events: ${g.event_count}</span>
                         <span>Severite: ${g.severity}</span>
-                        ${g.ml_anomaly_score !== undefined ? `<span>ML: ${(g.ml_anomaly_score * 100).toFixed(0)}%</span>` : ''}
                     </div>
                 </div>
             `).join('') : '<p class="text-sm text-soc-muted">Aucune correlation liee</p>';
@@ -1252,28 +1233,7 @@ function app() {
             const groups = r.ok ? await r.json() : [];
 
             let cards = groups.length > 0 ? groups.map(g => {
-                const typeColor = g.group_type === 'ip_source' ? 'text-soc-accent' : 'text-soc-warning';
-                const mlBadge = g.ml_anomaly_score !== undefined ? `
-                    <div class="mt-3 pt-3 border-t border-soc-border">
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="text-soc-muted flex items-center gap-1">
-                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                                ML Anomaly
-                            </span>
-                            <span class="font-mono ${g.ml_anomaly_score > 0.6 ? 'text-soc-danger' : g.ml_anomaly_score > 0.4 ? 'text-soc-warning' : 'text-soc-success'}">${(g.ml_anomaly_score * 100).toFixed(0)}%</span>
-                        </div>
-                        <div class="w-full bg-soc-bg rounded-full h-1.5 mt-1">
-                            <div class="h-1.5 rounded-full ${g.ml_anomaly_score > 0.6 ? 'bg-soc-danger' : g.ml_anomaly_score > 0.4 ? 'bg-soc-warning' : 'bg-soc-success'}" style="width: ${g.ml_anomaly_score * 100}%"></div>
-                        </div>
-                    </div>
-                ` : `
-                    <div class="mt-3 pt-3 border-t border-soc-border">
-                        <button onclick="document.querySelector('[x-data]').__x.\$data.mlEnrichGroup(${g.id})" class="text-xs text-soc-accent hover:underline flex items-center gap-1">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            Analyser avec ML
-                        </button>
-                    </div>
-                `;
+                const typeColor = g.group_type === 'ip_source' ? 'text-soc-accent' : g.group_type === 'session_flow' ? 'text-purple-400' : 'text-soc-warning';
                 return `<div class="bg-soc-card border border-soc-border rounded-xl p-5 hover:border-soc-accent/50 transition-colors cursor-pointer" onclick="document.querySelector('[x-data]').__x.\$data.openCorrelationDetail(${g.id})">
                     <div class="flex items-center justify-between mb-3">
                         <div class="flex items-center gap-2">
@@ -1286,8 +1246,8 @@ function app() {
                         <div class="flex justify-between"><span class="text-soc-muted">Source IP</span><span class="text-white font-mono">${g.source_ip || '-'}</span></div>
                         <div class="flex justify-between"><span class="text-soc-muted">Evenements</span><span class="text-white">${g.event_count || 0}</span></div>
                         <div class="flex justify-between"><span class="text-soc-muted">Severite</span><span class="text-white">${g.severity || '-'}</span></div>
+                        <div class="flex justify-between"><span class="text-soc-muted">Score</span><span class="text-white">${g.correlation_score || 0}</span></div>
                     </div>
-                    ${mlBadge}
                 </div>`;
             }).join('') : `<div class="bg-soc-card border border-soc-border rounded-xl p-12 text-center">
                 <svg class="w-16 h-16 mx-auto mb-4 text-soc-border" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
@@ -1297,82 +1257,11 @@ function app() {
 
             this.pageContent = `
                 <div>
-                    <!-- ML Summary Banner -->
-                    <div class="bg-soc-card border border-soc-border rounded-xl p-5 mb-6">
-                        <div class="flex items-center gap-3 mb-3">
-                            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            <h3 class="font-semibold text-white">Detection d'anomalies ML</h3>
-                            <span class="text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">Isolation Forest</span>
-                        </div>
-                        <p class="text-xs text-soc-muted mb-4">Analyse comportementale des evenements pour identifier des patterns anormaux non couverts par les regles.</p>
-                        <div class="flex gap-3">
-                            <button onclick="document.querySelector('[x-data]').__x.\$data.runMlDetection()" class="px-3 py-1.5 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-lg text-xs hover:bg-purple-500/20 transition-colors">
-                                Lancer l'analyse ML
-                            </button>
-                        </div>
-                        <div id="ml-summary-result" class="mt-4 hidden"></div>
-                    </div>
-
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         ${cards}
                     </div>
                 </div>
             `;
-        },
-
-        async mlEnrichGroup(groupId) {
-            try {
-                const r = await fetch(`/correlation/${groupId}/ml-enrich`, {
-                    method: 'POST',
-                    headers: this.headers
-                });
-                if (r.ok) {
-                    await this.renderCorrelations();
-                }
-            } catch (e) {
-                console.error('ML enrich error:', e);
-            }
-        },
-
-        async runMlDetection() {
-            const resultDiv = document.getElementById('ml-summary-result');
-            if (resultDiv) {
-                resultDiv.innerHTML = '<p class="text-xs text-soc-muted">Analyse en cours...</p>';
-                resultDiv.classList.remove('hidden');
-            }
-
-            try {
-                const r = await fetch('/correlation/ml-summary', { headers: this.headers });
-                if (r.ok) {
-                    const data = await r.json();
-                    if (resultDiv) {
-                        resultDiv.innerHTML = `
-                            <div class="grid grid-cols-4 gap-3 text-center">
-                                <div class="bg-soc-bg rounded-lg p-3">
-                                    <p class="text-2xl font-bold text-white">${data.total}</p>
-                                    <p class="text-xs text-soc-muted">Events analyses</p>
-                                </div>
-                                <div class="bg-soc-bg rounded-lg p-3">
-                                    <p class="text-2xl font-bold text-soc-danger">${data.anomalies}</p>
-                                    <p class="text-xs text-soc-muted">Anomalies</p>
-                                </div>
-                                <div class="bg-soc-bg rounded-lg p-3">
-                                    <p class="text-2xl font-bold text-soc-warning">${(data.anomaly_rate * 100).toFixed(1)}%</p>
-                                    <p class="text-xs text-soc-muted">Taux anomalie</p>
-                                </div>
-                                <div class="bg-soc-bg rounded-lg p-3">
-                                    <p class="text-2xl font-bold text-soc-accent">${(data.avg_score * 100).toFixed(0)}</p>
-                                    <p class="text-xs text-soc-muted">Score moyen</p>
-                                </div>
-                            </div>
-                        `;
-                    }
-                }
-            } catch (e) {
-                if (resultDiv) {
-                    resultDiv.innerHTML = '<p class="text-xs text-soc-danger">Erreur lors de l\'analyse ML</p>';
-                }
-            }
         },
 
         async renderReports() {

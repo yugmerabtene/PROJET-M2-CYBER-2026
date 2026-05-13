@@ -15,7 +15,6 @@ from app.core.realtime import router as realtime_router
 from app.correlation.routes import router as correlation_router
 from app.discovery.routes import router as discovery_router
 from app.frontend.routes import router as frontend_router
-from app.ml.routes import router as ml_router
 from app.reports.routes import router as reports_router
 from app.attack_lab import router as attack_lab_router
 from app.telemetry.routes import router as telemetry_router
@@ -43,7 +42,6 @@ def create_app() -> FastAPI:
     app.include_router(discovery_router, prefix="/discovery", tags=["discovery"])
     app.include_router(audit_router, prefix="/audit", tags=["audit"])
     app.include_router(correlation_router, prefix="/correlation", tags=["correlation"])
-    app.include_router(ml_router, prefix="/correlation", tags=["ml"])
     app.include_router(reports_router, prefix="/reports", tags=["reports"])
     app.include_router(attack_lab_router, tags=["attack-lab"])
     app.include_router(frontend_router, tags=["frontend"])

@@ -6,17 +6,18 @@ from app.correlation.schemas import CorrelationGroupResponse, CorrelatedEventRes
 from app.correlation.service import (
     correlate_by_ip,
     correlate_by_time_window,
+    correlate_by_session,
     get_correlation_groups,
     get_group_by_id,
     get_group_events,
     get_group_events_with_sequence,
     get_correlation_summary,
     resolve_group,
-    enrich_with_ml_scores,
     calculate_composite_score,
     correlate_by_hostname,
     detect_attack_chains,
     create_manual_group,
+    run_full_correlation_from_db,
 )
 from app.core.deps import get_current_user, get_db
 
@@ -52,43 +53,6 @@ def correlation_summary(
     return get_correlation_summary(db)
 
 
-@router.get("/ml-summary", summary="ML anomaly detection summary")
-def ml_summary(
-    limit: int = Query(500, le=5000),
-    db: Session = Depends(get_db),
-    _user=Depends(get_current_user),
-):
-    from app.telemetry.models import TelemetryEvent
-    from app.ml.service import anomaly_detector
-
-    db_events = (
-        db.query(TelemetryEvent)
-        .order_by(TelemetryEvent.observed_at.desc())
-        .limit(limit)
-        .all()
-    )
-    events = [
-        {
-            "source_ip": e.source_ip,
-            "target_ip": e.target_ip,
-            "event_type": e.event_type,
-            "severity": e.severity,
-            "message": e.message,
-            "observed_at": e.observed_at.isoformat() if e.observed_at else "",
-        }
-        for e in db_events
-    ]
-
-    if not events:
-        return {"total": 0, "anomalies": 0, "anomaly_rate": 0.0, "avg_score": 0.0, "model_ready": False}
-
-    anomaly_detector.fit(events)
-    summary = anomaly_detector.get_anomaly_summary(events)
-    summary["model_ready"] = anomaly_detector.is_fitted
-
-    return summary
-
-
 @router.post("/run-ip", response_model=list[CorrelationGroupResponse], summary="Lancer la correlation par IP")
 def run_ip_correlation(
     events: list[dict],
@@ -111,6 +75,27 @@ def run_temporal_correlation(
 ):
     groups = correlate_by_time_window(db, events, window_minutes, min_events)
     return groups
+
+
+@router.post("/run-session", summary="Lancer la correlation par session")
+def run_session_correlation(
+    events: list[dict],
+    min_events: int = Query(3, ge=1),
+    window_minutes: int = Query(30, ge=1),
+    db: Session = Depends(get_db),
+    _user=Depends(get_current_user),
+):
+    return correlate_by_session(db, events, min_events=min_events, window_minutes=window_minutes)
+
+
+@router.post("/run-all-db", summary="Exécuter la corrélation complète depuis la base")
+def run_all_correlation_from_db(
+    lookback_minutes: int = Query(120, ge=5, le=1440),
+    limit: int = Query(2000, ge=10, le=10000),
+    db: Session = Depends(get_db),
+    _user=Depends(get_current_user),
+):
+    return run_full_correlation_from_db(db, lookback_minutes=lookback_minutes, limit=limit)
 
 
 @router.get("/{group_id}", summary="Detail d'un groupe de correlation")
@@ -164,7 +149,7 @@ def get_correlation_timeline(
     db: Session = Depends(get_db),
     _user=Depends(get_current_user),
 ):
-    """Retourne timeline avec sequence et scores ML."""
+    """Retourne la timeline séquencée d'un groupe."""
     group = get_group_by_id(db, group_id)
     if group is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Groupe introuvable")
@@ -187,18 +172,6 @@ def resolve_correlation_group(
     if group is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Groupe introuvable")
     return group
-
-
-@router.post("/{group_id}/ml-enrich", summary="Enrichir un groupe avec ML anomaly detection")
-def ml_enrich_group(
-    group_id: int,
-    db: Session = Depends(get_db),
-    _user=Depends(get_current_user),
-):
-    result = enrich_with_ml_scores(db, group_id)
-    if "error" in result:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=result["error"])
-    return result
 
 
 @router.post("/run-hostname", summary="Correlation par hostname")

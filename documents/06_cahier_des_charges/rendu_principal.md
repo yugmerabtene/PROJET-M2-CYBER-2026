@@ -12,9 +12,9 @@ Ce document s'appuie sur :
 - l'[étude de marché (02)](../02_etude_de_marche/rendu_principal.md) ;
 - le [business model (03)](../03_business_model/rendu_principal.md) ;
 - le [business plan (04)](../04_business_plan/rendu_principal.md) ;
-- la [feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md) ;
-- la [gestion de projet (07)](../07_gestion_de_projet/rendu_principal.md) ;
-- l'[architecture produit retenue (08)](../08_architecture/rendu_principal.md).
+- la [feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md).
+
+Il alimente ensuite la [gestion de projet (07)](../07_gestion_de_projet/rendu_principal.md) et l'[architecture produit retenue (08)](../08_architecture/rendu_principal.md), afin de conserver une progression documentaire cohérente avec la numérotation réelle des livrables.
 
 ### 1.1. Contexte quantifié (mai 2026)
 
@@ -36,8 +36,8 @@ Ces chiffres justifient le périmètre MVP et les fonctionnalités demandées.
 | Statut | Version détaillée du cahier des charges MVP |
 | Périmètre | Produit MVP démontrable en environnement Docker |
 | Public visé | Équipe projet, parties prenantes, contributeurs techniques, responsables de validation |
-| Document précédent | [Gestion de projet (07)](../07_gestion_de_projet/rendu_principal.md) |
-| Document suivant | [Architecture produit (08)](../08_architecture/rendu_principal.md) |
+| Document précédent | [Feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md) |
+| Document suivant | [Gestion de projet (07)](../07_gestion_de_projet/rendu_principal.md) |
 
 ### Historique des versions
 
@@ -233,7 +233,7 @@ Toute route non explicitement publique doit refuser les accès non authentifiés
 - [Business model (03)](../03_business_model/rendu_principal.md)
 - [Business plan (04)](../04_business_plan/rendu_principal.md)
 - [Feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md)
-- [Gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md)
+- [Gestion de projet (07)](../07_gestion_de_projet/rendu_principal.md)
 - [Architecture produit (08)](../08_architecture/rendu_principal.md)
 
 ## 10. Exigences fonctionnelles
@@ -596,7 +596,7 @@ Le produit sera considéré comme conforme si les points suivants sont démontr�
 - [Business model (03)](../03_business_model/rendu_principal.md)
 - [Business plan (04)](../04_business_plan/rendu_principal.md)
 - [Feuille de cadrage (05)](../05_feuille_de_cadrage/rendu_principal.md)
-- [Gestion de projet (06)](../07_gestion_de_projet/rendu_principal.md)
+- [Gestion de projet (07)](../07_gestion_de_projet/rendu_principal.md)
 - [Architecture produit (08)](../08_architecture/rendu_principal.md)
 - [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/)
 - [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)

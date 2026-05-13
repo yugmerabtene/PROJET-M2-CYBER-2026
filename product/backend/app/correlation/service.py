@@ -38,17 +38,7 @@ def correlate_by_ip(db: Session, events: list[dict], min_events: int = 3, window
             evts, source_ips, target_ips, event_types, severities, window_minutes
         )
 
-        # ML scoring
-        ml_results = []
-        try:
-            from app.ml.service import anomaly_detector
-            anomaly_detector.fit(evts)
-            ml_results = anomaly_detector.predict(evts)
-        except Exception:
-            pass
-
-        ml_scores = [r["anomaly_score"] for r in ml_results] if ml_results else None
-        score_data = calculate_composite_score(evts, temporal_score, ml_scores, "ip_source")
+        score_data = calculate_composite_score(evts, temporal_score, "ip_source")
 
         group = CorrelationGroup(
             name=f"Activite suspecte depuis {source_ip}",
@@ -60,7 +50,6 @@ def correlate_by_ip(db: Session, events: list[dict], min_events: int = 3, window
             event_count=len(evts),
             first_seen=_parse_dt(first_seen),
             last_seen=_parse_dt(last_seen),
-            alert_ids=[],
             correlation_score=score_data["composite_score"],
             score_breakdown=score_data["breakdown"],
         )
@@ -68,7 +57,6 @@ def correlate_by_ip(db: Session, events: list[dict], min_events: int = 3, window
         db.flush()
 
         for idx, evt in enumerate(evts):
-            ml_score = ml_results[idx]["anomaly_score"] if idx < len(ml_results) else 0.0
             correlated = CorrelatedEvent(
                 group_id=group.id,
                 source_ip=evt.get("source_ip"),
@@ -79,7 +67,7 @@ def correlate_by_ip(db: Session, events: list[dict], min_events: int = 3, window
                 observed_at=_parse_dt(evt.get("observed_at", "")),
                 raw_payload=evt.get("raw_payload"),
                 sequence_order=idx,
-                ml_anomaly_score=ml_score,
+                ml_anomaly_score=0.0,
             )
             db.add(correlated)
 
@@ -92,7 +80,7 @@ def correlate_by_ip(db: Session, events: list[dict], min_events: int = 3, window
         )
         db.add(alert)
         db.flush()
-        group.alert_ids = [alert.id]
+        setattr(group, "alert_ids", [alert.id])
 
         groups.append(group)
 
@@ -135,17 +123,7 @@ def correlate_by_time_window(db: Session, events: list[dict], window_minutes: in
 
         risk_score = _calculate_temporal_risk_score(window_evts, source_ips, target_ips, event_types, severities, window_minutes)
 
-        # ML scoring
-        ml_results = []
-        try:
-            from app.ml.service import anomaly_detector
-            anomaly_detector.fit(window_evts)
-            ml_results = anomaly_detector.predict(window_evts)
-        except Exception:
-            pass
-
-        ml_scores = [r["anomaly_score"] for r in ml_results] if ml_results else None
-        score_data = calculate_composite_score(window_evts, risk_score, ml_scores, "temporal_burst")
+        score_data = calculate_composite_score(window_evts, risk_score, "temporal_burst")
 
         group = CorrelationGroup(
             name=f"Burst d'activite sur {window_minutes}min (score: {score_data['composite_score']})",
@@ -156,7 +134,6 @@ def correlate_by_time_window(db: Session, events: list[dict], window_minutes: in
             event_count=len(window_evts),
             first_seen=first_seen,
             last_seen=last_seen,
-            alert_ids=[],
             correlation_score=score_data["composite_score"],
             score_breakdown=score_data["breakdown"],
         )
@@ -164,7 +141,6 @@ def correlate_by_time_window(db: Session, events: list[dict], window_minutes: in
         db.flush()
 
         for idx, evt in enumerate(window_evts):
-            ml_score = ml_results[idx]["anomaly_score"] if idx < len(ml_results) else 0.0
             correlated = CorrelatedEvent(
                 group_id=group.id,
                 source_ip=evt.get("source_ip"),
@@ -175,7 +151,7 @@ def correlate_by_time_window(db: Session, events: list[dict], window_minutes: in
                 observed_at=_parse_dt(evt.get("observed_at", "")),
                 raw_payload=evt.get("raw_payload"),
                 sequence_order=idx,
-                ml_anomaly_score=ml_score,
+                ml_anomaly_score=0.0,
             )
             db.add(correlated)
 
@@ -187,7 +163,7 @@ def correlate_by_time_window(db: Session, events: list[dict], window_minutes: in
         )
         db.add(alert)
         db.flush()
-        group.alert_ids = [alert.id]
+        setattr(group, "alert_ids", [alert.id])
 
         groups.append(group)
 
@@ -200,22 +176,15 @@ def correlate_by_time_window(db: Session, events: list[dict], window_minutes: in
 def calculate_composite_score(
     events: list[dict],
     temporal_score: int,
-    ml_scores: list[float] | None = None,
     group_type: str = "unknown"
 ) -> dict:
     """
-    Score composite (0-100) avec 4 facteurs :
-    - temporal_score (35%)
-    - ml_average (25%)
-    - diversity (20%)
-    - severity (20%)
+    Score composite (0-100) basé uniquement sur les événements :
+    - temporal_score (45%)
+    - diversity (30%)
+    - severity (25%)
     """
-    # 1. Temporal score
-    temporal_contribution = temporal_score * 0.35
-
-    # 2. ML score (moyenne des scores d'anomalie)
-    ml_avg = sum(ml_scores) / len(ml_scores) if ml_scores else 0.0
-    ml_contribution = ml_avg * 100 * 0.25
+    temporal_contribution = temporal_score * 0.45
 
     # 3. Diversity score
     unique_types = len(set(e.get("event_type", "") for e in events))
@@ -223,22 +192,21 @@ def calculate_composite_score(
     unique_targets = len(set(e.get("target_ip", "") for e in events if e.get("target_ip")))
 
     diversity_score = min(unique_types * 10, 30) + min(unique_sources * 5, 20) + min(unique_targets * 5, 20)
-    diversity_contribution = min(diversity_score, 100) * 0.20
+    diversity_contribution = min(diversity_score, 100) * 0.30
 
     # 4. Severity score
     severity_weights = {"critical": 25, "high": 18, "medium": 10, "low": 4}
     severity_score = min(sum(severity_weights.get(e.get("severity", ""), 1) for e in events), 30)
-    severity_contribution = severity_score * 0.20
+    severity_contribution = severity_score * 0.25
 
-    composite = min(int(temporal_contribution + ml_contribution + diversity_contribution + severity_contribution), 100)
+    composite = min(int(temporal_contribution + diversity_contribution + severity_contribution), 100)
 
     return {
         "composite_score": composite,
         "breakdown": {
-            "temporal": {"score": temporal_score, "weight": 0.35, "contribution": round(temporal_contribution, 2)},
-            "ml": {"avg_score": round(ml_avg, 3), "weight": 0.25, "contribution": round(ml_contribution, 2)},
-            "diversity": {"score": diversity_score, "weight": 0.20, "contribution": round(diversity_contribution, 2)},
-            "severity": {"score": severity_score, "weight": 0.20, "contribution": round(severity_contribution, 2)},
+            "temporal": {"score": temporal_score, "weight": 0.45, "contribution": round(temporal_contribution, 2)},
+            "diversity": {"score": diversity_score, "weight": 0.30, "contribution": round(diversity_contribution, 2)},
+            "severity": {"score": severity_score, "weight": 0.25, "contribution": round(severity_contribution, 2)},
         }
     }
 
@@ -313,7 +281,6 @@ def get_group_events_with_sequence(db: Session, group_id: int) -> list[dict]:
             "severity": e.severity,
             "message": e.message,
             "observed_at": e.observed_at.isoformat() if e.observed_at else "",
-            "ml_anomaly_score": e.ml_anomaly_score,
             "sequence_order": e.sequence_order,
         }
         for e in events
@@ -358,67 +325,7 @@ def get_correlation_summary(db: Session) -> dict:
 
 
 def enrich_with_ml_scores(db: Session, group_id: int) -> dict:
-    group = db.query(CorrelationGroup).filter(CorrelationGroup.id == group_id).first()
-    if group is None:
-        return {"error": "Group not found"}
-
-    correlated_events = db.query(CorrelatedEvent).filter(CorrelatedEvent.group_id == group_id).all()
-    if not correlated_events:
-        return {"group_id": group_id, "ml_enriched": False, "reason": "No events"}
-
-    events = [
-        {
-            "source_ip": e.source_ip,
-            "target_ip": e.target_ip,
-            "event_type": e.event_type,
-            "severity": e.severity,
-            "message": e.message,
-            "observed_at": e.observed_at.isoformat() if e.observed_at else "",
-        }
-        for e in correlated_events
-    ]
-
-    from app.ml.service import anomaly_detector
-    anomaly_detector.fit(events)
-    results = anomaly_detector.predict(events)
-
-    anomaly_count = sum(1 for r in results if r["is_anomaly"])
-    avg_score = sum(r["anomaly_score"] for r in results) / len(results) if results else 0
-
-    # Update individual event ML scores
-    for evt, result in zip(correlated_events, results):
-        evt.ml_anomaly_score = result["anomaly_score"]
-
-    ml_severity_boost = 0
-    if avg_score > 0.7:
-        ml_severity_boost = 2
-    elif avg_score > 0.5:
-        ml_severity_boost = 1
-
-    if ml_severity_boost > 0:
-        severity_order = ["low", "medium", "high", "critical"]
-        current_idx = severity_order.index(group.severity) if group.severity in severity_order else 0
-        new_idx = min(current_idx + ml_severity_boost, len(severity_order) - 1)
-        group.severity = severity_order[new_idx]
-
-    # Recalculate composite score with ML
-    temporal_score = group.correlation_score or 50
-    score_data = calculate_composite_score(events, temporal_score, [r["anomaly_score"] for r in results], group.group_type)
-    group.correlation_score = score_data["composite_score"]
-    group.score_breakdown = score_data["breakdown"]
-
-    db.commit()
-
-    return {
-        "group_id": group_id,
-        "ml_enriched": True,
-        "total_events": len(results),
-        "anomaly_count": anomaly_count,
-        "avg_anomaly_score": round(avg_score, 3),
-        "severity_boost": ml_severity_boost,
-        "new_severity": group.severity,
-        "composite_score": group.correlation_score,
-    }
+    return {"error": "Feature disabled"}
 
 
 def _highest_severity(severities: list[str]) -> str:
@@ -469,16 +376,7 @@ def correlate_by_hostname(db: Session, events: list[dict], min_events: int = 3) 
             evts, {hostname}, set(), event_types, severities, 60
         )
 
-        ml_results = []
-        try:
-            from app.ml.service import anomaly_detector
-            anomaly_detector.fit(evts)
-            ml_results = anomaly_detector.predict(evts)
-        except Exception:
-            pass
-
-        ml_scores = [r["anomaly_score"] for r in ml_results] if ml_results else None
-        score_data = calculate_composite_score(evts, temporal_score, ml_scores, "hostname_match")
+        score_data = calculate_composite_score(evts, temporal_score, "hostname_match")
 
         group = CorrelationGroup(
             name=f"Activité suspecte sur {hostname}",
@@ -493,13 +391,11 @@ def correlate_by_hostname(db: Session, events: list[dict], min_events: int = 3) 
             hostname=hostname,
             correlation_score=score_data["composite_score"],
             score_breakdown=score_data["breakdown"],
-            alert_ids=[],
         )
         db.add(group)
         db.flush()
 
         for idx, evt in enumerate(evts):
-            ml_score = ml_results[idx]["anomaly_score"] if idx < len(ml_results) else 0.0
             correlated = CorrelatedEvent(
                 group_id=group.id,
                 source_ip=evt.get("source_ip"),
@@ -510,7 +406,7 @@ def correlate_by_hostname(db: Session, events: list[dict], min_events: int = 3) 
                 observed_at=_parse_dt(evt.get("observed_at", "")),
                 raw_payload=evt.get("raw_payload"),
                 sequence_order=idx,
-                ml_anomaly_score=ml_score,
+                ml_anomaly_score=0.0,
             )
             db.add(correlated)
 
@@ -523,7 +419,7 @@ def correlate_by_hostname(db: Session, events: list[dict], min_events: int = 3) 
         )
         db.add(alert)
         db.flush()
-        group.alert_ids = [alert.id]
+        setattr(group, "alert_ids", [alert.id])
 
         groups.append(group)
 
@@ -531,6 +427,140 @@ def correlate_by_hostname(db: Session, events: list[dict], min_events: int = 3) 
     for g in groups:
         db.refresh(g)
     return groups
+
+
+def correlate_by_session(db: Session, events: list[dict], min_events: int = 3, window_minutes: int = 30) -> list[CorrelationGroup]:
+    sessions: dict[tuple[str, str], list[dict]] = defaultdict(list)
+    for evt in events:
+        src = evt.get("source_ip") or ""
+        dst = evt.get("target_ip") or ""
+        if src and dst:
+            sessions[(src, dst)].append(evt)
+
+    groups = []
+    for (source_ip, target_ip), evts in sessions.items():
+        if len(evts) < min_events:
+            continue
+
+        sorted_evts = sorted(evts, key=lambda e: e.get("observed_at", ""))
+        first_seen = _parse_dt(sorted_evts[0].get("observed_at", ""))
+        last_seen = _parse_dt(sorted_evts[-1].get("observed_at", ""))
+        if (last_seen - first_seen) > timedelta(minutes=window_minutes):
+            continue
+
+        event_types = set(e.get("event_type", "") for e in sorted_evts)
+        if len(event_types) < 2:
+            continue
+
+        severities = [e.get("severity", "info") for e in sorted_evts]
+        max_severity = _highest_severity(severities)
+        temporal_score = _calculate_temporal_risk_score(sorted_evts, {source_ip}, {target_ip}, event_types, severities, window_minutes)
+        score_data = calculate_composite_score(sorted_evts, temporal_score, "session_flow")
+
+        group = CorrelationGroup(
+            name=f"Session suspecte {source_ip} -> {target_ip}",
+            group_type="session_flow",
+            description=f"{len(sorted_evts)} événements corrélés sur la même session source → cible.",
+            source_ip=source_ip,
+            target_ip=target_ip,
+            severity=max_severity,
+            event_count=len(sorted_evts),
+            first_seen=first_seen,
+            last_seen=last_seen,
+            correlation_score=score_data["composite_score"],
+            score_breakdown=score_data["breakdown"],
+        )
+        db.add(group)
+        db.flush()
+
+        for idx, evt in enumerate(sorted_evts):
+            db.add(CorrelatedEvent(
+                group_id=group.id,
+                telemetry_event_id=evt.get("telemetry_event_id") or evt.get("id"),
+                source_ip=evt.get("source_ip"),
+                target_ip=evt.get("target_ip"),
+                event_type=evt.get("event_type", "unknown"),
+                severity=evt.get("severity", "info"),
+                message=evt.get("message"),
+                observed_at=_parse_dt(evt.get("observed_at", "")),
+                raw_payload=evt.get("raw_payload"),
+                sequence_order=idx,
+                ml_anomaly_score=0.0,
+            ))
+
+        alert = Alert(
+            title=f"Corrélation session {source_ip} -> {target_ip}",
+            description=f"Session regroupée avec {len(sorted_evts)} événements et {len(event_types)} types.",
+            severity=max_severity,
+            source_ip=source_ip,
+            target_ip=target_ip,
+            rule_name="correlation_session",
+        )
+        db.add(alert)
+        db.flush()
+        setattr(group, "alert_ids", [alert.id])
+        groups.append(group)
+
+    db.commit()
+    for g in groups:
+        db.refresh(g)
+    return groups
+
+
+def run_full_correlation_from_db(db: Session, lookback_minutes: int = 120, limit: int = 2000) -> dict:
+    cutoff = datetime.now(timezone.utc) - timedelta(minutes=lookback_minutes)
+    db_events = (
+        db.query(TelemetryEvent)
+        .filter(TelemetryEvent.observed_at >= cutoff)
+        .order_by(TelemetryEvent.observed_at.desc())
+        .limit(limit)
+        .all()
+    )
+    events = [
+        {
+            "id": e.id,
+            "telemetry_event_id": e.id,
+            "source_ip": e.source_ip,
+            "target_ip": e.target_ip,
+            "event_type": e.event_type,
+            "severity": e.severity,
+            "message": e.message,
+            "observed_at": e.observed_at.isoformat() if e.observed_at else "",
+            "raw_payload": e.raw_payload,
+        }
+        for e in db_events
+    ]
+    if not events:
+        return {"events_considered": 0, "created": {"ip_source": 0, "temporal_burst": 0, "hostname_match": 0, "session_flow": 0, "attack_chain": 0}, "groups": []}
+
+    created_ip = correlate_by_ip(db, events, min_events=3, window_minutes=min(lookback_minutes, 60))
+    created_temporal = correlate_by_time_window(db, events, window_minutes=10, min_events=5)
+    created_hostname = correlate_by_hostname(db, events, min_events=3)
+    created_session = correlate_by_session(db, events, min_events=3, window_minutes=30)
+    created_chain = detect_attack_chains(db, events)
+    groups = [*created_ip, *created_temporal, *created_hostname, *created_session, *created_chain]
+
+    return {
+        "events_considered": len(events),
+        "created": {
+            "ip_source": len(created_ip),
+            "temporal_burst": len(created_temporal),
+            "hostname_match": len(created_hostname),
+            "session_flow": len(created_session),
+            "attack_chain": len(created_chain),
+        },
+        "groups": [
+            {
+                "id": g.id,
+                "name": g.name,
+                "group_type": g.group_type,
+                "severity": g.severity,
+                "event_count": g.event_count,
+                "correlation_score": g.correlation_score,
+            }
+            for g in groups
+        ],
+    }
 
 
 def detect_attack_chains(db: Session, events: list[dict]) -> list[CorrelationGroup]:
@@ -572,7 +602,6 @@ def detect_attack_chains(db: Session, events: list[dict]) -> list[CorrelationGro
                 last_seen=_parse_dt(seq[-1].get("observed_at")),
                 correlation_score=_calculate_chain_score(seq, pattern),
                 hostname=None,
-                alert_ids=[],
             )
             db.add(group)
             db.flush()
@@ -602,7 +631,7 @@ def detect_attack_chains(db: Session, events: list[dict]) -> list[CorrelationGro
             )
             db.add(alert)
             db.flush()
-            group.alert_ids = [alert.id]
+            setattr(group, "alert_ids", [alert.id])
 
             groups.append(group)
 
@@ -675,7 +704,6 @@ def create_manual_group(db: Session, event_ids: list[int], group_name: str, grou
     score_data = calculate_composite_score(
         [{"event_type": e.event_type, "severity": e.severity, "source_ip": e.source_ip, "target_ip": e.target_ip} for e in events],
         temporal_score,
-        None,
         group_type
     )
 
@@ -691,7 +719,6 @@ def create_manual_group(db: Session, event_ids: list[int], group_name: str, grou
         last_seen=sorted_events[-1].observed_at,
         correlation_score=score_data["composite_score"],
         score_breakdown=score_data["breakdown"],
-        alert_ids=[],
     )
     db.add(group)
     db.flush()
@@ -721,7 +748,7 @@ def create_manual_group(db: Session, event_ids: list[int], group_name: str, grou
     )
     db.add(alert)
     db.flush()
-    group.alert_ids = [alert.id]
+    setattr(group, "alert_ids", [alert.id])
 
     db.commit()
     db.refresh(group)

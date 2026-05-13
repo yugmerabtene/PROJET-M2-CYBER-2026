@@ -12,7 +12,7 @@ class CorrelationGroupResponse(BaseModel):
     target_ip: str | None
     severity: str
     event_count: int
-    alert_ids: list | None
+    alert_ids: list | None = None
     first_seen: datetime
     last_seen: datetime
     is_resolved: bool

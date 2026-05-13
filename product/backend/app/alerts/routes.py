@@ -141,7 +141,6 @@ def get_alert_route(
                 "severity": g.severity,
                 "event_count": g.event_count,
                 "is_resolved": g.is_resolved,
-                "ml_anomaly_score": g.ml_anomaly_score,
             }
             for g in correlations
         ],

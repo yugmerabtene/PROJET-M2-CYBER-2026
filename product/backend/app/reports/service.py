@@ -299,7 +299,6 @@ def export_json(db: Session, resource: str) -> dict:
                             "message": e.message,
                             "observed_at": e.observed_at.isoformat(),
                             "sequence_order": e.sequence_order,
-                            "ml_anomaly_score": e.ml_anomaly_score,
                         }
                         for e in g.events
                     ],

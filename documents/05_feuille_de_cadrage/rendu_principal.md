@@ -168,8 +168,8 @@ Ces décisions doivent rester stables pendant la phase MVP. Toute extension fonc
 - [Étude de marché (02)](../02_etude_de_marche/rendu_principal.md)
 - [Business model (03)](../03_business_model/rendu_principal.md)
 - [Business plan (04)](../04_business_plan/rendu_principal.md)
-- [Gestion de projet (07)](../07_gestion_de_projet/rendu_principal.md)
 - [Cahier des charges (06)](../06_cahier_des_charges/rendu_principal.md)
+- [Gestion de projet (07)](../07_gestion_de_projet/rendu_principal.md)
 - [Architecture produit (08)](../08_architecture/rendu_principal.md)
 
 ## 16. Feuille de route courte
