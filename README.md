@@ -1,6 +1,7 @@
 # DevinciWatch
 
-<img align="right" width="420" alt="DevinciWatch" src="devinciwatch-logo.svg" />
+<img width="968" height="584" alt="image" src="https://github.com/user-attachments/assets/01973057-1ee9-4664-9ba8-5b9e2bb177c3" />
+
 
 **DevinciWatch** est une plateforme de cybersurveillance réseau orientée SOC, conçue pour la formation, la démonstration et la validation professionnelle.
 
